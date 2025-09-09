@@ -1,0 +1,159 @@
+/* EmployeeList.css */
+
+/* Container */
+.employee-container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Header */
+.employee-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.employee-header h2 {
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.add-btn {
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-btn:hover {
+  background-color: #357ab7;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+}
+
+/* Table */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.employee-table th,
+.employee-table td {
+  text-align: left;
+  padding: 12px 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.employee-table th {
+  background-color: #4a90e2;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;   /* ✅ Prevent header text from breaking */
+  text-align: center;    /* ✅ Optional: center-align headers */
+}
+
+.employee-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.employee-table tbody tr:hover {
+  background-color: #e6f0ff;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.view-btn,
+.edit-btn,
+.delete-btn {
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.view-btn {
+  background-color: #5bc0de;
+  color: #fff;
+}
+
+.view-btn:hover {
+  background-color: #31b0d5;
+  transform: translateY(-1px);
+}
+
+.edit-btn {
+  background-color: #f0ad4e;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background-color: #ec971f;
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+  transform: translateY(-1px);
+}
+
+/* No data row */
+.employee-table tbody tr td[colspan="8"] {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .employee-container {
+    padding: 15px;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .add-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .view-btn,
+  .edit-btn,
+  .delete-btn {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+}
