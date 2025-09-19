@@ -24,19 +24,33 @@ const EmployeeList = ({ onAddClick }) => {
 
   // Delete handler (optional: you can call backend delete API here)
 const handleDelete = (id) => {
+  // Step 1: Initial confirmation
   if (window.confirm("Are you sure you want to delete this employee?")) {
-    console.log("Deleting employee with id:", id);
-    axios
-      .delete(`http://localhost:8085/api/v1/employees/${id}`)
-      .then(() => {
-        setEmployees((prev) => prev.filter((emp) => emp.id !== id));
-        console.log("Employee deleted successfully");
-      })
-      .catch((error) => {
-        console.error("Error deleting employee:", error.response || error.message);
-      });
+    // Step 2: Extra security confirmation
+    const confirmation = prompt(
+      "⚠️ Please type DEL to confirm removing this employee:"
+    );
+
+    if (confirmation === "DELETE") {
+      axios
+        .delete(`http://localhost:8085/api/v1/employees/${id}`)
+        .then(() => {
+          setEmployees((prev) => prev.filter((emp) => emp.id !== id));
+          alert("✅ Employee deleted successfully");
+        })
+        .catch((error) => {
+          console.error(
+            "Error deleting employee:",
+            error.response || error.message
+          );
+          alert("❌ Failed to delete employee. Try again.");
+        });
+    } else {
+      alert("Deletion cancelled. You did not type DELETE.");
+    }
   }
 };
+
 
   const handleView = (emp) => {
     navigate(`/employees/view/${emp.id}`);
