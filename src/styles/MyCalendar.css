@@ -1,0 +1,78 @@
+/* Page Container */
+.calendar-container{
+  padding:25px;
+  background:#f5f7fb;
+  min-height:100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Title */
+.calendar-title{
+  text-align:center;
+  font-size:24px;
+  font-weight:600;
+  color:#333;
+  margin-bottom:20px;
+}
+
+/* Calendar Box */
+.calendar-box{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Toolbar */
+.rbc-toolbar{
+  margin-bottom:15px;
+}
+
+.rbc-toolbar button{
+  background:#007bff;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.2s;
+}
+
+.rbc-toolbar button:hover{
+  background:#0056b3;
+}
+
+/* Today button highlight */
+.rbc-toolbar button.rbc-active{
+  background:#28a745;
+}
+
+/* Calendar Header */
+.rbc-header{
+  background:#f0f4ff;
+  font-weight:600;
+  padding:8px;
+  text-align:center;
+  color:#333;
+}
+
+/* Events */
+.rbc-event{
+  background:linear-gradient(135deg,#007bff,#4a90e2);
+  border:none;
+  border-radius:6px;
+  padding:4px;
+  font-size:13px;
+}
+
+/* Date cell hover */
+.rbc-day-bg:hover{
+  background:#f1f7ff;
+}
+
+/* Month view border */
+.rbc-month-view{
+  border-radius:8px;
+  overflow:hidden;
+}

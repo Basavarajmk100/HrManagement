@@ -1,0 +1,45 @@
+.expired-page {
+  padding: 20px;
+  background: #f6f8fb;
+  min-height: 100vh;
+}
+
+.search-box {
+  width: 250px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+.expired-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.expired-table th {
+  background: #ffe6e6;
+  font-weight: 600;
+}
+
+.expired-table th,
+.expired-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Renew Button */
+.renew-btn {
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.renew-btn:hover {
+  background: #0056b3;
+}

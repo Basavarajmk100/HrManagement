@@ -1,0 +1,126 @@
+.transactions-container {
+  padding: 20px;
+  background: #f9fafb;
+}
+
+.transactions-container h2 {
+  margin-bottom: 15px;
+}
+
+.search-input {
+  padding: 8px;
+  width: 250px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.transactions-table th {
+  background: #1e3a8a;
+  color: white;
+  padding: 10px;
+}
+
+.transactions-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status.success {
+  background-color: #16a34a;
+}
+
+.status.failed {
+  background-color: #dc2626;
+}
+
+.status.pending {
+  background-color: #f59e0b;
+}
+
+
+.transactions-container {
+  padding: 20px;
+  background: #f3f4f6;
+}
+
+.top-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.top-controls input,
+.top-controls select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.revenue-box {
+  background: #16a34a;
+  color: white;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.transactions-table th {
+  background: #1e3a8a;
+  color: white;
+  padding: 10px;
+}
+
+.transactions-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status.success { background: #16a34a; }
+.status.failed { background: #dc2626; }
+.status.pending { background: #f59e0b; }
+
+.invoice-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

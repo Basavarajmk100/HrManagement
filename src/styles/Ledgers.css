@@ -1,0 +1,205 @@
+/* ===== PAGE LAYOUT ===== */
+.finance-page {
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* ===== ADD BUTTON ===== */
+.add-btn {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(79, 70, 229, 0.3);
+}
+
+/* ===== TABLE ===== */
+.finance-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+.finance-table thead {
+  background: #007bff !important
+}
+
+.finance-table th {
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.finance-table td {
+  padding: 14px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+  color: #333;
+}
+
+.finance-table tr:hover {
+  background: #f9fafc;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.finance-table button {
+  margin-right: 6px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.finance-table button:nth-child(1) {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.finance-table button:nth-child(2) {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.finance-table button:nth-child(3) {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.finance-table button:hover {
+  opacity: 0.8;
+}
+
+/* ===== POPUP OVERLAY ===== */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* ===== POPUP CARD ===== */
+.popup-card {
+  background: #fff;
+  padding: 25px;
+  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-card h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+/* ===== INPUTS ===== */
+.popup-card input,
+.popup-card select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+}
+
+.popup-card input:focus,
+.popup-card select:focus {
+  border-color: #6366f1;
+}
+
+/* ===== POPUP BUTTONS ===== */
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.popup-actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.popup-actions button:first-child {
+  background: #4f46e5;
+  color: white;
+}
+
+.popup-actions button:last-child {
+  background: #e5e7eb;
+}
+
+/* ===== TRANSACTIONS SECTION ===== */
+.transactions-section {
+  margin-top: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+}
+
+.transactions-section h3 {
+  margin-bottom: 10px;
+}
+
+/* ===== CLOSE BUTTON ===== */
+.transactions-section button {
+  margin-bottom: 10px;
+  background: #ef4444;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

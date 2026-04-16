@@ -1,0 +1,82 @@
+/* Page Container */
+.dashboard-container{
+  padding: 25px;
+  background: #f5f7fb;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Title */
+.dashboard-container h2{
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 25px;
+}
+
+/* Table */
+.data-table{
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Table Header */
+/* Table Header */
+.data-table thead th{
+  background-color: #3B82F6;
+  color: white;
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+.data-table th{
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+   background-color: #3B82F6;
+   
+}
+
+/* Table Body */
+.data-table td{
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+  color: #374151;
+}
+
+/* Hover Effect */
+.data-table tbody tr:hover{
+  background: #f9fafb;
+}
+
+/* Status */
+.data-table td:nth-child(3){
+  font-weight: 600;
+  color: #f59e0b; /* Pending color */
+}
+
+/* Approve Button */
+.approve-btn{
+  background: #22c55e;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.approve-btn:hover{
+  background: #16a34a;
+  transform: scale(1.05);
+}

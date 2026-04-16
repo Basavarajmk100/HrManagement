@@ -1,0 +1,432 @@
+/* PAGE CONTAINER */
+.insurance-panel{
+  width: 95%;
+  margin: 20px auto;
+  font-family: "Nunito", sans-serif;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* HEADER ROW */
+.table-header-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+
+/* TITLE */
+.table-title{
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.table-subtitle{
+  font-size: 14px;
+  color: #6b7280;
+}
+
+
+/* SEARCH BAR */
+.searchInput{
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  outline: none;
+  font-size: 14px;
+  width: 250px;
+  transition: 0.2s;
+}
+
+.searchInput:focus{
+  border-color: #3b82f6;
+}
+
+
+
+
+.filter-container{
+  position: relative;
+}
+
+.filter-btn{
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-panel{
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 220px;
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 100;
+}
+
+.filter-title{
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.filter-panel select{
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.filter-buttons{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.reset-btn{
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.apply-btn{
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+/* BUTTON GROUP */
+.top-buttons{
+  display: flex;
+  gap: 10px;
+}
+
+
+/* BUTTONS */
+/* Small Top Buttons */
+.add-btn,
+.excel-btn,
+.format-btn,
+.download-btn {   /* if you have a Download Report button */
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;       /* smaller padding */
+  border-radius: 6px;      /* slightly smaller rounding */
+  font-size: 12px;         /* smaller font */
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+
+
+  width: 130px;      /* same width for all buttons */
+  height: 36px;      /* same height */
+}
+
+/* ADD BUTTON */
+.add-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.add-btn:hover {
+  background: #2563eb;
+}
+
+/* EXCEL UPLOAD BUTTON */
+.excel-btn {
+  background: #10b981;
+  color: white;
+}
+
+.excel-btn:hover {
+  background: #059669;
+}
+
+/* EXCEL FORMAT BUTTON */
+.format-btn {
+  background: #f59e0b;
+  color: white;
+}
+
+.format-btn:hover {
+  background: #d97706;
+}
+
+/* DOWNLOAD REPORT BUTTON */
+.download-btn {
+  background: #8b5cf6;
+  color: white;
+}
+
+.download-btn:hover {
+  background: #6d28d9;
+}
+
+/* TABLE WRAPPER */
+.table-wrapper{
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+
+
+/* TABLE */
+.styled-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+
+/* TABLE HEADER */
+.styled-table thead{
+  background: #f1f5f9;
+}
+
+.styled-table th{
+  text-align: left;
+  padding: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+
+/* TABLE BODY */
+.styled-table td{
+  padding: 14px;
+  border-top: 1px solid #f1f5f9;
+}
+
+
+/* ROW HOVER */
+.styled-table tbody tr:hover{
+  background: #f9fafb;
+}
+
+
+
+/* ACTION BUTTONS */
+.action-buttons{
+  display: flex;
+  gap: 8px;
+}
+
+
+/* EDIT BUTTON */
+.edit-btn{
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+}
+
+.edit-btn:hover{
+  background: #2563eb;
+}
+
+
+/* DELETE BUTTON */
+.delete-btn{
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-btn:hover{
+  background: #dc2626;
+}
+
+
+/* NO DATA */
+.noData{
+  text-align: center;
+  padding: 30px;
+  color: #6b7280;
+}
+
+
+
+
+/*
+
+/* ================================
+   BACKGROUND EFFECTS
+================================ */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;   /* important change */
+  overflow: hidden;
+}
+.ambient-orb {
+  position: absolute;
+  border-radius: 100%;
+  animation: blob 15s infinite alternate ease-in-out;
+}
+
+.bg-glass-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Animation */
+@keyframes blob {
+  0% { transform: translate(0px,0px) scale(1); }
+  33% { transform: translate(30px,-50px) scale(1.1); }
+  66% { transform: translate(-20px,20px) scale(0.9); }
+  100% { transform: translate(0px,0px) scale(1); }
+}
+
+/* ================================
+   COLORFUL THEME
+================================ */
+
+.theme-colorful .ambient-orb {
+  mix-blend-mode: multiply;
+  filter: blur(100px);
+}
+
+.theme-colorful .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(250,133,185,0.3);
+}
+
+.theme-colorful .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(94,168,230,0.3);
+  animation-delay: 2s;
+}
+
+.theme-colorful .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: rgba(92,194,198,0.3);
+  animation-delay: 4s;
+}
+
+.theme-colorful .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 35vw;
+  height: 35vw;
+  background: rgba(195,135,194,0.3);
+  animation-delay: 6s;
+}
+
+/* ================================
+   DARK THEME
+================================ */
+
+.theme-dark .ambient-orb {
+  mix-blend-mode: screen;
+  filter: blur(160px);
+}
+
+.theme-dark .orb-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(234,179,8,0.05);
+}
+
+.theme-dark .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: rgba(37,99,235,0.05);
+  animation-delay: 2s;
+}
+
+.theme-dark .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(225,29,72,0.05);
+  animation-delay: 4s;
+}
+
+.theme-dark .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(148,163,184,0.05);
+  animation-delay: 6s;
+}
+
+/* Glass layers */
+
+.theme-colorful .bg-glass-layer {
+  background: rgba(224,247,250,0.15);
+  backdrop-filter: blur(6px);
+}
+
+.theme-dark .bg-glass-layer {
+  background: rgba(0,0,0,0.15);
+  backdrop-filter: blur(20px);
+}
+
+/* TITLE */
+.title-section{
+  margin-bottom:15px;
+}
+
+.header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+
+

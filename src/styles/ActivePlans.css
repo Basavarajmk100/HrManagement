@@ -1,0 +1,67 @@
+.active-plans-page {
+  padding: 20px;
+  background: #f6f8fb;
+  min-height: 100vh;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.toolbar input {
+  width: 250px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.toolbar select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.plans-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.plans-table th {
+  background: #f0f2f5;
+  font-weight: 600;
+}
+
+.plans-table th,
+.plans-table td {
+  padding: 12px;
+  border: 1px solid #e1e1e1;
+  text-align: left;
+}
+
+/* Status badges */
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.status-badge.active {
+  background: #2ecc71;
+}
+
+.status-badge.due {
+  background: #f39c12;
+}
+
+.status-badge.expired {
+  background: #e74c3c;
+}
+
+
+
+

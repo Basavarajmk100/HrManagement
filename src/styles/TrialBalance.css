@@ -1,0 +1,306 @@
+/* Page Background */
+.trial-page {
+  padding: 25px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2f7, #f8fbff);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.trial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+.trial-header h2 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Controls */
+.trial-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+/* Search Input */
+.trial-controls input[type="text"] {
+  min-width: 220px;
+}
+
+/* Date Inputs */
+.trial-controls input[type="date"] {
+  min-width: 150px;
+}
+
+/* Common Input Styles */
+.trial-controls input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dcdfe6;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.trial-controls input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 6px rgba(74, 144, 226, 0.3);
+}
+
+/* Export Button */
+.export-btn {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #4a90e2, #007bff);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Card */
+.trial-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+/* Table Header */
+thead {
+  background: linear-gradient(135deg, #007bff, #4a90e2);
+  color: #fff;
+}
+
+th {
+  padding: 14px;
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Table Body */
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Zebra Rows */
+tbody tr:nth-child(even) {
+  background: #f9fbfd;
+}
+
+/* Hover Effect */
+tbody tr:hover {
+  background: #eef5ff;
+  transition: 0.2s;
+}
+
+/* Debit / Credit Colors */
+.debit {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.credit {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+/* Footer Total Row */
+tfoot {
+  background: #f1f4f9;
+}
+
+tfoot td {
+  padding: 14px;
+  font-weight: 600;
+  border-top: 2px solid #ddd;
+}
+
+/* Error Message */
+.error-text {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #ffecec;
+  color: #d63031;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .trial-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trial-controls {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .trial-controls input,
+  .export-btn {
+    width: 100%;
+  }
+}
+
+
+
+
+/* ================================
+   BACKGROUND EFFECTS
+================================ */
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1; /* ✅ send to background */
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: blob 18s infinite alternate ease-in-out;
+}
+
+.bg-glass-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Animation */
+@keyframes blob {
+  0% { transform: translate(0px,0px) scale(1); }
+  33% { transform: translate(30px,-50px) scale(1.1); }
+  66% { transform: translate(-20px,20px) scale(0.9); }
+  100% { transform: translate(0px,0px) scale(1); }
+}
+
+/* ================================
+   COLORFUL THEME
+================================ */
+
+.theme-colorful .ambient-orb {
+  mix-blend-mode: multiply;
+  filter: blur(80px); /* ✅ reduced */
+}
+
+.theme-colorful .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(250,133,185,0.25);
+}
+
+.theme-colorful .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(94,168,230,0.25);
+  animation-delay: 2s;
+}
+
+.theme-colorful .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: rgba(92,194,198,0.25);
+  animation-delay: 4s;
+}
+
+.theme-colorful .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 35vw;
+  height: 35vw;
+  background: rgba(195,135,194,0.25);
+  animation-delay: 6s;
+}
+
+/* ================================
+   DARK THEME
+================================ */
+
+.theme-dark .ambient-orb {
+  mix-blend-mode: screen;
+  filter: blur(120px); /* ✅ reduced */
+}
+
+.theme-dark .orb-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(234,179,8,0.08);
+}
+
+.theme-dark .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: rgba(37,99,235,0.08);
+  animation-delay: 2s;
+}
+
+.theme-dark .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(225,29,72,0.08);
+  animation-delay: 4s;
+}
+
+.theme-dark .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(148,163,184,0.08);
+  animation-delay: 6s;
+}
+
+/* ================================
+   GLASS LAYER (FIXED)
+================================ */
+
+.theme-colorful .bg-glass-layer {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px); /* ✅ soft glass */
+}
+
+.theme-dark .bg-glass-layer {
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(25px); /* ✅ FIXED (was 80px) */
+}

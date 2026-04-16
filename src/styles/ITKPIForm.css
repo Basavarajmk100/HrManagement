@@ -1,0 +1,99 @@
+/* ITKPIForm.css */
+
+/* Container */
+.kpi-form-container {
+  max-width: 700px;          /* Wider for 2-column */
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden !important;   /* Prevent scroll */
+}
+
+/* Form title */
+.kpi-form-container h2 {
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+/* Form layout – Two Columns */
+.kpi-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 18px; /* row-gap, col-gap */
+  align-items: start;
+}
+
+/* Single column items */
+.kpi-full {
+  grid-column: span 2;  /* For month dropdown or big fields */
+}
+
+/* Labels */
+.kpi-form label {
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+/* Inputs & selects */
+.kpi-form input[type="text"],
+.kpi-form input[type="number"],
+.kpi-form input[type="month"],
+.kpi-form select {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.kpi-form input:focus,
+.kpi-form select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+/* Disabled Textbox (KPI Score) */
+.kpi-form input[disabled] {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+
+/* Submit Button – full width */
+.kpi-form button {
+  grid-column: span 2;  /* Full width */
+  padding: 12px;
+  background-color: #FA85B9 ;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.kpi-form button:hover {
+  background-color: #FA85B9 ;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .kpi-form {
+    grid-template-columns: 1fr; /* Stack for mobile */
+  }
+
+  .kpi-form button,
+  .kpi-full {
+    grid-column: span 1;
+  }
+}

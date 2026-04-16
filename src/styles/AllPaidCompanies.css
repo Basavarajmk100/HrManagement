@@ -1,0 +1,361 @@
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #f1f5f9;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.title {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* TOP BAR */
+.top-bar {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.top-bar input,
+.top-bar select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #111827;
+}
+
+/* CARD */
+.card {
+  width: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* TABLE PANEL */
+.table-panel {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* HEADER */
+.table-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.table-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.table-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* BUTTON */
+.add-btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #FA85B9;
+  color: white;
+  font-weight: 700;
+}
+
+.add-btn:hover {
+  opacity: 0.9;
+}
+
+/* TABLE WRAPPER */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* TABLE */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* HEADER */
+.styled-table th {
+  padding: 12px;
+  text-align: left;
+  color: #6b7280;
+  font-size: 12px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ROW DATA */
+.styled-table td {
+  padding: 12px;
+  text-align: left;
+  color: #111827;
+}
+
+/* ROW STYLE */
+.table-row.tr-card {
+  background: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.2s;
+}
+
+.table-row.tr-card:hover {
+  background: #f9fafb;
+}
+
+/* STATUS */
+.status-pill {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-pill.paid {
+  background: #DCFCE7;
+  color: #166534;
+}
+
+/* FOOTER */
+.simple-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  font-size: 12px;
+  color: #666;
+}
+
+/* PAGINATION */
+.pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.pagination button {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  background: #ffffff;
+  color: #374151;
+}
+
+.pagination button:hover {
+  background: #f3f4f6;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* BADGES */
+.badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.paid {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.pending {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+/* PAGINATION BAR */
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* BUTTON */
+.pagination button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #1e40af;
+  color: white;
+}
+
+.pagination button:hover {
+  background: #1d4ed8;
+}
+
+/* EXCEL BUTTON */
+.excel-btn {
+  padding: 8px 12px;
+  background: #166534;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.excel-btn:hover {
+  background: #14532d;
+}
+
+
+
+
+
+
+
+
+
+/* ================================
+   BACKGROUND EFFECTS
+================================ */
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 100%;
+  animation: blob 15s infinite alternate ease-in-out;
+}
+
+.bg-glass-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Animation */
+@keyframes blob {
+  0% { transform: translate(0px,0px) scale(1); }
+  33% { transform: translate(30px,-50px) scale(1.1); }
+  66% { transform: translate(-20px,20px) scale(0.9); }
+  100% { transform: translate(0px,0px) scale(1); }
+}
+
+/* ================================
+   COLORFUL THEME
+================================ */
+
+.theme-colorful .ambient-orb {
+  mix-blend-mode: multiply;
+  filter: blur(100px);
+}
+
+.theme-colorful .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(250,133,185,0.3);
+}
+
+.theme-colorful .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(94,168,230,0.3);
+  animation-delay: 2s;
+}
+
+.theme-colorful .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: rgba(92,194,198,0.3);
+  animation-delay: 4s;
+}
+
+.theme-colorful .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 35vw;
+  height: 35vw;
+  background: rgba(195,135,194,0.3);
+  animation-delay: 6s;
+}
+
+/* ================================
+   DARK THEME
+================================ */
+
+.theme-dark .ambient-orb {
+  mix-blend-mode: screen;
+  filter: blur(160px);
+}
+
+.theme-dark .orb-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(234,179,8,0.05);
+}
+
+.theme-dark .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: rgba(37,99,235,0.05);
+  animation-delay: 2s;
+}
+
+.theme-dark .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(225,29,72,0.05);
+  animation-delay: 4s;
+}
+
+.theme-dark .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(148,163,184,0.05);
+  animation-delay: 6s;
+}
+
+/* Glass layers */
+
+.theme-colorful .bg-glass-layer {
+  background: rgba(224,247,250,0.3);
+  backdrop-filter: blur(12px);
+}
+
+.theme-dark .bg-glass-layer {
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(80px);
+}
+
+

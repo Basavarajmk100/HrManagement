@@ -1,0 +1,144 @@
+/* =========================================
+   PROVIDER SIDEBAR STYLES
+========================================= */
+
+/* Sidebar Base */
+.sidebar {
+  position: relative;
+  height: 100vh;
+  width: 96px;
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  box-shadow: var(--sidebar-shadow);
+  backdrop-filter: blur(24px);
+
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.sidebar:hover {
+  width: 288px;
+}
+
+/* Logo Area */
+.sidebar-logo-area {
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  height: 96px;
+  border-bottom: 1px solid var(--sidebar-border);
+}
+
+.logo-icon-box {
+  min-width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.sidebar:hover .logo-icon-box {
+  transform: rotate(6deg);
+}
+
+.logo-text {
+  margin-left: 16px;
+  font-size: 20px;
+  font-weight: 900;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+  color: inherit;
+}
+
+.sidebar:hover .logo-text {
+  opacity: 1;
+}
+
+/* Navigation */
+.nav-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px 20px;
+  overflow-y: auto;
+}
+
+.nav-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  border-radius: 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+
+  transition: all 0.2s ease;
+}
+
+.nav-icon {
+  position: absolute;
+  left: 0;
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-text {
+  margin-left: 56px;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.sidebar:hover .nav-text {
+  opacity: 1;
+}
+
+/* Active + Hover States */
+
+/* Simple Theme */
+.theme-simple .nav-btn:hover,
+.theme-simple .nav-btn.active {
+  background: rgba(250, 133, 185, 0.1);
+  color: #FA85B9;
+}
+
+/* Colorful Theme */
+.theme-colorful .nav-btn:hover,
+.theme-colorful .nav-btn.active {
+  background: #ffffff;
+  color: #5EA8E6;
+}
+
+/* Dark Theme */
+.theme-dark .nav-btn:hover,
+.theme-dark .nav-btn.active {
+  background: rgba(254, 240, 138, 0.08);
+  color: #FEF08A;
+}
+
+/* Footer */
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid var(--sidebar-border);
+}
+
+.logout-btn {
+  width: 100%;
+}

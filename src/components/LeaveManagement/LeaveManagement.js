@@ -54,28 +54,42 @@ const LeaveManagement = () => {
   };
 
   return (
-    <div className="leave-container">
+    <div className
+
+="leave-container">
       {/* Leave Balances */}
-      <div className="card">
+      <div className
+
+="card">
         <h2>Leave Balances</h2>
-        <div className="balance-item">
+        <div className
+
+="balance-item">
           <span>Casual Leave</span>
           <span>{balances.casual}</span>
         </div>
-        <div className="balance-item">
+        <div className
+
+="balance-item">
           <span>Sick Leave</span>
           <span>{balances.sick}</span>
         </div>
-        <div className="balance-item">
+        <div className
+
+="balance-item">
           <span>Earned Leave</span>
           <span>{balances.earned}</span>
         </div>
       </div>
 
       {/* Apply for Leave */}
-      <div className="card">
+      <div className
+
+="card">
         <h2>Apply for Leave</h2>
-        <form onSubmit={handleSubmit} className="leave-form">
+        <form onSubmit={handleSubmit} className
+
+="leave-form">
           <label>Leave Type</label>
           <select name="type" value={form.type} onChange={handleChange}>
             <option value="Casual">Casual</option>
@@ -114,10 +128,14 @@ const LeaveManagement = () => {
       </div>
 
       {/* Leave Requests */}
-      <div className="card">
+      <div className
+
+="card">
         <h2>My Leave Requests</h2>
         {requests.map((req) => (
-          <div key={req.id} className="request-item">
+          <div key={req.id} className
+
+="request-item">
             <p>
               <strong>{req.type} Leave</strong>
             </p>
@@ -125,7 +143,9 @@ const LeaveManagement = () => {
               {req.from} → {req.to}
             </p>
             <p>{req.reason}</p>
-            <span className={`status ${req.status.toLowerCase()}`}>
+            <span className
+
+={`status ${req.status.toLowerCase()}`}>
               {req.status}
             </span>
           </div>

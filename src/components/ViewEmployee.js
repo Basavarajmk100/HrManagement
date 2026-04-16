@@ -9,7 +9,7 @@ const ViewEmployee = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8085/api/v1/employees/${id}`)
+      .get(`http://localhost:5133/api/v1/employees/${id}`)
       .then((response) => setEmployee(response.data))
       .catch((error) => console.error("Error fetching employee:", error));
   }, [id]);
@@ -23,21 +23,35 @@ const ViewEmployee = () => {
   };
 
   return (
-    <div className="employee-details">
+    <div className
+
+="employee-details">
   
     {/* Profile Section */}
-<div className="profile-header">
+<div className
+
+="profile-header">
   <img
     src={employee.profileImageUrl || "/default-profile.png"}
     alt={`${employee.firstName} ${employee.lastName}`}
-    className="profile-img"
+    className
+
+="profile-img"
   />
-  <h2 className="profile-name">{employee.firstName} {employee.lastName}</h2>
-  <p className="designation">{employee.designation}</p>
-  <p className="department">{employee.department}</p>
+  <h2 className
+
+="profile-name">{employee.firstName} {employee.lastName}</h2>
+  <p className
+
+="designation">{employee.designation}</p>
+  <p className
+
+="department">{employee.department}</p>
 </div>
 
-<div className="profile-card">
+<div className
+
+="profile-card">
   <p><strong>Code:</strong> {employee.employeeCode}</p>
   <p><strong>Email:</strong> {employee.personalEmail}</p>
   <p><strong>Date of Joining:</strong> {employee.dateOfJoining}</p>
@@ -48,13 +62,17 @@ const ViewEmployee = () => {
 
       {/* Documents Section */}
       <h3>Documents</h3>
-      <div className="documents">
+      <div className
+
+="documents">
         <div>
           <p><strong>Aadhaar Card:</strong></p>
           {employee.aadhaarUrl ? (
             <img src={employee.aadhaarUrl} alt="Aadhaar" width="200" />
           ) : (
-            <span className="missing">Not Uploaded</span>
+            <span className
+
+="missing">Not Uploaded</span>
           )}
         </div>
 
@@ -63,7 +81,9 @@ const ViewEmployee = () => {
           {employee.panUrl ? (
             <img src={employee.panUrl} alt="PAN" width="200" />
           ) : (
-            <span className="missing">Not Uploaded</span>
+            <span className
+
+="missing">Not Uploaded</span>
           )}
         </div>
 
@@ -74,14 +94,18 @@ const ViewEmployee = () => {
               View Document
             </a>
           ) : (
-            <span className="missing">Not Uploaded</span>
+            <span className
+
+="missing">Not Uploaded</span>
           )}
         </div>
 
         <button onClick={handleUpload}>Upload Documents</button>
       </div>
 
-      <Link to="/employees" className="back-btn">⬅ Back</Link>
+      <Link to="/employees" className
+
+="back-btn">⬅ Back</Link>
     </div>
   );
 };

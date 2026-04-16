@@ -1,0 +1,99 @@
+.payslip-container {
+  width: 100vw !important;        /* full viewport width */
+  height: 100vh !important;       /* full viewport height */
+  max-width: none !important;     /* override previous max-width */
+  margin: 0 !important;           /* remove auto centering */
+  padding: 30px !important;       /* keep your padding */
+  background: #f8fafc !important;
+  font-family: Arial, sans-serif !important;
+  color: #1e40af !important;
+  border-radius: 0 !important;    /* remove rounded corners for full screen */
+  box-sizing: border-box !important;
+  overflow: auto !important;      /* ensure scroll if content exceeds screen */
+}
+
+.payslip-company-header p{
+  color: black;
+}
+
+/* Keep the rest of your styling the same */
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #1e40af;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.filters select {
+  padding: 6px 10px;
+  font-size: 13px;
+  margin-right: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.download-all-btn {
+  background-color: #FA85B9 ; /* Blue button */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.3s;
+}
+
+.download-all-btn:hover {
+  background-color:#FA85B9 ;
+}
+
+.payslip-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.payslip-table th {
+  background-color:   #3B82F6 !important;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.payslip-table td {
+  padding: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.payslip-table button {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.view-btn {
+  background-color: #3b82f6 !important;
+  color: white;
+}
+
+.view-btn:hover {
+  background-color: #2563eb !important;
+}
+
+.download-btn {
+  background-color:#3b82f6 !important ;
+  color: white;
+}
+
+.download-btn:hover {
+  background-color:#3b82f6 !important;
+}

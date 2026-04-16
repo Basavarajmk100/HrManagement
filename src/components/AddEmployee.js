@@ -12,6 +12,7 @@ function AddEmployee({ onAdd }) {
     designation: "",
     department: ""
   });
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,7 +22,7 @@ function AddEmployee({ onAdd }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8085/api/v1/employees",
+        "http://localhost:5133/api/v1/employees",
         formData
       );
       onAdd(response.data); // update list in parent
@@ -41,9 +42,13 @@ function AddEmployee({ onAdd }) {
   };
 
   return (
-    <div className="add-employee-container">
+    <div className
+
+="add-employee-container">
       <h2>Add New Employee</h2>
-      <form className="add-employee-form" onSubmit={handleSubmit}>
+      <form className
+
+="add-employee-form" onSubmit={handleSubmit}>
         <input
           type="text"
           name="employeeCode"

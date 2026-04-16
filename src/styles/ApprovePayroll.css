@@ -1,0 +1,134 @@
+.approve-container {
+  padding: 20px;
+}
+
+/* Page Title */
+h2 {
+  margin-bottom: 15px;
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+/* Table */
+.payroll-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+/* 🔵 TABLE HEADER – SAME AS DASHBOARD */
+.payroll-table thead {
+  background-color: #1e40af;
+}
+
+.payroll-table th {
+  padding: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #ffffff;
+  border: none;
+  text-align: center;
+}
+
+/* Table Body */
+.payroll-table td {
+  padding: 12px;
+  font-size: 14px;
+  color: #0f172a;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Hover effect */
+.payroll-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* No Data */
+.no-data {
+  text-align: center;
+  padding: 20px;
+  color: #64748b;
+}
+
+/* Buttons */
+.btn {
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  margin: 0 4px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn.approve {
+  background: #22c55e;
+  color: #ffffff;
+}
+
+.btn.approve:hover {
+  background: #16a34a;
+}
+
+.btn.reject {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.btn.reject:hover {
+  background: #dc2626;
+}
+
+/* Status Pills */
+.status {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.status.submitted {
+  background: #fde68a;
+  color: #92400e;
+}
+
+.status.approved {
+  background: #bbf7d0;
+  color: #166534;
+}
+
+.status.rejected {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+/* Filters */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.filter-bar input,
+.filter-bar select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+  outline: none;
+  border-color: #1e40af;
+  box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.2);
+}

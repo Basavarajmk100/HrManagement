@@ -1,0 +1,221 @@
+.sales-container {
+  padding: 20px;
+}
+
+.sales-topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.sales-search {
+  padding: 8px;
+  width: 220px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.add-sales-btn {
+  padding: 8px 14px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.sales-table th {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+}
+
+.sales-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.status-paid {
+  color: green;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: orange;
+  font-weight: bold;
+}
+
+/* Action Buttons */
+
+.view-btn1,
+.edit-btn1,
+.delete-btn1 {
+  width: 70px !important;
+  padding: 6px 0 !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 4px !important;
+  font-size: 13px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+}
+
+/* Individual button colors */
+
+.view-btn1 {
+  background: #17a2b8 !important;
+  margin-right: 6px !important;
+}
+
+.edit-btn1 {
+  background: #28a745 !important;
+  margin-right: 6px !important;
+}
+
+.delete-btn1 {
+  background: #dc3545 !important;
+}
+
+
+
+
+
+
+/* ================================
+   BACKGROUND EFFECTS
+================================ */
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1; /* ✅ send to background */
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: blob 18s infinite alternate ease-in-out;
+}
+
+.bg-glass-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Animation */
+@keyframes blob {
+  0% { transform: translate(0px,0px) scale(1); }
+  33% { transform: translate(30px,-50px) scale(1.1); }
+  66% { transform: translate(-20px,20px) scale(0.9); }
+  100% { transform: translate(0px,0px) scale(1); }
+}
+
+/* ================================
+   COLORFUL THEME
+================================ */
+
+.theme-colorful .ambient-orb {
+  mix-blend-mode: multiply;
+  filter: blur(80px); /* ✅ reduced */
+}
+
+.theme-colorful .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(250,133,185,0.25);
+}
+
+.theme-colorful .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(94,168,230,0.25);
+  animation-delay: 2s;
+}
+
+.theme-colorful .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: rgba(92,194,198,0.25);
+  animation-delay: 4s;
+}
+
+.theme-colorful .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 35vw;
+  height: 35vw;
+  background: rgba(195,135,194,0.25);
+  animation-delay: 6s;
+}
+
+/* ================================
+   DARK THEME
+================================ */
+
+.theme-dark .ambient-orb {
+  mix-blend-mode: screen;
+  filter: blur(120px); /* ✅ reduced */
+}
+
+.theme-dark .orb-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(234,179,8,0.08);
+}
+
+.theme-dark .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: rgba(37,99,235,0.08);
+  animation-delay: 2s;
+}
+
+.theme-dark .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(225,29,72,0.08);
+  animation-delay: 4s;
+}
+
+.theme-dark .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(148,163,184,0.08);
+  animation-delay: 6s;
+}
+
+/* ================================
+   GLASS LAYER (FIXED)
+================================ */
+
+.theme-colorful .bg-glass-layer {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px); /* ✅ soft glass */
+}
+
+.theme-dark .bg-glass-layer {
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(25px); /* ✅ FIXED (was 80px) */
+}

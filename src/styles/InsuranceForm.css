@@ -1,0 +1,234 @@
+/* Container */
+.insurance-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #f8f9fc;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Title */
+.insurance-container h2 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+/* Form Grid */
+.insurance-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 fields per row */
+  gap: 20px 30px; /* vertical and horizontal gap */
+}
+
+/* Labels and Inputs */
+.insurance-form label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.insurance-form input,
+.insurance-form select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+/* Focus effect */
+.insurance-form input:focus,
+.insurance-form select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  outline: none;
+}
+
+/* File and Submit Button Container */
+.button-row {
+  grid-column: span 2; /* full width row for file inputs & button */
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;      /* wrap on smaller screens */
+}
+
+/* File Inputs */
+.button-row input[type="file"] {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #f3f4f6;
+  cursor: pointer;
+}
+
+/* Submit Button */
+.button-row button {
+  flex: 1;
+  padding: 10px;
+  background: #FA85B9;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-row button:hover {
+  background: linear-gradient(90deg, #2563eb, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive: stack everything on mobile */
+@media (max-width: 768px) {
+  .insurance-form {
+    grid-template-columns: 1fr;
+  }
+  .button-row {
+    flex-direction: column;
+  }
+  .button-row input[type="file"],
+  .button-row button {
+    width: 100%;
+  }
+}
+
+
+
+
+
+/* Form grid */
+.insurance-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 fields per row */
+  gap: 20px 30px;
+}
+
+/* Labels & inputs styling */
+.insurance-form label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.insurance-form input,
+.insurance-form select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.insurance-form input:focus,
+.insurance-form select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  outline: none;
+}
+
+/* Button row (files + submit) */
+.button-row {
+  grid-column: span 2; /* full width */
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.button-row input[type="file"],
+.button-row button {
+  flex: 1; /* equal width */
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #f3f4f6;
+  cursor: pointer;
+}
+
+.button-row button {
+  border: none;
+  background: #FA85B9;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.button-row button:hover {
+  background: linear-gradient(90deg, #2563eb, #1e40af);
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .insurance-form {
+    grid-template-columns: 1fr;
+  }
+  .button-row {
+    flex-direction: column;
+  }
+  .button-row input[type="file"],
+  .button-row button {
+    width: 100%;
+  }
+}
+
+
+/* GRID FORM */
+.insurance-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* FORM SECTIONS */
+.form-section {
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-section h3 {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+/* INPUTS */
+.form-section input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ACTIONS */
+.form-actions {
+  grid-column: span 2;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .insurance-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

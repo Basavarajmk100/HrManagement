@@ -1,0 +1,71 @@
+/* Same design as IT & Sales KPI */
+
+.kpi-form-container {
+  max-width: 450px;
+  margin: 30px auto;
+  padding: 25px 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
+  animation: fadeIn 0.4s ease;
+}
+
+.kpi-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.kpi-form label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 14px;
+  display: block;
+  color: #334155;
+}
+
+.kpi-form input,
+.kpi-form select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #f8fafc;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.kpi-form input:focus,
+.kpi-form select:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.kpi-form button {
+  width: 100%;
+  padding: 12px;
+  background: #FA85B9 ;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+
+.kpi-form button:hover {
+  background: #FA85B9 ;
+  transform: translateY(-2px);
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,459 @@
+/* =========================================================
+   ROOT
+   ========================================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Ubuntu, sans-serif;
+  background: #f1f5f9;
+  color: #111827;
+}
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+.ctc-card {
+  background: linear-gradient(180deg, #ffffff, #fafafa);
+  padding: 32px;
+  border-radius: 0;                 /* full page look */
+  border: none;
+  width: 100%;
+  min-height: 100vh;                /* full height */
+  margin: 0;                        /* remove centering */
+  box-shadow: none;
+}
+
+
+.ctc-top-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.add-ctc-section {
+  flex: 2;
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.ctc-top-row .ctc-search {
+  flex: 1;
+  margin: 0;
+  max-width: 420px;
+}
+
+
+/* Input + Search button in one line */
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+
+/* Make input take remaining space */
+.search-row input {
+  flex: 1;
+}
+
+/* Keep button height same as input */
+.search-row button {
+  white-space: nowrap;
+}
+
+
+
+/* ===== CTC Search Container ===== */
+.ctc-search {
+  background: #f9fafb; /* soft light background */
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 30px auto;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== Input Field ===== */
+.ctc-search input[type="text"] {
+  width: 70%;
+  padding: 12px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.ctc-search input[type="text"]:focus {
+  border-color: #6366f1; /* soft purple focus */
+  box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
+}
+
+/* ===== Buttons ===== */
+.ctc-search button {
+  padding: 12px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #FA85B9 ; /* purple gradient optional */
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+}
+
+.ctc-search button:hover {
+  background: #FA85B9 ;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(79, 70, 229, 0.3);
+}
+
+/* ===== Search Results ===== */
+.ctc-search h3 {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.ctc-search ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.ctc-search li {
+  background: #ffffff;
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.ctc-search li:hover {
+  background: #f3f4f6;
+  transform: translateX(3px);
+}
+
+/* ===== Download Button ===== */
+/* ===== Small Download Button ===== */
+.ctc-search .download-btn {
+  display: inline-block;      /* not full width */
+  width: auto;                /* auto size */
+  margin: 15px auto 0;        /* center horizontally */
+  padding: 8px 16px;          /* smaller padding */
+  font-size: 14px;            /* smaller text */
+  border-radius: 8px;         /* slightly tighter */
+  background: #FA85B9 ;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(16, 185, 129, 0.2);
+}
+
+.ctc-search .download-btn:hover {
+  background: #FA85B9 ;
+  transform: translateY(-1px); /* subtle hover */
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
+}
+
+
+/* =========================================================
+   EMPLOYEE DETAILS
+   ========================================================= */
+.employee-details {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.employee-details label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  background: #ffffff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.employee-details input {
+  margin-top: 6px;
+  padding: 9px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+}
+
+.employee-details input:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: #ffffff;
+}
+
+/* =========================================================
+   CTC SUMMARY
+   ========================================================= */
+.ctc-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.ctc-fields {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ctc-summary label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  background: #ffffff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.ctc-summary input {
+  margin-top: 6px;
+  padding: 9px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+}
+
+/* =========================================================
+   INCENTIVE + EDIT BUTTON
+   ========================================================= */
+.edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.incentive-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.incentive-toggle input {
+  margin: 0;
+}
+
+/* Edit Button */
+.edit-btn {
+  padding: 8px 34px;
+  min-width: 160px;
+  height: 38px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+  transition: all 0.25s ease;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.45);
+}
+
+.edit-btn:active {
+  transform: scale(0.96);
+}
+
+.edit-btn.cancel {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* =========================================================
+   TABLE
+
+/* ===============================
+   Table
+   =============================== */
+/* ===============================
+   Table – FIXED ALIGNMENT
+   =============================== */
+.ctc-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-variant-numeric: tabular-nums; /* equal digit width */
+}
+
+/* Headers */
+.ctc-table th {
+  background:   #3B82F6;
+  color: #ffffff;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Cells */
+.ctc-table td {
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  vertical-align: middle;
+}
+
+/* Breakdown column */
+.ctc-table .label-cell {
+  text-align: left;
+  padding-left: 20px;
+  white-space: nowrap;
+}
+
+/* Amount columns */
+.ctc-table .amount-cell {
+  text-align: right; /* FINANCE STANDARD */
+}
+
+/* Inputs */
+.ctc-table input {
+  width: 100px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+/* Static values */
+.static-text {
+  display: inline-block;
+  min-width: 100px;
+  text-align: right;
+  font-weight: 500;
+}
+
+/* ===============================
+   Total Row
+   =============================== */
+.total-row td {
+  font-weight: 700;
+  background: #fee2e2;
+  text-align: right;
+}
+
+.total-row td:first-child {
+  text-align: left;
+  padding-left: 20px;
+}
+
+
+/* ===============================
+   Save Button
+   =============================== */
+.save-btn {
+  margin-top: 15px;
+  padding: 10px 18px;
+  background: #FA85B9  !important;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ===============================
+   Mobile Safety
+   =============================== */
+@media (max-width: 768px) {
+  .employee-details,
+  .ctc-summary {
+    gap: 12px;
+  }
+
+  .employee-details input,
+  .ctc-summary input {
+    width: 100%;
+  }
+}
+
+/* ===============================
+   CTC Summary Layout Fix
+   =============================== */
+
+/* Split summary into left (inputs) and right (actions) */
+.ctc-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Group CTC & Gross inputs */
+.ctc-fields {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Checkbox + Edit button row */
+.edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+/* Remove top margin pushing button down */
+.edit-actions .edit-btn {
+  margin-top: 0;
+}
+
+/* Checkbox + text strictly side by side */
+.incentive-toggle {
+  display: inline-flex;      /* ✅ horizontal always */
+  align-items: center;       /* ✅ vertical center */
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* Checkbox alignment fix */
+.incentive-toggle input[type="checkbox"] {
+  margin: 0;
+  vertical-align: middle;
+}
+
+
+
+

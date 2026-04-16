@@ -1,0 +1,169 @@
+/* === Global Layout === */
+.app-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafc;
+  min-height: 100vh;
+}
+
+/* === Navbar === */
+.navbar {
+  background-color: #1976d2;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* === Holiday Calendar Container === */
+.holiday-calendar-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.holiday-calendar-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* === Add Holiday Form (HR Dashboard) === */
+.add-holiday-form {
+  background: #f3f7fb;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.add-holiday-form h3 {
+  color: #1976d2;
+  margin-bottom: 15px;
+}
+
+.add-holiday-form form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.add-holiday-form input {
+  flex: 1 1 30%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.add-holiday-form button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.add-holiday-form button:hover {
+  background-color: #125ea3;
+}
+
+/* === Holiday Grid === */
+.holiday-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.holiday-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.holiday-card:hover {
+  transform: translateY(-5px);
+}
+
+.holiday-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.holiday-card h4 {
+  color: #1976d2;
+  margin: 5px 0;
+}
+
+.holiday-card p {
+  color: #555;
+  font-size: 15px;
+}
+
+/* === Home Page === */
+.home {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.home p {
+  color: #555;
+}
+
+/* Delete Button (HR dashboard) */
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}
+
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* space between icon and text */
+}
+
+.header-icon {
+  font-size: 32px; /* slightly larger than text */
+}
+

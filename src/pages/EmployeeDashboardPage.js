@@ -3,7 +3,9 @@ import EmployeeDashboard from "../components/EmployeeDashboard/EmployeeDashboard
 
 const EmployeeDashboardPage = () => {
   return (
-    <div className="p-2">
+    <div className
+
+="p-2">
      
       <EmployeeDashboard />
     </div>

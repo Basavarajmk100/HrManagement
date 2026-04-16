@@ -1,0 +1,197 @@
+.upgrade-page {
+  padding: 20px;
+  background: #f6f8fb;
+  min-height: 100vh;
+}
+
+.search-box {
+  width: 250px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+.upgrade-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.upgrade-table th {
+  background: #e6f2ff;
+  font-weight: 600;
+}
+
+.upgrade-table th,
+.upgrade-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Buttons */
+.approve-btn {
+  padding: 6px 12px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.reject-btn {
+  padding: 6px 12px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.approve-btn:hover {
+  background: darkgreen;
+}
+
+.reject-btn:hover {
+  background: darkred;
+}
+
+
+
+
+
+
+
+
+/* ================================
+   BACKGROUND EFFECTS
+================================ */
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 100%;
+  animation: blob 15s infinite alternate ease-in-out;
+}
+
+.bg-glass-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Animation */
+@keyframes blob {
+  0% { transform: translate(0px,0px) scale(1); }
+  33% { transform: translate(30px,-50px) scale(1.1); }
+  66% { transform: translate(-20px,20px) scale(0.9); }
+  100% { transform: translate(0px,0px) scale(1); }
+}
+
+/* ================================
+   COLORFUL THEME
+================================ */
+
+.theme-colorful .ambient-orb {
+  mix-blend-mode: multiply;
+  filter: blur(100px);
+}
+
+.theme-colorful .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(250,133,185,0.3);
+}
+
+.theme-colorful .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(94,168,230,0.3);
+  animation-delay: 2s;
+}
+
+.theme-colorful .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: rgba(92,194,198,0.3);
+  animation-delay: 4s;
+}
+
+.theme-colorful .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 35vw;
+  height: 35vw;
+  background: rgba(195,135,194,0.3);
+  animation-delay: 6s;
+}
+
+/* ================================
+   DARK THEME
+================================ */
+
+.theme-dark .ambient-orb {
+  mix-blend-mode: screen;
+  filter: blur(160px);
+}
+
+.theme-dark .orb-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(234,179,8,0.05);
+}
+
+.theme-dark .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: rgba(37,99,235,0.05);
+  animation-delay: 2s;
+}
+
+.theme-dark .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(225,29,72,0.05);
+  animation-delay: 4s;
+}
+
+.theme-dark .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(148,163,184,0.05);
+  animation-delay: 6s;
+}
+
+/* Glass layers */
+
+.theme-colorful .bg-glass-layer {
+  background: rgba(224,247,250,0.3);
+  backdrop-filter: blur(12px);
+}
+
+.theme-dark .bg-glass-layer {
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(80px);
+}

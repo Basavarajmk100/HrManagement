@@ -1,0 +1,39 @@
+.event-registration-container{
+  max-width:400px;
+  margin:40px auto;
+  padding:30px;
+  background:#ffffff;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.1);
+}
+
+.event-registration-container h2{
+  text-align:center;
+  margin-bottom:20px;
+  font-size: 25px;
+}
+
+.event-form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.event-form input{
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:6px;
+}
+
+.event-form button{
+  background:#FA85B9;
+  color:white;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.event-form button:hover{
+  opacity:0.9;
+}

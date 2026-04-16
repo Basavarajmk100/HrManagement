@@ -1,0 +1,210 @@
+.employee-report-container {
+  padding: 30px;
+  background-color: #f3f4f6;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  color: #1f2937;
+}
+
+.header {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #1e40af;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+/* Small Search Bar */
+.searchInput {
+  width: 220px;          /* smaller width */
+  padding: 6px 10px;     /* reduced height */
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #cbd5f5;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.searchInput::placeholder {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.searchInput:focus {
+  border-color: #1e40af;
+  box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.15);
+}
+
+/* Small Export Buttons */
+.exportBtn {
+  padding: 6px 12px;      /* smaller height & width */
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  background-color: #1e40af;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.exportBtn:hover {
+  background-color: #1e3a8a;
+  transform: translateY(-1px);
+}
+
+/* Table wrapper: horizontal scroll */
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1600px; /* ensures table is wide enough for horizontal scroll */
+}
+
+.th,
+.td {
+  padding: 12px 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #374151;
+   background-color: #1e3a8a;
+  white-space: nowrap; /* prevents wrapping */
+}
+
+/* Column widths */
+.th:nth-child(1), .td:nth-child(1) { width: 60px; }   /* Sl.No */
+.th:nth-child(2), .td:nth-child(2) { width: 60px; }   /* Photo */
+.th:nth-child(3), .td:nth-child(3) { width: 100px; }  /* Emp ID */
+.th:nth-child(4), .td:nth-child(4) { width: 180px; }  /* Name */
+.th:nth-child(5), .td:nth-child(5) { width: 180px; }  /* Father's Name */
+.th:nth-child(6), .td:nth-child(6) { width: 120px; }  /* Date of Joining */
+.th:nth-child(7), .td:nth-child(7) { width: 100px; }  /* PF No */
+.th:nth-child(8), .td:nth-child(8) { width: 100px; }  /* ESI No */
+.th:nth-child(9), .td:nth-child(9) { width: 120px; }  /* PAN No */
+.th:nth-child(10), .td:nth-child(10) { width: 150px; }/* Bank Name */
+.th:nth-child(11), .td:nth-child(11) { width: 150px; }/* Account No */
+.th:nth-child(12), .td:nth-child(12) { width: 120px; }/* IFSC */
+.th:nth-child(13), .td:nth-child(13) { width: 150px; }/* Designation */
+.th:nth-child(14), .td:nth-child(14) { width: 150px; }/* Occupation */
+.th:nth-child(15), .td:nth-child(15) { width: 150px; }/* Department */
+.th:nth-child(16), .td:nth-child(16) { width: 120px; }/* Branch */
+.th:nth-child(17), .td:nth-child(17) { width: 80px; } /* Grade */
+.th:nth-child(18), .td:nth-child(18) { width: 120px; }/* UAN */
+.th:nth-child(19), .td:nth-child(19) { width: 150px; }/* Aadhaar No */
+
+.table thead th {
+  background-color: #1e40af;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+
+.trEven {
+  background-color: #f9fafb;
+}
+
+.table tr:hover {
+  background-color: #e0e7ff;
+  transition: background-color 0.2s;
+}
+
+/* Photo Column */
+.photoImg {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  transition: transform 0.2s;
+}
+
+.photoImg:hover {
+  transform: scale(1.1);
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.pagination button:hover {
+  background-color: #1e40af;
+  color: white;
+}
+
+.pagination .activePage {
+  background-color: #1e40af;
+  color: white;
+  font-weight: 600;
+}
+
+/* Messages */
+.message {
+  padding: 20px;
+  font-size: 16px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.message.error {
+  color: #dc2626;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .th,
+  .td {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .searchInput,
+  .controls select,
+  .exportBtn {
+    width: 100%;
+  }
+
+  .tableWrapper {
+    overflow-x: scroll;
+  }
+}

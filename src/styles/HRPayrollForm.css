@@ -1,0 +1,91 @@
+/* ============================
+   HR Payroll Form – Compact UI
+=============================== */
+
+.hr-payroll-form-container {
+  width: 100%;
+  max-width: 650px;
+  background: #ffffff;
+  padding: 18px 22px;         /* reduced */
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  border: 1px solid #e5e7eb;
+  margin: 10px auto;          /* reduced */
+  font-family: "Inter", sans-serif;
+}
+/* Center whole page */
+.payroll-entry-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+  width: 100%;
+  min-height: 90vh;     /* avoids scrolling */
+}
+
+/* Center heading */
+.payroll-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+
+/* Labels */
+.hr-form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;          /* reduced */
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Inputs */
+.hr-form-group input,
+.hr-form-group select {
+  width: 100%;
+  padding: 8px 10px;           /* reduced */
+  border: 1.3px solid #d1d5db;
+  border-radius: 8px;          /* reduced */
+  font-size: 14px;
+  background: #f9fafb;
+  transition: 0.25s;
+}
+
+.hr-form-group input:focus,
+.hr-form-group select:focus {
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+  outline: none;
+}
+
+/* Spacing between fields */
+.hr-form-group {
+  margin-bottom: 12px;         /* reduced */
+}
+
+/* Submit Button */
+.hr-submit-btn {
+  width: 100%;
+  background: #FA85B9  !important ;
+  color: white;
+  padding: 10px;               /* reduced */
+  border: none;
+  border-radius: 10px;         /* reduced */
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.hr-submit-btn:hover {
+  background: #FA85B9 !important ;
+  transform: translateY(-1px);
+}
+
+.hr-submit-btn:active {
+  transform: scale(0.98);
+}

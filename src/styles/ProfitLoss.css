@@ -1,0 +1,82 @@
+.finance-page {
+  padding: 25px;
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+}
+
+.filters input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* SUMMARY CARDS */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.card {
+  padding: 15px;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+}
+
+.card.income {
+  background: #16a34a;
+}
+
+.card.expense {
+  background: #dc2626;
+}
+
+.card.profit {
+  background: #4f46e5;
+}
+
+.card.loss {
+  background: #f59e0b;
+}
+
+/* TABLE SECTION */
+.balance-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.balance-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.balance-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.balance-card td {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.total-row {
+  font-weight: bold;
+}

@@ -1,0 +1,133 @@
+/* =======================
+   Modal Overlay
+======================= */
+.user-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 54, 133, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* =======================
+   Glass Modal
+======================= */
+.user-modal {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 14px;
+  padding: 20px;
+  width: 360px;        /* slightly wider for buttons */
+  max-width: 90vw;     /* responsive on small screens */
+  color: white;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  animation: slideDown 0.3s ease;
+  display: flex;
+  flex-direction: column; /* stack inputs vertically */
+  align-items: stretch;
+}
+
+/* =======================
+   Modal Header
+======================= */
+.user-modal h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* =======================
+   Inputs & Select
+======================= */
+.user-modal input,
+.user-modal select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.user-modal input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.user-modal input:focus,
+.user-modal select:focus {
+  border-color: #3b82f6;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* =======================
+   Buttons Container
+======================= */
+/* Buttons Container (same) */
+.user-modal .form-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;          /* optional: smaller gap for smaller buttons */
+  margin-top: 18px;
+  flex-wrap: nowrap;
+}
+
+/* Small Buttons */
+.user-modal .form-buttons button {
+  all: unset;              
+  display: flex;
+  width: 100px;          /* smaller width */
+  height: 32px;          /* smaller height */
+  border-radius: 6px;    /* slightly smaller radius */
+  font-size: 13px;       /* smaller font */
+  font-weight: 600;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+/* Save Button */
+.user-modal .form-buttons .save-btn {
+  border: none;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: white;
+}
+
+/* Cancel Button */
+.user-modal .form-buttons .cancel-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Hover Effects */
+.user-modal .form-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .user-modal {
+    width: 90vw;
+  }
+  .user-modal .form-buttons button {
+    width: 40%;  /* buttons shrink on small screens */
+  }
+}

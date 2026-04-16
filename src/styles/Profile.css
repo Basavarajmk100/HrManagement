@@ -1,0 +1,255 @@
+/* 🌟 Profile Container */
+.profile-container {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f9fafb 0%, #eef2f7 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ✨ Profile Card */
+.profile-card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+  width: 100%;
+  border: 1px solid rgba(230, 235, 245, 0.8);
+  transition: all 0.3s ease;
+}
+
+/* 🧑‍💼 Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile-avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4f46e5;
+}
+
+.profile-name1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+/* Divider Line */
+.profile-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 1rem 0;
+}
+
+/* 📋 Employee Details Grid */
+.profile-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 1.2rem;
+}
+
+/* Each row styled like a neat data cell */
+.profile-details p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9fafb;
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  color: #374151;
+  margin: 0;
+  border: 1px solid #e5e7eb;
+}
+
+/* Label */
+.profile-details p strong {
+  color: #111827;
+  font-weight: 600;
+  width: 45%;
+  text-align: left;
+}
+
+/* Value */
+.profile-details p span {
+  width: 55%;
+  text-align: right;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+/* 🧭 Hover effect for better UI feedback */
+.profile-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* 📱 Responsive Layout */
+@media (max-width: 768px) {
+  .profile-details {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-details p {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-details p strong,
+  .profile-details p span {
+    width: 100%;
+    text-align: left;
+  }
+
+  .profile-avatar {
+    width: 55px;
+    height: 55px;
+  }
+
+  .profile-name {
+    font-size: 1.2rem;
+  }
+}
+
+
+
+
+/* ================================
+   BACKGROUND EFFECTS
+================================ */
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 100%;
+  animation: blob 15s infinite alternate ease-in-out;
+}
+
+.bg-glass-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Animation */
+@keyframes blob {
+  0% { transform: translate(0px,0px) scale(1); }
+  33% { transform: translate(30px,-50px) scale(1.1); }
+  66% { transform: translate(-20px,20px) scale(0.9); }
+  100% { transform: translate(0px,0px) scale(1); }
+}
+
+/* ================================
+   COLORFUL THEME
+================================ */
+
+.theme-colorful .ambient-orb {
+  mix-blend-mode: multiply;
+  filter: blur(100px);
+}
+
+.theme-colorful .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(250,133,185,0.3);
+}
+
+.theme-colorful .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(94,168,230,0.3);
+  animation-delay: 2s;
+}
+
+.theme-colorful .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: rgba(92,194,198,0.3);
+  animation-delay: 4s;
+}
+
+.theme-colorful .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 35vw;
+  height: 35vw;
+  background: rgba(195,135,194,0.3);
+  animation-delay: 6s;
+}
+
+/* ================================
+   DARK THEME
+================================ */
+
+.theme-dark .ambient-orb {
+  mix-blend-mode: screen;
+  filter: blur(160px);
+}
+
+.theme-dark .orb-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(234,179,8,0.05);
+}
+
+.theme-dark .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: rgba(37,99,235,0.05);
+  animation-delay: 2s;
+}
+
+.theme-dark .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(225,29,72,0.05);
+  animation-delay: 4s;
+}
+
+.theme-dark .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(148,163,184,0.05);
+  animation-delay: 6s;
+}
+
+/* Glass layers */
+
+.theme-colorful .bg-glass-layer {
+  background: rgba(224,247,250,0.3);
+  backdrop-filter: blur(12px);
+}
+
+.theme-dark .bg-glass-layer {
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(80px);
+}

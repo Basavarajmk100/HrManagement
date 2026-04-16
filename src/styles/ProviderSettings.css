@@ -1,0 +1,47 @@
+.settings-container {
+  padding: 20px;
+}
+
+.settings-container h2 {
+  margin-bottom: 15px;
+  color: #FA85B9;
+}
+
+.settings-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+}
+
+.settings-card h3 {
+  margin-bottom: 10px;
+  color: #FA85B9;
+}
+
+.settings-card input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.settings-card label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.settings-card button {
+  background: #FA85B9;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.settings-card button:hover {
+  background: #e96aa6; /* darker pink on hover */
+}

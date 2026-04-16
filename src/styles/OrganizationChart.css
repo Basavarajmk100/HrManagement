@@ -1,0 +1,210 @@
+.org-container {
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ====== Attractive Header ====== */
+.org-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+background: linear-gradient(135deg, #16a34a, #2563eb);
+
+
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.org-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+  color: #000;
+}
+
+.org-header p {
+  font-size: 0.95rem;
+  margin-top: 6px;
+  color: #000;
+}
+
+/* Org Tree */
+.org-tree {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.org-node {
+  text-align: center;
+  margin: 20px;
+  position: relative;
+}
+
+/* Cards */
+.org-card {
+  background: #2563eb;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  min-width: 160px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.org-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* ===== Role-based professional colors ===== */
+.org-card.ChiefExecutiveOfficer {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb); /* Deep corporate blue */
+}
+
+.org-card.Manager {
+  background: linear-gradient(135deg, #065f46, #10b981); /* Professional teal/green */
+}
+
+.org-card.Developer {
+  background: linear-gradient(135deg, #374151, #6b7280); /* Neutral gray for tech roles */
+}
+
+.org-card.Designer {
+  background: linear-gradient(135deg, #4338ca, #6366f1); /* Soft indigo for creative roles */
+}
+
+.role {
+  font-size: 0.8rem;
+  margin-top: 6px;
+  color: #e0e7ff;
+  font-weight: 500;
+}
+
+/* ===== Actions ===== */
+.actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 6px;
+}
+
+.actions button {
+  background: #ffffff;
+  color: #1e3a8a;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background 0.2s ease;
+}
+
+.actions button:hover {
+  background: #f3f4f6;
+}
+
+
+/* Children + connectors */
+.org-children {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.org-children::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: #9ca3af;
+}
+
+.org-node::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: #9ca3af;
+}
+
+/* Forms */
+/* ====== Forms ====== */
+.org-form {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 24px;
+  margin-top: 24px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.org-form h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-bottom: 16px;
+}
+
+/* Inputs */
+.org-form input,
+.org-form select {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.org-form input:focus,
+.org-form select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  outline: none;
+}
+
+/* Buttons */
+.org-form button {
+  background:#007bff;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.org-form button:hover {
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  transform: translateY(-2px);
+}
+
+/* Edit form (inline editor look) */
+.edit-form {
+  background: #f9fafb;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-top: 16px;
+}
+

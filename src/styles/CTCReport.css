@@ -1,0 +1,198 @@
+/* ===============================
+   Global Font Setup
+   =============================== */
+:root {
+  --font-ui: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: "Poppins", system-ui, sans-serif;
+}
+
+.report-container {
+  padding: 20px;
+  font-family: var(--font-ui);
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* ===============================
+   Header
+   =============================== */
+.report-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #0f172a;
+}
+
+/* ===============================
+   FILTER BAR
+   =============================== */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 16px;
+}
+/* SMALL SEARCH INPUT */
+.search-input {
+  min-width: 160px !important;
+  max-width: 200px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+
+/* INPUT & SELECT COMMON */
+.filter-bar input,
+.filter-bar select {
+  padding: 8px 12px;
+  min-width: 200px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+/* PLACEHOLDER */
+.filter-bar input::placeholder {
+  color: #94a3b8;
+}
+
+/* HOVER */
+.filter-bar input:hover,
+.filter-bar select:hover {
+  border-color: #2563eb;
+}
+
+/* FOCUS */
+.filter-bar input:focus,
+.filter-bar select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ===============================
+   EXPORT BUTTON
+   =============================== */
+.export-btn {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #ffffff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
+}
+
+/* BUTTON HOVER */
+.export-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
+}
+
+/* BUTTON ACTIVE */
+.export-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+}
+
+
+.export-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;   /* 👈 increase this */
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+@media (max-width: 768px) {
+  .filter-bar input,
+  .filter-bar select {
+    min-width: 100%;
+  }
+}
+
+/* ===============================
+   Table Styling
+   =============================== */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  font-family: var(--font-ui);
+}
+
+.report-table th {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  background:   #3B82F6 !important;
+  color: white;
+  padding: 10px 6px;
+}
+
+.report-table td {
+  font-weight: 500;
+  color: #111827;
+  padding: 8px 6px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.report-table tr:hover {
+  background: #f1f5f9;
+}
+
+/* Summary row */
+.summary-row {
+  font-weight: 600;
+  font-family: var(--font-heading);
+  background: #e0e7ff;
+}
+
+/* ===============================
+   Pagination
+   =============================== */
+.report-container > div button {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+/* ===============================
+   Chart Card
+   =============================== */
+.chart-container {
+  max-width: 700px;
+  height: 300px;
+  margin: 24px auto;
+  padding: 14px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+.chart-container h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #1e40af;
+}

@@ -1,0 +1,316 @@
+/* PAGE CONTAINER */
+.employee-insurance-container{
+  min-height: 100vh;
+  padding: 30px;
+  background: linear-gradient(135deg,#eef2ff,#f8fafc);
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* TITLE */
+.employee-insurance-container h2{
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+/* CARD */
+.insurance-card{
+  width: 750px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* SECTION TITLES */
+.insurance-card h3{
+  margin-bottom: 15px;
+  margin-top: 10px;
+  color: #2563eb;
+  font-size: 18px;
+}
+
+/* INPUTS */
+.insurance-card input,
+.insurance-card select{
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5f5;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+/* INPUT FOCUS */
+.insurance-card input:focus,
+.insurance-card select:focus{
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 4px rgba(37,99,235,0.3);
+}
+
+/* HORIZONTAL LINE */
+.insurance-card hr{
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* BUTTON */
+.download-btn1{
+  width: 100%;
+  padding: 12px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* BUTTON HOVER */
+.download-btn1:hover{
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px){
+  .insurance-card{
+    width: 95%;
+    padding: 20px;
+  }
+}
+
+
+
+.add-btn{
+  background:#22c55e;
+  color:white;
+  border:none;
+  padding:8px 14px;
+  margin:10px 0;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.add-btn:hover{
+  background:#16a34a;
+}
+
+.child-box{
+  border:1px solid #e2e8f0;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:10px;
+}
+
+
+
+
+
+/* ================================
+   BACKGROUND EFFECTS
+================================ */
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 100%;
+  animation: blob 15s infinite alternate ease-in-out;
+}
+
+.bg-glass-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Animation */
+@keyframes blob {
+  0% { transform: translate(0px,0px) scale(1); }
+  33% { transform: translate(30px,-50px) scale(1.1); }
+  66% { transform: translate(-20px,20px) scale(0.9); }
+  100% { transform: translate(0px,0px) scale(1); }
+}
+
+/* ================================
+   COLORFUL THEME
+================================ */
+
+.theme-colorful .ambient-orb {
+  mix-blend-mode: multiply;
+  filter: blur(100px);
+}
+
+.theme-colorful .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(250,133,185,0.3);
+}
+
+.theme-colorful .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(94,168,230,0.3);
+  animation-delay: 2s;
+}
+
+.theme-colorful .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: rgba(92,194,198,0.3);
+  animation-delay: 4s;
+}
+
+.theme-colorful .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 35vw;
+  height: 35vw;
+  background: rgba(195,135,194,0.3);
+  animation-delay: 6s;
+}
+
+/* ================================
+   DARK THEME
+================================ */
+
+.theme-dark .ambient-orb {
+  mix-blend-mode: screen;
+  filter: blur(160px);
+}
+
+.theme-dark .orb-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(234,179,8,0.05);
+}
+
+.theme-dark .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: rgba(37,99,235,0.05);
+  animation-delay: 2s;
+}
+
+.theme-dark .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(225,29,72,0.05);
+  animation-delay: 4s;
+}
+
+.theme-dark .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(148,163,184,0.05);
+  animation-delay: 6s;
+}
+
+/* Glass layers */
+
+.theme-colorful .bg-glass-layer {
+  background: rgba(224,247,250,0.3);
+  backdrop-filter: blur(12px);
+}
+
+.theme-dark .bg-glass-layer {
+  background: rgba(0,0,0,0.15);
+  backdrop-filter: blur(25px);
+}
+
+
+.employee-insurance-container{
+  position: relative;
+  z-index: 1;
+}
+
+.insurance-card{
+  position: relative;
+  z-index: 2;
+}
+
+
+/* CARD - compact */
+.insurance-card {
+  width: 650px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* GRID LAYOUT */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* FULL WIDTH FIELD */
+.full-width {
+  grid-column: span 2;
+}
+
+/* INPUTS - compact */
+.insurance-card input,
+.insurance-card select {
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+/* SECTION TITLES */
+.insurance-card h3 {
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+/* BUTTONS SMALL */
+.add-btn {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.download-btn1 {
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* CHILD BOX compact */
+.child-box {
+  padding: 10px;
+}
+
+
+.add-btn:disabled {
+  background: #cbd5e1;   /* ash color */
+  color: #6b7280;
+  cursor: not-allowed;
+  opacity: 0.8;
+}

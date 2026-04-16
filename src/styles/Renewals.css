@@ -1,0 +1,84 @@
+/* Page Wrapper */
+.renewal-page {
+  padding: 20px;
+  background: #f8fafc;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.renewal-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #0f172a;
+}
+
+/* Search & Filter */
+.renewal-filter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.renewal-filter input,
+.renewal-filter select {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Table */
+.renewal-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.renewal-table thead {
+  background: #16a34a;
+  color: white;
+}
+
+.renewal-table th,
+.renewal-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* Hover */
+.renewal-table tbody tr:hover {
+  background: #f1f5f9;
+}
+
+/* Auto Renew Badge */
+.renew-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.renew-yes {
+  background: #2563eb;
+}
+
+.renew-no {
+  background: #6b7280;
+}
+
+/* Days Left Badge */
+.days-left {
+  background: #facc15;
+  color: black;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}

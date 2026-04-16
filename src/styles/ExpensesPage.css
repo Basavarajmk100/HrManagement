@@ -1,0 +1,445 @@
+/* Page Background */
+.expenses-container {
+  padding: 25px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2f7, #e3e9f3);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header h2 {
+  font-size: 26px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.header button {
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #4facfe, #00c6ff);
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+}
+
+/* Table */
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.expenses-table th {
+  background: #4facfe;
+  color: white;
+  padding: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.expenses-table td {
+  padding: 12px;
+  text-align: center;
+  color: #333;
+}
+
+.expenses-table tr {
+  transition: 0.3s;
+}
+
+.expenses-table tr:hover {
+  background-color: rgba(79, 172, 254, 0.1);
+}
+
+/* Status Badges */
+.paid {
+  background: #d4edda;
+  color: #28a745;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pending {
+  background: #fff3cd;
+  color: #ff9800;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Delete Button */
+.delete-btn {
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #ff6a6a, #ff3d3d);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Modal Background */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal Card */
+.modal-content {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  padding: 25px;
+  border-radius: 15px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-in-out;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Inputs */
+.modal-content input,
+.modal-content select {
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: 0.2s;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border-color: #4facfe;
+  box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+}
+
+/* Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  margin: 5px;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-buttons button:first-child {
+  background: #4facfe;
+  color: white;
+}
+
+.modal-buttons button:first-child:hover {
+  background: #00c6ff;
+}
+
+.modal-buttons button:last-child {
+  background: #ddd;
+}
+
+.modal-buttons button:last-child:hover {
+  background: #bbb;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* Container for search + filter + button */
+.header div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 🔍 Search Box */
+.search-box {
+  padding: 10px 14px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  outline: none;
+  width: 220px;
+  font-size: 14px;
+  transition: 0.3s ease;
+  background: #f9fbfd;
+}
+
+.search-box:focus {
+  border-color: #4facfe;
+  box-shadow: 0 0 8px rgba(79, 172, 254, 0.4);
+  background: #fff;
+}
+
+/* 🎯 Filter Dropdown */
+.filter-dropdown {
+  padding: 10px 14px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  background: #f9fbfd;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.filter-dropdown:hover {
+  border-color: #4facfe;
+}
+
+.filter-dropdown:focus {
+  outline: none;
+  box-shadow: 0 0 6px rgba(79, 172, 254, 0.4);
+}
+
+/* ➕ Add Expense Button */
+.header button {
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: none;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  background: #FA85B9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.header button:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+}
+
+/* ✏️ Edit Button Upgrade */
+.edit-btn1 {
+  padding: 6px 12px;
+  margin-right: 6px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border: none;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn1:hover {
+  transform: scale(1.05);
+}
+
+/* ❌ Delete Button Upgrade */
+.delete-btn {
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #ff4b2b, #ff416c);
+  border: none;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+/* ================================
+   BACKGROUND EFFECTS
+================================ */
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1; /* ✅ send to background */
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: blob 18s infinite alternate ease-in-out;
+}
+
+.bg-glass-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Animation */
+@keyframes blob {
+  0% { transform: translate(0px,0px) scale(1); }
+  33% { transform: translate(30px,-50px) scale(1.1); }
+  66% { transform: translate(-20px,20px) scale(0.9); }
+  100% { transform: translate(0px,0px) scale(1); }
+}
+
+/* ================================
+   COLORFUL THEME
+================================ */
+
+.theme-colorful .ambient-orb {
+  mix-blend-mode: multiply;
+  filter: blur(80px); /* ✅ reduced */
+}
+
+.theme-colorful .orb-1 {
+  top: -10%;
+  left: -5%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(250,133,185,0.25);
+}
+
+.theme-colorful .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(94,168,230,0.25);
+  animation-delay: 2s;
+}
+
+.theme-colorful .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: rgba(92,194,198,0.25);
+  animation-delay: 4s;
+}
+
+.theme-colorful .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 35vw;
+  height: 35vw;
+  background: rgba(195,135,194,0.25);
+  animation-delay: 6s;
+}
+
+/* ================================
+   DARK THEME
+================================ */
+
+.theme-dark .ambient-orb {
+  mix-blend-mode: screen;
+  filter: blur(120px); /* ✅ reduced */
+}
+
+.theme-dark .orb-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(234,179,8,0.08);
+}
+
+.theme-dark .orb-2 {
+  top: 20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: rgba(37,99,235,0.08);
+  animation-delay: 2s;
+}
+
+.theme-dark .orb-3 {
+  bottom: -20%;
+  left: 20%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(225,29,72,0.08);
+  animation-delay: 4s;
+}
+
+.theme-dark .orb-4 {
+  bottom: -10%;
+  right: 10%;
+  width: 40vw;
+  height: 40vw;
+  background: rgba(148,163,184,0.08);
+  animation-delay: 6s;
+}
+
+/* ================================
+   GLASS LAYER (FIXED)
+================================ */
+
+.theme-colorful .bg-glass-layer {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px); /* ✅ soft glass */
+}
+
+.theme-dark .bg-glass-layer {
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(25px); /* ✅ FIXED (was 80px) */
+}

@@ -1,0 +1,165 @@
+/* ==========================
+   FULL PAGE CONTAINER
+========================== */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-color: #f3f4f6;
+  box-sizing: border-box;
+}
+
+/* ==========================
+   PROFILE CARD
+========================== */
+.profile-card {
+  width: 100%;
+  max-width: 750px;
+  background-color: #fff;
+  border-radius: 18px;
+  padding: 35px 30px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================
+   HEADER WITH ICON
+========================== */
+.profile-header1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  background-color: #fff !important;
+  font-size: 24px;
+}
+
+.profile-header1 h2 {
+  font-size: 32px;
+  color: #000; /* black heading */
+  font-weight: 700;
+}
+
+.profile-icon {
+  font-size: 40px;
+  color: #000; /* black icon */
+}
+
+/* ==========================
+   SECTION TITLES
+========================== */
+.profile-card h3 {
+  font-size: 20px;
+  color: #000; /* black headings */
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e0e7ff;
+  padding-bottom: 8px;
+  font-weight: 600;
+}
+
+/* ==========================
+   FORM LABELS & INPUTS
+========================== */
+.profile-card label {
+  display: block;
+  font-weight: 500;
+  color: #374151;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.profile-card input {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  background-color: #fefefe;
+}
+
+.profile-card input:focus {
+  border-color: #FA85B9;
+  box-shadow: 0 0 10px rgba(250,133,185,0.35);
+}
+
+.profile-card input:disabled {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+/* ==========================
+   HR DETAILS (READ-ONLY)
+========================== */
+.profile-card p {
+  font-size: 15px;
+  color: #4b5563;
+  margin: 8px 0;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: background 0.3s;
+}
+
+.profile-card p:hover {
+  background-color: #f3f4f6;
+}
+
+/* ==========================
+   SAVE BUTTON
+========================== */
+.profile-card button {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #FA85B9, #e96aa6);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(250,133,185,0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+.profile-card button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(250,133,185,0.5);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 20px;
+  }
+
+  .profile-card {
+    padding: 25px 20px;
+  }
+
+  .profile-card h3 {
+    font-size: 18px;
+  }
+
+  .profile-card input {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+
+  .profile-card button {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+}

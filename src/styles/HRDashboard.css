@@ -1,52 +1,123 @@
 /* ================= Container ================= */
 .hrdashboard {
   padding: 20px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #f8f9fa;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9fafb; /* softer light neutral background */
   min-height: 100vh;
-
+  color: #111827; /* deep neutral text for readability */
 }
 
+/* Layout */
 .hrdashboard-container {
   display: flex;
+  gap: 20px; /* spacing between sidebar and main */
 }
 
+/* Main Content Area */
 .hrdashboard-main {
   margin-left: 220px; /* Expanded sidebar width */
-  padding: 20px;
+  padding: 24px;
   width: calc(100% - 220px);
-  transition: margin-left 0.3s, width 0.3s;
+  background: #ffffff;
+  border-radius: 14px; /* slightly bigger radius for modern feel */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06); /* subtle but softer shadow */
+  transition: margin-left 0.3s ease, width 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* When sidebar is collapsed */
 .sidebar.collapsed ~ .hrdashboard-main {
   margin-left: 60px; /* Collapsed sidebar width */
   width: calc(100% - 60px);
 }
 
+/* ================= Header (Dashboard Top) ================= */
+.hrdashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd); /* modern light blue gradient */
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  color: #1e3a8a; /* deep professional blue */
+  transition: all 0.3s ease;
+}
+
+.hrdashboard-header:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Dashboard Title */
+.hrdashboard-header h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.5px;
+  color: #1e40af; /* clean deep blue */
+}
+
+/* Actions container */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Icons */
+.header-actions .icon {
+  font-size: 1.4rem;
+  color: #1e40af; /* blue accent */
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+  position: relative;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(30, 64, 175, 0.06); /* subtle tinted background */
+}
+
+.header-actions .icon:hover {
+  color: #0ea5e9; /* bright accent blue */
+  background: rgba(14, 165, 233, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Notification Badge */
+.header-actions .notification-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #ef4444; /* bright red alert */
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 999px;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
 /* ================= Stat Cards ================= */
 .stat-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
-  padding-top: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 24px;
+  margin: 24px 0;
+  width: 100%;
 }
 
-.sidebar.collapsed ~ .hrdashboard-main .stat-cards {
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-}
-
-/* Base Stat Card */
 .stat-card {
-  flex: 1;
-  color: white;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, all 0.3s ease;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stat-card:hover {
@@ -54,99 +125,101 @@
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-/* Number & Label */
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 700;
-}
-
-.stat-label {
-  font-size: 1.2rem;
-  margin-top: 10px;
-  opacity: 0.9;
-}
-
+/* Icons & text */
 .stat-card h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 10px;
+  margin: 12px 0 6px;
+  font-size: 18px;
 }
 
 .stat-card p {
-  font-size: 1.8rem;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stat-number {
+  font-size: 2.2rem;
   font-weight: 700;
-  color: white;
   margin: 0;
 }
 
-/* Gradient Backgrounds for Each Card */
+.stat-label {
+  font-size: 1rem;
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+/* Gradient Backgrounds */
 .stat-card.total-employees {
-  background: linear-gradient(135deg, #F59E0B, #D97706); /* Amber shades */
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: #fff;
 }
 
 .stat-card.on-leave {
-  background: linear-gradient(135deg, #EF4444, #DC2626); /* Red shades */
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: #fff;
 }
 
 .stat-card.new-joinees {
-  background: linear-gradient(135deg, #10B981, #059669); /* Green shades */
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #fff;
 }
 
 .stat-card.extra {
-  background: linear-gradient(135deg, #92400E, #F59E0B); /* Brown → Amber */
+  background: linear-gradient(135deg, #92400E, #F59E0B);
+  color: #fff;
 }
 
-/* ================= Leave Table ================= */
+/* ================= Leave Table (Corporate Theme) ================= */
 .leave-table-container {
-  background: white;
+  background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
   overflow: hidden;
+  border: 1px solid #e5e7eb;
 }
 
 .leave-table-container h2 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  padding: 16px;
+  padding: 16px 20px;
   border-bottom: 1px solid #e5e7eb;
-  background: #f9fafb;
-  color: #111827;
+  background: #f3f4f6;
+  color: #1e3a8a;
   margin: 0;
+  letter-spacing: 0.3px;
 }
 
 .leave-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.9rem;
+  color: #374151;
 }
 
-.leave-table th,
-.leave-table td {
-  padding: 12px 16px;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-/* Full-width header */
 .leave-table thead {
-  background-color: #4a90e2;
+  background-color: #1e40af;
 }
 
 .leave-table thead th {
-  color: #fff;
+  color: #ffffff;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   padding: 12px 16px;
   text-align: left;
   border: none;
+  letter-spacing: 0.4px;
 }
 
-/* Hover effect for rows */
+.leave-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
 .leave-table tbody tr:hover {
-  background-color: #f1f5fb;
+  background-color: #f0f5ff;
+  transition: background 0.2s ease;
 }
 
-/* Actions column */
 .leave-table th:last-child,
 .leave-table td:last-child {
   text-align: center;
@@ -157,166 +230,81 @@
   padding: 6px 14px;
   border: none;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
   margin: 0 4px;
 }
 
-/* Approve button (green) */
 .approve-btn {
-  background-color: #28a745;
+  background-color: #16a34a;
   color: #fff;
 }
-
 .approve-btn:hover {
-  background-color: #218838;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+  background-color: #15803d;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
 }
 
-.approve-btn:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-/* Disapprove button (red) */
 .disapprove-btn {
-  background-color: #dc3545;
+  background-color: #dc2626;
   color: #fff;
 }
-
 .disapprove-btn:hover {
-  background-color: #c82333;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+  background-color: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.25);
 }
 
-.disapprove-btn:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-/* ================= Modal ================= */
-/* ===== Overlay ===== */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45); /* darker backdrop */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-/* ===== Modal Box ===== */
-.modal {
-  background: #fff;
-  border-radius: 12px;
-  padding: 24px;
-  width: 380px;   /* smaller than before */
-  max-width: 90%;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  animation: fadeInScale 0.3s ease;
-}
-
-/* Modal Title */
-.modal h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: #111827;
-  text-align: center;
-}
-
-/* ===== Form Fields ===== */
-.modal label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 8px;
-  color: #374151;
-}
-
-.modal select,
-.modal textarea {
-  width: 100%;
-  padding: 8px 10px;
-  margin-bottom: 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 0.95rem;
-}
-
-.modal textarea {
-  min-height: 80px;
-  resize: none;
-}
-
-/* ===== Modal Buttons ===== */
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.modal-actions button {
-  flex: 1;
-  padding: 8px 14px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-/* Cancel Button */
 .cancel-btn {
-  background: #e5e7eb;
+  background-color: #e5e7eb;
   color: #374151;
 }
 .cancel-btn:hover {
-  background: #d1d5db;
-}
-
-/* Approve/Disapprove Buttons (reuse dashboard styles) */
-.approve-btn {
-  background: #10b981;
-  color: #fff;
-}
-.approve-btn:hover {
-  background: #059669;
-}
-
-.disapprove-btn {
-  background: #ef4444;
-  color: #fff;
-}
-.disapprove-btn:hover {
-  background: #dc2626;
-}
-
-/* ===== Animation ===== */
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  background-color: #d1d5db;
 }
 
 
+/* Force 3 equal-width stat cards */
+.stat-cards.fixed-three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* exactly 3 per row */
+  gap: 24px;
+  width: 100%;
+}
 
-.hrdashboard-container,
-.hrdashboard-main {
-  position: relative;
-  overflow: visible !important; /* Prevent clipping of modal */
-  z-index: 1;
+.stat-cards.fixed-three .stat-card {
+  min-width: 0; /* allow shrinking properly */
+  height: 200px; /* taller for visibility */
+  font-size: 1rem;
+}
+
+
+.icon.logout {
+  font-size: 28px; /* adjust size */
+  cursor: pointer;
+  margin-left: 16px; /* spacing from bell */
+  color: #fff;       /* ensure visible */
+  transition: color 0.3s;
+}
+
+.icon.logout:hover {
+  color: #f87171; /* hover red */
+}
+
+
+
+.chart-section{
+  display:flex;
+  gap:20px;
+  margin-top:20px;
+}
+
+.chart-box{
+  flex:1;
+  background:#ffffff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }

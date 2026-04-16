@@ -13,7 +13,7 @@ const EmployeeList = ({ onAddClick }) => {
   // Fetch employees from backend
   useEffect(() => {
     axios
-      .get("http://localhost:8085/api/v1/employees") // replace with your backend URL
+      .get("http://localhost:5133/api/v1/employees") // replace with your backend URL
       .then((response) => {
         setEmployees(response.data);
       })
@@ -31,9 +31,9 @@ const handleDelete = (id) => {
       "⚠️ Please type DEL to confirm removing this employee:"
     );
 
-    if (confirmation === "DELETE") {
+    if (confirmation === "DEL") {
       axios
-        .delete(`http://localhost:8085/api/v1/employees/${id}`)
+        .delete(`http://localhost:5133/api/v1/employees/${id}`)
         .then(() => {
           setEmployees((prev) => prev.filter((emp) => emp.id !== id));
           alert("✅ Employee deleted successfully");
@@ -61,15 +61,23 @@ const handleDelete = (id) => {
   };
 
   return (
-    <div className="employee-container">
-      <div className="employee-header">
+    <div className
+
+="employee-container">
+      <div className
+
+="employee-header">
         <h2>Employee List</h2>
-        <button className="add-btn" onClick={onAddClick}>
+        <button className
+
+="add-btn" onClick={onAddClick}>
           + Add Employee
         </button>
       </div>
 
-      <table className="employee-table">
+      <table className
+
+="employee-table">
         <thead>
           <tr>
             <th>Employee Code</th>
@@ -94,14 +102,22 @@ const handleDelete = (id) => {
                 <td>{emp.designation}</td>
                 <td>{emp.department}</td>
                 <td>
-                  <div className="action-buttons">
-                    <button className="view-btn" onClick={() => handleView(emp)}>
+                  <div className
+
+="action-buttons">
+                    <button className
+
+="view-btn" onClick={() => handleView(emp)}>
                       View
                     </button>
-                    <button className="edit-btn" onClick={() => handleEdit(emp)}>
+                    <button className
+
+="edit-btn" onClick={() => handleEdit(emp)}>
                       Edit
                     </button>
-                    <button className="delete-btn" onClick={() => handleDelete(emp.id)}>
+                    <button className
+
+="delete-btn" onClick={() => handleDelete(emp.id)}>
                       Delete
                     </button>
                   </div>

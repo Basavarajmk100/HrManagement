@@ -1,0 +1,125 @@
+.settings-container {
+  padding: 30px;
+  background: linear-gradient(135deg, #eef2ff, #f3f4f6);
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+.settings-container h2 {
+  color: black;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Layout — BOTH SIDES VISIBLE */
+.settings-layout {
+  display: flex;
+  gap: 25px;
+}
+
+/* Left Menu */
+.settings-menu {
+  width: 280px;
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Menu buttons */
+.settings-menu button {
+  padding: 12px 14px;
+  border: none;
+  background: #FA85B9;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+
+/* Hover */
+.settings-menu button:hover {
+  background: linear-gradient(135deg, #FA85B9, #e96aa6);
+  color: white;
+  transform: translateX(5px);
+}
+
+/* Active */
+.settings-menu button:focus {
+  background: linear-gradient(135deg, #FA85B9, #e96aa6);
+  color: white;
+}
+
+/* Right Content Panel */
+.settings-content {
+  flex: 1;
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Inputs */
+.settings-content input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* Input focus */
+.settings-content input:focus {
+  outline: none;
+  border-color: #FA85B9;
+  box-shadow: 0 0 5px rgba(250,133,185,0.4);
+}
+
+/* Save button */
+.settings-content button {
+  margin-top: 12px;
+  padding: 12px 18px;
+  border: none;
+  background: linear-gradient(135deg, #FA85B9, #e96aa6);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ==========================
+   ROLES & PERMISSIONS
+========================== */
+
+.role-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9fafb;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.role-item h4 {
+  margin-bottom: 10px;
+  color: #FA85B9;
+}
+
+.role-item label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.role-item input[type="checkbox"] {
+  margin-right: 8px;
+  accent-color: #FA85B9;
+}
