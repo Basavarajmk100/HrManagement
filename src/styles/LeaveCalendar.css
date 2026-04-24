@@ -251,3 +251,34 @@
   text-align: center;
   padding: 12px;
 }
+
+
+
+/*Back button*/
+.table-header-row {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.header-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.back-btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-right: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background: #3730a3;
+}

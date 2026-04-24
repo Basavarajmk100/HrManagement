@@ -16,195 +16,215 @@ const employees = [
   { id: 10, name: "Megha", email: "megha@gmail.com" }
 ];
 
-  const [formData, setFormData] = useState({
-    employeeId: "",
-    email: "",
-    username: "",
-    password: ""
+const [formData, setFormData] = useState({
+  employeeId: "",
+  email: "",
+  username: "",
+  password: ""
+});
+
+const [credentials, setCredentials] = useState([]);
+const [showPassword, setShowPassword] = useState(false);
+
+const handleEmployeeChange = (e) => {
+  const emp = employees.find(emp => emp.id === Number(e.target.value));
+
+  setFormData({
+    ...formData,
+    employeeId: emp.id,
+    email: emp.email,
+    username: emp.name.toLowerCase().replace(" ", "")
   });
+};
 
-  const [credentials, setCredentials] = useState([]);
-  const [showPassword, setShowPassword] = useState(false);
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  });
+};
 
-  const handleEmployeeChange = (e) => {
-    const emp = employees.find(emp => emp.id === Number(e.target.value));
+const generatePassword = () => {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#";
+  let password = "";
 
-    setFormData({
-      ...formData,
-      employeeId: emp.id,
-      email: emp.email,
-      username: emp.name.toLowerCase().replace(" ", "")
+  for (let i = 0; i < 10; i++) {
+    password += chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  setFormData({
+    ...formData,
+    password: password
+  });
+};
+
+const getStrength = () => {
+  if (formData.password.length > 8) return "Strong";
+  if (formData.password.length > 5) return "Medium";
+  if (formData.password.length > 0) return "Weak";
+  return "";
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+
+    const response = await fetch("http://localhost:5133/api/EmployeeCredentials/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
     });
-  };
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+    const data = await response.json();
 
-  const generatePassword = () => {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#";
-    let password = "";
-    for (let i = 0; i < 10; i++) {
-      password += chars[Math.floor(Math.random() * chars.length)];
-    }
+    alert(data.message);
 
-    setFormData({
-      ...formData,
-      password: password
-    });
-  };
-
-  const getStrength = () => {
-    if (formData.password.length > 8) return "Strong";
-    if (formData.password.length > 5) return "Medium";
-    if (formData.password.length > 0) return "Weak";
-    return "";
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+    // Add to local table
     setCredentials([...credentials, formData]);
 
-    alert("Credentials Created");
-
+    // Reset form
     setFormData({
       employeeId: "",
       email: "",
       username: "",
       password: ""
     });
-  };
 
-  return (
-    <div className
+  } catch (error) {
+    console.error("Error creating credentials:", error);
+  }
+};
 
-="credentials-page">
+return (
+<div className="credentials-page">
 
-      <div className
+  <div className="credentials-card">
 
-="credentials-card">
+    <h2>Create Employee Credentials</h2>
 
-        <h2>Create Employee Credentials</h2>
+    <form onSubmit={handleSubmit}>
 
-        <form onSubmit={handleSubmit}>
+      <div className="input-group">
+        <label>Select Employee</label>
+        <select onChange={handleEmployeeChange} required>
+          <option value="">Select Employee</option>
 
-          <div className
+          {employees.map(emp => (
+            <option key={emp.id} value={emp.id}>
+              {emp.name}
+            </option>
+          ))}
 
-="input-group">
-            <label>Select Employee</label>
-            <select onChange={handleEmployeeChange} required>
-              <option value="">Select Employee</option>
-              {employees.map(emp => (
-                <option key={emp.id} value={emp.id}>
-                  {emp.name}
-                </option>
-              ))}
-            </select>
-          </div>
+        </select>
+      </div>
 
-          <div className
+      <div className="input-group">
+        <label>Email</label>
 
-="input-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              readOnly
-            />
-          </div>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          readOnly
+        />
+      </div>
 
-          <div className
+      <div className="input-group">
+        <label>Username</label>
 
-="input-group">
-            <label>Username</label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-            />
-          </div>
+        <input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+        />
+      </div>
 
-          <div className
+      <div className="input-group">
+        <label>Password</label>
 
-="input-group">
-            <label>Password</label>
+        <div className="password-box">
 
-            <div className
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
 
-="password-box">
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
+          <button
+            type="button"
+            className="toggle-btn"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
 
-              <button
-                type="button"
-                className
+        </div>
 
-="toggle-btn"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </button>
-            </div>
+        <span className={`strength ${getStrength().toLowerCase()}`}>
+          {getStrength()}
+        </span>
 
-            <span className
+      </div>
 
-={`strength ${getStrength().toLowerCase()}`}>
-              {getStrength()}
-            </span>
+      <div className="button-row">
 
-          </div>
+        <button
+          type="button"
+          className="generate-btn"
+          onClick={generatePassword}
+        >
+          Generate Password
+        </button>
 
-         <div className="button-row">
-  <button className="generate-btn">Generate Password</button>
-  <button className="submit-btn">Create Credentials</button>
+        <button type="submit" className="submit-btn">
+          Create Credentials
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <div className="credentials-table">
+
+    <h3>Created Credentials</h3>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Username</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {credentials.map((cred, index) => (
+
+          <tr key={index}>
+            <td>{cred.email}</td>
+            <td>{cred.username}</td>
+            <td>{cred.password}</td>
+          </tr>
+
+        ))}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
 </div>
-
-        </form>
-
-      </div>
-
-      <div className
-
-="credentials-table">
-
-        <h3>Created Credentials</h3>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Username</th>
-              <th>Password</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {credentials.map((cred, index) => (
-              <tr key={index}>
-                <td>{cred.email}</td>
-                <td>{cred.username}</td>
-                <td>{cred.password}</td>
-              </tr>
-            ))}
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-  );
+);
 }
 
 export default CreateEmployeeCredentials;

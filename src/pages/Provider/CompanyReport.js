@@ -4,25 +4,61 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
 const CompanyReport = () => {
-
   const [search, setSearch] = useState("");
   const [companies, setCompanies] = useState([]);
 
-
-
-  
- const theme = localStorage.getItem("theme") || "simple";
-    const isSimple = theme === "simple";
+  const theme = localStorage.getItem("theme") || "simple";
+  const isSimple = theme === "simple";
   const isDark = theme === "dark";
   const isColorful = theme === "colorful";
 
   useEffect(() => {
     const dummyData = [
-      { id: 1, companyId: "C001", companyName: "Sunrise Pvt Ltd", users: 15, totalAmount: 12000, paid: 8000, due: 4000 },
-      { id: 2, companyId: "C002", companyName: "Bright Tech", users: 20, totalAmount: 18000, paid: 10000, due: 8000 },
-      { id: 3, companyId: "C003", companyName: "Blue Solutions", users: 10, totalAmount: 9000, paid: 5000, due: 4000 },
-      { id: 4, companyId: "C004", companyName: "Green Energy Co", users: 25, totalAmount: 25000, paid: 20000, due: 5000 },
-      { id: 5, companyId: "C005", companyName: "Tech Innovators", users: 30, totalAmount: 40000, paid: 35000, due: 5000 },
+      {
+        id: 1,
+        companyId: "C001",
+        companyName: "Sunrise Pvt Ltd",
+        users: 15,
+        totalAmount: 12000,
+        paid: 8000,
+        due: 4000,
+      },
+      {
+        id: 2,
+        companyId: "C002",
+        companyName: "Bright Tech",
+        users: 20,
+        totalAmount: 18000,
+        paid: 10000,
+        due: 8000,
+      },
+      {
+        id: 3,
+        companyId: "C003",
+        companyName: "Blue Solutions",
+        users: 10,
+        totalAmount: 9000,
+        paid: 5000,
+        due: 4000,
+      },
+      {
+        id: 4,
+        companyId: "C004",
+        companyName: "Green Energy Co",
+        users: 25,
+        totalAmount: 25000,
+        paid: 20000,
+        due: 5000,
+      },
+      {
+        id: 5,
+        companyId: "C005",
+        companyName: "Tech Innovators",
+        users: 30,
+        totalAmount: 40000,
+        paid: 35000,
+        due: 5000,
+      },
     ];
 
     setCompanies(dummyData);
@@ -32,7 +68,7 @@ const CompanyReport = () => {
   const filteredCompanies = companies.filter(
     (c) =>
       c.companyName.toLowerCase().includes(search.toLowerCase()) ||
-      c.companyId.toLowerCase().includes(search.toLowerCase())
+      c.companyId.toLowerCase().includes(search.toLowerCase()),
   );
 
   /* TOTALS */
@@ -69,96 +105,53 @@ const CompanyReport = () => {
   };
 
   return (
+    <div className={`users-container theme-${theme}`}>
+      {/* BACKGROUND EFFECTS */}
+      <div className="bg-canvas">
+        {isDark && (
+          <>
+            <div className="ambient-orb orb-1"></div>
+            <div className="ambient-orb orb-2"></div>
+            <div className="ambient-orb orb-3"></div>
+            <div className="ambient-orb orb-4"></div>
 
-  <div className
+            <div
+              className="bg-glass-layer"
+              style={{
+                background: "rgba(0,0,0,0.8)",
+                backdropFilter: "blur(100px)",
+              }}
+            ></div>
+          </>
+        )}
 
-={`users-container theme-${theme}`}>
+        {isColorful && (
+          <>
+            <div className="ambient-orb orb-1"></div>
+            <div className="ambient-orb orb-2"></div>
+            <div className="ambient-orb orb-3"></div>
+            <div className="ambient-orb orb-4"></div>
 
-    {/* BACKGROUND EFFECTS */}
-    <div className
+            <div className="bg-glass-layer"></div>
+          </>
+        )}
+      </div>
 
-="bg-canvas">
-      {isDark && (
-        <>
-          <div className
+      {/* USERS PAGE CONTENT BELOW */}
 
-="ambient-orb orb-1"></div>
-          <div className
-
-="ambient-orb orb-2"></div>
-          <div className
-
-="ambient-orb orb-3"></div>
-          <div className
-
-="ambient-orb orb-4"></div>
-
-          <div
-            className
-
-="bg-glass-layer"
-            style={{
-              background: "rgba(0,0,0,0.8)",
-              backdropFilter: "blur(100px)"
-            }}
-          ></div>
-        </>
-      )}
-
-      {isColorful && (
-        <>
-          <div className
-
-="ambient-orb orb-1"></div>
-          <div className
-
-="ambient-orb orb-2"></div>
-          <div className
-
-="ambient-orb orb-3"></div>
-          <div className
-
-="ambient-orb orb-4"></div>
-
-          <div className
-
-="bg-glass-layer"></div>
-        </>
-      )}
-    </div>
-
-    {/* USERS PAGE CONTENT BELOW */}
-
-
-      <div className
-
-="table-panel">
-
+      <div className="table-panel">
         {/* HEADER */}
-        <div className
-
-="table-header-row">
-
+        <div className="table-header-row">
           <div>
-            <div className
-
-="table-title">Company Report</div>
-            <div className
-
-="table-subtitle">
+            <div className="table-title">Company Report</div>
+            <div className="table-subtitle">
               Company revenue and payment overview
             </div>
           </div>
 
-          <button
-            className
-
-="add-btn"
-            onClick={downloadExcel}
-          >
+          <button className="add-btn" onClick={downloadExcel}>
             Download Excel
           </button>
-
         </div>
 
         {/* SEARCH */}
@@ -168,21 +161,13 @@ const CompanyReport = () => {
             placeholder="Search company..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className
-
-="users-search"
+            className="users-search"
           />
         </div>
 
         {/* TABLE */}
-        <div className
-
-="table-wrapper">
-
-          <table className
-
-="styled-table">
-
+        <div className="table-wrapper">
+          <table className="styled-table">
             <thead>
               <tr>
                 <th>Company</th>
@@ -194,91 +179,68 @@ const CompanyReport = () => {
             </thead>
 
             <tbody>
-
               {filteredCompanies.map((c) => (
-
-                <tr className
-
-="table-row" key={c.id}>
-
+                <tr className="table-row" key={c.id}>
                   {/* Company Avatar */}
                   <td>
-                    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                      
-                      <div className
-
-="cell-avatar">
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "14px",
+                      }}
+                    >
+                      <div className="cell-avatar">
                         {c.companyName.charAt(0)}
                       </div>
 
                       <div>
-                        <span className
+                        <span className="cell-name">{c.companyName}</span>
 
-="cell-name">
-                          {c.companyName}
-                        </span>
-
-                        <div className
-
-="cell-id">
-                          {c.companyId}
-                        </div>
+                        <div className="cell-id">{c.companyId}</div>
                       </div>
-
                     </div>
                   </td>
 
                   <td>{c.users}</td>
 
-                  <td className
-
-="cell-total">
+                  <td className="cell-total">
                     ₹ {c.totalAmount.toLocaleString()}
                   </td>
 
                   <td>
-                    <span className
-
-="status-pill status-paid">
+                    <span className="status-pill status-paid">
                       ₹ {c.paid.toLocaleString()}
                     </span>
                   </td>
 
                   <td>
                     <span
-                      className
-
-={`status-pill ${
+                      className={`status-pill ${
                         c.due > 0 ? "status-pending" : "status-paid"
                       }`}
                     >
                       ₹ {c.due.toLocaleString()}
                     </span>
                   </td>
-
                 </tr>
               ))}
 
               {/* TOTAL ROW */}
 
-              <tr className
-
-="total-row">
-                <td><strong>TOTAL</strong></td>
+              <tr className="total-row">
+                <td>
+                  <strong>TOTAL</strong>
+                </td>
                 <td></td>
                 <td>₹ {totalAmount.toLocaleString()}</td>
                 <td>₹ {totalPaid.toLocaleString()}</td>
                 <td>₹ {totalDue.toLocaleString()}</td>
               </tr>
-
             </tbody>
-
           </table>
-
         </div>
-
       </div>
-
     </div>
   );
 };

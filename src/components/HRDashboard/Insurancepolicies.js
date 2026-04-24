@@ -4,6 +4,9 @@ import { Plus, Upload, FileSpreadsheet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
 
+import Sidebar from "../Sidebar";
+import "../../styles/Sidebar.css";
+
 // Example initial employee data
 const initialEmployees = [
   {
@@ -29,7 +32,7 @@ const initialEmployees = [
     child2Dob: "2025-07-05",
     planA: 1330,
     planAGST: 1396.5,
-    planB: 930
+    planB: 930,
   },
   {
     id: 2,
@@ -54,7 +57,7 @@ const initialEmployees = [
     child2Dob: "2021-11-12",
     planA: 1520,
     planAGST: 1596,
-    planB: 1120
+    planB: 1120,
   },
   {
     id: 3,
@@ -79,7 +82,7 @@ const initialEmployees = [
     child2Dob: "2018-08-22",
     planA: 1780,
     planAGST: 1870,
-    planB: 1230
+    planB: 1230,
   },
   {
     id: 4,
@@ -104,78 +107,72 @@ const initialEmployees = [
     child2Dob: "",
     planA: 2100,
     planAGST: 2205,
-    planB: 1650
+    planB: 1650,
   },
- 
 ];
-  // Add more employees here
+// Add more employees here
 
 export default function EmployeeInsuranceTable() {
   const [employees, setEmployees] = useState(initialEmployees);
   const [search, setSearch] = useState("");
   const [excelFile, setExcelFile] = useState(null);
 
+  const [showFilters, setShowFilters] = useState(false);
 
- const [showFilters, setShowFilters] = useState(false);
+  const [empNoFilter, setEmpNoFilter] = useState("");
+  const [empNameFilter, setEmpNameFilter] = useState("");
+  const [genderFilter, setGenderFilter] = useState("");
+  const [healthcareFilter, setHealthcareFilter] = useState("");
+  const [healthcareNameFilter, setHealthcareNameFilter] = useState("");
 
-const [empNoFilter, setEmpNoFilter] = useState("");
-const [empNameFilter, setEmpNameFilter] = useState("");
-const [genderFilter, setGenderFilter] = useState("");
-const [healthcareFilter, setHealthcareFilter] = useState("");
-const [healthcareNameFilter, setHealthcareNameFilter] = useState("");
-
-
- const theme = localStorage.getItem("theme") || "simple";
-    const isSimple = theme === "simple";
-    const isDark = theme === "dark";
-    const isColorful = theme === "colorful";
-
-
+  const theme = localStorage.getItem("theme") || "simple";
+  const isSimple = theme === "simple";
+  const isDark = theme === "dark";
+  const isColorful = theme === "colorful";
 
   const downloadExcelFormat = () => {
-  // Define the columns headers exactly as in your table
-  const headers = [
-    "Employee No",
-    "Name",
-    "Email",
-    "Mobile",
-    "Gender",
-    "DOB",
-    "Healthcare Membership Type",
-    "Healthcare Membership Name",
-    "Father's DOB",
-    "Mother's DOB",
-    "Spouse Name",
-    "Spouse Gender",
-    "Spouse DOB",
-    "Child 1 Name",
-    "Child 1 Gender",
-    "Child 1 DOB",
-    "Child 2 Name",
-    "Child 2 Gender",
-    "Child 2 DOB",
-    "Plan A",
-    "Plan A with GST",
-    "Plan B"
-  ];
+    // Define the columns headers exactly as in your table
+    const headers = [
+      "Employee No",
+      "Name",
+      "Email",
+      "Mobile",
+      "Gender",
+      "DOB",
+      "Healthcare Membership Type",
+      "Healthcare Membership Name",
+      "Father's DOB",
+      "Mother's DOB",
+      "Spouse Name",
+      "Spouse Gender",
+      "Spouse DOB",
+      "Child 1 Name",
+      "Child 1 Gender",
+      "Child 1 DOB",
+      "Child 2 Name",
+      "Child 2 Gender",
+      "Child 2 DOB",
+      "Plan A",
+      "Plan A with GST",
+      "Plan B",
+    ];
 
-  // Create an empty row with headers
-  const worksheet = XLSX.utils.json_to_sheet([headers.reduce((acc, h) => ({ ...acc, [h]: "" }), {})]);
+    // Create an empty row with headers
+    const worksheet = XLSX.utils.json_to_sheet([
+      headers.reduce((acc, h) => ({ ...acc, [h]: "" }), {}),
+    ]);
 
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Employee_Format");
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Employee_Format");
 
-  XLSX.writeFile(workbook, "Employee_Excel_Format.xlsx");
-};
-
-
-
+    XLSX.writeFile(workbook, "Employee_Excel_Format.xlsx");
+  };
 
   const navigate = useNavigate();
 
   const handleDelete = (id) => {
     if (window.confirm("Delete this employee record?")) {
-      setEmployees(prev => prev.filter(e => e.id !== id));
+      setEmployees((prev) => prev.filter((e) => e.id !== id));
     }
   };
 
@@ -183,300 +180,260 @@ const [healthcareNameFilter, setHealthcareNameFilter] = useState("");
     setExcelFile(e.target.files[0]);
   };
 
-
-
-const filteredEmployees = employees.filter(e =>
-  (search === "" ||
-    e.name.toLowerCase().includes(search.toLowerCase()) ||
-    e.email.toLowerCase().includes(search.toLowerCase()) ||
-    e.employeeNo.toLowerCase().includes(search.toLowerCase())
-  ) &&
-
-  (empNoFilter === "" || e.employeeNo === empNoFilter) &&
-  (empNameFilter === "" || e.name === empNameFilter) &&
-  (genderFilter === "" || e.gender === genderFilter) &&
-  (healthcareFilter === "" || e.healthcareType === healthcareFilter)&&
-    (healthcareNameFilter === "" || e.healthcareName === healthcareNameFilter)
-);   
-
-
+  const filteredEmployees = employees.filter(
+    (e) =>
+      (search === "" ||
+        e.name.toLowerCase().includes(search.toLowerCase()) ||
+        e.email.toLowerCase().includes(search.toLowerCase()) ||
+        e.employeeNo.toLowerCase().includes(search.toLowerCase())) &&
+      (empNoFilter === "" || e.employeeNo === empNoFilter) &&
+      (empNameFilter === "" || e.name === empNameFilter) &&
+      (genderFilter === "" || e.gender === genderFilter) &&
+      (healthcareFilter === "" || e.healthcareType === healthcareFilter) &&
+      (healthcareNameFilter === "" ||
+        e.healthcareName === healthcareNameFilter),
+  );
 
   const downloadReport = () => {
     const worksheet = XLSX.utils.json_to_sheet(filteredEmployees);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Employee Insurance Report");
+    XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      "Employee Insurance Report",
+    );
     XLSX.writeFile(workbook, "Employee_Insurance_Report.xlsx");
   };
 
-return (
-  <div className
+  return (
+    <div className={`insurance-panel theme-${theme}`}>
+      <Sidebar />
 
-={`insurance-panel theme-${theme}`}>
-
-    {/* BACKGROUND EFFECTS */}
-    <div className
-
-="bg-canvas">
-      {(isDark || isColorful) && (
-        <>
-          <div className
-
-="ambient-orb orb-1"></div>
-          <div className
-
-="ambient-orb orb-2"></div>
-          <div className
-
-="ambient-orb orb-3"></div>
-          <div className
-
-="ambient-orb orb-4"></div>
-          <div className
-
-="bg-glass-layer"></div>
-        </>
-      )}
-    </div>
-
-    {/* MAIN PANEL */}
-    <div className
-
-="table-panel">
-
-      {/* HEADER */}
-      <div className
-
-="table-header-row">
-        <div>
-          <div className
-
-="table-title">Employee Insurance Records</div>
-          <div className
-
-="table-subtitle">
-            Manage employee healthcare memberships
-          </div>
+      <div className="page-content">
+        {/* BACKGROUND EFFECTS */}
+        <div className="bg-canvas">
+          {(isDark || isColorful) && (
+            <>
+              <div className="ambient-orb orb-1"></div>
+              <div className="ambient-orb orb-2"></div>
+              <div className="ambient-orb orb-3"></div>
+              <div className="ambient-orb orb-4"></div>
+              <div className="bg-glass-layer"></div>
+            </>
+          )}
         </div>
 
-        <input
-          type="text"
-          placeholder="Search employee..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className
-
-="searchInput"
-        />
-
-        <button className
-
-="add-btn" onClick={() => navigate("/insuranceform")}>
-          + Add Form
-        </button>
-      </div>
-
-      {/* SECOND ROW (Filters + Actions) */}
-      <div className
-
-="table-header-row" style={{ marginTop: "10px" }}>
-
-        <div className
-
-="header-left">
-
-          {/* FILTER BUTTON */}
-          <div className
-
-="filter-container">
-            <button
-              className
-
-="filter-btn"
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              Filters ▼
-            </button>
-
-            {showFilters && (
-              <div className
-
-="filter-panel">
-
-                <div className
-
-="filter-title">Filter Employees</div>
-
-                <label>Employee Number</label>
-                <select value={empNoFilter} onChange={(e) => setEmpNoFilter(e.target.value)}>
-                  <option value="">All</option>
-                  {[...new Set(employees.map(e => e.employeeNo))].map(no => (
-                    <option key={no}>{no}</option>
-                  ))}
-                </select>
-
-                <label>Name</label>
-                <select value={empNameFilter} onChange={(e) => setEmpNameFilter(e.target.value)}>
-                  <option value="">All</option>
-                  {[...new Set(employees.map(e => e.name))].map(name => (
-                    <option key={name}>{name}</option>
-                  ))}
-                </select>
-
-                <label>Gender</label>
-                <select value={genderFilter} onChange={(e) => setGenderFilter(e.target.value)}>
-                  <option value="">All</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-
-                <label>Healthcare Type</label>
-                <select value={healthcareFilter} onChange={(e) => setHealthcareFilter(e.target.value)}>
-                  <option value="">All</option>
-                  <option>Corporate Health</option>
-                  <option>Family Health</option>
-                  <option>Premium Health</option>
-                </select>
-
-                <div className
-
-="filter-buttons">
-                  <button className
-
-="reset-btn" onClick={() => {
-                    setEmpNoFilter("");
-                    setEmpNameFilter("");
-                    setGenderFilter("");
-                    setHealthcareFilter("");
-                  }}>
-                    Reset
-                  </button>
-
-                  <button className
-
-="apply-btn" onClick={() => setShowFilters(false)}>
-                    Apply
-                  </button>
-                </div>
-
+        {/* MAIN PANEL */}
+        <div className="table-panel">
+          {/* HEADER */}
+          <div className="table-header-row">
+            <div>
+              <div className="table-title">Employee Insurance Records</div>
+              <div className="table-subtitle">
+                Manage employee healthcare memberships
               </div>
-            )}
+            </div>
+
+            <input
+              type="text"
+              placeholder="Search employee..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="searchInput"
+            />
+
+            <button
+              className="add-btn"
+              onClick={() => navigate("/insuranceform")}
+            >
+              + Add Form
+            </button>
           </div>
 
-          <button className
+          {/* SECOND ROW (Filters + Actions) */}
+          <div className="table-header-row" style={{ marginTop: "10px" }}>
+            <div className="header-left">
+              {/* FILTER BUTTON */}
+              <div className="filter-container">
+                <button
+                  className="filter-btn"
+                  onClick={() => setShowFilters(!showFilters)}
+                >
+                  Filters ▼
+                </button>
 
-="add-btn" onClick={downloadReport}>
-            Report
-          </button>
+                {showFilters && (
+                  <div className="filter-panel">
+                    <div className="filter-title">Filter Employees</div>
 
-        </div>
+                    <label>Employee Number</label>
+                    <select
+                      value={empNoFilter}
+                      onChange={(e) => setEmpNoFilter(e.target.value)}
+                    >
+                      <option value="">All</option>
+                      {[...new Set(employees.map((e) => e.employeeNo))].map(
+                        (no) => (
+                          <option key={no}>{no}</option>
+                        ),
+                      )}
+                    </select>
 
-        <div className
+                    <label>Name</label>
+                    <select
+                      value={empNameFilter}
+                      onChange={(e) => setEmpNameFilter(e.target.value)}
+                    >
+                      <option value="">All</option>
+                      {[...new Set(employees.map((e) => e.name))].map(
+                        (name) => (
+                          <option key={name}>{name}</option>
+                        ),
+                      )}
+                    </select>
 
-="header-right">
-          <button className
+                    <label>Gender</label>
+                    <select
+                      value={genderFilter}
+                      onChange={(e) => setGenderFilter(e.target.value)}
+                    >
+                      <option value="">All</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                    </select>
 
-="add-btn" onClick={() => document.getElementById("excelUpload").click()}>
-            Add Excel
-          </button>
+                    <label>Healthcare Type</label>
+                    <select
+                      value={healthcareFilter}
+                      onChange={(e) => setHealthcareFilter(e.target.value)}
+                    >
+                      <option value="">All</option>
+                      <option>Corporate Health</option>
+                      <option>Family Health</option>
+                      <option>Premium Health</option>
+                    </select>
 
-          <button className
+                    <div className="filter-buttons">
+                      <button
+                        className="reset-btn"
+                        onClick={() => {
+                          setEmpNoFilter("");
+                          setEmpNameFilter("");
+                          setGenderFilter("");
+                          setHealthcareFilter("");
+                        }}
+                      >
+                        Reset
+                      </button>
 
-="add-btn" onClick={downloadExcelFormat}>
-            Excel Format
-          </button>
-        </div>
-
-      </div>
-
-      {/* HIDDEN FILE INPUT */}
-      <input
-        type="file"
-        accept=".xlsx,.xls"
-        id="excelUpload"
-        style={{ display: "none" }}
-        onChange={handleExcelUpload}
-      />
-
-      {/* TABLE */}
-      <div className
-
-="table-wrapper">
-        <table className
-
-="styled-table">
-
-          <thead>
-            <tr>
-              <th>Emp No</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Mobile</th>
-              <th>Gender</th>
-              <th>Healthcare</th>
-              <th>Plan A</th>
-              <th>Plan B</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filteredEmployees.length === 0 ? (
-              <tr>
-                <td colSpan="9" className
-
-="noData">No records found</td>
-              </tr>
-            ) : (
-              filteredEmployees.map(e => (
-                <tr key={e.id} className
-
-="table-row">
-
-                  <td>{e.employeeNo}</td>
-
-                  {/* NAME WITH AVATAR */}
-                  <td>
-                    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                      <div className
-
-="cell-avatar">
-                        {e.name.charAt(0)}
-                      </div>
-                      <span className
-
-="cell-name">{e.name}</span>
+                      <button
+                        className="apply-btn"
+                        onClick={() => setShowFilters(false)}
+                      >
+                        Apply
+                      </button>
                     </div>
-                  </td>
+                  </div>
+                )}
+              </div>
 
-                  <td>{e.email}</td>
-                  <td>{e.mobile}</td>
-                  <td>{e.gender}</td>
-                  <td>{e.healthcareType}</td>
-                  <td>{e.planA}</td>
-                  <td>{e.planB}</td>
+              <button className="add-btn" onClick={downloadReport}>
+                Report
+              </button>
+            </div>
 
-                  <td>
-                    <div className
+            <div className="header-right">
+              <button
+                className="add-btn"
+                onClick={() => document.getElementById("excelUpload").click()}
+              >
+                Add Excel
+              </button>
 
-="action-group">
-                      <button className
+              <button className="add-btn" onClick={downloadExcelFormat}>
+                Excel Format
+              </button>
+            </div>
+          </div>
 
-="more-action-btn">Edit</button>
-                      <button className
+          {/* HIDDEN FILE INPUT */}
+          <input
+            type="file"
+            accept=".xlsx,.xls"
+            id="excelUpload"
+            style={{ display: "none" }}
+            onChange={handleExcelUpload}
+          />
 
-="more-action-btn delete" onClick={() => handleDelete(e.id)}>Delete</button>
-                    </div>
-                  </td>
-
+          {/* TABLE */}
+          <div className="table-wrapper">
+            <table className="styled-table">
+              <thead>
+                <tr>
+                  <th>Emp No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>Gender</th>
+                  <th>Healthcare</th>
+                  <th>Plan A</th>
+                  <th>Plan B</th>
+                  <th>Actions</th>
                 </tr>
-              ))
-            )}
-          </tbody>
+              </thead>
 
-        </table>
+              <tbody>
+                {filteredEmployees.length === 0 ? (
+                  <tr>
+                    <td colSpan="9" className="noData">
+                      No records found
+                    </td>
+                  </tr>
+                ) : (
+                  filteredEmployees.map((e) => (
+                    <tr key={e.id} className="table-row">
+                      <td>{e.employeeNo}</td>
+
+                      {/* NAME WITH AVATAR */}
+                      <td>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "12px",
+                          }}
+                        >
+                          <div className="cell-avatar">{e.name.charAt(0)}</div>
+                          <span className="cell-name">{e.name}</span>
+                        </div>
+                      </td>
+
+                      <td>{e.email}</td>
+                      <td>{e.mobile}</td>
+                      <td>{e.gender}</td>
+                      <td>{e.healthcareType}</td>
+                      <td>{e.planA}</td>
+                      <td>{e.planB}</td>
+
+                      <td>
+                        <div className="action-group">
+                          <button className="more-action-btn">Edit</button>
+                          <button
+                            className="more-action-btn delete"
+                            onClick={() => handleDelete(e.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-
     </div>
-  </div>
-);
+  );
 }

@@ -3,7 +3,6 @@ import "../../styles/EmployeeManager.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
-import EmployeeManagerSidebar from "../Sidebar/EmployeeManagerSidebar";
 
 const GeneralInfo = () => {
   const [activeTab, setActiveTab] = useState("general");
@@ -56,7 +55,9 @@ const GeneralInfo = () => {
       const reader = new FileReader();
       reader.onload = () => {
         setEmployees((prev) =>
-          prev.map((emp) => (emp.id === id ? { ...emp, photo: reader.result } : emp))
+          prev.map((emp) =>
+            emp.id === id ? { ...emp, photo: reader.result } : emp,
+          ),
         );
       };
       reader.readAsDataURL(file);
@@ -64,11 +65,15 @@ const GeneralInfo = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this employee?")) return;
+    if (!window.confirm("Are you sure you want to delete this employee?"))
+      return;
     try {
-      const response = await fetch(`http://localhost:5133/api/EmployeeManager/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:5133/api/EmployeeManager/${id}`,
+        {
+          method: "DELETE",
+        },
+      );
       if (!response.ok) throw new Error("Failed to delete employee");
       setEmployees((prev) => prev.filter((emp) => emp.id !== id));
     } catch (error) {
@@ -85,15 +90,18 @@ const GeneralInfo = () => {
       const employeeToUpdate = employees.find((emp) => emp.id === id);
       const updatedEmployee = { ...employeeToUpdate, name: newName };
 
-      const response = await fetch(`http://localhost:5133/api/EmployeeManager/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedEmployee),
-      });
+      const response = await fetch(
+        `http://localhost:5133/api/EmployeeManager/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedEmployee),
+        },
+      );
       if (!response.ok) throw new Error("Failed to update employee");
 
       setEmployees((prev) =>
-        prev.map((emp) => (emp.id === id ? updatedEmployee : emp))
+        prev.map((emp) => (emp.id === id ? updatedEmployee : emp)),
       );
     } catch (error) {
       console.error(error);
@@ -118,11 +126,19 @@ const GeneralInfo = () => {
         (!filterDOJFrom || dojDate >= new Date(filterDOJFrom)) &&
         (!filterDOJTo || dojDate <= new Date(filterDOJTo));
 
-      const matchesDesignation = !filterDesignation || emp.designation === filterDesignation;
-      const matchesDepartment = !filterDepartment || emp.department === filterDepartment;
+      const matchesDesignation =
+        !filterDesignation || emp.designation === filterDesignation;
+      const matchesDepartment =
+        !filterDepartment || emp.department === filterDepartment;
       const matchesBank = !filterBank || emp.bankName === filterBank;
 
-      return matchesSearch && matchesDOJ && matchesDesignation && matchesDepartment && matchesBank;
+      return (
+        matchesSearch &&
+        matchesDOJ &&
+        matchesDesignation &&
+        matchesDepartment &&
+        matchesBank
+      );
     });
   }, [
     employees,
@@ -161,372 +177,292 @@ const GeneralInfo = () => {
         Grade: emp.grade,
         UAN: emp.uan,
         "Aadhaar No": emp.aadhaar,
-      }))
+      })),
     );
 
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Employees");
 
-    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
     const data = new Blob([excelBuffer], { type: "application/octet-stream" });
     saveAs(data, "Employee_Details.xlsx");
   };
 
   // ------------------ JSX ------------------
+  // ------------------ JSX ------------------
   return (
-  <div className
-
-="dashboard-layout" style={{ display: "flex" }}>
-  {/* Sidebar: only show if NOT on full-screen mode */}
-  {!collapsed && activeTab !== "general" && (
-    <EmployeeManagerSidebar
-      activeTab={activeTab}
-      setActiveTab={setActiveTab}
-      collapsed={collapsed}
-      setCollapsed={setCollapsed}
-    />
-  )}
-
-  {/* Main Content */}
-  <div
-    className
-
-="main-content"
-    style={{
-      flex: 1,
-      padding: "1rem",
-      transition: "margin 0.3s",
-      marginLeft: !collapsed && activeTab !== "general" ? "250px" : "0", // adjust if sidebar shown
-    }}
-  >
-   <div className
-
-="dashboard-header-row">
-
-  <h2 className
-
-="dashboard-header">
-    <span className
-
-="header-icon">🧑‍💼</span>
-    General Information
-  </h2>
-
- 
-
-</div>
-          {/* General Info Tab */}
-          {activeTab === "general" && (
-            <div className
-
-="table-container">
-              {/* Filter Bar */}
-        <div className
-
-="modern-filter-bar">
-
-  {/* LEFT SIDE */}
-  <div className
-
-="filter-left">
-
-    {/* Filter Dropdown */}
-    <div className
-
-="filter-dropdown">
-      <button className
-
-="filter-btn">
-        🔎 Filters <span className
-
-="arrow">▾</span>
-      </button>
-
-      <div className
-
-="filter-menu">
-
-        {/* DOJ Range */}
-        <div className
-
-="filter-group">
-          <label>📅 DOJ Range</label>
-
-          <input
-            type="date"
-            value={filterDOJFrom || ""}
-            onChange={(e) => setFilterDOJFrom(e.target.value)}
-          />
-
-          <input
-            type="date"
-            value={filterDOJTo || ""}
-            onChange={(e) => setFilterDOJTo(e.target.value)}
-          />
-
-          <div className
-
-="filter-actions">
-            <button
-              onClick={() =>
-                setSearch(`From ${filterDOJFrom || "—"} to ${filterDOJTo || "—"}`)
-              }
-            >
-              Apply
-            </button>
-
-            <button
-              className
-
-="clear-btn"
-              onClick={() => {
-                setFilterDOJFrom("");
-                setFilterDOJTo("");
-                setSearch("");
-              }}
-            >
-              Clear
-            </button>
-          </div>
+    <div className="dashboard-layout" style={{ display: "flex" }}>
+      {/* Main Content */}
+      <div
+        className="main-content"
+        style={{
+          flex: 1,
+          padding: "1rem",
+          transition: "margin 0.3s",
+          marginLeft: "0",
+        }}
+      >
+        <div className="dashboard-header-row">
+          <h2 className="dashboard-header">
+            <span className="header-icon">🧑‍💼</span>
+            General Information
+          </h2>
         </div>
 
-        {/* Designation */}
-        <div className
+        {/* General Info Tab */}
+        {activeTab === "general" && (
+          <div className="table-container">
+            {/* Filter Bar */}
+            <div className="modern-filter-bar">
+              {/* LEFT SIDE */}
+              <div className="filter-left">
+                {/* Filter Dropdown */}
+                <div className="filter-dropdown">
+                  <button className="filter-btn">
+                    🔎 Filters <span className="arrow">▾</span>
+                  </button>
 
-="filter-group">
-          <label>🏷️ Designation</label>
+                  <div className="filter-menu">
+                    {/* DOJ Range */}
+                    <div className="filter-group">
+                      <label>📅 DOJ Range</label>
 
-          {Array.from(new Set(employees.map(emp => emp.designation))).map(desig => (
-            <button
-              key={desig}
-              onClick={() => {
-                setFilterDesignation(desig);
-                setSearch(desig);
-              }}
-            >
-              {desig}
-            </button>
-          ))}
-        </div>
+                      <input
+                        type="date"
+                        value={filterDOJFrom || ""}
+                        onChange={(e) => setFilterDOJFrom(e.target.value)}
+                      />
 
-        {/* Department */}
-        <div className
+                      <input
+                        type="date"
+                        value={filterDOJTo || ""}
+                        onChange={(e) => setFilterDOJTo(e.target.value)}
+                      />
 
-="filter-group">
-          <label>🏢 Department</label>
+                      <div className="filter-actions">
+                        <button
+                          onClick={() =>
+                            setSearch(
+                              `From ${filterDOJFrom || "—"} to ${filterDOJTo || "—"}`,
+                            )
+                          }
+                        >
+                          Apply
+                        </button>
 
-          {Array.from(new Set(employees.map(emp => emp.department))).map(dept => (
-            <button
-              key={dept}
-              onClick={() => {
-                setFilterDepartment(dept);
-                setSearch(dept);
-              }}
-            >
-              {dept}
-            </button>
-          ))}
-        </div>
+                        <button
+                          className="clear-btn"
+                          onClick={() => {
+                            setFilterDOJFrom("");
+                            setFilterDOJTo("");
+                            setSearch("");
+                          }}
+                        >
+                          Clear
+                        </button>
+                      </div>
+                    </div>
 
-        {/* Bank */}
-        <div className
+                    {/* Designation */}
+                    <div className="filter-group">
+                      <label>🏷️ Designation</label>
 
-="filter-group">
-          <label>🏦 Bank</label>
+                      {Array.from(
+                        new Set(employees.map((emp) => emp.designation)),
+                      ).map((desig) => (
+                        <button
+                          key={desig}
+                          onClick={() => {
+                            setFilterDesignation(desig);
+                            setSearch(desig);
+                          }}
+                        >
+                          {desig}
+                        </button>
+                      ))}
+                    </div>
 
-          {Array.from(new Set(employees.map(emp => emp.bankName))).map(bank => (
-            <button
-              key={bank}
-              onClick={() => {
-                setFilterBank(bank);
-                setSearch(bank);
-              }}
-            >
-              {bank}
-            </button>
-          ))}
-        </div>
+                    {/* Department */}
+                    <div className="filter-group">
+                      <label>🏢 Department</label>
 
-      </div>
-    </div>
+                      {Array.from(
+                        new Set(employees.map((emp) => emp.department)),
+                      ).map((dept) => (
+                        <button
+                          key={dept}
+                          onClick={() => {
+                            setFilterDepartment(dept);
+                            setSearch(dept);
+                          }}
+                        >
+                          {dept}
+                        </button>
+                      ))}
+                    </div>
 
-    {/* Search */}
-    <div className
+                    {/* Bank */}
+                    <div className="filter-group">
+                      <label>🏦 Bank</label>
 
-="search-box">
+                      {Array.from(
+                        new Set(employees.map((emp) => emp.bankName)),
+                      ).map((bank) => (
+                        <button
+                          key={bank}
+                          onClick={() => {
+                            setFilterBank(bank);
+                            setSearch(bank);
+                          }}
+                        >
+                          {bank}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
 
-      <input
-        type="text"
-        placeholder="Search employees..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <span>🔍</span>
-    </div>
-  </div>
-
-
-  {/* RIGHT SIDE */}
-  <div className
-
-="filter-right">
-    <button className
-
-="add-employee-btn" onClick={handleAddEmployee}>
-      + Add Employee
-    </button>
-  </div>
-
-</div>
-
-              {/* Employee Table */}
-              {loadingEmployees ? (
-                <p>Loading employees...</p>
-              ) : (
-              <div className
-
-="table-panel fade-in">
-
-  <div className
-
-="table-header-row">
-    <div>
-      <h2 className
-
-="table-title">Employee Ledger</h2>
-      <p className
-
-="table-subtitle">
-        Live overview of all employee records
-      </p>
-    </div>
-
-    <button className
-
-="add-btn" onClick={exportToExcel}>
-      Export Excel
-    </button>
-  </div>
-
-  <div className
-
-="table-wrapper custom-scrollbar">
-    <table className
-
-="styled-table">
-
-      <thead>
-        <tr>
-          <th>Sl.No</th>
-          <th>Photo</th>
-          <th>Emp ID</th>
-          <th>Employee Name</th>
-          <th>Father</th>
-          <th>DOJ</th>
-          <th>PF</th>
-          <th>ESI</th>
-          <th>PAN</th>
-          <th>Bank</th>
-          <th>Account</th>
-          <th>IFSC</th>
-          <th>Designation</th>
-          <th>Department</th>
-          <th>Branch</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {filteredEmployees.map((emp, index) => (
-          <tr key={emp.id} className
-
-="table-row tr-card">
-
-            <td>{index + 1}</td>
-
-            <td>
-              <img
-                src={emp.photo || "/default-profile.png"}
-                alt="profile"
-                className
-
-="profile-pic"
-              />
-              <input
-                type="file"
-                onChange={(e) => handlePhotoUpload(e, emp.id)}
-              />
-            </td>
-
-            <td>{emp.id}</td>
-
-            <td>
-              <div style={{display:'flex',flexDirection:'column'}}>
-                <span className
-
-="cell-name">{emp.name}</span>
+                {/* Search */}
+                <div className="search-box">
+                  <input
+                    type="text"
+                    placeholder="Search employees..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                  <span>🔍</span>
+                </div>
               </div>
-            </td>
 
-            <td>{emp.father}</td>
-
-            <td>{new Date(emp.doj).toLocaleDateString()}</td>
-
-            <td>{emp.pfNo}</td>
-
-            <td>{emp.esiNo}</td>
-
-            <td>{emp.pan}</td>
-
-            <td>{emp.bankName}</td>
-
-            <td>{emp.accountNo}</td>
-
-            <td>{emp.ifsc}</td>
-
-            <td>
-              <span className
-
-="cell-type">{emp.designation}</span>
-            </td>
-
-            <td>{emp.department}</td>
-
-            <td>{emp.branch}</td>
-
-            <td style={{textAlign:"right"}}>
-              <button
-                className
-
-="more-action-btn"
-                onClick={() => handleEdit(emp.id)}
-              >
-                Edit
-              </button>
-
-              <button
-                className
-
-="more-action-btn"
-                onClick={() => handleDelete(emp.id)}
-              >
-                Delete
-              </button>
-            </td>
-
-          </tr>
-        ))}
-      </tbody>
-
-    </table>
-  </div>
-</div>
-              )}
+              {/* RIGHT SIDE */}
+              <div className="filter-right">
+                <button
+                  className="add-employee-btn"
+                  onClick={handleAddEmployee}
+                >
+                  + Add Employee
+                </button>
+              </div>
             </div>
-          )}
-        </div>
+
+            {/* Employee Table */}
+            {loadingEmployees ? (
+              <p>Loading employees...</p>
+            ) : (
+              <div className="table-panel fade-in">
+                <div className="table-header-row">
+                  <div>
+                    <h2 className="table-title">Employee Ledger</h2>
+                    <p className="table-subtitle">
+                      Live overview of all employee records
+                    </p>
+                  </div>
+
+                  <button className="add-btn" onClick={exportToExcel}>
+                    Export Excel
+                  </button>
+                </div>
+
+                <div className="table-wrapper custom-scrollbar">
+                  <table className="styled-table">
+                    <thead>
+                      <tr>
+                        <th>Sl.No</th>
+                        <th>Photo</th>
+                        <th>Emp ID</th>
+                        <th>Employee Name</th>
+                        <th>Father</th>
+                        <th>DOJ</th>
+                        <th>PF</th>
+                        <th>ESI</th>
+                        <th>PAN</th>
+                        <th>Bank</th>
+                        <th>Account</th>
+                        <th>IFSC</th>
+                        <th>Designation</th>
+                        <th>Department</th>
+                        <th>Branch</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {filteredEmployees.map((emp, index) => (
+                        <tr key={emp.id} className="table-row tr-card">
+                          <td>{index + 1}</td>
+
+                          <td>
+                            <img
+                              src={emp.photo || "/default-profile.png"}
+                              alt="profile"
+                              className="profile-pic"
+                            />
+                            <input
+                              type="file"
+                              onChange={(e) => handlePhotoUpload(e, emp.id)}
+                            />
+                          </td>
+
+                          <td>{emp.id}</td>
+
+                          <td>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                              }}
+                            >
+                              <span className="cell-name">{emp.name}</span>
+                            </div>
+                          </td>
+
+                          <td>{emp.father}</td>
+
+                          <td>{new Date(emp.doj).toLocaleDateString()}</td>
+
+                          <td>{emp.pfNo}</td>
+                          <td>{emp.esiNo}</td>
+                          <td>{emp.pan}</td>
+                          <td>{emp.bankName}</td>
+                          <td>{emp.accountNo}</td>
+                          <td>{emp.ifsc}</td>
+
+                          <td>
+                            <span className="cell-type">{emp.designation}</span>
+                          </td>
+
+                          <td>{emp.department}</td>
+                          <td>{emp.branch}</td>
+
+                          <td style={{ textAlign: "right" }}>
+                            <button
+                              className="more-action-btn"
+                              onClick={() => handleEdit(emp.id)}
+                            >
+                              Edit
+                            </button>
+
+                            <button
+                              className="more-action-btn"
+                              onClick={() => handleDelete(emp.id)}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
-  
+    </div>
   );
 };
 

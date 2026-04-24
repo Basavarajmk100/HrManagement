@@ -3,53 +3,33 @@ import "../../styles/AddPurchaseVoucher.css";
 
 const AddPurchaseVoucher = () => {
   return (
-    <div className
-
-="voucher-page">
-
-      <div className
-
-="voucher-card">
+    <div className="voucher-page">
+      <div className="voucher-card">
         <h2>Add Purchase Voucher</h2>
-        <p className
+        <p className="voucher-subtitle">Enter purchase voucher details</p>
 
-="voucher-subtitle">Enter purchase voucher details</p>
-
-        <form className
-
-="voucher-form">
-
-          <div className
-
-="form-group">
+        <form className="voucher-form">
+          <div className="form-group">
             <label>Voucher No</label>
             <input type="text" placeholder="PV-1011" />
           </div>
 
-          <div className
-
-="form-group">
+          <div className="form-group">
             <label>Vendor Name</label>
             <input type="text" placeholder="Enter vendor name" />
           </div>
 
-          <div className
-
-="form-group">
+          <div className="form-group">
             <label>Amount</label>
             <input type="number" placeholder="Enter amount" />
           </div>
 
-          <div className
-
-="form-group">
+          <div className="form-group">
             <label>Date</label>
             <input type="date" />
           </div>
 
-          <div className
-
-="form-group">
+          <div className="form-group">
             <label>Status</label>
             <select>
               <option>Paid</option>
@@ -57,15 +37,9 @@ const AddPurchaseVoucher = () => {
             </select>
           </div>
 
-          <button className
-
-="save-voucher-btn">
-            Save Voucher
-          </button>
-
+          <button className="save-voucher-btn">Save Voucher</button>
         </form>
       </div>
-
     </div>
   );
 };

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../../styles/ActivityPlanner.css";
 
-const ActivityPlanner = () => {
+import Sidebar from "../Sidebar";
 
+const ActivityPlanner = () => {
   const [activities, setActivities] = useState([]);
 
   const [formData, setFormData] = useState({
@@ -10,13 +11,13 @@ const ActivityPlanner = () => {
     date: "",
     time: "",
     location: "",
-    description: ""
+    description: "",
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -25,7 +26,7 @@ const ActivityPlanner = () => {
 
     const newActivity = {
       id: Date.now(),
-      ...formData
+      ...formData,
     };
 
     setActivities([...activities, newActivity]);
@@ -35,7 +36,7 @@ const ActivityPlanner = () => {
       date: "",
       time: "",
       location: "",
-      description: ""
+      description: "",
     });
   };
 
@@ -44,18 +45,12 @@ const ActivityPlanner = () => {
   };
 
   return (
-    <div className
-
-="planner-container">
-
+    <div className="planner-container">
       <h2>Activity Planner</h2>
 
       {/* Activity Form */}
 
-      <form className
-
-="planner-form" onSubmit={handleAddActivity}>
-
+      <form className="planner-form" onSubmit={handleAddActivity}>
         <input
           type="text"
           name="title"
@@ -97,42 +92,33 @@ const ActivityPlanner = () => {
         />
 
         <button type="submit">Add Activity</button>
-
       </form>
 
       {/* Activity List */}
 
-      <div className
-
-="activity-list">
-
+      <div className="activity-list">
         {activities.length === 0 && (
-          <p className
-
-="no-activity">No activities planned yet</p>
+          <p className="no-activity">No activities planned yet</p>
         )}
 
         {activities.map((activity) => (
-          <div key={activity.id} className
-
-="activity-card">
-
+          <div key={activity.id} className="activity-card">
             <h3>{activity.title}</h3>
 
-            <p><strong>Date:</strong> {activity.date}</p>
-            <p><strong>Time:</strong> {activity.time}</p>
-            <p><strong>Location:</strong> {activity.location}</p>
+            <p>
+              <strong>Date:</strong> {activity.date}
+            </p>
+            <p>
+              <strong>Time:</strong> {activity.time}
+            </p>
+            <p>
+              <strong>Location:</strong> {activity.location}
+            </p>
 
-            <p className
-
-="description">{activity.description}</p>
-
-
+            <p className="description">{activity.description}</p>
           </div>
         ))}
-
       </div>
-
     </div>
   );
 };

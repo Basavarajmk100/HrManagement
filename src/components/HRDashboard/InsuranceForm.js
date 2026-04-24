@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "../../styles/InsuranceForm.css";
+import { useNavigate } from "react-router-dom";
 
 const InsurancePage = () => {
+  const navigate = useNavigate();
+
   const [employeeData, setEmployeeData] = useState({
     employeeNo: "",
     name: "",
@@ -30,12 +33,10 @@ const InsurancePage = () => {
   const [policyFile, setPolicyFile] = useState(null);
   const [excelFile, setExcelFile] = useState(null);
 
-
-  
- const theme = localStorage.getItem("theme") || "simple";
-    const isSimple = theme === "simple";
-    const isDark = theme === "dark";
-    const isColorful = theme === "colorful";
+  const theme = localStorage.getItem("theme") || "simple";
+  const isSimple = theme === "simple";
+  const isDark = theme === "dark";
+  const isColorful = theme === "colorful";
 
   // ================= Handle Input Change =================
   const handleChange = (e) => {
@@ -109,12 +110,12 @@ const InsurancePage = () => {
 
     const formData = new FormData();
 
-Object.keys(employeeData).forEach((key) => {
-  const value = employeeData[key];
-  if (value !== "" && value !== null && value !== undefined) {
-    formData.append(key, value);
-  }
-});
+    Object.keys(employeeData).forEach((key) => {
+      const value = employeeData[key];
+      if (value !== "" && value !== null && value !== undefined) {
+        formData.append(key, value);
+      }
+    });
 
     if (policyFile) formData.append("PolicyCopy", policyFile);
     if (excelFile) formData.append("ExcelFile", excelFile);
@@ -142,64 +143,53 @@ Object.keys(employeeData).forEach((key) => {
   };
 
  return (
-  <div className
-
-={`insurance-container theme-${theme}`}>
+  <div className={`insurance-container theme-${theme}`}>
 
     {/* BACKGROUND EFFECTS */}
-    <div className
-
-="bg-canvas">
+    <div className="bg-canvas">
       {(isDark || isColorful) && (
         <>
-          <div className
-
-="ambient-orb orb-1"></div>
-          <div className
-
-="ambient-orb orb-2"></div>
-          <div className
-
-="ambient-orb orb-3"></div>
-          <div className
-
-="ambient-orb orb-4"></div>
-          <div className
-
-="bg-glass-layer"></div>
+          <div className="ambient-orb orb-1"></div>
+          <div className="ambient-orb orb-2"></div>
+          <div className="ambient-orb orb-3"></div>
+          <div className="ambient-orb orb-4"></div>
+          <div className="bg-glass-layer"></div>
         </>
       )}
     </div>
 
+
+
+     
+
     {/* MAIN PANEL */}
-    <div className
+    <div className="table-panel">
 
-="table-panel">
-
+       
       {/* HEADER */}
-      <div className
+{/* HEADER */}
+<div className="table-header-row">
 
-="table-header-row">
-        <div>
-          <div className
+  <button
+    className="back-btn"
+    onClick={() => window.history.back()}
+  >
+    ← Back
+  </button>
 
-="table-title">Employee Insurance Form</div>
-          <div className
+  <div className="header-text">
+    <div className="table-title">Employee Insurance Form</div>
+    <div className="table-subtitle">
+      Add or update employee insurance details
+    </div>
+  </div>
 
-="table-subtitle">
-            Add or update employee insurance details
-          </div>
-        </div>
-      </div>
+</div>
 
-      <form onSubmit={handleSubmit} className
-
-="insurance-form-grid">
+      <form onSubmit={handleSubmit} className="insurance-form-grid">
 
         {/* ================= EMPLOYEE INFO ================= */}
-        <div className
-
-="form-section">
+        <div className="form-section">
           <h3>Employee Info</h3>
 
           <input
@@ -221,9 +211,7 @@ Object.keys(employeeData).forEach((key) => {
         </div>
 
         {/* ================= HEALTHCARE ================= */}
-        <div className
-
-="form-section">
+        <div className="form-section">
           <h3>Healthcare Details</h3>
 
           <input name="healthcareType" placeholder="Healthcare Type" value={employeeData.healthcareType} onChange={handleChange} />
@@ -233,9 +221,7 @@ Object.keys(employeeData).forEach((key) => {
         </div>
 
         {/* ================= SPOUSE ================= */}
-        <div className
-
-="form-section">
+        <div className="form-section">
           <h3>Spouse Details</h3>
 
           <input name="spouseName" placeholder="Spouse Name" value={employeeData.spouseName} onChange={handleChange} />
@@ -244,9 +230,7 @@ Object.keys(employeeData).forEach((key) => {
         </div>
 
         {/* ================= CHILDREN ================= */}
-        <div className
-
-="form-section">
+        <div className="form-section">
           <h3>Children</h3>
 
           <input name="child1Name" placeholder="Child 1 Name" value={employeeData.child1Name} onChange={handleChange} />
@@ -259,9 +243,7 @@ Object.keys(employeeData).forEach((key) => {
         </div>
 
         {/* ================= PLANS ================= */}
-        <div className
-
-="form-section">
+        <div className="form-section">
           <h3>Plans</h3>
 
           <input type="number" name="planA" placeholder="Plan A" value={employeeData.planA} onChange={handleChange} />
@@ -270,17 +252,13 @@ Object.keys(employeeData).forEach((key) => {
         </div>
 
         {/* ================= ACTIONS ================= */}
-        <div className
-
-="form-actions">
+        <div className="form-actions">
 
           <input type="file" accept=".pdf,.jpg,.png" onChange={handlePolicyUpload} />
 
           <input type="file" accept=".xlsx,.xls" onChange={handleExcelUpload} />
 
-          <button type="submit" className
-
-="add-btn">
+          <button type="submit" className="add-btn">
             Save Insurance
           </button>
 

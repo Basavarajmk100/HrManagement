@@ -7,12 +7,12 @@ const MyTeam = ({ managerId }) => {
 
   useEffect(() => {
     fetch(`http://localhost:5133/api/MyTeam/${managerId}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setTeamMembers(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error fetching team:", err);
         setLoading(false);
       });
@@ -22,20 +22,12 @@ const MyTeam = ({ managerId }) => {
   if (teamMembers.length === 0) return <p>No team members found.</p>;
 
   return (
-    <div className
-
-="my-team">
+    <div className="my-team">
       <h2>My Team</h2>
-      <div className
-
-="team-list">
+      <div className="team-list">
         {teamMembers.map((member) => (
-          <div key={member.id} className
-
-="team-card">
-            <div className
-
-="avatar">{member.name.charAt(0)}</div>
+          <div key={member.id} className="team-card">
+            <div className="avatar">{member.name.charAt(0)}</div>
             <div>
               <h3>{member.name}</h3>
               <p>{member.role}</p>
