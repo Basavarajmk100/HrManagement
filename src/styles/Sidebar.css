@@ -1,58 +1,45 @@
-* --- SIDEBAR NAV --- */ .sidebar {
+/* --- SIDEBAR NAV --- */
+.sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  width: 96px;
+  width: 96px; /* collapsed */
   display: flex;
   flex-direction: column;
   background: var(--sidebar-bg);
   border-right: 1px solid var(--sidebar-border);
   box-shadow: var(--sidebar-shadow);
-  backdrop-filter: blur(24px);
+
+  backdrop-filter: blur(10px); /* reduced for performance */
+
   transition: width 0.3s ease;
   overflow-x: hidden;
   overflow-y: auto;
-}
 
-.sidebar {
-  width: 96px;
-  transition: width 0.3s ease;
+  z-index: 1000;
+
+  /* PERFORMANCE FIX */
+  transform: translateZ(0);
+  will-change: width;
+  backface-visibility: hidden;
 }
 
 .sidebar.expanded {
   width: 288px;
 }
 
-.sidebar-spacer {
-  width: 96px;
-  transition: width 0.3s ease;
+/* CONTENT SHIFT */
+.page-content {
+  margin-left: 96px;
+  transition: margin-left 0.3s ease;
 }
 
-.sidebar.expanded + .sidebar-spacer {
-  width: 288px;
+.sidebar.expanded ~ .page-content {
+  margin-left: 288px;
 }
 
-.sidebar-spacer {
-  width: 96px;
-  flex-shrink: 0;
-  transition: width 0.3s ease;
-}
-
-.sidebar:hover + .sidebar-spacer {
-  width: 288px;
-}
-
-/* Shift main content when sidebar expands */
-.main-content {
-  transition: margin-left 0.3s;
-  margin-left: 72px;
-}
-
-.main-content.shifted {
-  margin-left: 240px;
-}
-
+/* LOGO AREA */
 .sidebar-logo-area {
   display: flex;
   align-items: center;
@@ -60,6 +47,7 @@
   height: 96px;
   border-bottom: 1px solid var(--sidebar-border);
 }
+
 .logo-icon-box {
   min-width: 40px;
   height: 40px;
@@ -69,9 +57,11 @@
   justify-content: center;
   transition: transform 0.3s;
 }
-.sidebar:hover .logo-icon-box {
+
+.sidebar.expanded .logo-icon-box {
   transform: rotate(6deg);
 }
+
 .logo-text {
   margin-left: 16px;
   font-size: 20px;
@@ -81,10 +71,12 @@
   white-space: nowrap;
   color: inherit;
 }
+
 .sidebar.expanded .logo-text {
   opacity: 1;
 }
 
+/* NAV LINKS */
 .nav-links {
   flex: 1;
   display: flex;
@@ -95,30 +87,28 @@
   overflow-x: hidden;
 }
 
-/* ===== SUBMENU FIX ===== */
-
-/* Hide submenu by default */
-/* Submenu container */
+/* SUBMENU */
 .submenu {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-left: 32px; /* push submenu inside */
+  margin-left: 32px;
   margin-top: 4px;
-
   max-height: 0;
   overflow: hidden;
-
-  transition: max-height 0.3s ease;
+  transition: max-height 0.25s ease;
+  will-change: max-height;
 }
 
-/* Show submenu */
 .submenu-open {
-  max-height: 200px; /* enough space for items */
+  max-height: 200px;
 }
 
-/* Submenu buttons */
-/* Submenu buttons */
+.sidebar.expanded .submenu {
+  padding-left: 40px;
+}
+
+/* SUBMENU BUTTON */
 .submenu-btn {
   background: transparent;
   border: none;
@@ -136,18 +126,8 @@
   background: rgba(250, 133, 185, 0.1);
   color: #fa85b9;
 }
-/* Keep submenu inside sidebar when expanded */
-.sidebar.expanded .submenu {
-  position: relative;
-  left: 0;
-  top: 0;
-  transform: none;
-  opacity: 1;
-  visibility: visible;
-  padding-left: 40px;
-}
 
-/* Modern 3D Nav Buttons */
+/* NAV BUTTON */
 .nav-btn {
   position: relative;
   display: flex;
@@ -162,6 +142,7 @@
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
 }
+
 .nav-icon {
   position: absolute;
   left: 0;
@@ -171,10 +152,12 @@
   justify-content: center;
   transition: transform 0.3s;
 }
+
 .nav-btn:hover .nav-icon,
 .nav-btn.active .nav-icon {
   transform: scale(1.1);
 }
+
 .nav-text {
   margin-left: 56px;
   font-size: 15px;
@@ -183,9 +166,12 @@
   opacity: 0;
   transition: opacity 0.3s;
 }
-.sidebar:hover .nav-text {
+
+.sidebar.expanded .nav-text {
   opacity: 1;
 }
+
+/* NAV INDICATOR */
 .nav-indicator {
   position: absolute;
   left: 0;
@@ -195,6 +181,8 @@
   height: 24px;
   border-radius: 0 4px 4px 0;
 }
+
+/* TOOLTIP */
 .nav-tooltip {
   position: absolute;
   left: 110%;
@@ -211,15 +199,22 @@
   transition: all 0.3s;
   white-space: nowrap;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-  z-index: 100;
 }
+
 .sidebar:not(:hover) .nav-btn:hover .nav-tooltip {
   opacity: 1;
   visibility: visible;
 }
 
-/* 3D Hover & Relevant Theme Fills */
-/* Simple Theme */
+/* FOOTER */
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid var(--sidebar-border);
+}
+
+/* THEMES */
+
+/* SIMPLE */
 .theme-simple .nav-btn:hover {
   background: rgba(250, 133, 185, 0.1);
   color: #fa85b9;
@@ -229,22 +224,18 @@
     0 4px 0 rgba(250, 133, 185, 0.2),
     0 8px 15px rgba(250, 133, 185, 0.1);
 }
-.theme-simple .nav-btn:active {
-  transform: translateY(1px);
-  box-shadow: inset 0 2px 4px rgba(250, 133, 185, 0.1);
-}
+
 .theme-simple .nav-btn.active {
   background: rgba(250, 133, 185, 0.15);
   color: #fa85b9;
   border-color: rgba(250, 133, 185, 0.3);
-  box-shadow: inset 0 2px 4px rgba(250, 133, 185, 0.1);
-  transform: translateY(0);
 }
+
 .theme-simple .nav-indicator {
   background: #fa85b9;
 }
 
-/* Colorful Theme */
+/* COLORFUL */
 .theme-colorful .nav-btn:hover {
   background: rgba(255, 255, 255, 0.95);
   color: #5ea8e6;
@@ -254,22 +245,18 @@
     0 4px 0 rgba(94, 168, 230, 0.3),
     0 8px 20px rgba(0, 0, 0, 0.05);
 }
-.theme-colorful .nav-btn:active {
-  transform: translateY(1px);
-  box-shadow: inset 0 2px 4px rgba(94, 168, 230, 0.1);
-}
+
 .theme-colorful .nav-btn.active {
   background: #ffffff;
   color: #5ea8e6;
   border-color: #ffffff;
-  box-shadow: inset 0 2px 4px rgba(94, 168, 230, 0.1);
-  transform: translateY(0);
 }
+
 .theme-colorful .nav-indicator {
   background: #5ea8e6;
 }
 
-/* Elite Dark Theme */
+/* DARK */
 .theme-dark .nav-btn:hover {
   background: rgba(254, 240, 138, 0.08);
   color: #fef08a;
@@ -279,88 +266,41 @@
     0 4px 0 rgba(254, 240, 138, 0.15),
     0 8px 20px rgba(0, 0, 0, 0.5);
 }
-.theme-dark .nav-btn:active {
-  transform: translateY(1px);
-  box-shadow: inset 0 2px 4px rgba(254, 240, 138, 0.1);
-}
+
 .theme-dark .nav-btn.active {
   background: rgba(254, 240, 138, 0.05);
   color: #fef08a;
-  border-color: rgba(254, 240, 138, 0.2);
-  box-shadow: inset 0 2px 4px rgba(254, 240, 138, 0.05);
-  transform: translateY(0);
 }
+
 .theme-dark .nav-indicator {
   background: #fef08a;
   box-shadow: 0 0 10px #fef08a;
 }
 
-/* Logout Button Specialized State */
-.sidebar-footer {
-  padding: 20px;
-  border-top: 1px solid var(--sidebar-border);
-}
-.theme-simple .logout-btn:hover {
-  background: rgba(244, 63, 94, 0.1);
-  color: #f43f5e;
-  border-color: rgba(244, 63, 94, 0.3);
-  transform: translateY(-3px);
-  box-shadow:
-    0 4px 0 rgba(244, 63, 94, 0.2),
-    0 8px 15px rgba(244, 63, 94, 0.1);
-}
-.theme-simple .logout-btn:active {
-  transform: translateY(1px);
-  box-shadow: inset 0 2px 4px rgba(244, 63, 94, 0.1);
-}
-.theme-colorful .logout-btn:hover {
-  background: rgba(255, 255, 255, 0.95);
-  color: #f43f5e;
-  border-color: #ffffff;
-  transform: translateY(-3px);
-  box-shadow:
-    0 4px 0 rgba(244, 63, 94, 0.3),
-    0 8px 20px rgba(0, 0, 0, 0.05);
-}
-.theme-colorful .logout-btn:active {
-  transform: translateY(1px);
-  box-shadow: inset 0 2px 4px rgba(244, 63, 94, 0.1);
-}
-.theme-dark .logout-btn:hover {
-  background: rgba(254, 205, 211, 0.08);
-  color: #fecdd3;
-  border-color: rgba(254, 205, 211, 0.3);
-  transform: translateY(-3px);
-  box-shadow:
-    0 4px 0 rgba(254, 205, 211, 0.15),
-    0 8px 20px rgba(0, 0, 0, 0.5);
-}
-.theme-dark .logout-btn:active {
-  transform: translateY(1px);
-  box-shadow: inset 0 2px 4px rgba(254, 205, 211, 0.1);
+.sidebar,
+.nav-btn,
+.logo-icon-box {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
-/*This code is for sidebar collpasing*/
 .sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 70px; /* collapsed width */
-  transition: width 0.3s ease;
-  z-index: 1000;
+  backface-visibility: hidden;
 }
 
-.sidebar.expanded {
-  width: 288px; /* expanded width */
+/* PERFORMANCE OPTIMIZATION */
+.nav-btn,
+.logo-icon-box,
+.submenu-btn {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
-.page-content {
-  margin-left: 70px; /* collapsed sidebar */
-  transition: margin-left 0.3s ease;
+.sidebar::-webkit-scrollbar {
+  width: 4px;
 }
 
-/* when sidebar expands */
-.sidebar.expanded ~ .page-content {
-  margin-left: 240px;
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }

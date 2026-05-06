@@ -1,63 +1,72 @@
 import React, { useState } from "react";
-  import "../../styles/AdminUserApprovals.css";
+import "../../styles/AdminUserApprovals.css";
+
+import Sidebar from "../Sidebar";
+import "../../styles/Sidebar.css";
 
 function UserApprovals() {
-
   const [users, setUsers] = useState([
-    { id: 1, name: "Basavaraj", email: "basavaraj@gmail.com", status: "Pending" },
+    {
+      id: 1,
+      name: "Basavaraj",
+      email: "basavaraj@gmail.com",
+      status: "Pending",
+    },
     { id: 2, name: "Deepak", email: "deepak@gmail.com", status: "Pending" },
-    { id: 3, name: "Arun", email: "arun@gmail.com", status: "Pending" }
+    { id: 3, name: "Arun", email: "arun@gmail.com", status: "Pending" },
   ]);
 
   const approveUser = (id) => {
-    const updatedUsers = users.map(user =>
-      user.id === id ? { ...user, status: "Approved" } : user
+    const updatedUsers = users.map((user) =>
+      user.id === id ? { ...user, status: "Approved" } : user,
     );
     setUsers(updatedUsers);
   };
 
   return (
-    <div className
+    <div className="page-continer">
+      {/* SIDEBAR */}
+      <Sidebar />
 
-="dashboard-container">
-      <h2>User Approvals</h2>
+      {/* MAIN CONTENT */}
+      <div className="page-content">
+        {/* PAGE CONTENT WRAPPER */}
+        <div className="content-wrapper">
+          <h2>User Approvals</h2>
 
-      <table className
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-="data-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.status}</td>
 
-        <tbody>
-          {users.map(user => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.status}</td>
-
-              <td>
-                {user.status === "Pending" && (
-                  <button 
-                    onClick={() => approveUser(user.id)}
-                    className
-
-="approve-btn"
-                  >
-                    Approve
-                  </button>
-                )}
-              </td>
-
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  <td>
+                    {user.status === "Pending" && (
+                      <button
+                        onClick={() => approveUser(user.id)}
+                        className="approve-btn"
+                      >
+                        Approve
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/AccessManagement.css";
+import Select from "react-select";
 
 const AccessManagement = () => {
   const companies = ["ABC Pvt Ltd", "XYZ Technologies"];
@@ -8,16 +9,22 @@ const AccessManagement = () => {
   const isDark = theme === "dark";
   const isColorful = theme === "colorful";
 
-  const employees = ["Basavaraj", "Deepak", "Suresh"];
+  const employees = ["Basavaraj MK", "Deepak SN", "Suresh DL"];
 
   const roles = {
     Admin: ["HR Admin", "IT Admin", "Finance Admin"],
     Employee: ["All Employees", ...employees],
+
+    HR: ["HR Manager", "HR Executive"],
   };
 
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
   const [selectedEmployee, setSelectedEmployee] = useState("");
+
+  const [openMenu, setOpenMenu] = useState(null);
+
+  const [popup, setPopup] = useState("");
 
   /* HR ADMIN PERMISSIONS */
 
@@ -94,6 +101,31 @@ const AccessManagement = () => {
     });
   };
 
+  const [hrPermissions, setHrPermissions] = useState({
+    employeeRecords: { enabled: false, view: false, edit: false },
+    leaveManagement: { enabled: false, view: false, edit: false },
+    recruitment: { enabled: false, view: false, edit: false },
+    performanceReviews: { enabled: false, view: false, edit: false },
+  });
+
+  const handleHrPermission = (permission, type) => {
+    setHrPermissions({
+      ...hrPermissions,
+      [permission]: {
+        ...hrPermissions[permission],
+        [type]: !hrPermissions[permission][type],
+      },
+    });
+  };
+
+  const roleOptions = Object.keys(roles).map((role) => ({
+    label: role,
+    options: roles[role].map((item) => ({
+      label: item,
+      value: item,
+    })),
+  }));
+
   return (
     <div className={`access-page theme-${theme}`}>
       {/* BACKGROUND EFFECTS */}
@@ -152,26 +184,19 @@ const AccessManagement = () => {
           {/* ROLE */}
           <div className="form-group">
             <label>User Role</label>
-            <select
-              value={selectedRole}
-              onChange={(e) => setSelectedRole(e.target.value)}
-            >
-              <option value="">Select Role</option>
-
-              {Object.keys(roles).map((role) => (
-                <optgroup key={role} label={role}>
-                  {roles[role].map((item) => (
-                    <option key={item}>{item}</option>
-                  ))}
-                </optgroup>
-              ))}
-            </select>
+            <Select
+              options={roleOptions}
+              placeholder="Select Role"
+              value={roleOptions
+                .flatMap((group) => group.options)
+                .find((option) => option.value === selectedRole)}
+              onChange={(selected) => setSelectedRole(selected.value)}
+            />
           </div>
         </div>
 
         {/* RIGHT SIDE PERMISSIONS */}
         <div className="permissions-panel">
-          {/* HR ADMIN */}
           {/* HR ADMIN */}
           {selectedRole === "HR Admin" && (
             <div className="permission-box">
@@ -181,20 +206,20 @@ const AccessManagement = () => {
               <div className="permission-row">
                 <span>Employee Management</span>
 
-                <button
-                  className={
-                    hrAdminPermissions.employeeManagement.enable
-                      ? "enable-btn active"
-                      : "enable-btn"
-                  }
-                  onClick={() =>
-                    handleHrAdminPermission("employeeManagement", "enable")
-                  }
-                >
-                  {hrAdminPermissions.employeeManagement.enable
-                    ? "Enabled"
-                    : "Enable"}
-                </button>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={hrAdminPermissions.employeeManagement.enabled}
+                    onChange={() => {
+                      handleHrAdminPermission("employeeManagement", "enabled");
+
+                      if (!hrAdminPermissions.employeeManagement.enabled) {
+                        setPopup("Employee Management Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
 
                 <label>
                   View
@@ -219,24 +244,52 @@ const AccessManagement = () => {
                 </label>
               </div>
 
+              {popup && (
+                <div className="popup-overlay">
+                  <div className="permission-popup">
+                    <p>{popup}</p>
+
+                    <div className="popup-buttons">
+                      <button onClick={() => setPopup(null)}>OK</button>
+
+                      <button
+                        className="cancel-btn"
+                        onClick={() => setPopup(null)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Attendance Tracking */}
               <div className="permission-row">
                 <span>Attendance Tracking</span>
 
-                <button
-                  className={
-                    hrAdminPermissions.attendanceTracking.enable
-                      ? "enable-btn active"
-                      : "enable-btn"
-                  }
-                  onClick={() =>
-                    handleHrAdminPermission("attendanceTracking", "enable")
-                  }
-                >
-                  {hrAdminPermissions.attendanceTracking.enable
-                    ? "Enabled"
-                    : "Enable"}
-                </button>
+                {popup && (
+                  <div className="popup-overlay">
+                    <div className="permission-popup">
+                      <p>{popup}</p>
+                      <button onClick={() => setPopup(null)}>OK</button>
+                    </div>
+                  </div>
+                )}
+
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={hrAdminPermissions.attendanceTracking.enabled}
+                    onChange={() => {
+                      handleHrAdminPermission("attendanceTracking", "enabled");
+
+                      if (!hrAdminPermissions.attendanceTracking.enabled) {
+                        setPopup("Attendance Tracking Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
 
                 <label>
                   View
@@ -265,20 +318,20 @@ const AccessManagement = () => {
               <div className="permission-row">
                 <span>Leave Approval</span>
 
-                <button
-                  className={
-                    hrAdminPermissions.leaveApproval.enable
-                      ? "enable-btn active"
-                      : "enable-btn"
-                  }
-                  onClick={() =>
-                    handleHrAdminPermission("leaveApproval", "enable")
-                  }
-                >
-                  {hrAdminPermissions.leaveApproval.enable
-                    ? "Enabled"
-                    : "Enable"}
-                </button>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={hrAdminPermissions.leaveApproval.enabled}
+                    onChange={() => {
+                      handleHrAdminPermission("leaveApproval", "enabled");
+
+                      if (!hrAdminPermissions.leaveApproval.enabled) {
+                        alert("Leave Approval Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
 
                 <label>
                   View
@@ -306,19 +359,20 @@ const AccessManagement = () => {
               {/* Onboarding */}
               <div className="permission-row">
                 <span>Onboarding</span>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={hrAdminPermissions.onboarding.enabled}
+                    onChange={() => {
+                      handleHrAdminPermission("onboarding", "enabled");
 
-                <button
-                  className={
-                    hrAdminPermissions.onboarding.enable
-                      ? "enable-btn active"
-                      : "enable-btn"
-                  }
-                  onClick={() =>
-                    handleHrAdminPermission("onboarding", "enable")
-                  }
-                >
-                  {hrAdminPermissions.onboarding.enable ? "Enabled" : "Enable"}
-                </button>
+                      if (!hrAdminPermissions.onboarding.enabled) {
+                        alert("Onboarding Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
 
                 <label>
                   View
@@ -353,20 +407,24 @@ const AccessManagement = () => {
               <div className="permission-row">
                 <span>Payroll Management</span>
 
-                <button
-                  className={
-                    financeAdminPermissions.payrollManagement.enable
-                      ? "enable-btn active"
-                      : "enable-btn"
-                  }
-                  onClick={() =>
-                    handleFinanceAdminPermission("payrollManagement", "enable")
-                  }
-                >
-                  {financeAdminPermissions.payrollManagement.enable
-                    ? "Enabled"
-                    : "Enable"}
-                </button>
+                {popup && <div className="permission-popup">{popup}</div>}
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={financeAdminPermissions.payrollManagement.enabled}
+                    onChange={() => {
+                      handleFinanceAdminPermission(
+                        "payrollManagement",
+                        "enabled",
+                      );
+
+                      if (!financeAdminPermissions.payrollManagement.enabled) {
+                        alert("Payroll Management Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
 
                 <label>
                   View
@@ -402,20 +460,22 @@ const AccessManagement = () => {
               <div className="permission-row">
                 <span>View Profile</span>
 
-                <button
-                  className={
-                    employeePermissions.viewProfile.enable
-                      ? "enable-btn active"
-                      : "enable-btn"
-                  }
-                  onClick={() =>
-                    handleEmployeePermission("viewProfile", "enable")
-                  }
-                >
-                  {employeePermissions.viewProfile.enable
-                    ? "Enabled"
-                    : "Enable"}
-                </button>
+                {popup && <div className="permission-popup">{popup}</div>}
+
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={employeePermissions.viewProfile.enabled}
+                    onChange={() => {
+                      handleEmployeePermission("viewProfile", "enabled");
+
+                      if (!employeePermissions.viewProfile.enabled) {
+                        alert("View Profile Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
 
                 <label>
                   View
@@ -443,19 +503,20 @@ const AccessManagement = () => {
               {/* Apply Leave */}
               <div className="permission-row">
                 <span>Apply Leave</span>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={employeePermissions.applyLeave.enabled}
+                    onChange={() => {
+                      handleEmployeePermission("applyLeave", "enabled");
 
-                <button
-                  className={
-                    employeePermissions.applyLeave.enable
-                      ? "enable-btn active"
-                      : "enable-btn"
-                  }
-                  onClick={() =>
-                    handleEmployeePermission("applyLeave", "enable")
-                  }
-                >
-                  {employeePermissions.applyLeave.enable ? "Enabled" : "Enable"}
-                </button>
+                      if (!employeePermissions.applyLeave.enabled) {
+                        alert("Apply Leave Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
 
                 <label>
                   View
@@ -484,21 +545,20 @@ const AccessManagement = () => {
               <div className="permission-row">
                 <span>View Attendance</span>
 
-                <button
-                  className={
-                    employeePermissions.viewAttendance.enable
-                      ? "enable-btn active"
-                      : "enable-btn"
-                  }
-                  onClick={() =>
-                    handleEmployeePermission("viewAttendance", "enable")
-                  }
-                >
-                  {employeePermissions.viewAttendance.enable
-                    ? "Enabled"
-                    : "Enable"}
-                </button>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={employeePermissions.viewAttendance.enabled}
+                    onChange={() => {
+                      handleEmployeePermission("viewAttendance", "enabled");
 
+                      if (!employeePermissions.viewAttendance.enabled) {
+                        alert("View Attendance Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
                 <label>
                   View
                   <input
@@ -526,20 +586,20 @@ const AccessManagement = () => {
               <div className="permission-row">
                 <span>Download Payslip</span>
 
-                <button
-                  className={
-                    employeePermissions.downloadPayslip.enable
-                      ? "enable-btn active"
-                      : "enable-btn"
-                  }
-                  onClick={() =>
-                    handleEmployeePermission("downloadPayslip", "enable")
-                  }
-                >
-                  {employeePermissions.downloadPayslip.enable
-                    ? "Enabled"
-                    : "Enable"}
-                </button>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={employeePermissions.downloadPayslip.enabled}
+                    onChange={() => {
+                      handleEmployeePermission("downloadPayslip", "enabled");
+
+                      if (!employeePermissions.downloadPayslip.enabled) {
+                        alert("Download Payslip Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
 
                 <label>
                   View
@@ -559,6 +619,177 @@ const AccessManagement = () => {
                     checked={employeePermissions.downloadPayslip.edit}
                     onChange={() =>
                       handleEmployeePermission("downloadPayslip", "edit")
+                    }
+                  />
+                </label>
+              </div>
+            </div>
+          )}
+
+          {/* HR */}
+          {["HR Manager", "HR Executive"].includes(selectedRole) && (
+            <div className="permission-box">
+              <h4>{selectedRole} Permissions</h4>
+
+              {/* Employee Records */}
+              <div className="permission-row">
+                <span>Employee Records</span>
+
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.employeeRecords.enabled}
+                    onChange={() => {
+                      handleHrPermission("employeeRecords", "enabled");
+
+                      if (!hrPermissions.employeeRecords.enabled) {
+                        alert("Employee Records Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
+
+                <label>
+                  View
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.employeeRecords.view}
+                    onChange={() =>
+                      handleHrPermission("employeeRecords", "view")
+                    }
+                  />
+                </label>
+
+                <label>
+                  Edit
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.employeeRecords.edit}
+                    onChange={() =>
+                      handleHrPermission("employeeRecords", "edit")
+                    }
+                  />
+                </label>
+              </div>
+
+              {/* Leave Management */}
+              <div className="permission-row">
+                <span>Leave Management</span>
+
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.leaveManagement.enabled}
+                    onChange={() => {
+                      handleHrPermission("leaveManagement", "enabled");
+
+                      if (!hrPermissions.leaveManagement.enabled) {
+                        alert("Leave Management Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
+
+                <label>
+                  View
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.leaveManagement.view}
+                    onChange={() =>
+                      handleHrPermission("leaveManagement", "view")
+                    }
+                  />
+                </label>
+
+                <label>
+                  Edit
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.leaveManagement.edit}
+                    onChange={() =>
+                      handleHrPermission("leaveManagement", "edit")
+                    }
+                  />
+                </label>
+              </div>
+
+              {/* Recruitment */}
+              <div className="permission-row">
+                <span>Recruitment</span>
+
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.recruitment.enabled}
+                    onChange={() => {
+                      handleHrPermission("recruitment", "enabled");
+
+                      if (!hrPermissions.recruitment.enabled) {
+                        alert("Recruitment Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
+
+                <label>
+                  View
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.recruitment.view}
+                    onChange={() => handleHrPermission("recruitment", "view")}
+                  />
+                </label>
+
+                <label>
+                  Edit
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.recruitment.edit}
+                    onChange={() => handleHrPermission("recruitment", "edit")}
+                  />
+                </label>
+              </div>
+
+              {/* Performance Reviews */}
+              <div className="permission-row">
+                <span>Performance Reviews</span>
+
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.performanceReviews.enabled}
+                    onChange={() => {
+                      handleHrPermission("performanceReviews", "enabled");
+
+                      if (!hrPermissions.performanceReviews.enabled) {
+                        alert("Performance Reviews Enabled");
+                      }
+                    }}
+                  />
+                  <span className="slider"></span>
+                </label>
+
+                <label>
+                  View
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.performanceReviews.view}
+                    onChange={() =>
+                      handleHrPermission("performanceReviews", "view")
+                    }
+                  />
+                </label>
+
+                <label>
+                  Edit
+                  <input
+                    type="checkbox"
+                    checked={hrPermissions.performanceReviews.edit}
+                    onChange={() =>
+                      handleHrPermission("performanceReviews", "edit")
                     }
                   />
                 </label>

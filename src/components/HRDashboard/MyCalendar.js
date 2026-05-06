@@ -1,54 +1,98 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import "../../styles/MyCalendar.css";
 
 const localizer = momentLocalizer(moment);
 
 function MyCalendar() {
+  const [events, setEvents] = useState([]);
+  const [date, setDate] = useState(new Date());
 
-  const [events, setEvents] = useState([
-    {
-      title: "HR Meeting",
-      start: new Date(2026, 3, 5, 10, 0),
-      end: new Date(2026, 3, 5, 11, 0)
-    },
-    {
-      title: "Project Review",
-      start: new Date(2026, 3, 7, 14, 0),
-      end: new Date(2026, 3, 7, 15, 0)
-    }
-  ]);
+  const theme = localStorage.getItem("theme") || "simple";
 
-    const theme = localStorage.getItem("theme") || "simple";
-    const isSimple = theme === "simple";
-    const isDark = theme === "dark";
-    const isColorful = theme === "colorful";
+  useEffect(() => {
+    loadEvents();
+
+    const interval = setInterval(() => {
+      loadEvents();
+    }, 60000); // every 60 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const loadEvents = () => {
+    Promise.all([
+      fetch("http://localhost:5133/api/meetingscheduler/all").then((res) =>
+        res.json(),
+      ),
+      fetch("http://localhost:5133/api/calendar/events").then((res) =>
+        res.json(),
+      ),
+    ])
+      .then(([meetings, calendarEvents]) => {
+        const dbEvents = meetings.map((meeting) => ({
+          title: meeting.title,
+          start: new Date(`${meeting.date}T${meeting.time}`),
+          end: new Date(`${meeting.date}T${meeting.time}`),
+        }));
+
+        const externalEvents = calendarEvents.map((event) => ({
+          title: event.title,
+          start: new Date(event.start),
+          end: new Date(event.end),
+        }));
+
+        setEvents([...dbEvents, ...externalEvents]);
+      })
+      .catch((error) => console.error("Error loading events:", error));
+  };
+
+  const syncGoogleCalendar = () => {
+    window.location.href = "http://localhost:5133/api/calendar/google-login";
+  };
+
+  const syncOutlookCalendar = () => {
+    window.location.href = "http://localhost:5133/api/calendar/outlook-login";
+  };
+
+  const syncTeamsCalendar = () => {
+    window.location.href = "http://localhost:5133/api/calendar/teams-login";
+  };
 
   return (
+    <div className={`calendar-container theme-${theme}`}>
+      <h2 className="calendar-title">My Calendar</h2>
 
-    <div className
+      {/* Sync Buttons */}
+      <div className="sync-buttons">
+        <button className="google-sync-btn" onClick={syncGoogleCalendar}>
+          Sync Google Calendar
+        </button>
 
-={`calendar-container theme-${theme}`}>
+        <button className="outlook-sync-btn" onClick={syncOutlookCalendar}>
+          Sync Outlook Calendar
+        </button>
 
-    <h2 className
+        <button className="teams-sync-btn" onClick={syncTeamsCalendar}>
+          Sync Teams Meetings
+        </button>
+      </div>
 
-="calendar-title">My Calendar</h2>
-
-    <div className
-
-="calendar-box">
-      <Calendar
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 500 }}
-      />
+      <div className="calendar-box">
+        <Calendar
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          date={date}
+          onNavigate={(newDate) => setDate(newDate)}
+          style={{ height: 500 }}
+        />
+      </div>
     </div>
-
-  </div>
-);
+  );
 }
 
 export default MyCalendar;

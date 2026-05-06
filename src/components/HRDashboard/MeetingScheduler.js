@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/MeetingScheduler.css";
 
 export default function MeetingScheduler() {
-
   const [meetingTitle, setMeetingTitle] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -13,7 +12,16 @@ export default function MeetingScheduler() {
   const isDark = theme === "dark";
   const isColorful = theme === "colorful";
 
-  const handleAddMeeting = () => {
+  /* LOAD MEETINGS FROM DATABASE */
+  useEffect(() => {
+    fetch("http://localhost:5133/api/meetingscheduler/all")
+      .then((res) => res.json())
+      .then((data) => setMeetings(data))
+      .catch((err) => console.error("Error fetching meetings:", err));
+  }, []);
+
+  /* ADD MEETING */
+  const handleAddMeeting = async () => {
     if (!meetingTitle || !date || !time) {
       alert("Please fill all fields");
       return;
@@ -22,11 +30,29 @@ export default function MeetingScheduler() {
     const newMeeting = {
       id: Date.now(),
       title: meetingTitle,
-      date,
-      time
+      date: date,
+      time: time,
     };
 
-    setMeetings([...meetings, newMeeting]);
+    try {
+      const response = await fetch(
+        "http://localhost:5133/api/meetingscheduler/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newMeeting),
+        },
+      );
+
+      if (response.ok) {
+        const savedMeeting = await response.json();
+        setMeetings((prev) => [...prev, savedMeeting]);
+      }
+    } catch (error) {
+      console.error("Error saving meeting:", error);
+    }
 
     setMeetingTitle("");
     setDate("");
@@ -34,37 +60,21 @@ export default function MeetingScheduler() {
   };
 
   return (
-
-    <div className
-
-={`meeting-panel theme-${theme}`}>
-
+    <div className={`meeting-panel theme-${theme}`}>
       {/* BACKGROUND EFFECTS */}
-      <div className
-
-="bg-canvas">
+      <div className="bg-canvas">
         {isDark && (
           <>
-            <div className
-
-="ambient-orb orb-1"></div>
-            <div className
-
-="ambient-orb orb-2"></div>
-            <div className
-
-="ambient-orb orb-3"></div>
-            <div className
-
-="ambient-orb orb-4"></div>
+            <div className="ambient-orb orb-1"></div>
+            <div className="ambient-orb orb-2"></div>
+            <div className="ambient-orb orb-3"></div>
+            <div className="ambient-orb orb-4"></div>
 
             <div
-              className
-
-="bg-glass-layer"
+              className="bg-glass-layer"
               style={{
                 background: "rgba(0,0,0,0.8)",
-                backdropFilter: "blur(100px)"
+                backdropFilter: "blur(100px)",
               }}
             ></div>
           </>
@@ -72,53 +82,27 @@ export default function MeetingScheduler() {
 
         {isColorful && (
           <>
-            <div className
+            <div className="ambient-orb orb-1"></div>
+            <div className="ambient-orb orb-2"></div>
+            <div className="ambient-orb orb-3"></div>
+            <div className="ambient-orb orb-4"></div>
 
-="ambient-orb orb-1"></div>
-            <div className
-
-="ambient-orb orb-2"></div>
-            <div className
-
-="ambient-orb orb-3"></div>
-            <div className
-
-="ambient-orb orb-4"></div>
-
-            <div className
-
-="bg-glass-layer"></div>
+            <div className="bg-glass-layer"></div>
           </>
         )}
       </div>
 
-
-      <div className
-
-="table-panel theme-light">
-
+      <div className="table-panel theme-light">
         {/* HEADER */}
-        <div className
-
-="table-header-row">
+        <div className="table-header-row">
           <div>
-            <div className
-
-="table-title">Meeting Scheduler</div>
-            <div className
-
-="table-subtitle">
-              Schedule and manage meetings
-            </div>
+            <div className="table-title">Meeting Scheduler</div>
+            <div className="table-subtitle">Schedule and manage meetings</div>
           </div>
         </div>
 
-
         {/* FORM */}
-        <div className
-
-="meeting-form">
-
+        <div className="meeting-form">
           <input
             type="text"
             placeholder="Meeting Title"
@@ -139,34 +123,24 @@ export default function MeetingScheduler() {
           />
 
           <button
-            className
-
-="add-btn"
+            className="add-btn"
             style={{
               background: isSimple
                 ? "rgba(250,133,185,0.1)"
                 : isDark
-                ? "rgba(255,255,255,0.1)"
-                : "linear-gradient(to right,#FA85B9,#C387C2)",
-              color: isSimple ? "#FA85B9" : "#fff"
+                  ? "rgba(255,255,255,0.1)"
+                  : "linear-gradient(to right,#FA85B9,#C387C2)",
+              color: isSimple ? "#FA85B9" : "#fff",
             }}
             onClick={handleAddMeeting}
           >
             Add Meeting
           </button>
-
         </div>
 
-
         {/* TABLE */}
-        <div className
-
-="table-wrapper">
-
-          <table className
-
-="styled-table">
-
+        <div className="table-wrapper">
+          <table className="styled-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -177,20 +151,15 @@ export default function MeetingScheduler() {
             </thead>
 
             <tbody>
-
               {meetings.length === 0 ? (
                 <tr>
-                  <td colSpan="4" className
-
-="noData">
+                  <td colSpan="4" className="noData">
                     No meetings scheduled
                   </td>
                 </tr>
               ) : (
                 meetings.map((meeting) => (
-                  <tr key={meeting.id} className
-
-="table-row">
+                  <tr key={meeting.id} className="table-row">
                     <td>{meeting.id}</td>
                     <td>{meeting.title}</td>
                     <td>{meeting.date}</td>
@@ -198,15 +167,10 @@ export default function MeetingScheduler() {
                   </tr>
                 ))
               )}
-
             </tbody>
-
           </table>
-
         </div>
-
       </div>
-
     </div>
   );
 }

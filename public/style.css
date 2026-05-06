@@ -1,3 +1,11 @@
+/* ==========================================================================
+   ITSMYHR — MASTER STYLESHEET
+   Kinsoft Technologies | Elite HRaaS Platform
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES & ROOT SETTINGS
+   -------------------------------------------------------------------------- */
 :root {
   --bg-canvas: #f8fafc;
 
@@ -17,19 +25,23 @@
   --shadow-glow: 0 10px 30px rgba(79, 70, 229, 0.15);
 
   --spring: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  --smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* --------------------------------------------------------------------------
+   2. BASE STYLES & TYPOGRAPHY
+   -------------------------------------------------------------------------- */
 body {
-  background-color: #f8fafc;
-  color: #334155;
-  overflow-x: hidden;
-
   background-color: var(--bg-canvas);
   color: var(--text-body);
   font-family: "Plus Jakarta Sans", sans-serif;
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
+/* --------------------------------------------------------------------------
+   3. GLASSMORPHISM & AMBIENT LAYERS
+   -------------------------------------------------------------------------- */
 .glass-panel {
   background: var(--bg-glass);
   backdrop-filter: blur(24px);
@@ -44,6 +56,7 @@ body {
   inset: 0;
   z-index: -1;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .orb {
@@ -89,7 +102,9 @@ body {
   }
 }
 
-/* Custom Scrollbar for AI Matrix List */
+/* --------------------------------------------------------------------------
+   4. CUSTOM SCROLLBAR
+   -------------------------------------------------------------------------- */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -104,14 +119,20 @@ body {
   background: #94a3b8;
 }
 
-/* Navigation & Glassmorphism */
+/* --------------------------------------------------------------------------
+   5. NAVIGATION & GLASS EFFECTS
+   -------------------------------------------------------------------------- */
 .glass-nav {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s ease;
 }
 
-/* App Routing */
+/* --------------------------------------------------------------------------
+   6. APP ROUTING & PAGE TRANSITIONS
+   -------------------------------------------------------------------------- */
 .page-view {
   display: none;
   opacity: 0;
@@ -122,7 +143,9 @@ body {
   opacity: 1;
 }
 
-/* Split Hero Slideshow */
+/* --------------------------------------------------------------------------
+   7. HERO SLIDESHOW ANIMATIONS
+   -------------------------------------------------------------------------- */
 .hero-slideshow {
   position: relative;
   width: 100%;
@@ -131,6 +154,7 @@ body {
   overflow: hidden;
   box-shadow: 0 25px 50px -12px rgba(2, 132, 199, 0.2);
 }
+
 .hero-slide {
   position: absolute;
   inset: 0;
@@ -142,6 +166,7 @@ body {
     transform 6s linear;
   transform: scale(1.05);
 }
+
 .hero-slide.active {
   opacity: 1;
   transform: scale(1);
@@ -157,39 +182,46 @@ body {
   z-index: 3;
   background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 30px;
   border-radius: 20px;
   border-left: 6px solid #0ea5e9;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  transition: all 0.6s var(--spring);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
+
 .hero-slide.active .slide-content-wrapper {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.3s;
 }
 
-/* Dynamic 3D HR Character Widget */
+/* --------------------------------------------------------------------------
+   8. 3D HR AVATAR WIDGET
+   -------------------------------------------------------------------------- */
 .hr-avatar-widget {
   position: fixed;
   z-index: 90;
   display: flex;
   flex-direction: column;
   pointer-events: none;
-  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  transition: all 0.8s var(--spring);
 }
+
 .pos-br {
   bottom: 30px;
   right: 30px;
   align-items: flex-end;
 }
+
 .pos-bl {
   bottom: 30px;
   left: 30px;
   align-items: flex-start;
 }
+
 .pos-mr {
   bottom: 40%;
   right: 30px;
@@ -215,13 +247,16 @@ body {
   position: relative;
   margin-bottom: 10px;
 }
+
 .pos-br .hr-bubble,
 .pos-mr .hr-bubble {
   border-bottom-right-radius: 4px;
 }
+
 .pos-bl .hr-bubble {
   border-bottom-left-radius: 4px;
 }
+
 .hr-bubble.show {
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -232,8 +267,8 @@ body {
   width: 170px;
   height: auto;
   object-fit: contain;
-  mix-blend-mode: multiply; /* Magically removes the white background of the JPG/AVIF */
-  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.2)) contrast(1.05); /* Adds 3D depth to the cutout */
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.2)) contrast(1.05);
   pointer-events: auto;
   cursor: pointer;
   transition: all 0.5s ease;
@@ -241,6 +276,7 @@ body {
   border: none;
   border-radius: 0;
 }
+
 .hr-label {
   font-weight: 900;
   text-transform: uppercase;
@@ -253,20 +289,23 @@ body {
     0 0 20px rgba(255, 255, 255, 1);
 }
 
-/* Multicolour Feature Tiles */
+/* --------------------------------------------------------------------------
+   9. FEATURE TILES — MULTICOLOUR INTERACTIVE
+   -------------------------------------------------------------------------- */
 .feature-tile {
   background: #ffffff;
   border-radius: 24px;
   padding: 40px;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  transition: all 0.4s var(--spring);
   border: 1px solid #f1f5f9;
-  box-shadow: var(--shadow-tile);
+  box-shadow: var(--shadow-tile, 0 10px 30px -5px rgba(15, 23, 42, 0.08));
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
+
 .feature-tile::before {
   content: "";
   position: absolute;
@@ -275,6 +314,7 @@ body {
   transition: opacity 0.4s;
   z-index: 0;
 }
+
 .feature-tile > * {
   position: relative;
   z-index: 1;
@@ -282,9 +322,13 @@ body {
 
 .feature-tile:hover {
   transform: translateY(-10px);
-  box-shadow: var(--shadow-tile-hover);
+  box-shadow: var(
+    --shadow-tile-hover,
+    0 25px 50px -12px rgba(15, 23, 42, 0.25)
+  );
   border-color: transparent;
 }
+
 .tile-icon {
   width: 70px;
   height: 70px;
@@ -296,6 +340,7 @@ body {
   margin-bottom: 24px;
   transition: all 0.4s ease;
 }
+
 .feature-tile:hover .tile-icon {
   transform: scale(1.15) rotate(5deg);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
@@ -367,17 +412,22 @@ body {
   color: #ffffff;
 }
 
-/* AI Board Styles */
+/* --------------------------------------------------------------------------
+   10. AI BOARD — DIAGNOSTIC MATRIX
+   -------------------------------------------------------------------------- */
 .ai-tab {
   transition: all 0.3s ease;
   border: 1px solid transparent;
+  cursor: pointer;
 }
+
 .ai-tab.active {
   background: #ffffff;
   border-color: #e2e8f0;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
   transform: translateX(5px);
 }
+
 .ai-tab.active .tab-icon {
   background: #0284c7;
   color: #ffffff;
@@ -395,11 +445,14 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
+  border-radius: 24px;
 }
+
 .ai-scanner-overlay.scanning {
   opacity: 1;
   pointer-events: all;
 }
+
 .scan-line {
   width: 100%;
   height: 3px;
@@ -408,6 +461,7 @@ body {
   position: absolute;
   animation: scanAnim 1.2s infinite linear;
 }
+
 @keyframes scanAnim {
   0% {
     top: 0;
@@ -422,11 +476,13 @@ body {
     opacity: 0;
   }
 }
+
 .ai-content {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s var(--spring);
 }
+
 .ai-content.show {
   opacity: 1;
   transform: translateY(0);
@@ -437,9 +493,11 @@ body {
   display: none;
   animation: fadeIn 0.5s ease forwards;
 }
+
 .ai-content.active {
   display: flex;
-} /* Restored active class definition */
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -451,13 +509,15 @@ body {
   }
 }
 
-/* Modals */
-/* Modal / Popup System */
+/* --------------------------------------------------------------------------
+   11. MODAL SYSTEM
+   -------------------------------------------------------------------------- */
 .modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(15, 23, 42, 0.3);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 100;
   display: flex;
   justify-content: center;
@@ -467,6 +527,7 @@ body {
   transition: all 0.4s var(--smooth);
   padding: 20px;
 }
+
 .modal-overlay.active {
   opacity: 1;
   visibility: visible;
@@ -477,6 +538,7 @@ body {
   max-width: 900px;
   background: var(--bg-glass-heavy);
   backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   border: 1px solid white;
   border-radius: 32px;
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.1);
@@ -488,6 +550,7 @@ body {
   flex-direction: column;
   max-height: 90vh;
 }
+
 .modal-overlay.active .modal-content {
   transform: translateY(0) scale(1);
   opacity: 1;
@@ -512,6 +575,7 @@ body {
   z-index: 10;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
+
 .close-btn:hover {
   background: #f1f5f9;
   transform: rotate(90deg);
@@ -526,6 +590,7 @@ body {
   overflow: hidden;
   margin-top: 8px;
 }
+
 .info-bar-fill {
   height: 100%;
   background: var(--brand-gradient);
@@ -534,14 +599,18 @@ body {
   transition: width 1s var(--smooth);
 }
 
+.modal-bar {
+  transition: width 1.2s var(--spring) 0.2s;
+}
+
 .ai-tab.active {
   background: white;
   color: black;
 }
 
-/* ==========================================================================
-           ANIMATED CSS ILLUSTRATIONS   
-           ========================================================================== */
+/* --------------------------------------------------------------------------
+   12. ANIMATED CSS ILLUSTRATIONS
+   -------------------------------------------------------------------------- */
 
 /* AI Legal Scanner Animation */
 .mock-contract {
@@ -553,6 +622,7 @@ body {
   overflow: hidden;
   height: 350px;
 }
+
 .laser-scanner {
   position: absolute;
   left: 0;
@@ -563,6 +633,7 @@ body {
   animation: scan 4s infinite ease-in-out;
   z-index: 10;
 }
+
 .laser-scanner::after {
   content: "";
   position: absolute;
@@ -573,6 +644,7 @@ body {
   background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.15));
   transform: translateY(-100%);
 }
+
 @keyframes scan {
   0%,
   100% {
@@ -603,6 +675,7 @@ body {
   animation: popupRisk 4s infinite var(--spring);
   z-index: 20;
 }
+
 .mock-resolve {
   position: absolute;
   top: 45%;
@@ -618,6 +691,7 @@ body {
   animation: popupResolve 4s infinite var(--spring);
   z-index: 20;
 }
+
 @keyframes popupRisk {
   0%,
   35% {
@@ -635,6 +709,7 @@ body {
     transform: translateY(-10px);
   }
 }
+
 @keyframes popupResolve {
   0%,
   70% {
@@ -665,6 +740,7 @@ body {
   position: relative;
   overflow: hidden;
 }
+
 .comp-progress-bg {
   width: 40px;
   height: 40px;
@@ -672,6 +748,7 @@ body {
   border: 4px solid #f1f5f9;
   position: relative;
 }
+
 .comp-progress-fill {
   position: absolute;
   top: -4px;
@@ -685,6 +762,7 @@ body {
   transform: rotate(-45deg);
   opacity: 0;
 }
+
 .comp-card.animate-c1 .comp-progress-fill {
   animation: fillCircle 3s infinite ease-out 0.5s;
 }
@@ -694,6 +772,7 @@ body {
 .comp-card.animate-c3 .comp-progress-fill {
   animation: fillCircle 3s infinite ease-out 1.5s;
 }
+
 @keyframes fillCircle {
   0% {
     transform: rotate(-45deg);
@@ -719,9 +798,11 @@ body {
   display: none;
   animation: slideUpFade 0.5s var(--spring) forwards;
 }
+
 .ai-tab-content.active {
   display: block;
 }
+
 @keyframes slideUpFade {
   from {
     opacity: 0;
@@ -732,14 +813,17 @@ body {
     transform: translateY(0);
   }
 }
+
 .ai-tab-btn {
   transition: all 0.3s ease;
 }
+
 .ai-tab-btn.active {
   background: white;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
   border-color: rgba(99, 102, 241, 0.3);
 }
+
 .ai-tab-btn.active .icon-bg {
   background: var(--brand-main);
   color: white;
@@ -749,4 +833,452 @@ body {
 .chart-bar-fill {
   width: 0;
   transition: width 1.5s var(--smooth);
+}
+
+/* Utility badge for modals */
+.badge {
+  display: inline-block;
+  padding: 0.375rem 0.875rem;
+  background: var(--brand-light);
+  color: var(--brand-main);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Code font for technical displays */
+.code-font {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* ==========================================================================
+   📱 MOBILE RESPONSIVENESS ADD-ONS
+   (Appended — Desktop experience 100% preserved)
+   ========================================================================== */
+
+/* Base mobile fixes */
+@media (max-width: 767px) {
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+    font-size: 16px;
+  }
+
+  /* Navigation: Show hamburger on mobile */
+  .glass-nav {
+    padding: 0.75rem 1rem !important;
+  }
+
+  .glass-nav .max-w-7xl {
+    padding: 0 !important;
+  }
+
+  /* Hide desktop nav links on mobile */
+  .glass-nav .hidden.md\:flex {
+    display: none !important;
+  }
+
+  /* Mobile menu button styles */
+  .mobile-menu-btn {
+    display: block !important;
+    background: none;
+    border: none;
+    color: #0284c7;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 60;
+  }
+
+  /* Hero Section */
+  section[style*="min-h-[85vh]"] {
+    min-height: auto !important;
+    padding-top: 6rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  h1.text-5xl,
+  h1.text-4xl {
+    font-size: 2.25rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h1.md\:text-7xl,
+  h1.md\:text-5xl {
+    font-size: 2.5rem !important;
+  }
+
+  p.text-xl {
+    font-size: 1.125rem !important;
+  }
+
+  /* Hero slideshow */
+  .hero-slideshow {
+    max-height: 300px;
+    border-radius: 1.5rem !important;
+  }
+
+  .hero-slide {
+    background-size: cover !important;
+    background-position: center !important;
+    min-height: 250px !important;
+  }
+
+  .slide-content-wrapper {
+    padding: 1rem !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    right: 20px !important;
+    border-radius: 16px !important;
+  }
+
+  .slide-content-wrapper h3 {
+    font-size: 1.25rem !important;
+  }
+
+  .slide-content-wrapper p {
+    font-size: 0.95rem !important;
+  }
+
+  /* Service Comparison Cards */
+  .grid.grid-cols-1.md\:grid-cols-2 {
+    gap: 1.5rem !important;
+  }
+
+  .p-8.rounded-3xl {
+    padding: 1.5rem !important;
+    border-radius: 1.5rem !important;
+  }
+
+  /* AI Matrix Section */
+  /* AI Matrix Section - Fixed for Mobile */
+  /* ==========================================================================
+     AI MATRIX SECTION - FIXED MOBILE LAYOUT
+     ========================================================================== */
+  @media (max-width: 767px) {
+    /* 1. The Container: Force Horizontal Scroll, Remove Vertical Leaks */
+    #industry-tabs {
+      display: flex !important; /* Enforce Flexbox */
+      flex-direction: row !important; /* Horizontal row */
+      flex-wrap: nowrap !important; /* CRITICAL: Prevents wrapping to next line */
+      overflow-x: auto !important; /* Enable Horizontal Scrolling */
+      overflow-y: hidden !important; /* FIXED: Must be hidden, not visible */
+
+      height: auto !important;
+      max-height: none !important; /* Remove previous height constraints */
+
+      padding: 1rem !important;
+      padding-bottom: 1.5rem !important; /* Extra space for scrollbar */
+      gap: 0.75rem !important; /* Spacing between items */
+
+      /* iOS Smooth Scrolling */
+      -webkit-overflow-scrolling: touch;
+
+      /* Custom Scrollbar for Firefox */
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+    }
+
+    /* 2. Custom Scrollbar Styling (WebKit/Blink) */
+    #industry-tabs::-webkit-scrollbar {
+      height: 6px;
+      width: 100%;
+    }
+    #industry-tabs::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+    #industry-tabs::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 10px;
+    }
+
+    /* 3. The Tabs: Prevent Shrinking & Overlap */
+    /* Target the direct children of the tabs container */
+    #industry-tabs > * {
+      flex: 0 0 auto !important; /* Don't Grow, Don't Shrink, Base Auto */
+      min-width: 150px !important; /* Fixed width ensures uniformity */
+      max-width: 160px !important;
+
+      display: flex !important; /* Use Flex, not inline-flex */
+      flex-direction: column; /* Icon on top, text on bottom */
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      padding: 1rem !important;
+      border-radius: 1rem !important; /* Rounded pills */
+      background: white !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+      cursor: pointer;
+      margin: 0 !important;
+    }
+
+    /* 4. Active State for Selected Tab */
+    #industry-tabs > .active {
+      border-color: #4f46e5 !important; /* Brand border */
+      background: #eef2ff !important; /* Brand background */
+      color: #4f46e5 !important;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15) !important;
+    }
+
+    /* 5. Content Styling inside Tabs */
+    #industry-tabs > * i {
+      font-size: 1.5rem !important;
+      margin-bottom: 0.5rem !important;
+      display: block;
+    }
+
+    #industry-tabs > * span {
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      line-height: 1.2;
+      display: block;
+      word-wrap: break-word; /* Allow text to wrap if long */
+    }
+
+    /* 6. Ensure Output Area is Ready */
+    .lg\:col-span-8.bg-slate-900 {
+      padding: 1.5rem !important;
+      border-radius: 1.5rem !important;
+      min-height: 350px !important; /* Reduced min-height for better mobile fit */
+      margin-top: 1rem !important;
+    }
+
+    #ai-output {
+      min-height: 250px !important;
+      max-height: none !important;
+      overflow-y: auto;
+    }
+  }
+
+  /* Extra small mobile - under 480px */
+  @media (max-width: 479px) {
+    #industry-tabs .ai-tab,
+    #industry-tabs > div,
+    #industry-tabs button {
+      min-width: 140px !important;
+      max-width: 160px !important;
+      padding: 0.75rem !important;
+      font-size: 0.875rem !important;
+    }
+
+    #industry-tabs {
+      gap: 0.5rem !important;
+      padding: 0.5rem !important;
+    }
+  }
+
+  /* Feature Tiles */
+  .feature-tile {
+    padding: 1.5rem !important;
+    min-height: auto !important;
+    border-radius: 1.5rem !important;
+  }
+
+  .tile-icon {
+    width: 56px !important;
+    height: 56px !important;
+    font-size: 1.75rem !important;
+    margin-bottom: 1rem !important;
+    border-radius: 16px !important;
+  }
+
+  .feature-tile h3 {
+    font-size: 1.25rem !important;
+  }
+
+  .feature-tile p {
+    font-size: 0.95rem !important;
+  }
+
+  /* Contact Form */
+  .grid.grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .bg-slate-800\/50.backdrop-blur-md {
+    padding: 2rem 1.5rem !important;
+    border-radius: 2rem !important;
+  }
+
+  form.bg-white {
+    padding: 1.5rem !important;
+    border-radius: 1.5rem !important;
+  }
+
+  /* Modals */
+  .modal-content {
+    width: 95% !important;
+    max-width: none !important;
+    max-height: 90vh !important;
+    border-radius: 1.25rem !important;
+    margin: 0 auto !important;
+  }
+
+  .modal-content .p-10 {
+    padding: 1.5rem !important;
+  }
+
+  .modal-content .text-4xl {
+    font-size: 1.5rem !important;
+  }
+
+  .modal-content .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  .close-btn {
+    top: 16px !important;
+    right: 16px !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* Floating HR Avatar */
+  .hr-avatar-widget {
+    bottom: 1rem !important;
+    right: 1rem !important;
+    transform: scale(0.85) !important;
+    transform-origin: bottom right;
+  }
+
+  .hr-avatar-img {
+    width: 140px !important;
+  }
+
+  .hr-bubble {
+    display: none !important;
+  }
+
+  .hr-label {
+    font-size: 13px !important;
+  }
+
+  /* Footer */
+  .grid.grid-cols-1.md\:grid-cols-4 {
+    gap: 2rem !important;
+    text-align: center;
+  }
+
+  .md\:col-span-2 {
+    grid-column: span 1 !important;
+  }
+
+  .flex.gap-4 {
+    justify-content: center !important;
+  }
+
+  .footer-brand-text {
+    text-align: center !important;
+  }
+
+  /* Utility: Prevent tap highlight */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Ensure buttons are touch-friendly */
+  button,
+  a[role="button"],
+  .feature-tile,
+  .ai-tab,
+  .close-btn {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Improve form input touch targets */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    padding: 0.875rem 1rem !important;
+  }
+}
+
+/* Small mobile adjustments (under 480px) */
+@media (max-width: 479px) {
+  h1.text-5xl {
+    font-size: 1.875rem !important;
+  }
+
+  .text-4xl.font-extrabold {
+    font-size: 1.5rem !important;
+  }
+
+  .text-3xl {
+    font-size: 1.375rem !important;
+  }
+
+  .hero-slide {
+    min-height: 200px !important;
+  }
+
+  .slide-content-wrapper h3 {
+    font-size: 1.125rem !important;
+  }
+
+  .slide-content-wrapper p {
+    font-size: 0.875rem !important;
+  }
+
+  .hr-avatar-widget {
+    transform: scale(0.75) !important;
+  }
+
+  .hr-avatar-img {
+    width: 120px !important;
+  }
+
+  .feature-tile {
+    padding: 1.25rem !important;
+  }
+
+  .tile-icon {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 1.5rem !important;
+  }
+
+  /* Compact modals on very small screens */
+  .modal-content {
+    width: 98% !important;
+    border-radius: 1rem !important;
+  }
+
+  .modal-content .p-10 {
+    padding: 1.25rem !important;
+  }
+}
+
+/* Fix for viewport height on mobile browsers (iOS Safari) */
+@supports (-webkit-touch-callout: none) {
+  .min-h-\[85vh\] {
+    min-height: -webkit-fill-available;
+  }
+
+  .modal-content {
+    max-height: -webkit-fill-available;
+  }
+}
+
+/* Smooth scroll fix for mobile with momentum */
+html.scroll-smooth {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent overscroll bounce on mobile (optional) */
+@media (max-width: 767px) {
+  body {
+    overscroll-behavior-y: contain;
+  }
 }

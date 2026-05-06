@@ -1,78 +1,146 @@
 /* Page Container */
-.calendar-container{
-  padding:25px;
-  background:#f5f7fb;
-  min-height:100vh;
+.calendar-container {
+  padding: 25px;
+  background: #f5f7fb;
+  min-height: 100vh;
   font-family: "Segoe UI", sans-serif;
 }
 
 /* Title */
-.calendar-title{
-  text-align:center;
-  font-size:24px;
-  font-weight:600;
-  color:#333;
-  margin-bottom:20px;
+.calendar-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 /* Calendar Box */
-.calendar-box{
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+.calendar-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Toolbar */
-.rbc-toolbar{
-  margin-bottom:15px;
+.rbc-toolbar {
+  margin-bottom: 15px;
 }
 
-.rbc-toolbar button{
-  background:#007bff;
-  color:white;
-  border:none;
-  padding:6px 12px;
-  border-radius:6px;
-  cursor:pointer;
-  font-size:14px;
-  transition:0.2s;
+.rbc-toolbar button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
 }
 
-.rbc-toolbar button:hover{
-  background:#0056b3;
+.rbc-toolbar button:hover {
+  background: #0056b3;
 }
 
 /* Today button highlight */
-.rbc-toolbar button.rbc-active{
-  background:#28a745;
+.rbc-toolbar button.rbc-active {
+  background: #28a745;
 }
 
 /* Calendar Header */
-.rbc-header{
-  background:#f0f4ff;
-  font-weight:600;
-  padding:8px;
-  text-align:center;
-  color:#333;
+.rbc-header {
+  background: #f0f4ff;
+  font-weight: 600;
+  padding: 8px;
+  text-align: center;
+  color: #333;
 }
 
 /* Events */
-.rbc-event{
-  background:linear-gradient(135deg,#007bff,#4a90e2);
-  border:none;
-  border-radius:6px;
-  padding:4px;
-  font-size:13px;
+.rbc-event {
+  background: linear-gradient(135deg, #007bff, #4a90e2);
+  border: none;
+  border-radius: 6px;
+  padding: 4px;
+  font-size: 13px;
 }
 
 /* Date cell hover */
-.rbc-day-bg:hover{
-  background:#f1f7ff;
+.rbc-day-bg:hover {
+  background: #f1f7ff;
 }
 
 /* Month view border */
-.rbc-month-view{
-  border-radius:8px;
-  overflow:hidden;
+.rbc-month-view {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* CONTAINER */
+.sync-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* COMMON BUTTON STYLE */
+.sync-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* GOOGLE BUTTON */
+.google-sync-btn {
+  background: #ffffff;
+  color: #444;
+  border: 1px solid #dadce0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.google-sync-btn:hover {
+  background: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* OUTLOOK BUTTON */
+.outlook-sync-btn {
+  background: #0078d4;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.outlook-sync-btn:hover {
+  background: #106ebe;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18);
+}
+
+.teams-sync-btn {
+  background: linear-gradient(135deg, #6264a7, #464775);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  margin-left: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.teams-sync-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
