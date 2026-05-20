@@ -15,12 +15,32 @@ function MyCalendar() {
   useEffect(() => {
     loadEvents();
 
+    const params = new URLSearchParams(window.location.search);
+    const googleStatus = params.get("google");
+    const outlookStatus = params.get("outlook");
+
+    if (googleStatus === "success") {
+      alert("Google Connected Successfully");
+      window.location.replace("/planner/my-calendar");
+    }
+
+    if (outlookStatus === "success") {
+      alert("Outlook Connected Successfully");
+      window.location.replace("/planner/my-calendar");
+    }
+
     const interval = setInterval(() => {
       loadEvents();
-    }, 60000); // every 60 seconds
+    }, 60000);
 
     return () => clearInterval(interval);
   }, []);
+
+  const eventStyleGetter = (event) => {
+    return {
+      className: event.className,
+    };
+  };
 
   const loadEvents = () => {
     Promise.all([
@@ -32,17 +52,27 @@ function MyCalendar() {
       ),
     ])
       .then(([meetings, calendarEvents]) => {
-        const dbEvents = meetings.map((meeting) => ({
-          title: meeting.title,
-          start: new Date(`${meeting.date}T${meeting.time}`),
-          end: new Date(`${meeting.date}T${meeting.time}`),
-        }));
+        const now = new Date();
 
-        const externalEvents = calendarEvents.map((event) => ({
-          title: event.title,
-          start: new Date(event.start),
-          end: new Date(event.end),
-        }));
+        const dbEvents = meetings.map((meeting) => {
+          const start = new Date(`${meeting.date}T${meeting.time}`);
+          return {
+            title: meeting.title,
+            start: start,
+            end: start,
+            className: start < now ? "past-event" : "future-event",
+          };
+        });
+
+        const externalEvents = calendarEvents.map((event) => {
+          const start = new Date(event.start);
+          return {
+            title: event.title,
+            start: start,
+            end: new Date(event.end),
+            className: start < now ? "past-event" : "future-event",
+          };
+        });
 
         setEvents([...dbEvents, ...externalEvents]);
       })
@@ -76,7 +106,7 @@ function MyCalendar() {
         </button>
 
         <button className="teams-sync-btn" onClick={syncTeamsCalendar}>
-          Sync Teams Meetings
+          Sync Teams Calendar
         </button>
       </div>
 
@@ -88,6 +118,7 @@ function MyCalendar() {
           endAccessor="end"
           date={date}
           onNavigate={(newDate) => setDate(newDate)}
+          eventPropGetter={eventStyleGetter}
           style={{ height: 500 }}
         />
       </div>

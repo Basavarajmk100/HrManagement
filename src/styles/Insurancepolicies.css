@@ -251,8 +251,6 @@
   color: #6b7280;
 }
 
-/*
-
 /* ================================
    BACKGROUND EFFECTS
 ================================ */
@@ -414,4 +412,144 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+/* ===== ISSUE INSURANCE MODAL ===== */
+
+/* Overlay background */
+.insurance-panel .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Modal box */
+.insurance-panel .modal-box {
+  background: #ffffff;
+  width: 420px;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  animation: modalFade 0.25s ease;
+  text-align: center;
+}
+
+/* Title */
+.insurance-panel .modal-box h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Employee text */
+.insurance-panel .modal-box p {
+  margin-bottom: 25px;
+  font-size: 15px;
+  color: #555;
+}
+
+.insurance-panel .modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Common button style */
+.insurance-panel .cancel-btn,
+.insurance-panel .submit-btn {
+  width: 110px; /* same width */
+  height: 34px; /* same height */
+  flex: none; /* prevent stretching */
+  border-radius: 6px;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cancel button */
+.insurance-panel .cancel-btn {
+  background: #e11d48;
+  color: white;
+}
+
+.insurance-panel .cancel-btn:hover {
+  background: #be123c;
+}
+
+/* Issue button */
+.insurance-panel .submit-btn {
+  background: #16a34a;
+  color: white;
+}
+
+.insurance-panel .submit-btn:hover {
+  background: #15803d;
+}
+
+/* Smooth animation */
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Compact Modal Form */
+.insurance-panel .modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+/* Labels */
+.insurance-panel .modal-form label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Inputs & Select */
+.insurance-panel .modal-form input,
+.insurance-panel .modal-form select {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #9ca3af; /* darker border */
+  font-size: 13px;
+  background: #f3f4f6; /* light grey so it shows */
+  transition: 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hover */
+.insurance-panel .modal-form input:hover,
+.insurance-panel .modal-form select:hover {
+  border-color: #6b7280;
+}
+
+/* Focus */
+.insurance-panel .modal-form input:focus,
+.insurance-panel .modal-form select:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+  outline: none;
 }

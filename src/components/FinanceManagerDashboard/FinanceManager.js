@@ -1,67 +1,63 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Building2,
   Users,
-  Wallet,
-  LogOut,
+  UserPlus,
+  Bed,
   Bell,
-  Search,
+  Crown,
+  LogOut,
+  SquareDashed,
+  Palette,
+  Moon,
   MoreVertical,
   ArrowUpRight,
+  Search,
   ArrowDownRight,
-  Crown,
-  Palette,
-  SquareDashed,
-  Moon,
-  Calendar,
-  CreditCard,
-  Shield,
-  Activity,
-  Image,
-  ClipboardList,
-  CalendarDays,
-  TrendingUp,
-  GitBranch,
-  CalendarCheck,
-  BookOpen,
-  Receipt,
-  BarChart3,
   FileText,
+  User,
+  ReceiptText,
+  CalendarDays,
+  ClipboardCheck,
+  ShieldCheck,
+  ClipboardList,
+  Calendar,
+  DollarSign,
+  Wallet,
+  Receipt,
+  BookOpen,
   Scale,
-  UserPlus,
-  CheckSquare,
-  UserCheck,
+  BarChart3,
+  Settings,
+  Building2,
+  Hash,
+  Mail,
 } from "lucide-react";
 
 import {
   ResponsiveContainer,
-  LineChart,
-  Line,
   BarChart,
   Bar,
-  PieChart,
-  Pie,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
 } from "recharts";
 
-import "../../styles/ProviderDashboard.css";
+import "../../styles/ProviderDashboard.css"; // Keep same CSS as provider
 
 // ==========================================
-// 2. THEME CONFIG & DATA
+// DATA
 // ==========================================
-
 const STATS_DATA = [
   {
     id: 1,
-    label: "Total Employees",
-    value: "3",
-    change: "+12%",
+    label: "Total Payroll Processed",
+    value: 480000,
+    change: "+20%",
     isUp: true,
-    icon: Building2,
-    path: "/staffdetails",
+    icon: UserPlus,
     themeColors: {
       simple: {
         color: "#FA85B9",
@@ -91,11 +87,11 @@ const STATS_DATA = [
   },
   {
     id: 2,
-    label: "Employees on Leave",
-    value: "175",
-    change: "+5%",
-    isUp: true,
-    icon: Users,
+    label: "Pending Reimbursements",
+    value: 12,
+    change: "-10%",
+    isUp: false,
+    icon: Bed,
     themeColors: {
       simple: {
         color: "#5EA8E6",
@@ -125,11 +121,11 @@ const STATS_DATA = [
   },
   {
     id: 3,
-    label: "New Joinees",
-    value: "₹40,000",
-    change: "-2%",
-    isUp: false,
-    icon: Wallet,
+    label: "Total Expenses",
+    value: 18,
+    change: "+15%",
+    isUp: true,
+    icon: Users,
     themeColors: {
       simple: {
         color: "#C387C2",
@@ -157,14 +153,13 @@ const STATS_DATA = [
       },
     },
   },
-
   {
     id: 4,
-    label: "Pending Leave Requests",
-    value: 5,
-    change: "+5%",
+    label: "Budget Remaining",
+    value: 0,
+    change: "0%",
     isUp: true,
-    icon: Users,
+    icon: Calendar,
     themeColors: {
       simple: {
         color: "#5CC2C6",
@@ -193,169 +188,91 @@ const STATS_DATA = [
     },
   },
 ];
-// ==========================================
-// HR DASHBOARD - LEAVE APPROVALS DATA
-// ==========================================
-const LEAVES_DATA = [
+
+const LEAVE_REQUESTS = [
   {
-    id: "L001",
-    name: "Basavaraj Patil",
-    department: "Engineering",
-    leaveType: "Casual Leave",
-    from: "2026-03-01",
-    to: "2026-03-03",
-    status: "Pending", // Could be Pending / Approved / Rejected
-    colors: {
-      simple: {
-        badgeBg: "rgba(250, 133, 185, 0.15)",
-        badgeText: "#C13674",
-        actionHoverBg: "rgba(250,133,185,0.1)",
-        actionHoverColor: "#FA85B9",
-      },
-      colorful: {
-        badgeBg: "rgba(250, 133, 185, 0.2)",
-        badgeText: "#C13674",
-        actionHoverBg: "rgba(250,133,185,0.1)",
-        actionHoverColor: "#FA85B9",
-      },
-      dark: {
-        badgeBg: "rgba(225, 29, 72, 0.15)",
-        badgeText: "#FECDD3",
-        actionHoverBg: "rgba(255,255,255,0.1)",
-        actionHoverColor: "#ffffff",
-      },
-    },
-  },
-  {
-    id: "L002",
-    name: "Nayana Kulkarni",
-    department: "HR",
-    leaveType: "Sick Leave",
-    from: "2026-03-05",
-    to: "2026-03-06",
+    id: 101,
+    type: "Sick Leave",
+    from: "2025-09-10",
+    to: "2025-09-12",
     status: "Approved",
     colors: {
       simple: {
-        badgeBg: "rgba(92, 194, 198, 0.15)",
-        badgeText: "#2B8B8F",
-        actionHoverBg: "rgba(250,133,185,0.1)",
-        actionHoverColor: "#FA85B9",
+        badgeBg: "rgba(16,185,129,0.15)",
+        badgeText: "#10B981",
+        dueText: "#10B981",
       },
       colorful: {
-        badgeBg: "rgba(92, 194, 198, 0.2)",
-        badgeText: "#2B8B8F",
-        actionHoverBg: "rgba(94,168,230,0.1)",
-        actionHoverColor: "#5EA8E6",
+        badgeBg: "rgba(16,185,129,0.2)",
+        badgeText: "#10B981",
+        dueText: "#10B981",
       },
       dark: {
-        badgeBg: "rgba(148, 163, 184, 0.15)",
-        badgeText: "#F8FAFC",
-        actionHoverBg: "rgba(255,255,255,0.1)",
-        actionHoverColor: "#ffffff",
+        badgeBg: "rgba(16,185,129,0.15)",
+        badgeText: "#10B981",
+        dueText: "#10B981",
       },
     },
   },
   {
-    id: "L003",
-    name: "Rahul Deshmukh",
-    department: "Finance",
-    leaveType: "Casual Leave",
-    from: "2026-03-08",
-    to: "2026-03-09",
-    status: "Rejected",
-    colors: {
-      simple: {
-        badgeBg: "rgba(94, 168, 230, 0.15)",
-        badgeText: "#2872AC",
-        actionHoverBg: "rgba(250,133,185,0.1)",
-        actionHoverColor: "#FA85B9",
-      },
-      colorful: {
-        badgeBg: "rgba(94, 168, 230, 0.2)",
-        badgeText: "#2872AC",
-        actionHoverBg: "rgba(94,168,230,0.1)",
-        actionHoverColor: "#5EA8E6",
-      },
-      dark: {
-        badgeBg: "rgba(37, 99, 235, 0.15)",
-        badgeText: "#BFDBFE",
-        actionHoverBg: "rgba(255,255,255,0.1)",
-        actionHoverColor: "#ffffff",
-      },
-    },
-  },
-  {
-    id: "L004",
-    name: "Sneha Patil",
-    department: "Marketing",
-    leaveType: "Sick Leave",
-    from: "2026-03-10",
-    to: "2026-03-12",
+    id: 102,
+    type: "Casual Leave",
+    from: "2025-09-15",
+    to: "2025-09-16",
     status: "Pending",
     colors: {
       simple: {
-        badgeBg: "rgba(250, 133, 185, 0.15)",
-        badgeText: "#C13674",
-        actionHoverBg: "rgba(250,133,185,0.1)",
-        actionHoverColor: "#FA85B9",
+        badgeBg: "rgba(245,158,11,0.15)",
+        badgeText: "#F59E0B",
+        dueText: "#F59E0B",
       },
       colorful: {
-        badgeBg: "rgba(250, 133, 185, 0.2)",
-        badgeText: "#C13674",
-        actionHoverBg: "rgba(250,133,185,0.1)",
-        actionHoverColor: "#FA85B9",
+        badgeBg: "rgba(245,158,11,0.2)",
+        badgeText: "#F59E0B",
+        dueText: "#F59E0B",
       },
       dark: {
-        badgeBg: "rgba(225, 29, 72, 0.15)",
-        badgeText: "#FECDD3",
-        actionHoverBg: "rgba(255,255,255,0.1)",
-        actionHoverColor: "#ffffff",
+        badgeBg: "rgba(245,158,11,0.15)",
+        badgeText: "#F59E0B",
+        dueText: "#F59E0B",
+      },
+    },
+  },
+  {
+    id: 103,
+    type: "Annual Leave",
+    from: "2025-09-20",
+    to: "2025-09-25",
+    status: "Rejected",
+    colors: {
+      simple: {
+        badgeBg: "rgba(239,68,68,0.15)",
+        badgeText: "#EF4444",
+        dueText: "#EF4444",
+      },
+      colorful: {
+        badgeBg: "rgba(239,68,68,0.2)",
+        badgeText: "#EF4444",
+        dueText: "#EF4444",
+      },
+      dark: {
+        badgeBg: "rgba(239,68,68,0.15)",
+        badgeText: "#EF4444",
+        dueText: "#EF4444",
       },
     },
   },
 ];
 
-const employeeGrowthData = [
-  { month: "Jan", employees: 120 },
-  { month: "Feb", employees: 135 },
-  { month: "Mar", employees: 150 },
-  { month: "Apr", employees: 170 },
-  { month: "May", employees: 190 },
-  { month: "Jun", employees: 210 },
-];
-
-const salaryExpenseData = [
-  { month: "Jan", salary: 120000 },
-  { month: "Feb", salary: 135000 },
-  { month: "Mar", salary: 150000 },
-  { month: "Apr", salary: 160000 },
-  { month: "May", salary: 180000 },
-  { month: "Jun", salary: 200000 },
-];
-
-const departmentData = [
-  { name: "IT", value: 40 },
-  { name: "HR", value: 10 },
-  { name: "Finance", value: 15 },
-  { name: "Sales", value: 25 },
-  { name: "Support", value: 10 },
-];
-
-const leaveStatsData = [
-  { month: "Jan", leave: 8 },
-  { month: "Feb", leave: 12 },
-  { month: "Mar", leave: 6 },
-  { month: "Apr", leave: 10 },
-  { month: "May", leave: 14 },
-  { month: "Jun", leave: 9 },
+const financeData = [
+  { month: "Jan", revenue: 50000, expenses: 30000, profit: 20000 },
+  { month: "Feb", revenue: 60000, expenses: 35000, profit: 25000 },
+  { month: "Mar", revenue: 70000, expenses: 40000, profit: 30000 },
+  { month: "Apr", revenue: 65000, expenses: 42000, profit: 23000 },
+  { month: "May", revenue: 80000, expenses: 50000, profit: 30000 },
 ];
 
 const MENU_ITEMS = [
-  { name: "Calendar", icon: Calendar, path: "/calendar" },
-  /*{ name: "Payroll", icon: CreditCard, path: "/payroll" },*/
-  { name: "Insurance", icon: Shield, path: "/insurancepolicies" },
-  { name: "Staff Details", icon: Users, path: "/staffdetails" },
-
   // New Finance submenu
   {
     name: "Finance",
@@ -386,63 +303,39 @@ const MENU_ITEMS = [
     ],
   },
 
+  // NEW MENU
   {
-    name: "My Planner",
-    icon: CalendarDays,
+    name: "Settings",
+    icon: Settings,
     submenu: [
       {
-        name: "Meeting Scheduler",
-        path: "/planner/meeting-scheduler",
-        icon: ClipboardList,
-      },
-      { name: "To Do List", path: "/planner/todo-list", icon: CheckSquare },
-      { name: "My Calendar", path: "/planner/my-calendar", icon: Calendar },
-    ],
-  },
-
-  { name: "User Approvals", icon: UserCheck, path: "/admin/user-approvals" },
-
-  {
-    name: "Co-curricular Activities",
-    icon: Activity,
-    submenu: [
-      { name: "Gallery", path: "/activities/gallery", icon: Image },
-      {
-        name: "Activity Planner",
-        path: "/activities/planner",
-        icon: ClipboardList,
+        name: "Create Company",
+        path: "/settings/create-company",
+        icon: Building2,
       },
       {
-        name: "Calendar of Events",
-        path: "/activities/calendar",
-        icon: CalendarDays,
+        name: "Invoice Number Type",
+        path: "/settings/invoice-number-type",
+        icon: Hash,
       },
       {
-        name: "Event Registration",
-        path: "/activities/event-registration",
-        icon: UserPlus,
-      },
-      {
-        name: "Participants List",
-        path: "/activities/participants",
+        name: "Create Vendors",
+        path: "/settings/create-vendors",
         icon: Users,
       },
+      {
+        name: "Email Settings",
+        path: "/settings/email-settings",
+        icon: Mail,
+      },
     ],
   },
 
-  { name: "Team Member", icon: Users, path: "/team" },
-  { name: "Performance Analysis", icon: TrendingUp, path: "/performance" },
-  { name: "Organization Chart", icon: GitBranch, path: "/organization" },
-  { name: "Holiday Management", icon: CalendarCheck, path: "/manage-holidays" },
-  { name: "Profile", icon: Shield, path: "/profile" },
-
-  { name: "Insurance", icon: Shield, path: "/insurancepolicies2" },
+  /* { name: "My Insurance", icon: Shield, path: "/my-insurance" },*/
 ];
-
 // ==========================================
-// 3. COMPONENTS
+// STAT CARD COMPONENT (Updated Like ProviderDashboard)
 // ==========================================
-
 const StatCard = ({ stat, theme }) => {
   const Icon = stat.icon;
   const isSimple = theme === "simple";
@@ -451,12 +344,10 @@ const StatCard = ({ stat, theme }) => {
 
   const iconSize = isSimple ? 24 : 28;
   const colors = stat.themeColors[theme];
-  const navigate = useNavigate();
 
   return (
     <div
       className="stat-tile group"
-      onClick={() => stat.path && navigate(stat.path)}
       style={{
         "--color-bg": colors.bg,
         "--color-text": colors.color || colors.text,
@@ -491,18 +382,20 @@ const StatCard = ({ stat, theme }) => {
               className="glaze-diag"
               style={{
                 background:
-                  "linear-gradient(to bottom right, transparent, rgba(255,255,255,0.4), transparent)",
+                  "linear-gradient(to bottom right, transparent, rgba(255,255,255,0.15), transparent)",
               }}
             />
             <div
               className="glaze-shadow"
-              style={{ boxShadow: "inset 0 -8px 20px rgba(0,0,0,0.1)" }}
+              style={{
+                boxShadow: "inset 0 -8px 20px rgba(0,0,0,0.05)",
+              }}
             />
           </div>
         </>
       )}
 
-      {/* Elite Dark Mode Effects */}
+      {/* Dark Mode Effects */}
       {isDark && (
         <div className="dark-edge-lit">
           <div
@@ -588,6 +481,7 @@ const StatCard = ({ stat, theme }) => {
             <span>{stat.change}</span>
           </div>
         </div>
+
         <div>
           <h3
             className="tile-value"
@@ -627,19 +521,19 @@ const StatCard = ({ stat, theme }) => {
 };
 
 // ==========================================
-// 4. MAIN APP COMPONENT
+// MAIN DASHBOARD COMPONENT (Updated like ProviderDashboard)
 // ==========================================
-export default function App() {
+export default function MyHRDashboard() {
   const [activeTab, setActiveTab] = useState("Dashboard");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-  const navigate = useNavigate(); // ✅ Add navigation
+  const navigate = useNavigate(); // Navigation support
 
   const [openMenu, setOpenMenu] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const isColorful = theme === "colorful";
   const isSimple = theme === "simple";
   const isDark = theme === "dark";
+  const isColorful = theme === "colorful";
 
   useEffect(() => {
     document.body.className = `theme-${theme}`;
@@ -675,8 +569,6 @@ export default function App() {
           </>
         )}
       </div>
-
-      {/* SIDEBAR */}
 
       <aside
         className={`sidebar ${isExpanded ? "expanded" : ""} ${isColorful || isDark ? "glass" : ""}`}
@@ -773,16 +665,15 @@ export default function App() {
               className="header-title"
               style={{ color: isDark ? "#ffffff" : "inherit" }}
             >
-              Admin
+              Finance Manager Dashboard
             </h1>
             <p className="header-subtitle">
-              Hello,Here is your ecosystem overview.
+              Hello, welcome! Here is Your Dashboard Overview.
             </p>
           </div>
 
           <div className="header-actions">
             {/* THEME TOGGLE */}
-
             <div
               className="theme-toggle-wrapper"
               style={{
@@ -794,6 +685,7 @@ export default function App() {
                 border: isDark
                   ? "1px solid rgba(255,255,255,0.05)"
                   : "1px solid #e2e8f0",
+                marginLeft: "12px",
               }}
             >
               <button
@@ -864,6 +756,7 @@ export default function App() {
               <Search size={16} color={isDark ? "#64748b" : "#94a3b8"} />
             </div>
 
+            {/* NOTIFICATION */}
             <button
               className="icon-btn"
               style={{
@@ -889,9 +782,10 @@ export default function App() {
               ></div>
             </button>
 
+            {/* PROFILE */}
             <button
               className="profile-btn"
-              onClick={() => navigate("/adminprofile")}
+              onClick={() => navigate("/Profile")}
               style={{
                 background: isDark
                   ? "#151A23"
@@ -910,7 +804,7 @@ export default function App() {
                 alt="Profile"
                 className="profile-img"
               />
-              <span className="profile-name">Alex</span>
+              <span className="profile-name">Basavaraj</span>
             </button>
           </div>
         </header>
@@ -922,75 +816,47 @@ export default function App() {
           ))}
         </div>
 
-        {/* ===== Admin Dashboard Charts ===== */}
+        {/* ===== Finance Manager Charts Section ===== */}
         <div className="chart-section">
-          {/* Employee Growth */}
+          {/* Revenue vs Expense Chart */}
           <div className="chart-box">
-            <h3>Employee Growth</h3>
+            <h3>Revenue vs Expenses</h3>
             <ResponsiveContainer width="100%" height={250}>
-              <LineChart data={employeeGrowthData}>
+              <LineChart data={financeData}>
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
                 <Line
                   type="monotone"
-                  dataKey="employees"
-                  stroke="#3B82F6"
-                  strokeWidth={2}
+                  dataKey="revenue"
+                  stroke="#22C55E"
+                  strokeWidth={3}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="expenses"
+                  stroke="#EF4444"
+                  strokeWidth={3}
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
 
-          {/* Salary Expenses */}
+          {/* Monthly Profit Chart */}
           <div className="chart-box">
-            <h3>Salary Expenses</h3>
+            <h3>Monthly Profit</h3>
             <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={salaryExpenseData}>
+              <BarChart data={financeData}>
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="salary" fill="#C387C2" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="profit" fill="#6366F1" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        <div className="chart-section">
-          {/* Leave Statistics */}
-          <div className="chart-box">
-            <h3>Leave Statistics</h3>
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={leaveStatsData}>
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="leave" fill="#5CC2C6" radius={[6, 6, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
-          {/* Department Distribution */}
-          <div className="chart-box">
-            <h3>Department Distribution</h3>
-            <ResponsiveContainer width="100%" height={250}>
-              <PieChart>
-                <Pie
-                  data={departmentData}
-                  dataKey="value"
-                  nameKey="name"
-                  outerRadius={90}
-                  fill="#FFB6D5"
-                  label
-                />
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        {/* DATA TABLE */}
-        {/* DATA TABLE */}
+        {/* LEAVE REQUESTS TABLE */}
         <div className="table-panel fade-in">
           <div className="table-header-row">
             <div>
@@ -1000,7 +866,7 @@ export default function App() {
               >
                 Leave Approvals
               </h2>
-              <p className="table-subtitle">Manage employee leave requests</p>
+              <p className="table-subtitle">Manage pending leave requests</p>
             </div>
           </div>
 
@@ -1008,10 +874,7 @@ export default function App() {
             <table className="styled-table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Department</th>
-                  <th>Leave Type</th>
+                  <th>Type</th>
                   <th>From</th>
                   <th>To</th>
                   <th style={{ textAlign: "center" }}>Status</th>
@@ -1019,41 +882,29 @@ export default function App() {
                 </tr>
               </thead>
               <tbody>
-                {LEAVES_DATA.map((leave) => {
-                  const colors = leave.colors[theme];
+                {LEAVE_REQUESTS.map((req) => {
+                  const colors = req.colors[theme];
 
                   return (
                     <tr
-                      key={leave.id}
+                      key={req.id}
                       className="table-row tr-card"
                       onMouseEnter={(e) => {
                         if (isSimple) {
-                          const avatar =
-                            e.currentTarget.querySelector(".cell-avatar");
                           const action =
                             e.currentTarget.querySelector(".more-action-btn");
-                          if (avatar) {
-                            avatar.style.background = colors.avatarHoverBg;
-                            avatar.style.color = colors.avatarHoverText;
-                            avatar.style.borderColor = colors.avatarHoverBg;
-                          }
                           if (action) {
-                            action.style.background = colors.actionHoverBg;
-                            action.style.color = colors.actionHoverColor;
+                            action.style.background =
+                              colors.actionHoverBg || "rgba(0,0,0,0.05)";
+                            action.style.color =
+                              colors.actionHoverColor || colors.badgeText;
                           }
                         }
                       }}
                       onMouseLeave={(e) => {
                         if (isSimple) {
-                          const avatar =
-                            e.currentTarget.querySelector(".cell-avatar");
                           const action =
                             e.currentTarget.querySelector(".more-action-btn");
-                          if (avatar) {
-                            avatar.style.background = "";
-                            avatar.style.color = "";
-                            avatar.style.borderColor = "";
-                          }
                           if (action) {
                             action.style.background = "";
                             action.style.color = "";
@@ -1061,50 +912,9 @@ export default function App() {
                         }
                       }}
                     >
-                      <td>
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 16,
-                          }}
-                        >
-                          <div
-                            className="cell-avatar"
-                            style={{
-                              background: isColorful
-                                ? colors.avatarGrad
-                                : isDark
-                                  ? colors.avatarBg
-                                  : "",
-                              color: isColorful
-                                ? "#ffffff"
-                                : isDark
-                                  ? colors.avatarText
-                                  : "",
-                              border: isDark
-                                ? `1px solid ${colors.avatarBorder}`
-                                : "",
-                              boxShadow:
-                                isColorful || isDark
-                                  ? "inset 0 2px 10px rgba(255,255,255,0.1)"
-                                  : "",
-                            }}
-                          >
-                            {leave.name.charAt(0)}
-                          </div>
-                          <div
-                            style={{ display: "flex", flexDirection: "column" }}
-                          >
-                            <span className="cell-name">{leave.name}</span>
-                            <span className="cell-id">{leave.id}</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td>{leave.department}</td>
-                      <td>{leave.leaveType}</td>
-                      <td>{leave.from}</td>
-                      <td>{leave.to}</td>
+                      <td>{req.type}</td>
+                      <td>{req.from}</td>
+                      <td>{req.to}</td>
                       <td style={{ textAlign: "center" }}>
                         <span
                           className="status-pill"
@@ -1112,11 +922,11 @@ export default function App() {
                             background: colors.badgeBg,
                             color: colors.badgeText,
                             border: isDark
-                              ? `1px solid ${colors.badgeBorder}`
+                              ? `1px solid ${colors.badgeText}33`
                               : "none",
                           }}
                         >
-                          {leave.status}
+                          {req.status}
                         </span>
                       </td>
                       <td style={{ textAlign: "right" }}>
@@ -1142,7 +952,7 @@ export default function App() {
                   color: "var(--text-muted)",
                 }}
               >
-                Showing {LEAVES_DATA.length} results
+                Showing {LEAVE_REQUESTS.length} results
               </span>
               <div style={{ display: "flex", gap: 8 }}>
                 <button className="btn-outline">Prev</button>

@@ -59,7 +59,6 @@
 
 /* Events */
 .rbc-event {
-  background: linear-gradient(135deg, #007bff, #4a90e2);
   border: none;
   border-radius: 6px;
   padding: 4px;
@@ -143,4 +142,17 @@
 .teams-sync-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Past Events - Gray */
+.rbc-event.past-event {
+  background-color: #d6d6d6 !important;
+  color: #555 !important;
+  opacity: 0.7;
+}
+
+/* Upcoming Events - Blue */
+.rbc-event.future-event {
+  background-color: #007bff !important;
+  color: #fff !important;
 }

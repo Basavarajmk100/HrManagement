@@ -15,10 +15,14 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const users = [
-    { email: "demo@gmail.com", password: "123", role: "Admin" },
-    { email: "demo@gmail.com", password: "123", role: "HR" },
-    { email: "demo@gmail.com", password: "123", role: "Employee" },
-    { email: "demo@gmail.com", password: "123", role: "System Maintenance" },
+    { email: "admin@hrms.com", password: "Admin@1234", role: "Admin" },
+    { email: "hr@hrms.com", password: "Hr@1234", role: "HR" },
+    { email: "employee@hrms.com", password: "Emp@1234", role: "Employee" },
+    {
+      email: "maintenance@hrms.com",
+      password: "Maint@1234",
+      role: "System Maintenance",
+    },
   ];
 
   const handleChange = (e) => {

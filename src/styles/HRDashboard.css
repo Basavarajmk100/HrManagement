@@ -21,10 +21,7 @@
   background: #ffffff;
   border-radius: 14px; /* slightly bigger radius for modern feel */
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06); /* subtle but softer shadow */
-  transition:
-    margin-left 0.3s ease,
-    width 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: none;
 }
 
 /* When sidebar is collapsed */

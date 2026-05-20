@@ -14,15 +14,15 @@ const AccessManagement = () => {
   const roles = {
     Admin: ["HR Admin", "IT Admin", "Finance Admin"],
     Employee: ["All Employees", ...employees],
-
     HR: ["HR Manager", "HR Executive"],
   };
 
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
-  const [selectedEmployee, setSelectedEmployee] = useState("");
+  /*const [selectedEmployee, setSelectedEmployee] = useState("");
 
   const [openMenu, setOpenMenu] = useState(null);
+  */
 
   const [popup, setPopup] = useState("");
 
@@ -53,7 +53,7 @@ const AccessManagement = () => {
     loginCredentials: { enabled: false, view: false, edit: false },
   });
 
-  const handleItAdminPermission = (permission, type) => {
+  const handleITAdminPermission = (permission, type) => {
     setItAdminPermissions({
       ...itAdminPermissions,
       [permission]: {
@@ -399,6 +399,49 @@ const AccessManagement = () => {
             </div>
           )}
 
+          {selectedRole === "IT Admin" && (
+            <div className="permission-box">
+              <h4>IT Admin Permissions</h4>
+
+              {/* System Access Control */}
+              <div className="permission-row">
+                <span>System Access Control</span>
+
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={itAdminPermissions.systemAccessControl.enabled}
+                    onChange={() =>
+                      handleITAdminPermission("systemAccessControl", "enabled")
+                    }
+                  />
+                  <span className="slider"></span>
+                </label>
+
+                <label>
+                  View
+                  <input
+                    type="checkbox"
+                    checked={itAdminPermissions.systemAccessControl.view}
+                    onChange={() =>
+                      handleITAdminPermission("systemAccessControl", "view")
+                    }
+                  />
+                </label>
+
+                <label>
+                  Edit
+                  <input
+                    type="checkbox"
+                    checked={itAdminPermissions.systemAccessControl.edit}
+                    onChange={() =>
+                      handleITAdminPermission("systemAccessControl", "edit")
+                    }
+                  />
+                </label>
+              </div>
+            </div>
+          )}
           {selectedRole === "Finance Admin" && (
             <div className="permission-box">
               <h4>Finance Admin Permissions</h4>

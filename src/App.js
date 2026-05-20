@@ -51,6 +51,9 @@ import ApprovePayroll from "./components/HRDashboard/ApprovePayroll";
 import InsuranceForm from "./components/HRDashboard/InsuranceForm";
 
 import InsurancePolicies from "./components/HRDashboard/Insurancepolicies";
+import InsurancePolicies2 from "./components/HRDashboard/Insurancepolicies2";
+
+import StaffDetails from "./components/HRDashboard/StaffDetails";
 
 import InvoicesPage from "./components/HRDashboard/InvoicesPage";
 import PurchaseVoucher from "./components/HRDashboard/PurchaseVoucher";
@@ -68,6 +71,12 @@ import ProfitLossPage from "./components/HRDashboard/ProfitLossPage";
 import ExpensesPage from "./components/HRDashboard/ExpensesPage";
 
 import TrialBalancePage from "./components/HRDashboard/TrialBalancePage";
+
+import CreateCompany from "./components/FinanceManagerDashboard/CreateCompany";
+import InvoiceNumberType from "./components/FinanceManagerDashboard/InvoiceNumberType";
+import CreateVendors from "./components/FinanceManagerDashboard/CreateVendors";
+
+import EmailSettings from "./components/FinanceManagerDashboard/EmailSettings";
 
 // ⬇️ NEW — Performance Dashboard Component
 import PerformanceDashboard from "./components/HRDashboard/PerformanceDashboard";
@@ -175,6 +184,9 @@ import ProviderDashboardSidebar from "./pages/Provider/ProviderDashboardSidebar"
 
 import BillingHistory from "./pages/Provider/BillingHistory";
 
+//Finanace Manager
+import FinanceManager from "./components/FinanceManagerDashboard/FinanceManager";
+
 function LandingRedirect() {
   React.useEffect(() => {
     window.location.href = "/itsmyhr.html";
@@ -244,9 +256,12 @@ function App() {
 
         <Route path="/planner/my-calendar" element={<MyCalendar />} />
 
+        <Route path="/staffdetails" element={<StaffDetails />} />
+
         <Route path="/insuranceform" element={<InsuranceForm />} />
 
         <Route path="/insurancepolicies" element={<InsurancePolicies />} />
+        <Route path="/insurancepolicies2" element={<InsurancePolicies2 />} />
 
         <Route path="/finance/invoicesPage" element={<InvoicesPage />} />
 
@@ -272,6 +287,15 @@ function App() {
         <Route path="/finance/expenses" element={<ExpensesPage />} />
 
         <Route path="/finance/trial-balance" element={<TrialBalancePage />} />
+
+        <Route path="/settings/create-company" element={<CreateCompany />} />
+        <Route
+          path="/settings/invoice-number-type"
+          element={<InvoiceNumberType />}
+        />
+
+        <Route path="/settings/create-vendors" element={<CreateVendors />} />
+        <Route path="/settings/email-settings" element={<EmailSettings />} />
 
         <Route path="/download-bank-sheet" element={<DownloadBankSheet />} />
         <Route path="/download-pay-slip" element={<DownloadPayslip />} />
@@ -346,6 +370,7 @@ function App() {
           path="/employee-manager/scheduling"
           element={<SchedulingManager />}
         />
+
         <Route
           path="/employee-manager/leaves"
           element={<LeaveDetailsManager />}
@@ -474,6 +499,8 @@ function App() {
             <h2 style={{ textAlign: "center" }}>404 - Page Not Found</h2>
           }
         />
+
+        <Route path="/finance-Manager" element={<FinanceManager />} />
       </Routes>
     </Router>
   );
