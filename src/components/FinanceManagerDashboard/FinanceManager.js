@@ -32,6 +32,7 @@ import {
   Building2,
   Hash,
   Mail,
+  LayoutTemplate,
 } from "lucide-react";
 
 import {
@@ -313,11 +314,24 @@ const MENU_ITEMS = [
         path: "/settings/create-company",
         icon: Building2,
       },
+
       {
-        name: "Invoice Number Type",
-        path: "/settings/invoice-number-type",
-        icon: Hash,
+        name: "Invoice",
+        icon: FileText,
+        submenu: [
+          {
+            name: "Invoice Number Type",
+            path: "/settings/invoice-number-type",
+            icon: Hash,
+          },
+          {
+            name: "Template Select",
+            path: "/settings/template-select",
+            icon: LayoutTemplate,
+          },
+        ],
       },
+
       {
         name: "Create Vendors",
         path: "/settings/create-vendors",
@@ -529,6 +543,8 @@ export default function MyHRDashboard() {
   const navigate = useNavigate(); // Navigation support
 
   const [openMenu, setOpenMenu] = useState(null);
+
+  const [openSubMenu, setOpenSubMenu] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const isSimple = theme === "simple";
@@ -627,16 +643,47 @@ export default function MyHRDashboard() {
                     className={`submenu ${openMenu === item.name ? "submenu-open" : ""}`}
                   >
                     {item.submenu.map((sub) => (
-                      <button
-                        key={sub.name}
-                        className="submenu-btn"
-                        onClick={() => {
-                          setActiveTab(sub.name);
-                          navigate(sub.path);
-                        }}
-                      >
-                        {sub.name}
-                      </button>
+                      <div key={sub.name}>
+                        {/* First Level Submenu */}
+                        <button
+                          className="submenu-btn"
+                          onClick={() => {
+                            if (sub.submenu) {
+                              setOpenSubMenu((prev) =>
+                                prev === sub.name ? null : sub.name,
+                              );
+                            } else {
+                              setActiveTab(sub.name);
+                              navigate(sub.path);
+                            }
+                          }}
+                        >
+                          {sub.name}
+                        </button>
+
+                        {/* Nested Submenu */}
+                        {sub.submenu && openSubMenu === sub.name && (
+                          <div className="nested-submenu">
+                            {sub.submenu.map((nested) => {
+                              const NestedIcon = nested.icon;
+
+                              return (
+                                <button
+                                  key={nested.name}
+                                  className="nested-submenu-btn"
+                                  onClick={() => {
+                                    setActiveTab(nested.name);
+                                    navigate(nested.path);
+                                  }}
+                                >
+                                  {NestedIcon && <NestedIcon size={14} />}
+                                  <span>{nested.name}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 )}

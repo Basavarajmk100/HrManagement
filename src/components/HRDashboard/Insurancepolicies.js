@@ -128,6 +128,11 @@ export default function EmployeeInsuranceTable() {
   const [showModal, setShowModal] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editEmployee, setEditEmployee] = useState(null);
+
+  const [policyCopy, setPolicyCopy] = useState(null);
+
   const [policyNumber, setPolicyNumber] = useState("");
   const [policyType, setPolicyType] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -182,6 +187,18 @@ export default function EmployeeInsuranceTable() {
   const handleIssueInsurance = (id) => {
     setSelectedEmployee(id);
     setShowModal(true);
+  };
+
+  /*Edit Handler*/
+  const handleEdit = (employee) => {
+    setEditEmployee(employee);
+
+    setPolicyNumber(employee.policyNumber || "");
+    setPolicyType(employee.policyType || "");
+    setStartDate(employee.startDate || "");
+    setEndDate(employee.endDate || "");
+
+    setShowEditModal(true);
   };
 
   /* Delete Handler */
@@ -441,6 +458,13 @@ export default function EmployeeInsuranceTable() {
                           </button>
 
                           <button
+                            className="more-action-btn edit"
+                            onClick={() => handleEdit(e)}
+                          >
+                            Edit
+                          </button>
+
+                          <button
                             className="more-action-btn delete"
                             onClick={() => handleDelete(e.id)}
                           >
@@ -498,6 +522,18 @@ export default function EmployeeInsuranceTable() {
               />
             </div>
 
+            <label>Upload Policy Copy</label>
+
+            <input
+              type="file"
+              accept=".pdf,.jpg,.jpeg,.png"
+              onChange={(e) => setPolicyCopy(e.target.files[0])}
+            />
+
+            {policyCopy && (
+              <p className="file-name">Selected File: {policyCopy.name}</p>
+            )}
+
             <div className="modal-actions">
               <button
                 className="cancel-btn"
@@ -507,6 +543,60 @@ export default function EmployeeInsuranceTable() {
               </button>
 
               <button className="submit-btn">Issue</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showEditModal && (
+        <div className="modal-overlay">
+          <div className="modal-box">
+            <h3>Edit Insurance</h3>
+
+            <p>Employee ID: {editEmployee?.id}</p>
+
+            <div className="modal-form">
+              <label>Policy Number</label>
+              <input
+                type="text"
+                value={policyNumber}
+                onChange={(e) => setPolicyNumber(e.target.value)}
+              />
+
+              <label>Policy Type</label>
+              <select
+                value={policyType}
+                onChange={(e) => setPolicyType(e.target.value)}
+              >
+                <option value="">Select Policy</option>
+                <option>Plan A</option>
+                <option>Plan B</option>
+              </select>
+
+              <label>Start Date</label>
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+
+              <label>End Date</label>
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
+
+            <div className="modal-actions">
+              <button
+                className="cancel-btn"
+                onClick={() => setShowEditModal(false)}
+              >
+                Cancel
+              </button>
+
+              <button className="submit-btn">Update</button>
             </div>
           </div>
         </div>

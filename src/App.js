@@ -187,6 +187,10 @@ import BillingHistory from "./pages/Provider/BillingHistory";
 //Finanace Manager
 import FinanceManager from "./components/FinanceManagerDashboard/FinanceManager";
 
+import TemplateSelect from "./components/FinanceManagerDashboard/TemplateSelect";
+
+import Admin from "./components/AdminDashboard/Admin"; // adjust path if needed
+
 function LandingRedirect() {
   React.useEffect(() => {
     window.location.href = "/itsmyhr.html";
@@ -210,10 +214,11 @@ function App() {
         <Route path="/home" element={<HomePage />} />
 
         {/* Dashboard */}
-        <Route path="/admin" element={<HRDashboardPage />} />
+        <Route path="/hr-manager" element={<HRDashboardPage />} />
 
         {/* Default route */}
         <Route path="/" element={<Navigate to="/provider-dashboard" />} />
+        <Route path="/admin-dashboard" element={<Admin />} />
 
         {/* Provider Dashboard route */}
         <Route path="/provider-dashboard" element={<ProviderDashboard />} />
@@ -322,8 +327,8 @@ function App() {
         />
 
         {/* Employee Manager Routes */}
-        <Route path="/hr-manager" element={<EmployeeManager />} />
-        <Route path="/hr-manager/add" element={<AddEmployeePage />} />
+        <Route path="/hr-dashboard" element={<EmployeeManager />} />
+        <Route path="/hr-dashboard/add" element={<AddEmployeePage />} />
         <Route
           path="/employee-manager/addPayroll"
           element={<HRPayrollForm />}
@@ -338,6 +343,7 @@ function App() {
         />
         <Route path="/employee-manager/ITKPIForm" element={<ITKPIForm />} />
         <Route path="/employee-manager/HRKPIForm" element={<HRKPIForm />} />
+
         <Route
           path="/employee-manager/FinanceKPIForm"
           element={<FinanceKPIForm />}
@@ -501,6 +507,8 @@ function App() {
         />
 
         <Route path="/finance-Manager" element={<FinanceManager />} />
+
+        <Route path="/settings/template-select" element={<TemplateSelect />} />
       </Routes>
     </Router>
   );

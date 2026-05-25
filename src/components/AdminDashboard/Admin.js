@@ -351,91 +351,6 @@ const leaveStatsData = [
 ];
 
 const MENU_ITEMS = [
-  { name: "Calendar", icon: Calendar, path: "/calendar" },
-  /*{ name: "Payroll", icon: CreditCard, path: "/payroll" },*/
-  { name: "Insurance", icon: Shield, path: "/insurancepolicies" },
-  { name: "Staff Details", icon: Users, path: "/staffdetails" },
-
-  // New Finance submenu
-  {
-    name: "Finance",
-    icon: Wallet,
-    submenu: [
-      { name: "InvoicesPage", path: "/finance/invoicesPage", icon: Receipt },
-      {
-        name: "Purchase Voucher",
-        path: "/finance/purchase-voucher",
-        icon: ClipboardList,
-      },
-      {
-        name: "Sale Voucher",
-        path: "/finance/sales-voucher",
-        icon: ClipboardList,
-      },
-      { name: "Ledgers", path: "/finance/ledgers", icon: BookOpen },
-
-      // ✅ Add this
-      { name: "Trial Balance", path: "/finance/trial-balance", icon: Scale },
-      {
-        name: "Balance Sheet",
-        path: "/finance/balance-sheet",
-        icon: BarChart3,
-      },
-      { name: "P and L Account", path: "/finance/pnl", icon: BarChart3 },
-      { name: "Expenses", path: "/finance/expenses", icon: FileText },
-    ],
-  },
-
-  {
-    name: "My Planner",
-    icon: CalendarDays,
-    submenu: [
-      {
-        name: "Meeting Scheduler",
-        path: "/planner/meeting-scheduler",
-        icon: ClipboardList,
-      },
-      { name: "To Do List", path: "/planner/todo-list", icon: CheckSquare },
-      { name: "My Calendar", path: "/planner/my-calendar", icon: Calendar },
-    ],
-  },
-
-  { name: "User Approvals", icon: UserCheck, path: "/admin/user-approvals" },
-
-  {
-    name: "Co-curricular Activities",
-    icon: Activity,
-    submenu: [
-      { name: "Gallery", path: "/activities/gallery", icon: Image },
-      {
-        name: "Activity Planner",
-        path: "/activities/planner",
-        icon: ClipboardList,
-      },
-      {
-        name: "Calendar of Events",
-        path: "/activities/calendar",
-        icon: CalendarDays,
-      },
-      {
-        name: "Event Registration",
-        path: "/activities/event-registration",
-        icon: UserPlus,
-      },
-      {
-        name: "Participants List",
-        path: "/activities/participants",
-        icon: Users,
-      },
-    ],
-  },
-
-  { name: "Team Member", icon: Users, path: "/team" },
-  { name: "Performance Analysis", icon: TrendingUp, path: "/performance" },
-  { name: "Organization Chart", icon: GitBranch, path: "/organization" },
-  { name: "Holiday Management", icon: CalendarCheck, path: "/manage-holidays" },
-  { name: "Profile", icon: Shield, path: "/profile" },
-
   { name: "Insurance", icon: Shield, path: "/insurancepolicies2" },
 ];
 
@@ -773,7 +688,7 @@ export default function App() {
               className="header-title"
               style={{ color: isDark ? "#ffffff" : "inherit" }}
             >
-              HR Manager
+              Admin
             </h1>
             <p className="header-subtitle">
               Hello,Here is your ecosystem overview.

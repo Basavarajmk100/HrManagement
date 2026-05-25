@@ -531,12 +531,22 @@
 .insurance-panel .modal-form select {
   padding: 6px 8px;
   border-radius: 6px;
-  border: 1px solid #9ca3af; /* darker border */
+  border: 1px solid #7c8db5;
   font-size: 13px;
-  background: #f3f4f6; /* light grey so it shows */
+  background: #eef4ff; /* soft blue */
+  color: #1f2937;
   transition: 0.2s;
   width: 100%;
   box-sizing: border-box;
+}
+
+/* Focus Effect */
+.insurance-panel .modal-form input:focus,
+.insurance-panel .modal-form select:focus {
+  outline: none;
+  border-color: #4f46e5;
+  background: #ffffff;
+  box-shadow: 0 0 4px rgba(79, 70, 229, 0.4);
 }
 
 /* Hover */
@@ -546,10 +556,48 @@
 }
 
 /* Focus */
+/* Focus */
 .insurance-panel .modal-form input:focus,
 .insurance-panel .modal-form select:focus {
   border-color: #2563eb;
-  background: #ffffff;
+  background: #eef4ff;
+  color: #1f2937;
   box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
   outline: none;
+}
+
+.action-group {
+  display: flex;
+  gap: 10px; /* space between buttons */
+  align-items: center;
+}
+
+/* ISSUE INSURANCE BUTTON */
+.more-action-btn.issue {
+  background: #28a745;
+  color: white;
+}
+
+.more-action-btn.issue:hover {
+  background: #218838;
+}
+
+/* EDIT BUTTON */
+.more-action-btn.edit {
+  background: #f0ad4e;
+  color: white;
+}
+
+.more-action-btn.edit:hover {
+  background: #ec971f;
+}
+
+/* DELETE BUTTON */
+.more-action-btn.delete {
+  background: #dc3545;
+  color: white;
+}
+
+.more-action-btn.delete:hover {
+  background: #c82333;
 }
