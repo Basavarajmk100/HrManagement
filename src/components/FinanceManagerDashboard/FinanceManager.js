@@ -320,7 +320,7 @@ const MENU_ITEMS = [
         icon: FileText,
         submenu: [
           {
-            name: "Invoice Number Type",
+            name: "Invoice Type",
             path: "/settings/invoice-number-type",
             icon: Hash,
           },

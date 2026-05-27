@@ -1,20 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function TemplateSelect() {
-  const [selectedTemplate, setSelectedTemplate] = useState("");
+  const navigate = useNavigate();
 
   const templates = [
-    "GST Goods Invoice",
-    "GST Service Invoice",
-    "Retail Invoice",
-    "Proforma Invoice",
-    "Tax Invoice",
-    "Debit/Credit Note Invoice",
+    {
+      name: "GST Goods Invoice",
+      path: "/gst-goods-invoice",
+    },
+    {
+      name: "GST Service Invoice",
+      path: "/gst-service-invoice",
+    },
+    {
+      name: "Retail Invoice",
+      path: "/retail-invoice",
+    },
+    {
+      name: "Proforma Invoice",
+      path: "/proforma-invoice",
+    },
+    {
+      name: "Tax Invoice",
+      path: "/tax-invoice",
+    },
+    {
+      name: "Debit/Credit Note Invoice",
+      path: "/debit-credit-invoice",
+    },
   ];
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>GST Invoice Templates</h2>
+      <h2>Invoice Templates</h2>
       <p>Select invoice template format</p>
 
       <div
@@ -28,24 +47,21 @@ function TemplateSelect() {
         {templates.map((template, index) => (
           <div
             key={index}
-            onClick={() => setSelectedTemplate(template)}
+            onClick={() => navigate(template.path)}
             style={{
               padding: "20px",
               borderRadius: "14px",
               cursor: "pointer",
-              border:
-                selectedTemplate === template
-                  ? "2px solid #2563eb"
-                  : "1px solid #ddd",
-              background: selectedTemplate === template ? "#eff6ff" : "#fff",
+              border: "1px solid #ddd",
+              background: "#fff",
               transition: "0.3s",
               boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
           >
-            <h3>{template}</h3>
+            <h3>{template.name}</h3>
 
             <p style={{ color: "#666", marginTop: "10px" }}>
-              Click to select this invoice template
+              Click to open this invoice template
             </p>
           </div>
         ))}

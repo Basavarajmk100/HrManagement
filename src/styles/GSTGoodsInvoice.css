@@ -1,0 +1,463 @@
+/* GSTGoodsInvoice.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f3f4f6, #dbeafe);
+  padding: 30px 15px;
+}
+
+.invoiceBox {
+  max-width: 950px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.4s ease-in-out;
+}
+/* HEADER */
+
+.header {
+  background: #3b82f6;
+  color: white;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.invoiceTitle {
+  font-size: 28px;
+  letter-spacing: 1px;
+  font-weight: 700;
+
+  margin-top: 80px;
+  margin-left: 40px;
+}
+
+.companyInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 320px;
+}
+
+.companyDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.companyInfo h3 {
+  margin-bottom: 6px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.companyInfo p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: white;
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* TOP SECTION */
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 18px 24px;
+  flex-wrap: wrap;
+}
+
+.topSection div {
+  flex: 1;
+  min-width: 220px;
+}
+
+.topSection p {
+  margin-bottom: 6px;
+  color: #374151;
+  font-size: 13px;
+}
+
+/* ADDRESS SECTION */
+
+.addressSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding: 0 24px 20px;
+}
+
+.addressSection h4 {
+  margin-bottom: 6px;
+  color: #3b82f6;
+  font-size: 14px;
+  font-weight: 600;
+}
+/* INPUTS */
+
+.input,
+.textarea,
+.tableInput {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  transition: 0.3s;
+  background: #f9fafb;
+}
+
+.input:focus,
+.textarea:focus,
+.tableInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+}
+
+.textarea {
+  min-height: 110px;
+  resize: none;
+}
+
+/* TABLE */
+
+.table {
+  width: calc(100% - 60px);
+  margin: 20px auto;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  table-layout: fixed; /* proper alignment */
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.th {
+  color: white;
+  padding: 12px;
+  text-align: center; /* heading alignment */
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #dbeafe;
+}
+
+.td {
+  border: 1px solid #e5e7eb;
+  padding: 14px;
+  background: #fff;
+  text-align: center; /* data alignment */
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.tableInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: center;
+  font-size: 14px;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+  transition: 0.3s;
+}
+
+/* TOTAL */
+
+.totalSection {
+  padding: 30px;
+  text-align: right;
+}
+
+.totalSection h2 {
+  display: inline-block;
+  background: #3b82f6;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 18px;
+  box-shadow: 0 5px 15px rgba(249, 115, 22, 0.3);
+}
+
+/* BUTTONS */
+
+.buttonSection {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 30px 35px;
+  flex-wrap: wrap;
+}
+
+.button,
+.printButton {
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+}
+
+.printButton {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: white;
+}
+
+.printButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(22, 163, 74, 0.35);
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .invoiceTitle {
+    font-size: 30px;
+  }
+
+  .addressSection {
+    grid-template-columns: 1fr;
+  }
+
+  .topSection {
+    flex-direction: column;
+  }
+
+  .table {
+    width: 100%;
+  }
+
+  .buttonSection {
+    flex-direction: column;
+  }
+
+  .button,
+  .printButton {
+    width: 100%;
+  }
+}
+
+.amountWordsCheck {
+  padding: 10px 30px;
+  font-size: 14px;
+}
+
+.amountWordsCheck label {
+  display: inline-flex; /* changed from flex */
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.amountWordsCheck input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+}
+
+.amountWords {
+  padding: 0 30px 20px;
+  font-size: 15px;
+  color: #374151;
+  font-weight: 500;
+}
+
+/*Upload logo*/
+.logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: white;
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.logoInput {
+  display: none;
+}
+
+.logoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TOOLBAR */
+
+.toolbar {
+  width: 90%;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 18px 22px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.toolbar h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 14px;
+}
+
+/* COLOR THEME OPTIONS */
+
+.colorOptions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+}
+
+.colorOptions button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+/* HOVER EFFECT */
+
+.colorOptions button:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.18),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+/* ACTIVE SELECTED COLOR */
+
+.activeColor {
+  transform: scale(1.12);
+  border: 3px solid #ffffff !important;
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.25),
+    0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* SMALL INNER GLOW */
+
+.colorOptions button::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+.invoiceTitleInput {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  outline: none;
+  width: 120px;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.editableCompanyName {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+  outline: none;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.editableText {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  line-height: 1.7;
+  resize: none;
+  outline: none;
+  width: 100%;
+  min-height: 60px;
+}
+
+.editableText::placeholder,
+.editableCompanyName::placeholder,
+.invoiceTitleInput::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}

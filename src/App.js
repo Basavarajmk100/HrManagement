@@ -72,12 +72,6 @@ import ExpensesPage from "./components/HRDashboard/ExpensesPage";
 
 import TrialBalancePage from "./components/HRDashboard/TrialBalancePage";
 
-import CreateCompany from "./components/FinanceManagerDashboard/CreateCompany";
-import InvoiceNumberType from "./components/FinanceManagerDashboard/InvoiceNumberType";
-import CreateVendors from "./components/FinanceManagerDashboard/CreateVendors";
-
-import EmailSettings from "./components/FinanceManagerDashboard/EmailSettings";
-
 // ⬇️ NEW — Performance Dashboard Component
 import PerformanceDashboard from "./components/HRDashboard/PerformanceDashboard";
 
@@ -191,6 +185,14 @@ import TemplateSelect from "./components/FinanceManagerDashboard/TemplateSelect"
 
 import Admin from "./components/AdminDashboard/Admin"; // adjust path if needed
 
+import CreateCompany from "./components/FinanceManagerDashboard/CreateCompany";
+import InvoiceNumberType from "./components/FinanceManagerDashboard/InvoiceNumberType";
+import CreateVendors from "./components/FinanceManagerDashboard/CreateVendors";
+
+import EmailSettings from "./components/FinanceManagerDashboard/EmailSettings";
+
+import GSTGoodsInvoice from "./components/FinanceManagerDashboard/GSTGoodsInvoice";
+
 function LandingRedirect() {
   React.useEffect(() => {
     window.location.href = "/itsmyhr.html";
@@ -292,15 +294,6 @@ function App() {
         <Route path="/finance/expenses" element={<ExpensesPage />} />
 
         <Route path="/finance/trial-balance" element={<TrialBalancePage />} />
-
-        <Route path="/settings/create-company" element={<CreateCompany />} />
-        <Route
-          path="/settings/invoice-number-type"
-          element={<InvoiceNumberType />}
-        />
-
-        <Route path="/settings/create-vendors" element={<CreateVendors />} />
-        <Route path="/settings/email-settings" element={<EmailSettings />} />
 
         <Route path="/download-bank-sheet" element={<DownloadBankSheet />} />
         <Route path="/download-pay-slip" element={<DownloadPayslip />} />
@@ -506,9 +499,21 @@ function App() {
           }
         />
 
+        {/* Finanace Manager */}
+
         <Route path="/finance-Manager" element={<FinanceManager />} />
 
         <Route path="/settings/template-select" element={<TemplateSelect />} />
+
+        <Route path="/settings/create-company" element={<CreateCompany />} />
+        <Route
+          path="/settings/invoice-number-type"
+          element={<InvoiceNumberType />}
+        />
+
+        <Route path="/settings/create-vendors" element={<CreateVendors />} />
+        <Route path="/settings/email-settings" element={<EmailSettings />} />
+        <Route path="/gst-goods-invoice" element={<GSTGoodsInvoice />} />
       </Routes>
     </Router>
   );
