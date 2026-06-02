@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import "../../styles/GSTGoodsInvoice.css";
 
-function GSTGoodsInvoice() {
+function GSTServiceInvoice() {
   const [invoice, setInvoice] = useState({
     invoiceNumber: "",
     date: "",
     billTo: "",
-    shipTo: "",
-    product: "",
-    quantity: "",
-    unitPrice: "",
+    serviceDescription: "",
+    serviceHours: "",
+    serviceRate: "",
     currency: "₹",
 
-    title: "INVOICE",
+    title: "SERVICE INVOICE",
     companyName: "ABC Technologies Pvt Ltd",
     companyAddress: "#24, VijayaNagar, Bangalore, Karnataka - 560001",
     companyContact:
@@ -32,7 +31,7 @@ function GSTGoodsInvoice() {
     });
   };
 
-  /*logo change*/
+  /* logo change */
   const handleLogoChange = (e) => {
     const file = e.target.files[0];
 
@@ -41,7 +40,8 @@ function GSTGoodsInvoice() {
     }
   };
 
-  const total = Number(invoice.quantity || 0) * Number(invoice.unitPrice || 0);
+  const total =
+    Number(invoice.serviceHours || 0) * Number(invoice.serviceRate || 0);
 
   const numberToWords = (num) => {
     const ones = [
@@ -109,24 +109,9 @@ function GSTGoodsInvoice() {
     return num;
   };
 
-  const handleSaveInvoice = () => {
-    localStorage.setItem("gstGoodsInvoice", JSON.stringify(invoice));
-
-    alert("Invoice Saved Successfully");
-  };
-
-  const handlePrintInvoice = () => {
-    window.print();
-  };
-
-  const handleSendInvoice = () => {
-    alert(
-      `Invoice ${invoice.invoiceNumber} has been sent to the customer successfully.`,
-    );
-  };
-
   return (
     <div className="page">
+      {/* TOOLBAR */}
       <div className="toolbar">
         <h3>Choose Invoice Theme</h3>
 
@@ -169,7 +154,7 @@ function GSTGoodsInvoice() {
           <div>
             <input
               type="text"
-              value={invoice.title || "INVOICE"}
+              value={invoice.title}
               name="title"
               onChange={handleChange}
               className="invoiceTitleInput"
@@ -205,7 +190,7 @@ function GSTGoodsInvoice() {
               <input
                 type="text"
                 name="companyName"
-                value={invoice.companyName || ""}
+                value={invoice.companyName}
                 onChange={handleChange}
                 placeholder="Company Name"
                 className="editableCompanyName"
@@ -213,7 +198,7 @@ function GSTGoodsInvoice() {
 
               <textarea
                 name="companyAddress"
-                value={invoice.companyAddress || ""}
+                value={invoice.companyAddress}
                 onChange={handleChange}
                 placeholder="Company Address"
                 className="editableText"
@@ -221,7 +206,7 @@ function GSTGoodsInvoice() {
 
               <textarea
                 name="companyContact"
-                value={invoice.companyContact || ""}
+                value={invoice.companyContact}
                 onChange={handleChange}
                 placeholder="Phone, Email, GSTIN"
                 className="editableText"
@@ -293,33 +278,24 @@ function GSTGoodsInvoice() {
               className="textarea"
             />
           </div>
-
-          <div>
-            <h4>SHIP TO</h4>
-
-            <textarea
-              name="shipTo"
-              value={invoice.shipTo}
-              onChange={handleChange}
-              placeholder="Shipping Details"
-              className="textarea"
-            />
-          </div>
         </div>
 
-        {/* TABLE */}
+        {/* SERVICE TABLE */}
         <table className="table">
           <thead>
             <tr>
               <th className="th" style={{ background: themeColor }}>
-                DESCRIPTION
+                SERVICE DESCRIPTION
               </th>
+
               <th className="th" style={{ background: themeColor }}>
-                QTY
+                HOURS
               </th>
+
               <th className="th" style={{ background: themeColor }}>
-                UNIT PRICE
+                RATE PER HOUR
               </th>
+
               <th className="th" style={{ background: themeColor }}>
                 TOTAL
               </th>
@@ -331,10 +307,10 @@ function GSTGoodsInvoice() {
               <td className="td">
                 <input
                   type="text"
-                  name="product"
-                  value={invoice.product}
+                  name="serviceDescription"
+                  value={invoice.serviceDescription}
                   onChange={handleChange}
-                  placeholder="Product Name"
+                  placeholder="Service Details"
                   className="tableInput"
                 />
               </td>
@@ -342,8 +318,8 @@ function GSTGoodsInvoice() {
               <td className="td">
                 <input
                   type="number"
-                  name="quantity"
-                  value={invoice.quantity}
+                  name="serviceHours"
+                  value={invoice.serviceHours}
                   onChange={handleChange}
                   className="tableInput"
                 />
@@ -352,8 +328,8 @@ function GSTGoodsInvoice() {
               <td className="td">
                 <input
                   type="number"
-                  name="unitPrice"
-                  value={invoice.unitPrice}
+                  name="serviceRate"
+                  value={invoice.serviceRate}
                   onChange={handleChange}
                   className="tableInput"
                 />
@@ -374,6 +350,7 @@ function GSTGoodsInvoice() {
           </h2>
         </div>
 
+        {/* AMOUNT IN WORDS */}
         <div className="amountWordsCheck">
           <label>
             <input
@@ -393,21 +370,13 @@ function GSTGoodsInvoice() {
 
         {/* BUTTONS */}
         <div className="buttonSection">
-          <button className="button" onClick={handleSaveInvoice}>
-            Save Invoice
-          </button>
+          <button className="button">Save Invoice</button>
 
-          <button className="printButton" onClick={handlePrintInvoice}>
-            Print Invoice
-          </button>
-
-          <button className="sendButton" onClick={handleSendInvoice}>
-            Send Invoice
-          </button>
+          <button className="printButton">Print Invoice</button>
         </div>
       </div>
     </div>
   );
 }
 
-export default GSTGoodsInvoice;
+export default GSTServiceInvoice;

@@ -32,6 +32,7 @@ import {
   UserPlus,
   CheckSquare,
   UserCheck,
+  DollarSign,
 } from "lucide-react";
 
 import {
@@ -352,9 +353,10 @@ const leaveStatsData = [
 
 const MENU_ITEMS = [
   { name: "Calendar", icon: Calendar, path: "/calendar" },
-  /*{ name: "Payroll", icon: CreditCard, path: "/payroll" },*/
+  { name: "Payroll", icon: CreditCard, path: "/payroll" },
   { name: "Insurance", icon: Shield, path: "/insurancepolicies" },
   { name: "Staff Details", icon: Users, path: "/staffdetails" },
+  { name: "CTC Details", icon: DollarSign, path: "/my-ctc" },
 
   // New Finance submenu
   {
@@ -435,8 +437,6 @@ const MENU_ITEMS = [
   { name: "Organization Chart", icon: GitBranch, path: "/organization" },
   { name: "Holiday Management", icon: CalendarCheck, path: "/manage-holidays" },
   { name: "Profile", icon: Shield, path: "/profile" },
-
-  { name: "Insurance", icon: Shield, path: "/insurancepolicies2" },
 ];
 
 // ==========================================

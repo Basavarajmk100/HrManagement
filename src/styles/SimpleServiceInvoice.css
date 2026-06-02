@@ -1,0 +1,208 @@
+/* Simple Service Invoice */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.simpleInvoice {
+  min-height: 100vh;
+  background: #f1f5f9;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.invoiceCard {
+  width: 100%;
+  max-width: 850px;
+  background: white;
+  border-radius: 14px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* TITLE */
+
+.invoiceCard h1 {
+  text-align: center;
+  color: #2563eb;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* INVOICE INFO */
+
+.invoiceInfo {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.invoiceInfo p {
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+}
+
+.invoiceInfo strong {
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #334155;
+}
+
+.invoiceInfo input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 13px;
+}
+
+.invoiceInfo input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: white;
+}
+
+/* SECTIONS */
+
+.section {
+  margin-bottom: 25px;
+}
+
+.section h3 {
+  color: #2563eb;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.section textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  resize: none;
+  background: #f8fafc;
+  font-size: 14px;
+}
+
+.section textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: white;
+}
+
+/* TOTAL */
+
+.totalBox {
+  width: 280px;
+  margin-left: auto;
+  margin-top: 20px;
+  background: #eff6ff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.totalBox h2 {
+  color: #2563eb;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.totalBox input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+}
+
+.totalBox input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* THANK YOU */
+
+.thankYou {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.thankYou h3 {
+  color: #0f172a;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* BUTTONS */
+
+.buttonSection {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.saveBtn,
+.printBtn {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.saveBtn {
+  background: #2563eb;
+}
+
+.printBtn {
+  background: #0f172a;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .simpleInvoice {
+    padding: 15px;
+  }
+
+  .invoiceCard {
+    padding: 20px;
+  }
+
+  .invoiceInfo {
+    flex-direction: column;
+  }
+
+  .invoiceInfo p {
+    width: 100%;
+  }
+
+  .totalBox {
+    width: 100%;
+  }
+
+  .buttonSection {
+    flex-direction: column;
+  }
+
+  .saveBtn,
+  .printBtn {
+    width: 100%;
+  }
+}

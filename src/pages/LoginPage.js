@@ -15,11 +15,22 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const users = [
-    { email: "admin@hrms.com", password: "Admin@1234", role: "Admin" },
-    { email: "hr@hrms.com", password: "Hr@1234", role: "HR" },
-    { email: "employee@hrms.com", password: "Emp@1234", role: "Employee" },
+    { email: "admin@itsmyhr.in", password: "Admin@1234", role: "Admin" },
+    { email: "hr@itsmyhr.in", password: "Hr@1234", role: "HR" },
     {
-      email: "maintenance@hrms.com",
+      email: "hrmanager@itsmyhr.in",
+      password: "HrManager@1234",
+      role: "HR Manager",
+    },
+    { email: "employee@itsmyhr.in", password: "Emp@1234", role: "Employee" },
+
+    {
+      email: "finance@itsmyhr.in",
+      password: "Finance@1234",
+      role: "Finance Manager",
+    },
+    {
+      email: "maintenance@itsmyhr.in",
       password: "Maint@1234",
       role: "System Maintenance",
     },
@@ -44,13 +55,23 @@ const LoginPage = () => {
 
       switch (user.role) {
         case "Admin":
-          navigate("/admin");
+          navigate("/admin-dashboard");
           break;
+
         case "HR":
+          navigate("/hr-dashboard");
+          break;
+
+        case "HR Manager":
           navigate("/hr-manager");
           break;
+
         case "Employee":
           navigate("/employee-dashboard");
+          break;
+
+        case "Finance Manager":
+          navigate("/finance-Manager");
           break;
 
         case "System Maintenance":
@@ -99,7 +120,10 @@ const LoginPage = () => {
             <select name="role" value={form.role} onChange={handleChange}>
               <option value="Admin">Admin</option>
               <option value="HR">HR</option>
+              <option value="HR Manager">HR Manager</option>
               <option value="Employee">Employee</option>
+
+              <option value="Finance Manager">Finance Manager</option>
               <option value="System Maintenance" style={{ color: "#9ca3af" }}>
                 System Maintenance
               </option>

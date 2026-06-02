@@ -13,17 +13,20 @@ function TemplateSelect() {
       name: "GST Service Invoice",
       path: "/gst-service-invoice",
     },
+
     {
-      name: "Retail Invoice",
-      path: "/retail-invoice",
+      name: "Sidebar Service Invoice",
+      path: "/sidebar-service-invoice",
     },
+
     {
-      name: "Proforma Invoice",
-      path: "/proforma-invoice",
+      name: "Minimal Service Invoice",
+      path: "/minimal-service-invoice",
     },
+
     {
-      name: "Tax Invoice",
-      path: "/tax-invoice",
+      name: "Simple Service Invoice",
+      path: "/simple-service-invoice",
     },
     {
       name: "Debit/Credit Note Invoice",

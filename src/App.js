@@ -23,6 +23,7 @@ import TeamMember from "./components/HRDashboard/TeamMember";
 import OrganizationChart from "./components/HRDashboard/OrganizationChart";
 import HolidayManagement from "./components/HRDashboard/HolidayManagement";
 import PayrollDashboard from "./components/HRDashboard/PayrollDashboard";
+import HrManagerCTCSidebar from "./components/HRDashboard/HrManagerCTCSidebar";
 
 import Gallery from "./components/HRDashboard/Gallery";
 
@@ -51,7 +52,7 @@ import ApprovePayroll from "./components/HRDashboard/ApprovePayroll";
 import InsuranceForm from "./components/HRDashboard/InsuranceForm";
 
 import InsurancePolicies from "./components/HRDashboard/Insurancepolicies";
-import InsurancePolicies2 from "./components/HRDashboard/Insurancepolicies2";
+import InsurancePoliciesAdmin from "./components/AdminDashboard/InsurancepoliciesAdmin";
 
 import StaffDetails from "./components/HRDashboard/StaffDetails";
 
@@ -83,7 +84,7 @@ import MyTeam from "./components/EmployeeDashboard/MyTeam";
 import Attendance from "./components/EmployeeDashboard/Attendance";
 import IncomeDeclaration from "./components/EmployeeDashboard/IncomeDeclaration";
 import EmployeeDashboardPageComponent from "./components/EmployeeDashboard/EmployeeDashboard"; // main EmployeeDashboard page
-
+import EmployeeCTCSidebar from "./components/EmployeeDashboard/EmployeeCTCSidebar";
 import ViewInsurance from "./components/EmployeeDashboard/ViewInsurance";
 import RequestInsurance from "./components/EmployeeDashboard/RequestInsurance";
 
@@ -184,6 +185,7 @@ import FinanceManager from "./components/FinanceManagerDashboard/FinanceManager"
 import TemplateSelect from "./components/FinanceManagerDashboard/TemplateSelect";
 
 import Admin from "./components/AdminDashboard/Admin"; // adjust path if needed
+import AdminCTCSidebar from "./components/AdminDashboard/AdminCTCSidebar";
 
 import CreateCompany from "./components/FinanceManagerDashboard/CreateCompany";
 import InvoiceNumberType from "./components/FinanceManagerDashboard/InvoiceNumberType";
@@ -192,6 +194,14 @@ import CreateVendors from "./components/FinanceManagerDashboard/CreateVendors";
 import EmailSettings from "./components/FinanceManagerDashboard/EmailSettings";
 
 import GSTGoodsInvoice from "./components/FinanceManagerDashboard/GSTGoodsInvoice";
+
+import GSTServiceInvoice from "./components/FinanceManagerDashboard/GSTServiceInvoice";
+
+import SidebarServiceInvoice from "./components/FinanceManagerDashboard/SidebarServiceInvoice";
+
+import MinimalServiceInvoice from "./components/FinanceManagerDashboard/MinimalServiceInvoice";
+
+import SimpleServiceInvoice from "./components/FinanceManagerDashboard/SimpleServiceInvoice";
 
 function LandingRedirect() {
   React.useEffect(() => {
@@ -236,6 +246,7 @@ function App() {
         <Route path="/organization" element={<OrganizationChart />} />
         <Route path="/manage-holidays" element={<HolidayManagement />} />
         <Route path="/payroll" element={<PayrollDashboard />} />
+        <Route path="/hr/my-ctc" element={<HrManagerCTCSidebar />} />
 
         <Route path="/admin/user-approvals" element={<UserApprovals />} />
 
@@ -268,7 +279,12 @@ function App() {
         <Route path="/insuranceform" element={<InsuranceForm />} />
 
         <Route path="/insurancepolicies" element={<InsurancePolicies />} />
-        <Route path="/insurancepolicies2" element={<InsurancePolicies2 />} />
+        <Route
+          path="/insurancepoliciesadmin"
+          element={<InsurancePoliciesAdmin />}
+        />
+
+        <Route path="/my-ctc" element={<AdminCTCSidebar />} />
 
         <Route path="/finance/invoicesPage" element={<InvoicesPage />} />
 
@@ -312,6 +328,8 @@ function App() {
         <Route path="/my-team" element={<MyTeam />} />
 
         <Route path="/income-declaration" element={<IncomeDeclaration />} />
+
+        <Route path="/my-ctc" element={<EmployeeCTCSidebar />} />
 
         <Route path="/employee/view-insurance" element={<ViewInsurance />} />
         <Route
@@ -514,6 +532,23 @@ function App() {
         <Route path="/settings/create-vendors" element={<CreateVendors />} />
         <Route path="/settings/email-settings" element={<EmailSettings />} />
         <Route path="/gst-goods-invoice" element={<GSTGoodsInvoice />} />
+
+        <Route path="/gst-service-invoice" element={<GSTServiceInvoice />} />
+
+        <Route
+          path="/sidebar-service-invoice"
+          element={<SidebarServiceInvoice />}
+        />
+
+        <Route
+          path="/minimal-service-invoice"
+          element={<MinimalServiceInvoice />}
+        />
+
+        <Route
+          path="/simple-service-invoice"
+          element={<SimpleServiceInvoice />}
+        />
       </Routes>
     </Router>
   );

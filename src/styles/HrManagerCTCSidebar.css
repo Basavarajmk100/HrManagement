@@ -1,0 +1,92 @@
+/* Container */
+.ctc-container {
+  padding: 20px;
+  background: #0f172a;
+  min-height: 100vh;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.ctc-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #38bdf8;
+}
+
+/* Empty state */
+.ctc-empty {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* Table wrapper */
+.table-wrapper {
+  overflow-x: auto;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Table */
+.ctc-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+/* Table head */
+.ctc-table thead {
+  background: #334155;
+}
+
+.ctc-table th {
+  padding: 12px;
+  text-align: left;
+  color: #e2e8f0;
+  font-size: 14px;
+}
+
+/* Table body */
+.ctc-table td {
+  padding: 12px;
+  border-bottom: 1px solid #334155;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+/* Hover effect */
+.ctc-table tbody tr:hover {
+  background: #273449;
+  transition: 0.2s;
+}
+
+/* CTC amount styling */
+.ctc-table td:last-child {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.edit-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ctc-table input {
+  padding: 5px;
+  width: 100px;
+}

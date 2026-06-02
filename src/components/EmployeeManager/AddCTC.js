@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/AddCTC.css";
+import AppraisalModal from "./AppraisalModal";
 import * as XLSX from "xlsx";
 const AddCTC = () => {
   const [editMode, setEditMode] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const[searchResult,setSearchResult]=useState(null);
+  const [searchResult, setSearchResult] = useState(null);
 
   const [enableIncentive, setEnableIncentive] = useState(false);
 
   const [form, setForm] = useState({
     empId: "",
     empName: "",
-    totalCTC: 0,      // Annual 
-    grossMonthly: 0,  // Auto
+    totalCTC: 0, // Annual
+    grossMonthly: 0, // Auto
     basic: 0,
     hra: 0,
     medical: 1250,
     transport: 1600,
-    bonus: 0,         // 20% of Basic
+    bonus: 0, // 20% of Basic
     employerPF: 1800, // Fixed
     variableAnnual: 0,
     special: 0,
   });
-
+  const [showAppraisal, setShowAppraisal] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   const handleChange = (key, value) => {
     setForm({ ...form, [key]: Number(value) || 0 });
@@ -46,11 +48,9 @@ const AddCTC = () => {
     // Statutory Bonus = (Basic / 100) * 20
     const bonus = (basic / 100) * 20;
 
-
     // Performance Incentive = 20% of Basic (Monthly)
-const incentiveMonthly = enableIncentive ? basic * 0.2 : 0;
-const incentiveAnnual = incentiveMonthly * 12;
-
+    const incentiveMonthly = enableIncentive ? basic * 0.2 : 0;
+    const incentiveAnnual = incentiveMonthly * 12;
 
     // Employer PF fixed
     const employerPF = 1800;
@@ -64,7 +64,6 @@ const incentiveAnnual = incentiveMonthly * 12;
       form.transport +
       incentiveMonthly;
 
-
     const special = Math.max(grossMonthly - usedAmount, 0);
 
     setForm((prev) => ({
@@ -77,168 +76,135 @@ const incentiveAnnual = incentiveMonthly * 12;
       variableAnnual: incentiveAnnual, // AUTO SET
       special,
     }));
-}, [
-  form.totalCTC,
-  editMode,
-  form.medical,
-  form.transport,
-  enableIncentive,
-]);
+  }, [form.totalCTC, editMode, form.medical, form.transport, enableIncentive]);
 
+  const handleSubmit = async () => {
+    const calculatedAnnual = Number((form.grossMonthly * 12).toFixed(2));
+    const enteredCTC = Number(form.totalCTC.toFixed(2));
 
-const handleSubmit = async () => {
-  const calculatedAnnual = Number((form.grossMonthly * 12).toFixed(2));
-  const enteredCTC = Number(form.totalCTC.toFixed(2));
+    if (calculatedAnnual !== enteredCTC) {
+      const difference = Number((enteredCTC - calculatedAnnual).toFixed(2));
 
-  if (calculatedAnnual !== enteredCTC) {
-    const difference = Number((enteredCTC - calculatedAnnual).toFixed(2));
+      alert(
+        `CTC Mismatch (Total Cost to Company)\n\n` +
+          `Entered CTC: ₹${enteredCTC}\n` +
+          `Calculated CTC: ₹${calculatedAnnual}\n\n` +
+          `Difference in Total Cost to Company: ₹${difference}`,
+      );
+      return; // ❌ STOP saving
+    }
 
-    alert(
-      `CTC Mismatch (Total Cost to Company)\n\n` +
-      `Entered CTC: ₹${enteredCTC}\n` +
-      `Calculated CTC: ₹${calculatedAnnual}\n\n` +
-      `Difference in Total Cost to Company: ₹${difference}`
-    );
-    return; // ❌ STOP saving
-  }
+    try {
+      const response = await fetch("http://localhost:5133/api/ctc/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-  try {
-    const response = await fetch("http://localhost:5133/api/ctc/save", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+      const data = await response.json();
+      alert(data.message);
+    } catch (error) {
+      console.error("Error saving CTC:", error);
+    }
+  };
 
-    const data = await response.json();
-    alert(data.message);
-  } catch (error) {
-    console.error("Error saving CTC:", error);
-  }
-};
+  const handleSearch = async () => {
+    if (!searchTerm.trim()) {
+      alert("Enter Employee ID or Name");
+      return;
+    }
 
+    try {
+      const res = await fetch(
+        `http://localhost:5133/api/ctc/search?query=${encodeURIComponent(searchTerm)}`,
+      );
 
-
-
-const handleSearch = async () => {
-  if (!searchTerm.trim()) {
-    alert("Enter Employee ID or Name");
-    return;
-  }
-
-  try {
-    const res = await fetch(
-      `http://localhost:5133/api/ctc/search?query=${encodeURIComponent(searchTerm)}`
-    );
-
-    if (!res.ok) {
-      if (res.status === 404) {
-        alert("No employees found");
-      } else {
-        alert(`Server error: ${res.status}`);
+      if (!res.ok) {
+        if (res.status === 404) {
+          alert("No employees found");
+        } else {
+          alert(`Server error: ${res.status}`);
+        }
+        setSearchResult([]); // clear previous results
+        return;
       }
-      setSearchResult([]); // clear previous results
-      return;
-    }
 
-    // Parse JSON safely
-    const data = await res.json().catch(() => null);
+      // Parse JSON safely
+      const data = await res.json().catch(() => null);
 
-    if (!data || !data.length) {
-      alert("No employees found");
+      if (!data || !data.length) {
+        alert("No employees found");
+        setSearchResult([]);
+        return;
+      }
+
+      // Set multiple results
+      setSearchResult(data);
+    } catch (err) {
+      console.error("Search error", err);
+      alert("Error fetching employee CTC. Check backend or network.");
       setSearchResult([]);
+    }
+  };
+
+  const handleExcelDownload = () => {
+    if (!searchResult || searchResult.length === 0) {
+      alert("Search employee first");
       return;
     }
 
-    // Set multiple results
-    setSearchResult(data);
+    // Convert JSON → Excel sheet
+    const worksheet = XLSX.utils.json_to_sheet(searchResult);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "CTC Details");
 
-  } catch (err) {
-    console.error("Search error", err);
-    alert("Error fetching employee CTC. Check backend or network.");
-    setSearchResult([]);
-  }
-};
-
-const handleExcelDownload = () => {
-  if (!searchResult || searchResult.length === 0) {
-    alert("Search employee first");
-    return;
-  }
-
-  // Convert JSON → Excel sheet
-  const worksheet = XLSX.utils.json_to_sheet(searchResult);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "CTC Details");
-
-  // Download file
-  XLSX.writeFile(workbook, "CTC_Search_Results.xlsx");
-};
-
-
+    // Download file
+    XLSX.writeFile(workbook, "CTC_Search_Results.xlsx");
+  };
 
   return (
-    <div className
+    <div className="ctc-card">
+      {/* 🔍 Search CTC */}
+      <div className="ctc-top-row">
+        {/* ===== LEFT : Add CTC ===== */}
+        <div className="add-ctc-section">
+          <h3>Add CTC</h3>
+          {/* Add CTC form continues here */}
+        </div>
 
-="ctc-card">
-            {/* 🔍 Search CTC */}
-<div className
+        {/* ===== RIGHT : Search CTC ===== */}
+        <div className="ctc-search">
+          <div className="search-row">
+            <input
+              type="text"
+              placeholder="Search by Employee ID"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button onClick={handleSearch}>Search</button>
+          </div>
 
-="ctc-top-row">
+          {searchResult && searchResult.length > 0 && (
+            <>
+              <h3>Search Results</h3>
+              <ul>
+                {searchResult.map((emp) => (
+                  <li key={emp.id}>
+                    {emp.empId} - {emp.empName}
+                  </li>
+                ))}
+              </ul>
 
-  {/* ===== LEFT : Add CTC ===== */}
-  <div className
-
-="add-ctc-section">
-    <h3>Add CTC</h3>
-    {/* Add CTC form continues here */}
-  </div>
-
-  {/* ===== RIGHT : Search CTC ===== */}
- <div className
-
-="ctc-search">
-  <div className
-
-="search-row">
-    <input
-      type="text"
-      placeholder="Search by Employee ID"
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-    />
-    <button onClick={handleSearch}>Search</button>
-  </div>
-
-  {searchResult && searchResult.length > 0 && (
-    <>
-      <h3>Search Results</h3>
-      <ul>
-        {searchResult.map(emp => (
-          <li key={emp.id}>
-            {emp.empId} - {emp.empName}
-          </li>
-        ))}
-      </ul>
-
-      <button
-        className
-
-="download-btn"
-        onClick={handleExcelDownload}
-      >
-        Download CTC (Excel)
-      </button>
-    </>
-  )}
-</div>
-
-
-</div>
+              <button className="download-btn" onClick={handleExcelDownload}>
+                Download CTC (Excel)
+              </button>
+            </>
+          )}
+        </div>
+      </div>
 
       {/* Employee Info */}
-      <div className
-
-="employee-details">
+      <div className="employee-details">
         <input
           placeholder="Employee ID"
           value={form.empId}
@@ -252,57 +218,44 @@ const handleExcelDownload = () => {
       </div>
 
       {/* CTC Summary */}
-     <div className
+      <div className="ctc-summary">
+        <div className="ctc-fields">
+          <label>
+            CTC (Annual)
+            <input
+              type="number"
+              value={form.totalCTC}
+              onChange={(e) => handleChange("totalCTC", e.target.value)}
+            />
+          </label>
 
-="ctc-summary">
-  <div className
+          <label>
+            Gross Monthly
+            <input value={form.grossMonthly.toFixed(2)} disabled />
+          </label>
+        </div>
 
-="ctc-fields">
-    <label>
-      CTC (Annual)
-      <input
-        type="number"
-        value={form.totalCTC}
-        onChange={(e) => handleChange("totalCTC", e.target.value)}
-      />
-    </label>
+        <div className="edit-actions">
+          <label className="incentive-toggle">
+            <input
+              type="checkbox"
+              checked={enableIncentive}
+              onChange={(e) => setEnableIncentive(e.target.checked)}
+            />
+            <span>Performance Incentive (20%)</span>
+          </label>
 
-    <label>
-      Gross Monthly
-      <input value={form.grossMonthly.toFixed(2)} disabled />
-    </label>
-  </div>
-
-  <div className
-
-="edit-actions">
-    <label className
-
-="incentive-toggle">
-      <input
-        type="checkbox"
-        checked={enableIncentive}
-        onChange={(e) => setEnableIncentive(e.target.checked)}
-      />
-        <span>Performance Incentive (20%)</span>
-    </label>
-
-    <button
-      className
-
-={`edit-btn ${editMode ? "cancel" : ""}`}
-      onClick={() => setEditMode(!editMode)}
-    >
-      {editMode ? "Cancel Edit" : "Edit"}
-    </button>
-  </div>
-
+          <button
+            className={`edit-btn ${editMode ? "cancel" : ""}`}
+            onClick={() => setEditMode(!editMode)}
+          >
+            {editMode ? "Cancel Edit" : "Edit"}
+          </button>
+        </div>
       </div>
 
       {/* Breakdown */}
-      <table className
-
-="ctc-table">
+      <table className="ctc-table">
         <thead>
           <tr>
             <th>Breakdown</th>
@@ -311,87 +264,95 @@ const handleExcelDownload = () => {
           </tr>
         </thead>
         <tbody>
-<Row
-  label="Basic Salary"
-  value={form.basic}
-  editable
-  editMode={editMode}
-  onChange={(v) => handleChange("basic", v)}
-/>
-<Row
-  label="HRA"
-  value={form.hra}
-  editable
-  editMode={editMode}
-  onChange={(v)=> handleChange("hra",v)}
+          <Row
+            label="Basic Salary"
+            value={form.basic}
+            editable
+            editMode={editMode}
+            onChange={(v) => handleChange("basic", v)}
+          />
+          <Row
+            label="HRA"
+            value={form.hra}
+            editable
+            editMode={editMode}
+            onChange={(v) => handleChange("hra", v)}
+          />
 
-/>
+          <Row
+            label="Medical Allowance"
+            value={form.medical}
+            editable
+            editMode={editMode}
+            onChange={(v) => handleChange("medical", v)}
+          />
 
-<Row
-  label="Medical Allowance"
-  value={form.medical}
-  editable
-  editMode={editMode}
-  onChange={(v) => handleChange("medical", v)}
-/>
+          <Row
+            label="Transport Allowance"
+            value={form.transport}
+            editable
+            editMode={editMode}
+            onChange={(v) => handleChange("transport", v)}
+          />
 
-<Row
-  label="Transport Allowance"
-  value={form.transport}
-  editable
-  editMode={editMode}
-  onChange={(v) => handleChange("transport", v)}
-/>
+          <Row
+            label="Special Allowance"
+            value={form.special}
+            editable
+            editMode={editMode}
+            onChange={(v) => handleChange("special", v)}
+          />
+          <Row
+            label="Statutory Bonus (20%)"
+            value={form.bonus}
+            editable
+            editMode={editMode}
+            onChange={(v) => handleChange("bonus", v)}
+          />
 
+          <Row
+            label="Employer PF"
+            value={form.employerPF}
+            editable
+            editMode={editMode}
+            onChange={(v) => handleChange("employerPF", v)}
+          />
 
-<Row
-  label="Special Allowance"
-  value={form.special}
-  editable
-  editMode={editMode}
-  onChange={(v) => handleChange("special", v)}
-/>
-<Row
-  label="Statutory Bonus (20%)"
-  value={form.bonus}
-  editable
-  editMode={editMode}
-  onChange={(v) => handleChange("bonus", v)}
-/>
+          <Row
+            label="Performance Incentive (20% of Basic)"
+            value={form.variableAnnual / 12}
+            editable={false}
+            editMode={false}
+          />
 
-<Row
-  label="Employer PF"
-  value={form.employerPF}
-  editable
-  editMode={editMode}
-  onChange={(v) => handleChange("employerPF", v)}
-/>
-
-
-<Row
-  label="Performance Incentive (20% of Basic)"
-  value={form.variableAnnual / 12}
-  editable={false}
-  editMode={false}
-/>
-
-
-
-          <tr className
-
-="total-row">
+          <tr className="total-row">
             <td>Total Cost to Company</td>
             <td>{form.grossMonthly.toFixed(2)}</td>
             <td>{form.totalCTC.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>
+      <div className="action-buttons">
+        <button className="save-btn" onClick={handleSubmit}>
+          Save CTC
+        </button>
 
-      <button className
+        <button
+          className="appraisal-btn"
+          onClick={() => {
+            setSelectedEmployee(form);
+            setShowAppraisal(true);
+          }}
+        >
+          Appraisal
+        </button>
+      </div>
 
-="save-btn" onClick={handleSubmit}>
-        Save CTC
-      </button>
+      <AppraisalModal
+        isOpen={showAppraisal}
+        onClose={() => setShowAppraisal(false)}
+        employee={selectedEmployee}
+      />
     </div>
   );
 };
@@ -406,13 +367,9 @@ const formatAmount = (value) =>
 // Row component NEXT
 const Row = ({ label, value, editable = false, editMode, onChange }) => (
   <tr>
-    <td className
+    <td className="label-cell">{label}</td>
 
-="label-cell">{label}</td>
-
-    <td className
-
-="amount-cell">
+    <td className="amount-cell">
       {editable && editMode ? (
         <input
           type="number"
@@ -420,21 +377,12 @@ const Row = ({ label, value, editable = false, editMode, onChange }) => (
           onChange={(e) => onChange(Number(e.target.value))}
         />
       ) : (
-        <span className
-
-="static-text">{formatAmount(value)}</span>
+        <span className="static-text">{formatAmount(value)}</span>
       )}
     </td>
 
-    <td className
-
-="amount-cell">
-      {formatAmount(value * 12)}
-    </td>
+    <td className="amount-cell">{formatAmount(value * 12)}</td>
   </tr>
 );
-
-
-
 
 export default AddCTC;

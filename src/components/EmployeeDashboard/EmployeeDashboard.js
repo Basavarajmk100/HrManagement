@@ -22,6 +22,7 @@ import {
   ShieldCheck,
   ClipboardList,
   Calendar,
+  Wallet,
 } from "lucide-react";
 
 import {
@@ -279,6 +280,7 @@ const MENU_ITEMS = [
   },
   { name: "Profile", icon: User, path: "/profile" },
   { name: "Payslip", icon: ReceiptText, path: "/payslip" },
+  { name: "My CTC", icon: Wallet, path: "/my-ctc" },
 
   /* { name: "My Insurance", icon: Shield, path: "/my-insurance" },*/
 

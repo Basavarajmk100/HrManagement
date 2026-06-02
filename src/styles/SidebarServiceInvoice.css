@@ -1,0 +1,285 @@
+/* Compact Sidebar Service Invoice */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.serviceInvoice2 {
+  min-height: 100vh;
+  display: flex;
+  background: #f1f5f9;
+}
+
+/* SIDEBAR */
+
+.invoiceSidebar {
+  width: 25%;
+  padding: 25px 18px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebarLogo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: white;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.sidebarLogoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logoInput {
+  display: none;
+}
+
+.sidebarCompanyName {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  outline: none;
+}
+
+.sidebarText {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: white;
+  resize: none;
+  outline: none;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* CONTENT */
+
+.invoiceContent {
+  width: 75%;
+  background: white;
+  padding: 25px;
+}
+
+/* TOP */
+
+.invoiceHeader2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.invoiceHeading2 {
+  border: none;
+  outline: none;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  width: 260px;
+}
+
+.invoiceDetailsBox {
+  width: 260px;
+}
+
+.invoiceDetailsBox div {
+  margin-bottom: 12px;
+}
+
+.invoiceDetailsBox label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* INPUTS */
+
+.modernInput,
+.billTextarea2 {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 13px;
+}
+
+.modernInput:focus,
+.billTextarea2:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: white;
+}
+
+.billSection2 {
+  margin-bottom: 20px;
+}
+
+.billSection2 h3 {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.billTextarea2 {
+  min-height: 90px;
+  resize: none;
+}
+
+/* TABLE */
+
+.serviceTable2 {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+.serviceTable2 th {
+  color: white;
+  padding: 12px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.serviceTable2 td {
+  border: 1px solid #e2e8f0;
+  padding: 10px;
+  text-align: center;
+}
+
+.tableInput2 {
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  background: transparent;
+  font-size: 13px;
+}
+
+.totalCell {
+  font-weight: 700;
+}
+
+/* TOTAL */
+
+.grandTotalBox {
+  width: 220px;
+  margin-left: auto;
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #f8fafc;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.grandTotalBox h2 {
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #334155;
+}
+
+.grandTotalBox h1 {
+  font-size: 28px;
+}
+
+/* AMOUNT WORDS */
+
+.amountToggle {
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+.amountToggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 360px;
+}
+
+.amountWords2 {
+  margin-top: 10px;
+  background: #eff6ff;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #1e293b;
+  min-width: 240px;
+}
+
+/* BUTTONS */
+
+.buttonSection2 {
+  display: flex;
+  gap: 14px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.saveBtn2,
+.printBtn2 {
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.printBtn2 {
+  background: #0f172a;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+  .serviceInvoice2 {
+    flex-direction: column;
+  }
+
+  .invoiceSidebar,
+  .invoiceContent {
+    width: 100%;
+  }
+
+  .invoiceHeader2 {
+    flex-direction: column;
+  }
+
+  .invoiceDetailsBox,
+  .grandTotalBox {
+    width: 100%;
+  }
+
+  .buttonSection2 {
+    flex-direction: column;
+  }
+
+  .saveBtn2,
+  .printBtn2 {
+    width: 100%;
+  }
+}

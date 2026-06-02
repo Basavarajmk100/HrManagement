@@ -6,8 +6,15 @@
 }
 
 body {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Ubuntu, sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Ubuntu,
+    sans-serif;
   background: #f1f5f9;
   color: #111827;
 }
@@ -18,14 +25,13 @@ body {
 .ctc-card {
   background: linear-gradient(180deg, #ffffff, #fafafa);
   padding: 32px;
-  border-radius: 0;                 /* full page look */
+  border-radius: 0; /* full page look */
   border: none;
   width: 100%;
-  min-height: 100vh;                /* full height */
-  margin: 0;                        /* remove centering */
+  min-height: 100vh; /* full height */
+  margin: 0; /* remove centering */
   box-shadow: none;
 }
-
 
 .ctc-top-row {
   display: flex;
@@ -45,7 +51,6 @@ body {
   max-width: 420px;
 }
 
-
 /* Input + Search button in one line */
 .search-row {
   display: flex;
@@ -63,8 +68,6 @@ body {
   white-space: nowrap;
 }
 
-
-
 /* ===== CTC Search Container ===== */
 .ctc-search {
   background: #f9fafb; /* soft light background */
@@ -73,7 +76,7 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   max-width: 600px;
   margin: 30px auto;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 /* ===== Input Field ===== */
@@ -98,7 +101,7 @@ body {
   margin-left: 10px;
   border: none;
   border-radius: 10px;
-  background: #FA85B9 ; /* purple gradient optional */
+  background: #fa85b9; /* purple gradient optional */
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -107,7 +110,7 @@ body {
 }
 
 .ctc-search button:hover {
-  background: #FA85B9 ;
+  background: #fa85b9;
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(79, 70, 229, 0.3);
 }
@@ -144,13 +147,13 @@ body {
 /* ===== Download Button ===== */
 /* ===== Small Download Button ===== */
 .ctc-search .download-btn {
-  display: inline-block;      /* not full width */
-  width: auto;                /* auto size */
-  margin: 15px auto 0;        /* center horizontally */
-  padding: 8px 16px;          /* smaller padding */
-  font-size: 14px;            /* smaller text */
-  border-radius: 8px;         /* slightly tighter */
-  background: #FA85B9 ;
+  display: inline-block; /* not full width */
+  width: auto; /* auto size */
+  margin: 15px auto 0; /* center horizontally */
+  padding: 8px 16px; /* smaller padding */
+  font-size: 14px; /* smaller text */
+  border-radius: 8px; /* slightly tighter */
+  background: #fa85b9;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -160,11 +163,10 @@ body {
 }
 
 .ctc-search .download-btn:hover {
-  background: #FA85B9 ;
+  background: #fa85b9;
   transform: translateY(-1px); /* subtle hover */
   box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
 }
-
 
 /* =========================================================
    EMPLOYEE DETAILS
@@ -315,7 +317,7 @@ body {
 
 /* Headers */
 .ctc-table th {
-  background:   #3B82F6;
+  background: #3b82f6;
   color: #ffffff;
   padding: 12px;
   font-size: 14px;
@@ -374,18 +376,30 @@ body {
   padding-left: 20px;
 }
 
-
 /* ===============================
    Save Button
    =============================== */
-.save-btn {
+.action-buttons {
+  display: flex;
+  gap: 12px;
   margin-top: 15px;
+}
+
+.save-btn,
+.appraisal-btn {
   padding: 10px 18px;
-  background: #FA85B9  !important;
   color: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.save-btn {
+  background: #fa85b9 !important;
+}
+
+.appraisal-btn {
+  background: #6366f1;
 }
 
 /* ===============================
@@ -438,8 +452,8 @@ body {
 
 /* Checkbox + text strictly side by side */
 .incentive-toggle {
-  display: inline-flex;      /* ✅ horizontal always */
-  align-items: center;       /* ✅ vertical center */
+  display: inline-flex; /* ✅ horizontal always */
+  align-items: center; /* ✅ vertical center */
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
@@ -453,7 +467,3 @@ body {
   margin: 0;
   vertical-align: middle;
 }
-
-
-
-

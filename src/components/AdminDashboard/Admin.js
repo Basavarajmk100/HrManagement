@@ -32,6 +32,7 @@ import {
   UserPlus,
   CheckSquare,
   UserCheck,
+  DollarSign,
 } from "lucide-react";
 
 import {
@@ -351,7 +352,9 @@ const leaveStatsData = [
 ];
 
 const MENU_ITEMS = [
-  { name: "Insurance", icon: Shield, path: "/insurancepolicies2" },
+  { name: "Insurance", icon: Shield, path: "/insurancepoliciesadmin" },
+  // ✅ ADD THIS
+  { name: "CTC Details", icon: DollarSign, path: "/my-ctc" },
 ];
 
 // ==========================================

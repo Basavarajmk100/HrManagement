@@ -325,7 +325,7 @@ const MENU_ITEMS = [
             icon: Hash,
           },
           {
-            name: "Template Select",
+            name: "Templates",
             path: "/settings/template-select",
             icon: LayoutTemplate,
           },

@@ -1,0 +1,68 @@
+/* Container */
+.ctc-container {
+  padding: 20px;
+  background: #f8fafc;
+  min-height: 100vh;
+  color: #0f172a;
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.ctc-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+/* Empty state */
+.ctc-empty {
+  color: #64748b;
+}
+
+/* Table wrapper */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table */
+.ctc-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Header (WHITE BACKGROUND) */
+.ctc-table thead {
+  background: #ffffff;
+}
+
+/* Header text */
+.ctc-table th {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #0f172a;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+/* Rows */
+.ctc-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #334155;
+}
+
+/* Hover effect */
+.ctc-table tbody tr:hover {
+  background: #f1f5f9;
+  transition: 0.3s;
+}
+
+/* Alternate row color */
+.ctc-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
