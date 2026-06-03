@@ -1,92 +1,100 @@
-/* Container */
+/* PAGE BACKGROUND */
 .ctc-container {
-  padding: 20px;
-  background: #0f172a;
+  padding: 24px;
   min-height: 100vh;
-  color: #fff;
-  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f4f6fb, #eef2ff);
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-/* Title */
+/* TITLE */
 .ctc-title {
-  font-size: 20px;
+  font-size: 26px;
+  font-weight: 700;
   margin-bottom: 20px;
-  color: #38bdf8;
+  color: #1f2937;
 }
 
-/* Empty state */
+/* LOADING */
 .ctc-empty {
-  color: #94a3b8;
-  font-size: 14px;
+  text-align: center;
+  font-size: 16px;
+  color: #6b7280;
+  margin-top: 60px;
 }
 
-/* Table wrapper */
+/* CHART WRAPPER (IMPORTANT FOR LINE CHART VISIBILITY) */
+.chart-wrapper {
+  width: 100%;
+  height: 380px; /* 🔥 increased height for line smooth rendering */
+  margin-bottom: 25px;
+  background: #ffffff; /* makes chart clearer */
+  border-radius: 16px;
+  padding: 10px 10px 0 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* CARD */
+.ctc-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* SECTION TITLE */
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #374151;
+}
+
+/* TABLE WRAPPER */
 .table-wrapper {
+  width: 100%;
   overflow-x: auto;
-  background: #1e293b;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Table */
+/* TABLE */
 .ctc-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px;
+  font-size: 14px;
 }
 
-/* Table head */
+/* HEADER */
 .ctc-table thead {
-  background: #334155;
+  background: linear-gradient(90deg, #6366f1, #4f46e5);
+  color: white;
 }
 
-.ctc-table th {
-  padding: 12px;
-  text-align: left;
-  color: #e2e8f0;
-  font-size: 14px;
-}
-
-/* Table body */
+/* CELLS */
+.ctc-table th,
 .ctc-table td {
-  padding: 12px;
-  border-bottom: 1px solid #334155;
-  color: #cbd5e1;
-  font-size: 14px;
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* Hover effect */
+/* ROW HOVER (FIXED SYNTAX) */
 .ctc-table tbody tr:hover {
-  background: #273449;
-  transition: 0.2s;
+  background: #f3f4f6;
 }
 
-/* CTC amount styling */
-.ctc-table td:last-child {
-  color: #22c55e;
-  font-weight: bold;
-}
+/* RESPONSIVE FIX FOR SMALL SCREENS */
+@media (max-width: 768px) {
+  .chart-wrapper {
+    height: 300px;
+  }
 
-.edit-btn {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+  .ctc-title {
+    font-size: 20px;
+  }
 
-.save-btn {
-  background: #22c55e;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.ctc-table input {
-  padding: 5px;
-  width: 100px;
+  .ctc-table th,
+  .ctc-table td {
+    padding: 10px;
+    font-size: 13px;
+  }
 }

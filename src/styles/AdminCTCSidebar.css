@@ -66,3 +66,63 @@
 .ctc-table tbody tr:nth-child(even) {
   background: #fafafa;
 }
+
+.chart-container {
+  width: 100%;
+  height: 350px;
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ctc-layout {
+  display: flex;
+  gap: 20px;
+}
+
+.ctc-left {
+  flex: 2;
+}
+
+.ctc-right {
+  flex: 2;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #c387c2;
+  box-shadow: 0 8px 20px rgba(195, 135, 194, 0.2);
+  min-height: 500px;
+}
+.ctc-right h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.selected-row {
+  background: #f7e8f7;
+}
+
+.ctc-table tbody tr {
+  cursor: pointer;
+}
+
+.ctc-table tbody tr:hover {
+  background: #fdf4fd;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: #faf5fa;
+  border-radius: 8px;
+}
+
+.empty-details {
+  text-align: center;
+  color: #666;
+  margin-top: 100px;
+}
