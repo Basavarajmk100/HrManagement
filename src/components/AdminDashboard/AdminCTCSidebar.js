@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/AdminCTCSidebar.css";
-
 import {
   BarChart,
   Bar,
@@ -59,6 +58,8 @@ function AdminCTCSidebar() {
                     <th>Employee ID</th>
                     <th>Name</th>
                     <th>Annual CTC</th>
+                    <th>Appraisal %</th>
+                    <th>Appraised On</th>
                   </tr>
                 </thead>
 
@@ -76,10 +77,44 @@ function AdminCTCSidebar() {
                       <td>{employee.empId}</td>
                       <td>{employee.empName}</td>
                       <td>₹ {employee.totalCTC}</td>
+                      <td>{employee.appraisalPercentage || "-"}</td>
+
+                      <td>
+                        {employee.appraisedOn
+                          ? new Date(employee.appraisedOn).toLocaleDateString()
+                          : "-"}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            <div className="comment-section">
+              <h3>CTC Change History</h3>
+
+              {selectedEmployee ? (
+                <table className="comment-table">
+                  <thead>
+                    <tr>
+                      <th>Previous CTC</th>
+                      <th>Current CTC</th>
+                      <th>Comments</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>₹ {selectedEmployee.previousCTC || "-"}</td>
+                      <td>₹ {selectedEmployee.totalCTC}</td>
+                      <td>
+                        {selectedEmployee.comment || "No comments available"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              ) : (
+                <p>Select an employee to view CTC history.</p>
+              )}
             </div>
           </div>
 
@@ -102,6 +137,22 @@ function AdminCTCSidebar() {
                 <div className="detail-item">
                   <strong>Annual CTC:</strong>
                   <span>₹ {selectedEmployee.totalCTC}</span>
+                </div>
+
+                <div className="detail-item">
+                  <strong>Appraisal %:</strong>
+                  <span>{selectedEmployee.appraisalPercentage || "-"}</span>
+                </div>
+
+                <div className="detail-item">
+                  <strong>Appraised On:</strong>
+                  <span>
+                    {selectedEmployee.appraisedOn
+                      ? new Date(
+                          selectedEmployee.appraisedOn,
+                        ).toLocaleDateString()
+                      : "-"}
+                  </span>
                 </div>
 
                 <div className="detail-item">

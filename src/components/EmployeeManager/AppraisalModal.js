@@ -1,5 +1,4 @@
 // AppraisalModal.js
-
 import React, { useState, useEffect } from "react";
 import "../../styles/AppraisalModal.css";
 
@@ -40,23 +39,45 @@ const AppraisalModal = ({ isOpen, onClose, employee }) => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch("http://localhost:5133/api/ctc/appraisal", {
+      if (!form.effectiveFrom) {
+        alert("Please select Effective From Date");
+        return;
+      }
+
+      const appraisalData = {
+        empId: form.empId,
+        currentCTC: form.currentCTC,
+        appraisalPercentage: form.appraisalPercent,
+        effectiveFromDate: `${form.effectiveFrom}T00:00:00`,
+        revisedCTC: form.revisedCTC,
+      };
+
+      console.log("Sending:", appraisalData);
+
+      const response = await fetch("http://localhost:5133/api/appraisal/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(appraisalData),
       });
 
-      const data = await response.json();
+      const text = await response.text();
+      console.log("Response:", text);
+
+      if (!response.ok) {
+        throw new Error(text);
+      }
+
+      const data = JSON.parse(text);
+
       alert(data.message);
       onClose();
     } catch (error) {
-      console.error(error);
+      console.error("Save Error:", error);
       alert("Failed to save appraisal");
     }
   };
-
   if (!isOpen) return null;
 
   return (

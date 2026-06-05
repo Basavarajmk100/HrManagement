@@ -87,17 +87,17 @@
 }
 
 .ctc-right {
-  flex: 2;
+  flex: 1;
   background: #fff;
-  padding: 20px;
-  border-radius: 16px;
+  padding: 15px;
+  border-radius: 12px;
   border: 1px solid #c387c2;
-  box-shadow: 0 8px 20px rgba(195, 135, 194, 0.2);
-  min-height: 500px;
+  box-shadow: 0 4px 12px rgba(195, 135, 194, 0.2);
+  min-height: auto;
 }
 .ctc-right h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
+  font-size: 20px;
+  margin-bottom: 12px;
 }
 
 .selected-row {
@@ -115,14 +115,53 @@
 .detail-item {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 12px;
-  padding: 10px;
+  margin-bottom: 6px;
+  padding: 8px 10px;
   background: #faf5fa;
-  border-radius: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.detail-item strong {
+  font-size: 14px;
+}
+
+.detail-item span {
+  font-size: 14px;
 }
 
 .empty-details {
   text-align: center;
   color: #666;
-  margin-top: 100px;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.comment-section {
+  margin-top: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.comment-section h3 {
+  margin-bottom: 12px;
+}
+
+.comment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comment-table th,
+.comment-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.comment-table th {
+  background: #3b82f6;
+  color: white;
 }
