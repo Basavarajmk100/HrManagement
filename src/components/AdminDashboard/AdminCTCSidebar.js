@@ -13,6 +13,7 @@ import {
 function AdminCTCSidebar() {
   const [employeeCTCList, setEmployeeCTCList] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5133/api/ctc/report")
@@ -51,6 +52,16 @@ function AdminCTCSidebar() {
               </ResponsiveContainer>
             </div>
 
+            <div className="search-container">
+              <input
+                type="text"
+                placeholder="Search by Employee ID or Name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+              />
+            </div>
+
             <div className="table-wrapper">
               <table className="ctc-table">
                 <thead>
@@ -64,28 +75,39 @@ function AdminCTCSidebar() {
                 </thead>
 
                 <tbody>
-                  {employeeCTCList.map((employee) => (
-                    <tr
-                      key={employee.empId}
-                      onClick={() => setSelectedEmployee(employee)}
-                      className={
-                        selectedEmployee?.empId === employee.empId
-                          ? "selected-row"
-                          : ""
-                      }
-                    >
-                      <td>{employee.empId}</td>
-                      <td>{employee.empName}</td>
-                      <td>₹ {employee.totalCTC}</td>
-                      <td>{employee.appraisalPercentage || "-"}</td>
-
-                      <td>
-                        {employee.appraisedOn
-                          ? new Date(employee.appraisedOn).toLocaleDateString()
-                          : "-"}
-                      </td>
-                    </tr>
-                  ))}
+                  {employeeCTCList
+                    .filter(
+                      (employee) =>
+                        employee.empId
+                          .toString()
+                          .includes(searchTerm.toLowerCase()) ||
+                        employee.empName
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase()),
+                    )
+                    .map((employee) => (
+                      <tr
+                        key={employee.empId}
+                        onClick={() => setSelectedEmployee(employee)}
+                        className={
+                          selectedEmployee?.empId === employee.empId
+                            ? "selected-row"
+                            : ""
+                        }
+                      >
+                        <td>{employee.empId}</td>
+                        <td>{employee.empName}</td>
+                        <td>₹ {employee.totalCTC}</td>
+                        <td>{employee.appraisalPercentage || "-"}</td>
+                        <td>
+                          {employee.appraisedOn
+                            ? new Date(
+                                employee.appraisedOn,
+                              ).toLocaleDateString()
+                            : "-"}
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
