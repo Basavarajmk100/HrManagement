@@ -554,40 +554,33 @@ const PayrollDashboard = () => {
 
       {/* ACTION BAR */}
       <div className="button-row">
+        <label className={styles.uploadBtn}>
+          <BsFileEarmarkExcel />
+          Upload Excel
+          <input
+            type="file"
+            accept=".xlsx,.xls"
+            hidden
+            onChange={handleExcelUpload}
+          />
+        </label>
+
         <button
-          className="filter-toggle-btn"
-          onClick={() => setShowFilters(!showFilters)}
+          className="add-btn"
+          onClick={() => navigate("/employee-manager/addPayroll")}
         >
-          Search Filters {showFilters ? <HiChevronUp /> : <HiChevronDown />}
+          + Add Payroll
         </button>
 
-        <div className="right-actions">
-          {/* UPLOAD EXCEL */}
-          <label className={styles.uploadBtn}>
-            <BsFileEarmarkExcel />
-            Upload Excel
-            <input
-              type="file"
-              accept=".xlsx,.xls"
-              hidden
-              onChange={handleExcelUpload}
-            />
-          </label>
-
-          <button
-            className="add-btn"
-            onClick={() => navigate("/employee-manager/addPayroll")}
-          >
-            + Add Payroll
-          </button>
-          <button className="export-btn" onClick={exportToExcel}>
-            <BsFileEarmarkExcel /> Export Excel
-          </button>
-        </div>
+        <button className="export-btn" onClick={exportToExcel}>
+          <BsFileEarmarkExcel />
+          Export Excel
+        </button>
       </div>
 
       {/* FILTER PANEL */}
-      <div className="payroll-filter-row">
+      {/* FILTER PANEL */}
+      <div className={styles.employeeFilterBar}>
         <input
           type="text"
           placeholder="Search by Employee ID or Name"
