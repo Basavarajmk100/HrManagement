@@ -7,13 +7,10 @@
   margin: auto;
 }
 
-
 /* Header layout */
 .flex {
   display: flex;
 }
-
-
 
 .justify-between {
   justify-content: space-between;
@@ -90,7 +87,7 @@ table {
 
 /* Table Header – same as Admin Dashboard */
 thead {
-  background-color: #1e40af;
+  background-color: #3b82f6;
 }
 
 th {
@@ -102,9 +99,8 @@ th {
   color: #ffffff;
   border: none;
   text-align: left;
+  background-color: #3b82f6 !important;
 }
-
-
 
 td {
   padding: 14px;

@@ -4,7 +4,7 @@ import "../../styles/ApprovePayroll.css";
 // ✅ MOVE THIS FUNCTION TO TOP
 const generateMonths = (
   startYear = 2020,
-  endYear = new Date().getFullYear() + 1
+  endYear = new Date().getFullYear() + 1,
 ) => {
   const months = [];
   for (let year = startYear; year <= endYear; year++) {
@@ -19,7 +19,6 @@ const generateMonths = (
   }
   return months;
 };
-
 
 const ApprovePayroll = () => {
   const [payrolls, setPayrolls] = useState([]);
@@ -68,57 +67,49 @@ const ApprovePayroll = () => {
         status: "Submitted",
       },
 
-
       {
-        id:4,
-        empId:"EMP004",
-        name:"Varun",
-        department:"Finance",
-        month:"2025-10",
-        basic:35000,
-        allowances:6000,
-        deductions:3000,
-        netSalary:38000,
-        status:"Submitted",
+        id: 4,
+        empId: "EMP004",
+        name: "Varun",
+        department: "Finance",
+        month: "2025-10",
+        basic: 35000,
+        allowances: 6000,
+        deductions: 3000,
+        netSalary: 38000,
+        status: "Submitted",
       },
     ]);
   }, []);
 
   const handleApprove = (id) => {
     setPayrolls((prev) =>
-      prev.map((p) =>
-        p.id === id ? { ...p, status: "Approved" } : p
-      )
+      prev.map((p) => (p.id === id ? { ...p, status: "Approved" } : p)),
     );
   };
 
   const handleReject = (id) => {
     setPayrolls((prev) =>
-      prev.map((p) =>
-        p.id === id ? { ...p, status: "Rejected" } : p
-      )
+      prev.map((p) => (p.id === id ? { ...p, status: "Rejected" } : p)),
     );
   };
 
   // FILTER LOGIC
-  const filteredPayrolls = payrolls.filter((p) =>
-    (search === "" ||
-      p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.empId.toLowerCase().includes(search.toLowerCase())) &&
-    (month === "" || p.month === month) &&
-    p.status === "Submitted"
+  const filteredPayrolls = payrolls.filter(
+    (p) =>
+      (search === "" ||
+        p.name.toLowerCase().includes(search.toLowerCase()) ||
+        p.empId.toLowerCase().includes(search.toLowerCase())) &&
+      (month === "" || p.month === month) &&
+      p.status === "Submitted",
   );
 
   return (
-    <div className
-
-="approve-container">
+    <div className="approve-container">
       <h2>Approve Payroll</h2>
 
       {/* FILTER BAR */}
-      <div className
-
-="filter-bar">
+      <div className="filter-bar">
         <input
           type="text"
           placeholder="Search by name or ID"
@@ -126,22 +117,18 @@ const ApprovePayroll = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-      <select value={month} onChange={(e) => setMonth(e.target.value)}>
-  <option value="">Select Month</option>
-  {monthsList.map((m) => (
-    <option key={m.value} value={m.value}>
-      {m.label}
-    </option>
-  ))}
-</select>
-
-
+        <select value={month} onChange={(e) => setMonth(e.target.value)}>
+          <option value="">Select Month</option>
+          {monthsList.map((m) => (
+            <option key={m.value} value={m.value}>
+              {m.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* TABLE */}
-      <table className
-
-="payroll-table">
+      <table className="payroll-table">
         <thead>
           <tr>
             <th>Emp ID</th>
@@ -160,9 +147,7 @@ const ApprovePayroll = () => {
         <tbody>
           {filteredPayrolls.length === 0 ? (
             <tr>
-              <td colSpan="10" className
-
-="no-data">
+              <td colSpan="10" className="no-data">
                 No payrolls found
               </td>
             </tr>
@@ -178,23 +163,17 @@ const ApprovePayroll = () => {
                 <td>₹{p.deductions}</td>
                 <td>₹{p.netSalary}</td>
                 <td>
-                  <span className
-
-="status submitted">Submitted</span>
+                  <span className="status submitted">Submitted</span>
                 </td>
                 <td>
                   <button
-                    className
-
-="btn approve"
+                    className="btn approve"
                     onClick={() => handleApprove(p.id)}
                   >
                     Approve
                   </button>
                   <button
-                    className
-
-="btn reject"
+                    className="btn reject"
                     onClick={() => handleReject(p.id)}
                   >
                     Reject

@@ -2,11 +2,16 @@
   padding: 20px;
 }
 
+.approve-container h2 {
+  font-size: 24px;
+}
+
 /* Page Title */
 h2 {
   margin-bottom: 15px;
   color: #1e3a8a;
   font-weight: 700;
+  font-size: 24px;
 }
 
 /* Table */
@@ -21,7 +26,7 @@ h2 {
 
 /* 🔵 TABLE HEADER – SAME AS DASHBOARD */
 .payroll-table thead {
-  background-color: #1e40af;
+  background-color: #3b82f6 !important;
 }
 
 .payroll-table th {
@@ -33,6 +38,7 @@ h2 {
   color: #ffffff;
   border: none;
   text-align: center;
+  background-color: #3b82f6 !important;
 }
 
 /* Table Body */
@@ -113,22 +119,23 @@ h2 {
 /* Filters */
 .filter-bar {
   display: flex;
-  gap: 12px;
-  margin-bottom: 15px;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
-.filter-bar input,
+.filter-bar input {
+  flex: 1;
+  min-width: 250px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
 .filter-bar select {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 14px;
-  background: #ffffff;
-}
-
-.filter-bar input:focus,
-.filter-bar select:focus {
-  outline: none;
-  border-color: #1e40af;
-  box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.2);
+  width: 200px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
