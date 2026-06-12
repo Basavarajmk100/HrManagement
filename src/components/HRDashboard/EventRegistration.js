@@ -2,71 +2,64 @@ import React, { useState } from "react";
 import "../../styles/EventRegistration.css";
 
 const EventRegistration = () => {
-
   const [formData, setFormData] = useState({
     employeeId: "",
     employeeName: "",
     department: "",
     activityName: "",
-    date: ""
+    date: "",
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const response = await fetch("http://localhost:5133/api/EventRegistration", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch(
+        "http://localhost:5133/api/EventRegistration",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        },
+      );
 
-    if (response.ok) {
-      alert("Successfully Registered for the Activity!");
-      console.log("Data sent to backend:", formData);
+      if (response.ok) {
+        alert("Successfully Registered for the Activity!");
+        console.log("Data sent to backend:", formData);
 
-      setFormData({
-        employeeId: "",
-        employeeName: "",
-        department: "",
-        activityName: "",
-        date: ""
-      });
-
-    } else {
-      alert("Failed to register");
+        setFormData({
+          employeeId: "",
+          employeeName: "",
+          department: "",
+          activityName: "",
+          date: "",
+        });
+      } else {
+        alert("Failed to register");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
-   const theme = localStorage.getItem("theme") || "simple";
-    const isSimple = theme === "simple";
-    const isDark = theme === "dark";
-    const isColorful = theme === "colorful";
-
+  };
+  const theme = localStorage.getItem("theme") || "simple";
+  const isSimple = theme === "simple";
+  const isDark = theme === "dark";
+  const isColorful = theme === "colorful";
 
   return (
-
- <div className
-
-={`event-registration-container theme-${theme}`}>
+    <div className={`event-registration-container theme-${theme}`}>
       <h2>Event Registration</h2>
 
-      <form onSubmit={handleSubmit} className
-
-="event-form">
-
+      <form onSubmit={handleSubmit} className="event-form">
         <input
           type="text"
           name="employeeId"
@@ -112,9 +105,7 @@ const handleSubmit = async (e) => {
         />
 
         <button type="submit">Register</button>
-
       </form>
-
     </div>
   );
 };
