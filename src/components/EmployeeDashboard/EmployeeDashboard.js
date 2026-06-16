@@ -282,6 +282,12 @@ const MENU_ITEMS = [
   { name: "Payslip", icon: ReceiptText, path: "/payslip" },
   { name: "My CTC", icon: Wallet, path: "/my-ctc" },
 
+  {
+    name: "Event Registration",
+    path: "/activities/event-registration",
+    icon: UserPlus,
+  },
+
   /* { name: "My Insurance", icon: Shield, path: "/my-insurance" },*/
 
   {

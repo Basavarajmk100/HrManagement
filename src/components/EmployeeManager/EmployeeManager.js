@@ -31,6 +31,7 @@ import {
   UserPlus,
   FileBarChart,
   User,
+  CalendarCheck,
 } from "lucide-react";
 
 import {
@@ -374,6 +375,12 @@ const MENU_ITEMS = [
   { name: "Payroll", icon: Wallet, path: "/employee-manager/payroll" },
   { name: "Scheduling", icon: Calendar, path: "/employee-manager/scheduling" },
   { name: "Leave Details", icon: Umbrella, path: "/employee-manager/leaves" },
+
+  {
+    name: "Event Registration",
+    icon: CalendarCheck,
+    path: "/employee-manager/events",
+  },
   {
     name: "HR Payroll Form",
     icon: FileText,

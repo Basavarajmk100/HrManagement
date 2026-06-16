@@ -355,6 +355,49 @@ const MENU_ITEMS = [
   { name: "Insurance", icon: Shield, path: "/insurancepoliciesadmin" },
   // ✅ ADD THIS
   { name: "CTC Details", icon: DollarSign, path: "/my-ctc" },
+
+  {
+    name: "Finance",
+    icon: Wallet,
+    submenu: [
+      { name: "Invoices Page", path: "/admin/finance/invoices", icon: Receipt },
+      {
+        name: "Purchase Voucher",
+        path: "/admin/finance/purchase-voucher",
+        icon: ClipboardList,
+      },
+      {
+        name: "Sale Voucher",
+        path: "/admin/finance/sales-voucher",
+        icon: ClipboardList,
+      },
+      {
+        name: "Ledgers",
+        path: "/admin/finance/ledgers",
+        icon: BookOpen,
+      },
+      {
+        name: "Trial Balance",
+        path: "/admin/finance/trial-balance",
+        icon: Scale,
+      },
+      {
+        name: "Balance Sheet",
+        path: "/admin/finance/balance-sheet",
+        icon: BarChart3,
+      },
+      {
+        name: "P and L Account",
+        path: "/admin/finance/pnl",
+        icon: BarChart3,
+      },
+      {
+        name: "Expenses",
+        path: "/admin/finance/expenses",
+        icon: FileText,
+      },
+    ],
+  },
 ];
 
 // ==========================================

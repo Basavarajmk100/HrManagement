@@ -122,6 +122,8 @@ import EditPayroll from "./components/EmployeeManager/EditPayroll";
 
 import AddCTC from "./components/EmployeeManager/AddCTC";
 
+import HREventRegistration from "./components/EmployeeManager/HREventRegistration";
+
 import PayrollReports from "./components/EmployeeManager/PayrollReports";
 
 import CTCReport from "./components/EmployeeManager/CTCReport";
@@ -186,6 +188,8 @@ import TemplateSelect from "./components/FinanceManagerDashboard/TemplateSelect"
 
 import Admin from "./components/AdminDashboard/Admin"; // adjust path if needed
 import AdminCTCSidebar from "./components/AdminDashboard/AdminCTCSidebar";
+import AdminInvoicesPage from "./components/AdminDashboard/AdminInvoicesPage";
+import AdminPurchaseVoucher from "./components/AdminDashboard/AdminPurchaseVoucher";
 
 import CreateCompany from "./components/FinanceManagerDashboard/CreateCompany";
 import InvoiceNumberType from "./components/FinanceManagerDashboard/InvoiceNumberType";
@@ -231,6 +235,12 @@ function App() {
         {/* Default route */}
         <Route path="/" element={<Navigate to="/provider-dashboard" />} />
         <Route path="/admin-dashboard" element={<Admin />} />
+
+        <Route path="/admin/finance/invoices" element={<AdminInvoicesPage />} />
+        <Route
+          path="/admin/finance/purchase-voucher"
+          element={<AdminPurchaseVoucher />}
+        />
 
         {/* Provider Dashboard route */}
         <Route path="/provider-dashboard" element={<ProviderDashboard />} />
@@ -391,6 +401,11 @@ function App() {
         <Route
           path="/employee-manager/leaves"
           element={<LeaveDetailsManager />}
+        />
+
+        <Route
+          path="/employee-manager/events"
+          element={<HREventRegistration />}
         />
 
         <Route

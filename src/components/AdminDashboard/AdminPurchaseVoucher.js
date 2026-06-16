@@ -3,7 +3,7 @@ import "../../styles/PurchaseVoucher.css";
 
 import { useNavigate } from "react-router-dom";
 
-const PurchaseVoucher = () => {
+const AdminPurchaseVoucher = () => {
   const navigate = useNavigate();
 
   const [vouchers, setVouchers] = useState([
@@ -132,11 +132,8 @@ const PurchaseVoucher = () => {
             className="searchInput"
           />
 
-          <button
-            className="add-btn"
-            onClick={() => navigate("/finance/add-purchase-voucher")}
-          >
-            + Add Voucher
+          <button className="add-btn" onClick={() => window.print()}>
+            Download
           </button>
         </div>
 
@@ -194,13 +191,14 @@ const PurchaseVoucher = () => {
                         {v.status}
                       </span>
                     </td>
-
                     <td>
                       <div className="action-group">
                         <button className="more-action-btn">View</button>
-                        <button className="more-action-btn">Edit</button>
+
+                        <button className="more-action-btn">Approve</button>
+
                         <button className="more-action-btn delete">
-                          Delete
+                          Reject
                         </button>
                       </div>
                     </td>
@@ -215,4 +213,4 @@ const PurchaseVoucher = () => {
   );
 };
 
-export default PurchaseVoucher;
+export default AdminPurchaseVoucher;

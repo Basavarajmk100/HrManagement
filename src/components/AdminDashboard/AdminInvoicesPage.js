@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import "../../styles/InvoicesPage.css";
+import "../../styles/AdminInvoicesPage.css";
 
-const InvoicesPage = () => {
+const AdminInvoicesPage = () => {
   const [search, setSearch] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [selectedInvoice, setSelectedInvoice] = useState(null);
-  const [isEditMode, setIsEditMode] = useState(false);
+
   const [viewInvoice, setViewInvoice] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -17,6 +15,7 @@ const InvoicesPage = () => {
       amount: 12000,
       date: "2026-02-01",
       status: "Paid",
+      approvalStatus: "Pending",
     },
     {
       id: 2,
@@ -25,6 +24,7 @@ const InvoicesPage = () => {
       amount: 8500,
       date: "2026-02-02",
       status: "Pending",
+      approvalStatus: "Pending",
     },
     {
       id: 3,
@@ -33,6 +33,7 @@ const InvoicesPage = () => {
       amount: 15000,
       date: "2026-02-03",
       status: "Paid",
+      approvalStatus: "Pending",
     },
     {
       id: 4,
@@ -41,6 +42,7 @@ const InvoicesPage = () => {
       amount: 6000,
       date: "2026-02-04",
       status: "Overdue",
+      approvalStatus: "Pending",
     },
   ]);
 
@@ -48,14 +50,6 @@ const InvoicesPage = () => {
   const isSimple = theme === "simple";
   const isDark = theme === "dark";
   const isColorful = theme === "colorful";
-
-  const [newInvoice, setNewInvoice] = useState({
-    invoiceNo: "",
-    company: "",
-    amount: "",
-    date: "",
-    status: "Pending",
-  });
 
   const filteredInvoices = invoices.filter((inv) =>
     inv.company.toLowerCase().includes(search.toLowerCase()),
@@ -68,43 +62,26 @@ const InvoicesPage = () => {
 
   const totalAmount = invoices.reduce((sum, i) => sum + i.amount, 0);
 
-  const handleChange = (e) =>
-    setNewInvoice({ ...newInvoice, [e.target.name]: e.target.value });
-
-  const handleSaveInvoice = () => {
-    if (isEditMode) {
-      setInvoices(
-        invoices.map((inv) =>
-          inv.id === selectedInvoice.id ? newInvoice : inv,
-        ),
-      );
-    } else {
-      setInvoices([...invoices, { id: invoices.length + 1, ...newInvoice }]);
-    }
-    setShowModal(false);
-    setIsEditMode(false);
-    setSelectedInvoice(null);
-    setNewInvoice({
-      invoiceNo: "",
-      company: "",
-      amount: "",
-      date: "",
-      status: "Pending",
-    });
+  const handleView = (invoice) => {
+    setViewInvoice(invoice);
   };
 
-  const handleView = (invoice) => setViewInvoice(invoice);
-  const handleEdit = (invoice) => {
-    setSelectedInvoice(invoice);
-    setNewInvoice(invoice);
-    setIsEditMode(true);
-    setShowModal(true);
+  const handleApprove = (id) => {
+    setInvoices(
+      invoices.map((inv) =>
+        inv.id === id ? { ...inv, approvalStatus: "Approved" } : inv,
+      ),
+    );
   };
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this invoice?")) {
-      setInvoices(invoices.filter((inv) => inv.id !== id));
-    }
+
+  const handleReject = (id) => {
+    setInvoices(
+      invoices.map((inv) =>
+        inv.id === id ? { ...inv, approvalStatus: "Rejected" } : inv,
+      ),
+    );
   };
+
   return (
     <div className={`invoice-panel theme-${theme}`}>
       {/* BACKGROUND EFFECTS */}
@@ -138,8 +115,8 @@ const InvoicesPage = () => {
             className="searchInput"
           />
 
-          <button className="add-btn" onClick={() => setShowModal(true)}>
-            + Create Invoice
+          <button className="add-btn" onClick={() => window.print()}>
+            Download
           </button>
         </div>
 
@@ -154,6 +131,7 @@ const InvoicesPage = () => {
                 <th>Amount</th>
                 <th>Date</th>
                 <th>Status</th>
+                <th>Approval Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -199,6 +177,19 @@ const InvoicesPage = () => {
                         {inv.status}
                       </span>
                     </td>
+                    <td>
+                      <span
+                        className={`status-pill ${
+                          inv.approvalStatus === "Approved"
+                            ? "paid"
+                            : inv.approvalStatus === "Rejected"
+                              ? "overdue"
+                              : "pending"
+                        }`}
+                      >
+                        {inv.approvalStatus}
+                      </span>
+                    </td>
 
                     <td>
                       <div className="action-group">
@@ -208,17 +199,19 @@ const InvoicesPage = () => {
                         >
                           View
                         </button>
+
                         <button
                           className="more-action-btn"
-                          onClick={() => handleEdit(inv)}
+                          onClick={() => handleApprove(inv.id)}
                         >
-                          Edit
+                          Approve
                         </button>
+
                         <button
                           className="more-action-btn delete"
-                          onClick={() => handleDelete(inv.id)}
+                          onClick={() => handleReject(inv.id)}
                         >
-                          Delete
+                          Reject
                         </button>
                       </div>
                     </td>
@@ -255,56 +248,6 @@ const InvoicesPage = () => {
         </div>
       </div>
 
-      {/* CREATE / EDIT MODAL */}
-      {showModal && (
-        <div className="invoice-modal">
-          <div className="invoice-modal-content">
-            <h3>{isEditMode ? "Edit Invoice" : "Create Invoice"}</h3>
-
-            <input
-              name="invoiceNo"
-              placeholder="Invoice No"
-              value={newInvoice.invoiceNo}
-              onChange={handleChange}
-            />
-            <input
-              name="company"
-              placeholder="Company Name"
-              value={newInvoice.company}
-              onChange={handleChange}
-            />
-            <input
-              name="amount"
-              type="number"
-              placeholder="Amount"
-              value={newInvoice.amount}
-              onChange={handleChange}
-            />
-            <input
-              name="date"
-              type="date"
-              value={newInvoice.date}
-              onChange={handleChange}
-            />
-
-            <select
-              name="status"
-              value={newInvoice.status}
-              onChange={handleChange}
-            >
-              <option>Pending</option>
-              <option>Paid</option>
-              <option>Overdue</option>
-            </select>
-
-            <div className="invoice-actions">
-              <button onClick={handleSaveInvoice}>Save</button>
-              <button onClick={() => setShowModal(false)}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* VIEW MODAL */}
       {viewInvoice && (
         <div className="invoice-modal">
@@ -327,6 +270,10 @@ const InvoicesPage = () => {
               <b>Status:</b> {viewInvoice.status}
             </p>
 
+            <p>
+              <b>Approval Status:</b> {viewInvoice.approvalStatus}
+            </p>
+
             <div className="invoice-actions">
               <button onClick={() => window.print()}>
                 Print / Download PDF
@@ -340,4 +287,4 @@ const InvoicesPage = () => {
   );
 };
 
-export default InvoicesPage;
+export default AdminInvoicesPage;
