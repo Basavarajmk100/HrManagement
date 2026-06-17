@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/SalesVoucher.css";
 
-const SalesVoucher = () => {
+const AdminSalesVoucher = () => {
   const navigate = useNavigate();
 
   const [sales, setSales] = useState([
@@ -83,11 +83,8 @@ const SalesVoucher = () => {
             className="searchInput"
           />
 
-          <button
-            className="add-btn"
-            onClick={() => navigate("/finance/add-sales-voucher")}
-          >
-            + Add Sales Voucher
+          <button className="add-btn" onClick={() => window.print()}>
+            Download
           </button>
         </div>
 
@@ -151,9 +148,11 @@ const SalesVoucher = () => {
                     <td>
                       <div className="action-group">
                         <button className="more-action-btn">View</button>
-                        <button className="more-action-btn">Edit</button>
+
+                        <button className="more-action-btn">Approve</button>
+
                         <button className="more-action-btn delete">
-                          Delete
+                          Reject
                         </button>
                       </div>
                     </td>
@@ -168,4 +167,4 @@ const SalesVoucher = () => {
   );
 };
 
-export default SalesVoucher;
+export default AdminSalesVoucher;

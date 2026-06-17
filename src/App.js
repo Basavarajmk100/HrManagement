@@ -190,6 +190,10 @@ import Admin from "./components/AdminDashboard/Admin"; // adjust path if needed
 import AdminCTCSidebar from "./components/AdminDashboard/AdminCTCSidebar";
 import AdminInvoicesPage from "./components/AdminDashboard/AdminInvoicesPage";
 import AdminPurchaseVoucher from "./components/AdminDashboard/AdminPurchaseVoucher";
+import AdminSalesVoucher from "./components/AdminDashboard/AdminSalesVoucher";
+import AdminLedgersPage from "./components/AdminDashboard/AdminLedgersPage";
+
+import AdminTrialBalancePage from "./components/AdminDashboard/AdminTrialBalancePage";
 
 import CreateCompany from "./components/FinanceManagerDashboard/CreateCompany";
 import InvoiceNumberType from "./components/FinanceManagerDashboard/InvoiceNumberType";
@@ -237,9 +241,22 @@ function App() {
         <Route path="/admin-dashboard" element={<Admin />} />
 
         <Route path="/admin/finance/invoices" element={<AdminInvoicesPage />} />
+
         <Route
           path="/admin/finance/purchase-voucher"
           element={<AdminPurchaseVoucher />}
+        />
+
+        <Route
+          path="/admin/finance/sales-voucher"
+          element={<AdminSalesVoucher />}
+        />
+
+        <Route path="/admin/finance/ledgers" element={<AdminLedgersPage />} />
+
+        <Route
+          path="/admin/finance/trial-balance"
+          element={<AdminTrialBalancePage />}
         />
 
         {/* Provider Dashboard route */}
