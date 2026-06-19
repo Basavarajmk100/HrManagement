@@ -69,13 +69,46 @@ export default function EventRegistration() {
     return e;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const e = validate();
+
     if (Object.keys(e).length > 0) {
       setErrors(e);
       return;
     }
-    setSubmitted(true);
+
+    const payload = {
+      eventTitle: form.title,
+      description: form.description,
+      eventDate: form.date,
+      eventTime: form.time,
+      location: form.location,
+      openTo: form.openTo,
+      selectedTeams: selectedTeams.join(","),
+      selectedStaff: selectedStaff.map((s) => s.name).join(","),
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:5133/api/hreventregistration/save",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      const result = await response.text();
+      console.log(result);
+
+      if (response.ok) {
+        setSubmitted(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleReset = () => {
