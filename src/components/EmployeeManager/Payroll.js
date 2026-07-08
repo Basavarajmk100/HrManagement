@@ -402,6 +402,64 @@ const PayrollDashboard = () => {
   if (loading) return <p>Loading payroll data...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
+  const downloadPayrollTemplate = () => {
+    const template = [
+      {
+        EmpId: "",
+        PayrollMonth: "",
+        Name: "",
+        FatherName: "",
+        DateofJoining: "",
+        DateofLeaving: "",
+        PfNo: "",
+        EsiNo: "",
+        PanNo: "",
+        BankName: "",
+        AccountNo: "",
+        Ifsc: "",
+        Designation: "",
+        Occupation: "",
+        Department: "",
+        SalaryCalendarDays: "",
+        WeeklyOff: "",
+        GeneralHolidays: "",
+        UAN: "",
+        AadharNumber: "",
+        PayDays: "",
+        PresentDays: "",
+        Basic: "",
+        Hra: "",
+        SpecialAllowance: "",
+        WeekendAllowance: "",
+        StatBonus: "",
+        Incentives: "",
+        TotalEarnings: "",
+        Pf: "",
+        Pt: "",
+        Tds: "",
+        TotalDeduction: "",
+        NetAmount: "",
+        Remarks: "",
+      },
+    ];
+
+    const ws = XLSX.utils.json_to_sheet(template);
+    const wb = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(wb, ws, "Payroll Template");
+
+    const excelBuffer = XLSX.write(wb, {
+      bookType: "xlsx",
+      type: "array",
+    });
+
+    const data = new Blob([excelBuffer], {
+      type: "application/octet-stream",
+    });
+
+    saveAs(data, "Payroll_Template.xlsx");
+  };
+
   return (
     <div className={styles.payrollDashboardContainer}>
       {/* HEADER */}
@@ -553,7 +611,13 @@ const PayrollDashboard = () => {
       )}
 
       {/* ACTION BAR */}
+      {/* ACTION BAR */}
       <div className="button-row">
+        <button className="template-btn" onClick={downloadPayrollTemplate}>
+          <BsFileEarmarkExcel />
+          Download Format
+        </button>
+
         <label className={styles.uploadBtn}>
           <BsFileEarmarkExcel />
           Upload Excel

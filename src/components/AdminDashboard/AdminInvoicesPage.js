@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import "../../styles/AdminInvoicesPage.css";
 
 const AdminInvoicesPage = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(""); // existing search bar
 
   const [viewInvoice, setViewInvoice] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [showRejectPopup, setShowRejectPopup] = useState(false);
+  const [rejectReason, setRejectReason] = useState("");
+  const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
+
+  const [showConfirmReject, setShowConfirmReject] = useState(false);
 
   const [invoices, setInvoices] = useState([
     {
@@ -47,14 +53,97 @@ const AdminInvoicesPage = () => {
   ]);
 
   const theme = localStorage.getItem("theme") || "simple";
-  const isSimple = theme === "simple";
+
   const isDark = theme === "dark";
   const isColorful = theme === "colorful";
 
-  const filteredInvoices = invoices.filter((inv) =>
-    inv.company.toLowerCase().includes(search.toLowerCase()),
-  );
+  // ---------------- FILTER STATES ----------------
+  const [filters, setFilters] = useState({
+    company: "",
+    date: "",
+    month: "",
+    year: "",
+    invoiceNo: "",
+    status: "",
+  });
 
+  // This state stores data only after clicking Search
+  const [filteredInvoices, setFilteredInvoices] = useState(invoices);
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSearchFilters = () => {
+    let filtered = [...invoices];
+
+    // Existing top search bar (company search)
+    if (search.trim() !== "") {
+      filtered = filtered.filter((inv) =>
+        inv.company.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+
+    // Toolbar filters
+    if (filters.company) {
+      filtered = filtered.filter((inv) =>
+        inv.company.toLowerCase().includes(filters.company.toLowerCase()),
+      );
+    }
+
+    if (filters.invoiceNo) {
+      filtered = filtered.filter((inv) =>
+        inv.invoiceNo.toLowerCase().includes(filters.invoiceNo.toLowerCase()),
+      );
+    }
+
+    if (filters.status) {
+      filtered = filtered.filter(
+        (inv) => inv.status.toLowerCase() === filters.status.toLowerCase(),
+      );
+    }
+
+    if (filters.date) {
+      filtered = filtered.filter((inv) => inv.date === filters.date);
+    }
+
+    if (filters.month) {
+      filtered = filtered.filter((inv) => {
+        const invoiceMonth = new Date(inv.date).getMonth() + 1;
+        return invoiceMonth === Number(filters.month);
+      });
+    }
+
+    if (filters.year) {
+      filtered = filtered.filter((inv) => {
+        const invoiceYear = new Date(inv.date).getFullYear();
+        return invoiceYear === Number(filters.year);
+      });
+    }
+
+    setFilteredInvoices(filtered);
+    setCurrentPage(1);
+  };
+
+  const handleResetFilters = () => {
+    setFilters({
+      company: "",
+      date: "",
+      month: "",
+      year: "",
+      invoiceNo: "",
+      status: "",
+    });
+    setSearch("");
+    setFilteredInvoices(invoices);
+    setCurrentPage(1);
+  };
+
+  // ---------------- PAGINATION ----------------
   const itemsPerPage = 3;
   const indexOfLast = currentPage * itemsPerPage;
   const indexOfFirst = indexOfLast - itemsPerPage;
@@ -67,37 +156,110 @@ const AdminInvoicesPage = () => {
   };
 
   const handleApprove = (id) => {
-    setInvoices(
-      invoices.map((inv) =>
-        inv.id === id ? { ...inv, approvalStatus: "Approved" } : inv,
-      ),
+    const updated = invoices.map((inv) =>
+      inv.id === id ? { ...inv, approvalStatus: "Approved" } : inv,
     );
+    setInvoices(updated);
+    setFilteredInvoices(updated);
   };
 
   const handleReject = (id) => {
-    setInvoices(
-      invoices.map((inv) =>
-        inv.id === id ? { ...inv, approvalStatus: "Rejected" } : inv,
-      ),
+    setSelectedInvoiceId(id);
+    setRejectReason("");
+    setShowRejectPopup(true);
+  };
+
+  const submitReject = () => {
+    if (!rejectReason.trim()) {
+      alert("Please enter rejection reason");
+      return;
+    }
+
+    setShowRejectPopup(false);
+    setShowConfirmReject(true);
+  };
+
+  const confirmRejectInvoice = () => {
+    const updated = invoices.map((inv) =>
+      inv.id === selectedInvoiceId
+        ? {
+            ...inv,
+            approvalStatus: "Rejected",
+            rejectionReason: rejectReason,
+          }
+        : inv,
     );
+
+    setInvoices(updated);
+    setFilteredInvoices(updated);
+    setShowConfirmReject(false);
+    setRejectReason("");
+    setSelectedInvoiceId(null);
+  };
+
+  /*Download at Top*/
+  const handleDownloadCSV = () => {
+    const headers = [
+      "ID",
+      "Invoice No",
+      "Company",
+      "Amount",
+      "Date",
+      "Status",
+      "Approval Status",
+    ];
+
+    const rows = filteredInvoices.map((inv) => [
+      inv.id,
+      inv.invoiceNo,
+      inv.company,
+      inv.amount,
+      inv.date,
+      inv.status,
+      inv.approvalStatus,
+    ]);
+
+    const csvContent = [
+      headers.join(","),
+      ...rows.map((row) => row.join(",")),
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "invoices.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  /*Download functioanlity in table*/
+  const handleDownload = (invoice) => {
+    const data = `
+Invoice ID: ${invoice.id}
+Company: ${invoice.company}
+Amount: ${invoice.amount}
+Status: ${invoice.status}
+Date: ${invoice.date}
+  `;
+
+    const blob = new Blob([data], { type: "text/plain" });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `invoice_${invoice.id}.txt`;
+    a.click();
+
+    window.URL.revokeObjectURL(url);
   };
 
   return (
     <div className={`invoice-panel theme-${theme}`}>
-      {/* BACKGROUND EFFECTS */}
-      <div className="bg-canvas">
-        {(isDark || isColorful) && (
-          <>
-            <div className="ambient-orb orb-1"></div>
-            <div className="ambient-orb orb-2"></div>
-            <div className="ambient-orb orb-3"></div>
-            <div className="ambient-orb orb-4"></div>
-            <div className="bg-glass-layer"></div>
-          </>
-        )}
-      </div>
+      {(isDark || isColorful) && <></>}
 
-      {/* MAIN PANEL */}
       <div className="table-panel">
         {/* HEADER */}
         <div className="table-header-row">
@@ -107,15 +269,81 @@ const AdminInvoicesPage = () => {
           </div>
 
           <h3 style={{ marginLeft: "auto" }}>₹{totalAmount}</h3>
+        </div>
 
+        {/* NEW FILTER TOOLBAR BELOW SEARCH BAR */}
+        <div className="invoice-filter-toolbar">
           <input
-            placeholder="Search company..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="searchInput"
+            type="text"
+            name="company"
+            placeholder="Filter by Company"
+            value={filters.company}
+            onChange={handleFilterChange}
           />
 
-          <button className="add-btn" onClick={() => window.print()}>
+          <input
+            type="date"
+            name="date"
+            value={filters.date}
+            onChange={handleFilterChange}
+          />
+
+          <select
+            name="month"
+            value={filters.month}
+            onChange={handleFilterChange}
+          >
+            <option value="">Month</option>
+            <option value="1">Jan</option>
+            <option value="2">Feb</option>
+            <option value="3">Mar</option>
+            <option value="4">Apr</option>
+            <option value="5">May</option>
+            <option value="6">Jun</option>
+            <option value="7">Jul</option>
+            <option value="8">Aug</option>
+            <option value="9">Sep</option>
+            <option value="10">Oct</option>
+            <option value="11">Nov</option>
+            <option value="12">Dec</option>
+          </select>
+
+          <input
+            type="number"
+            name="year"
+            placeholder="Year"
+            value={filters.year}
+            onChange={handleFilterChange}
+          />
+
+          <input
+            type="text"
+            name="invoiceNo"
+            placeholder="Invoice No"
+            value={filters.invoiceNo}
+            onChange={handleFilterChange}
+          />
+
+          <select
+            name="status"
+            value={filters.status}
+            onChange={handleFilterChange}
+          >
+            <option value="">Status</option>
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+            <option value="Overdue">Overdue</option>
+          </select>
+
+          <button className="filter-search-btn" onClick={handleSearchFilters}>
+            Search
+          </button>
+
+          <button className="filter-reset-btn" onClick={handleResetFilters}>
+            Reset
+          </button>
+
+          <button className="add-btn" onClick={handleDownloadCSV}>
             Download
           </button>
         </div>
@@ -139,7 +367,7 @@ const AdminInvoicesPage = () => {
             <tbody>
               {currentData.length === 0 ? (
                 <tr>
-                  <td colSpan="7" className="noData">
+                  <td colSpan="8" className="noData">
                     No invoices found
                   </td>
                 </tr>
@@ -147,10 +375,8 @@ const AdminInvoicesPage = () => {
                 currentData.map((inv) => (
                   <tr key={inv.id} className="table-row">
                     <td>{inv.id}</td>
-
                     <td>{inv.invoiceNo}</td>
 
-                    {/* Company with avatar */}
                     <td>
                       <div
                         style={{
@@ -167,7 +393,6 @@ const AdminInvoicesPage = () => {
                     </td>
 
                     <td>₹{inv.amount}</td>
-
                     <td>{inv.date}</td>
 
                     <td>
@@ -177,6 +402,7 @@ const AdminInvoicesPage = () => {
                         {inv.status}
                       </span>
                     </td>
+
                     <td>
                       <span
                         className={`status-pill ${
@@ -212,6 +438,13 @@ const AdminInvoicesPage = () => {
                           onClick={() => handleReject(inv.id)}
                         >
                           Reject
+                        </button>
+
+                        <button
+                          className="more-action-btn download"
+                          onClick={() => handleDownload(inv)}
+                        >
+                          Download
                         </button>
                       </div>
                     </td>
@@ -269,7 +502,6 @@ const AdminInvoicesPage = () => {
             <p>
               <b>Status:</b> {viewInvoice.status}
             </p>
-
             <p>
               <b>Approval Status:</b> {viewInvoice.approvalStatus}
             </p>
@@ -279,6 +511,58 @@ const AdminInvoicesPage = () => {
                 Print / Download PDF
               </button>
               <button onClick={() => setViewInvoice(null)}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showRejectPopup && (
+        <div className="invoice-modal">
+          <div className="invoice-modal-content">
+            <h3>Reject Invoice</h3>
+
+            <textarea
+              placeholder="Enter rejection reason..."
+              value={rejectReason}
+              onChange={(e) => setRejectReason(e.target.value)}
+              rows="4"
+              style={{ width: "100%", padding: "10px", marginTop: "10px" }}
+            />
+
+            <div className="invoice-actions">
+              <button onClick={submitReject}>Submit</button>
+              <button
+                onClick={() => {
+                  setShowRejectPopup(false);
+                  setRejectReason("");
+                  setSelectedInvoiceId(null);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showConfirmReject && (
+        <div className="invoice-modal">
+          <div className="invoice-modal-content">
+            <h3>Confirm Rejection</h3>
+            <p style={{ marginTop: "10px" }}>
+              Are you sure you want to reject this invoice?
+            </p>
+
+            <div className="invoice-actions">
+              <button onClick={confirmRejectInvoice}>Yes</button>
+              <button
+                onClick={() => {
+                  setShowConfirmReject(false);
+                  setShowRejectPopup(true);
+                }}
+              >
+                No
+              </button>
             </div>
           </div>
         </div>

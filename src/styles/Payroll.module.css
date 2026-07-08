@@ -1,185 +1,463 @@
-/* =========================
-   MAIN CONTAINER
-========================= */
+/* =========================================================
+   PAYROLL DASHBOARD — MODERN PROFESSIONAL THEME
+   All class names are unchanged from the original file, so
+   no JSX/className references need to be touched.
+========================================================= */
+
+/* Optional: if your build allows external font imports, this
+   pairs nicely with the rest of the theme. It degrades safely
+   to the system stack below if unavailable. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* =========================================================
+   DESIGN TOKENS (scoped to this component only)
+========================================================= */
 .payrollDashboardContainer {
-  padding: 24px;
+  --color-bg: #f4f6fb;
+  --color-surface: #ffffff;
+  --color-border: #e5e9f0;
+  --color-border-strong: #d6dce6;
+
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-text-soft: #9aa4b2;
+
+  --color-primary: #4338ca;
+  --color-primary-dark: #312a98;
+  --color-primary-soft: #eef0ff;
+
+  --color-success: #0d9f6e;
+  --color-success-dark: #0b8a5f;
+  --color-warning: #d97706;
+  --color-warning-dark: #b45309;
+  --color-danger: #dc2626;
+  --color-danger-dark: #b91c1c;
+  --color-info: #2563eb;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.07);
+  --shadow-lg: 0 12px 28px rgba(16, 24, 40, 0.1);
+
+  --transition: 180ms ease;
+
+  padding: 28px clamp(16px, 3vw, 32px);
   min-height: 100vh;
-  background: #f8fafc;
-  font-family: "Segoe UI", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* =========================
+/* =========================================================
    PAGE TITLE
-========================= */
-.payroll-header-title {
+========================================================= */
+:global(.payroll-header-title) {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: #1e3a8a;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 20px;
+  gap: 12px;
+  color: var(--color-text);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
 }
 
-.payroll-icon {
-  font-size: 34px;
-  color: #2563eb;
+:global(.payroll-icon) {
+  font-size: 30px;
+  color: var(--color-primary);
+  flex-shrink: 0;
 }
 
-/* =========================
-   CHART SECTION
-========================= */
+/* =========================================================
+   CHART CARD
+========================================================= */
 .chartCard {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-md);
+  transition:
+    box-shadow var(--transition),
+    transform var(--transition);
 }
-/* =========================
-   EMPLOYEE FILTER BAR
-========================= */
-/* =========================
-   EMPLOYEE FILTER BAR
-========================= */
 
+.chartCard:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   EMPLOYEE FILTER BAR
+========================================================= */
 .employeeFilterBar {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 14px;
   width: 100%;
   margin: 20px 0;
-  padding: 16px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .employeeFilterBar input {
   flex: 1;
-  height: 48px;
+  height: 46px;
   padding: 0 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: #fbfcfe;
   font-size: 14px;
+  color: var(--color-text);
   outline: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.employeeFilterBar input::placeholder {
+  color: var(--color-text-soft);
 }
 
 .employeeFilterBar input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  background: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.12);
 }
 
 .employeeFilterBar select {
   width: 220px;
-  height: 48px;
+  height: 46px;
   padding: 0 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: #fbfcfe;
   font-size: 14px;
+  color: var(--color-text);
   outline: none;
+  cursor: pointer;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.employeeFilterBar select:focus {
+  background: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.12);
 }
 
 .employeeFilterBar button {
   width: 120px;
-  height: 48px;
+  height: 46px;
   border: none;
-  border-radius: 8px;
-  background: #ef4444;
-  color: white;
+  border-radius: var(--radius-sm);
+  background: var(--color-danger);
+  color: #ffffff;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  box-shadow: var(--shadow-sm);
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
 .employeeFilterBar button:hover {
-  background: #dc2626;
+  background: var(--color-danger-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
-/* =========================
+.employeeFilterBar button:active {
+  transform: translateY(0);
+}
+
+.employeeFilterBar button:focus-visible,
+.employeeFilterBar input:focus-visible,
+.employeeFilterBar select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* =========================================================
    ACTION BAR
-========================= */
-
-.button-row {
+========================================================= */
+:global(.button-row) {
   display: flex;
-  justify-content: flex-end; /* Move buttons to right */
+  justify-content: flex-end;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   margin: 20px 0;
+  flex-wrap: wrap;
 }
 
-/* ALL BUTTONS SAME SIZE */
-
+/* Shared button shell */
 .uploadBtn,
-.add-btn,
-.export-btn {
-  width: 180px;
-  height: 48px;
-
+:global(.add-btn),
+:global(.export-btn),
+:global(.template-btn) {
+  width: 140px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
-
   gap: 8px;
   padding: 0;
 
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
 
-  font-size: 14px;
   font-weight: 600;
+  letter-spacing: 0.01em;
 
   cursor: pointer;
   box-sizing: border-box;
   white-space: nowrap;
 
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
-/* Upload Excel */
+.uploadBtn:focus-visible,
+:global(.add-btn:focus-visible),
+:global(.export-btn:focus-visible) {
+  outline: 2px solid #1f2937;
+  outline-offset: 2px;
+}
 
+/* Upload Excel — reference size */
 .uploadBtn {
-  background: #2563eb;
-  color: #fff;
+  width: 180px;
+  height: 46px;
+  font-size: 14px;
+  background: var(--color-primary);
+  color: #ffffff;
 }
-
-/* Add Payroll */
-
-.add-btn {
-  background: #10b981;
-  color: #fff;
-}
-
-/* Export Excel */
-
-.export-btn {
-  background: #f59e0b;
-  color: #fff;
-}
-
-/* Hover Effects */
 
 .uploadBtn:hover {
-  background: #1d4ed8;
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
-.add-btn:hover {
-  background: #059669;
+/* Add Payroll — smaller, compact size (forced to win over any
+   competing global .add-btn rule elsewhere in the app) */
+.payrollDashboardContainer :global(.add-btn) {
+  width: 140px !important;
+  height: 38px !important;
+  flex: 0 0 auto !important;
+  font-size: 13px !important;
+  background: var(--color-success) !important;
+  color: #ffffff !important;
 }
 
-.export-btn:hover {
-  background: #d97706;
+.payrollDashboardContainer :global(.add-btn:hover) {
+  background: var(--color-success-dark) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
-/* =========================
+/* Export Excel — smaller, compact size (forced to win over any
+   competing global .export-btn rule elsewhere in the app) */
+.payrollDashboardContainer :global(.export-btn) {
+  width: 140px !important;
+  height: 38px !important;
+  flex: 0 0 auto !important;
+  font-size: 13px !important;
+  background: var(--color-warning) !important;
+  color: #ffffff !important;
+}
+
+.payrollDashboardContainer :global(.export-btn:hover) {
+  background: var(--color-warning-dark) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.uploadBtn:active,
+.payrollDashboardContainer :global(.add-btn:active),
+.payrollDashboardContainer :global(.export-btn:active) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Download Format — same size as Export/Add Payroll */
+.payrollDashboardContainer :global(.template-btn) {
+  width: 170px !important;
+  height: 46px !important;
+  flex: 0 0 auto !important;
+  font-size: 13px !important;
+  background: var(--color-primary) !important;
+  color: #ffffff !important;
+}
+
+.payrollDashboardContainer :global(.template-btn:hover) {
+  background: var(--color-primary-dark) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   TABLE SECTION WRAPPER
+========================================================= */
+.payrollTableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 18px;
+}
+
+.tableSection h3 {
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+.tableSection table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13.5px;
+  background: var(--color-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+.tableSection thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tableSection th {
+  background: var(--color-primary);
+  color: #ffffff;
+  padding: 12px 14px;
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-primary-dark);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tableSection th:first-child {
+  border-top-left-radius: var(--radius-sm);
+}
+
+.tableSection th:last-child {
+  border-top-right-radius: var(--radius-sm);
+}
+
+.tableSection td {
+  padding: 10px 14px;
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* Subtle zebra striping for readability across wide tables */
+.tableSection tbody tr:nth-child(even) td {
+  background: #fafbfd;
+}
+
+/* Light hover effect */
+.tableSection tbody tr:hover td {
+  background: var(--color-primary-soft);
+  transition: background var(--transition);
+}
+
+/* Selected Employee Row */
+.tableSection tbody tr.selectedRow td {
+  background: #e0e4ff !important;
+  font-weight: 600;
+}
+
+/* Salary Highlight */
+.tableSection td b {
+  color: var(--color-success);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+.payrollTableWrapper::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+.payrollTableWrapper::-webkit-scrollbar-track {
+  background: #eef1f6;
+  border-radius: 10px;
+}
+
+.payrollTableWrapper::-webkit-scrollbar-thumb {
+  background: #c7ccd6;
+  border-radius: 10px;
+}
+
+.payrollTableWrapper::-webkit-scrollbar-thumb:hover {
+  background: #a8aeba;
+}
+
+/* =========================================================
    RESPONSIVE
-========================= */
-
+========================================================= */
 @media (max-width: 768px) {
-  .button-row {
+  .payrollDashboardContainer {
+    padding: 18px;
+  }
+
+  :global(.payroll-header-title) {
+    font-size: 22px;
+  }
+
+  :global(.button-row) {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .uploadBtn,
+  .payrollDashboardContainer :global(.add-btn),
+  .payrollDashboardContainer :global(.export-btn) {
+    width: 100% !important;
   }
 
   .employeeFilterBar {
@@ -191,140 +469,27 @@
   .employeeFilterBar button {
     width: 100%;
   }
-}
-/* =========================
-   TABLE SECTION
-========================= */
-.payrollTableWrapper {
-  width: 100%;
-  overflow-x: auto;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  padding: 15px;
-}
-
-.tableSection h3 {
-  color: #1e3a8a;
-  margin-bottom: 15px;
-  font-size: 20px;
-}
-
-/* =========================
-   TABLE
-========================= */
-/* =========================
-   TABLE
-========================= */
-
-.tableSection table {
-  width: max-content;
-  min-width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-  background: #ffffff;
-}
-
-.tableSection thead {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.tableSection th {
-  background: #3b82f6;
-  color: #ffffff;
-  padding: 12px;
-  text-align: center;
-  white-space: nowrap;
-  border: 1px solid #dbeafe;
-  font-weight: 600;
-}
-
-.tableSection td {
-  padding: 10px;
-  text-align: center;
-  white-space: nowrap;
-  border: 1px solid #e5e7eb;
-  background: #ffffff; /* White cells */
-}
-
-/* Keep all rows white */
-
-.tableSection tbody tr {
-  background: #ffffff;
-}
-
-.tableSection tbody tr:nth-child(even) {
-  background: #ffffff;
-}
-
-/* Light hover effect */
-
-.tableSection tbody tr:hover {
-  background: #f9fafb;
-  transition: background 0.2s ease;
-}
-
-/* Selected Employee Row */
-
-.tableSection tbody tr.selectedRow {
-  background: #dbeafe !important;
-  font-weight: 600;
-}
-
-/* Salary Highlight */
-
-.tableSection td b {
-  color: #059669;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-/* =========================
-   SCROLLBAR
-========================= */
-.payrollTableWrapper::-webkit-scrollbar {
-  height: 10px;
-}
-
-.payrollTableWrapper::-webkit-scrollbar-track {
-  background: #e5e7eb;
-  border-radius: 10px;
-}
-
-.payrollTableWrapper::-webkit-scrollbar-thumb {
-  background: #e5e7eb;
-  border-radius: 10px;
-}
-
-.payrollTableWrapper::-webkit-scrollbar-thumb:hover {
-  background: #e5e7eb;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 768px) {
-  .button-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .right-actions {
-    justify-content: center;
-  }
-
-  .payroll-filter-row {
-    flex-direction: column;
-  }
-
-  .payroll-filter-row input,
-  .payroll-filter-row select {
-    width: 100%;
-  }
 
   .tableSection table {
     font-size: 12px;
+  }
+
+  .tableSection th,
+  .tableSection td {
+    padding: 8px 10px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .chartCard,
+  .uploadBtn,
+  .payrollDashboardContainer :global(.add-btn),
+  .payrollDashboardContainer :global(.export-btn),
+  .employeeFilterBar button,
+  .tableSection tbody tr {
+    transition: none !important;
   }
 }

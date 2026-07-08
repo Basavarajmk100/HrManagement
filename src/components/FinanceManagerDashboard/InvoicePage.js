@@ -17,6 +17,7 @@ const InvoicesPage = () => {
       amount: 12000,
       date: "2026-02-01",
       status: "Paid",
+      approvalStatus: "Pending",
     },
     {
       id: 2,
@@ -25,6 +26,7 @@ const InvoicesPage = () => {
       amount: 8500,
       date: "2026-02-02",
       status: "Pending",
+      approvalStatus: "Pending",
     },
     {
       id: 3,
@@ -33,6 +35,7 @@ const InvoicesPage = () => {
       amount: 15000,
       date: "2026-02-03",
       status: "Paid",
+      approvalStatus: "Pending",
     },
     {
       id: 4,
@@ -41,6 +44,7 @@ const InvoicesPage = () => {
       amount: 6000,
       date: "2026-02-04",
       status: "Overdue",
+      approvalStatus: "Pending",
     },
   ]);
 
@@ -211,8 +215,11 @@ const InvoicesPage = () => {
                         <button
                           className="more-action-btn"
                           onClick={() => handleEdit(inv)}
+                          disabled={inv.approvalStatus === "Approved"}
                         >
-                          Edit
+                          {inv.approvalStatus === "Approved"
+                            ? "Approved"
+                            : "Edit"}
                         </button>
                         <button
                           className="more-action-btn delete"

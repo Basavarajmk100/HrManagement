@@ -25,6 +25,8 @@ import HolidayManagement from "./components/HRDashboard/HolidayManagement";
 import PayrollDashboard from "./components/HRDashboard/PayrollDashboard";
 import HrManagerCTCSidebar from "./components/HRDashboard/HrManagerCTCSidebar";
 
+import EventReports from "./components/HRDashboard/EventReports";
+
 import Gallery from "./components/HRDashboard/Gallery";
 
 import UserApprovals from "./components/HRDashboard/AdminUserApprovals";
@@ -274,6 +276,9 @@ function App() {
         <Route path="/manage-holidays" element={<HolidayManagement />} />
         <Route path="/payroll" element={<PayrollDashboard />} />
         <Route path="/hr/my-ctc" element={<HrManagerCTCSidebar />} />
+
+        {/* Event Reports page */}
+        <Route path="/event-reports" element={<EventReports />} />
 
         <Route path="/admin/user-approvals" element={<UserApprovals />} />
 

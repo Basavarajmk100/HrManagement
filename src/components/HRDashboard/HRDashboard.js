@@ -357,6 +357,7 @@ const MENU_ITEMS = [
   { name: "Insurance", icon: Shield, path: "/insurancepolicies" },
   { name: "Staff Details", icon: Users, path: "/staffdetails" },
   { name: "CTC Details", icon: DollarSign, path: "/my-ctc" },
+  { name: "Event Reports", icon: FileText, path: "/event-reports" },
 
   // New Finance submenu
   {

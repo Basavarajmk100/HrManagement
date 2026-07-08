@@ -2,56 +2,73 @@
    HR Payroll Form – Compact UI
 =============================== */
 
-.hr-payroll-form-container {
-  width: 100%;
-  max-width: 650px;
-  background: #ffffff;
-  padding: 18px 22px;         /* reduced */
-  border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-  border: 1px solid #e5e7eb;
-  margin: 10px auto;          /* reduced */
-  font-family: "Inter", sans-serif;
-}
-/* Center whole page */
+/* Page */
 .payroll-entry-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  background: #f8fafc;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 20px;
-  width: 100%;
-  min-height: 90vh;     /* avoids scrolling */
 }
 
-/* Center heading */
+/* Heading */
 .payroll-title {
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   font-size: 24px;
   font-weight: 700;
+  color: #111827;
 }
 
+/* Main Form Container */
+.hr-payroll-form-container {
+  width: 100%;
+  max-width: 1100px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+
+  /* this makes form fields side by side */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 20px;
+}
+
+/* Each field */
+.hr-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Full width utility */
+.full-width {
+  grid-column: 1 / -1;
+}
 
 /* Labels */
 .hr-form-group label {
   display: block;
   font-weight: 600;
-  margin-bottom: 4px;          /* reduced */
+  margin-bottom: 6px;
   font-size: 14px;
   color: #374151;
 }
 
-/* Inputs */
+/* Inputs + select */
 .hr-form-group input,
 .hr-form-group select {
   width: 100%;
-  padding: 8px 10px;           /* reduced */
+  padding: 10px 12px;
   border: 1.3px solid #d1d5db;
-  border-radius: 8px;          /* reduced */
+  border-radius: 8px;
   font-size: 14px;
   background: #f9fafb;
   transition: 0.25s;
+  box-sizing: border-box;
 }
 
 .hr-form-group input:focus,
@@ -62,30 +79,122 @@
   outline: none;
 }
 
-/* Spacing between fields */
-.hr-form-group {
-  margin-bottom: 12px;         /* reduced */
+/* Section box like Employee Details / Attendance / Summary */
+.hr-form-section {
+  grid-column: 1 / -1;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 6px;
 }
 
-/* Submit Button */
+.hr-form-section h4 {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Attendance section in grid */
+.hr-form-section .hr-form-group {
+  margin-bottom: 12px;
+}
+
+/* Readonly employee details / summary grid */
+.hr-readonly-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.hr-readonly-grid div {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.hr-readonly-grid span {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.hr-readonly-grid b {
+  font-size: 14px;
+  color: #111827;
+}
+
+/* Readonly fields */
+.hr-readonly-field input {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+/* Summary box */
+.hr-summary-box {
+  grid-column: 1 / -1;
+}
+
+/* Submit button full width */
 .hr-submit-btn {
+  grid-column: 1 / -1;
   width: 100%;
-  background: #FA85B9  !important ;
+  background: #fa85b9 !important;
   color: white;
-  padding: 10px;               /* reduced */
+  padding: 12px;
   border: none;
-  border-radius: 10px;         /* reduced */
+  border-radius: 10px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
+  margin-top: 8px;
 }
 
 .hr-submit-btn:hover {
-  background: #FA85B9 !important ;
+  background: #f56da9 !important;
   transform: translateY(-1px);
 }
 
 .hr-submit-btn:active {
   transform: scale(0.98);
+}
+
+/* ============================
+   Make some sections inner-grid
+=============================== */
+
+/* Attendance section fields side by side */
+.hr-form-section.attendance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hr-payroll-form-container {
+    grid-template-columns: 1fr;
+  }
+
+  .hr-readonly-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .payroll-entry-page {
+    padding: 12px;
+  }
+
+  .hr-payroll-form-container {
+    padding: 16px;
+  }
+
+  .hr-readonly-grid {
+    grid-template-columns: 1fr;
+  }
 }
