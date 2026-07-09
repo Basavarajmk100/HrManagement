@@ -19,7 +19,7 @@ import {
   Cell,
 } from "recharts";
 
-const PayrollDashboard = () => {
+const AdminPayrollManagement = () => {
   const [search, setSearch] = useState("");
   const [department, setDepartment] = useState("");
   const [showFilters, setShowFilters] = useState(false);
@@ -610,38 +610,6 @@ const PayrollDashboard = () => {
         </>
       )}
 
-      {/* ACTION BAR */}
-      <div className="button-row">
-        <button className="template-btn" onClick={downloadPayrollTemplate}>
-          <BsFileEarmarkExcel />
-          Payroll Template
-        </button>
-
-        <label className={styles.uploadBtn}>
-          <BsFileEarmarkExcel />
-          Upload Excel
-          <input
-            type="file"
-            accept=".xlsx,.xls"
-            hidden
-            onChange={handleExcelUpload}
-          />
-        </label>
-
-        <button
-          className="add-btn"
-          onClick={() => navigate("/employee-manager/addPayroll")}
-        >
-          + Add Payroll
-        </button>
-
-        <button className="export-btn" onClick={exportToExcel}>
-          <BsFileEarmarkExcel />
-          Export Excel
-        </button>
-      </div>
-
-      {/* FILTER PANEL */}
       {/* FILTER PANEL */}
       <div className={styles.employeeFilterBar}>
         <input
@@ -669,6 +637,11 @@ const PayrollDashboard = () => {
           }}
         >
           Clear
+        </button>
+
+        <button onClick={exportToExcel}>
+          <BsFileEarmarkExcel />
+          Download
         </button>
       </div>
 
@@ -896,4 +869,4 @@ const PayrollDashboard = () => {
   );
 };
 
-export default PayrollDashboard;
+export default AdminPayrollManagement;

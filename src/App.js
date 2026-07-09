@@ -196,6 +196,7 @@ import AdminSalesVoucher from "./components/AdminDashboard/AdminSalesVoucher";
 import AdminLedgersPage from "./components/AdminDashboard/AdminLedgersPage";
 
 import AdminTrialBalancePage from "./components/AdminDashboard/AdminTrialBalancePage";
+import AdminPayrollManagementPage from "./components/AdminDashboard/AdminPayrollManagement";
 
 import CreateCompany from "./components/FinanceManagerDashboard/CreateCompany";
 import InvoiceNumberType from "./components/FinanceManagerDashboard/InvoiceNumberType";
@@ -241,6 +242,11 @@ function App() {
         {/* Default route */}
         <Route path="/" element={<Navigate to="/provider-dashboard" />} />
         <Route path="/admin-dashboard" element={<Admin />} />
+
+        <Route
+          path="/admin/payroll-management"
+          element={<AdminPayrollManagementPage />}
+        />
 
         <Route path="/admin/finance/invoices" element={<AdminInvoicesPage />} />
 

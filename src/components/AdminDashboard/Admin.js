@@ -194,6 +194,7 @@ const STATS_DATA = [
     },
   },
 ];
+
 // ==========================================
 // HR DASHBOARD - LEAVE APPROVALS DATA
 // ==========================================
@@ -355,6 +356,12 @@ const MENU_ITEMS = [
   { name: "Insurance", icon: Shield, path: "/insurancepoliciesadmin" },
   // ✅ ADD THIS
   { name: "CTC Details", icon: DollarSign, path: "/my-ctc" },
+
+  {
+    name: "Payroll Management",
+    icon: Wallet,
+    path: "/admin/payroll-management",
+  },
 
   {
     name: "Finance",
