@@ -9,6 +9,7 @@ const AddCTC = () => {
   const [searchResult, setSearchResult] = useState(null);
 
   const [enableIncentive, setEnableIncentive] = useState(false);
+  const [incentiveType, setIncentiveType] = useState("Monthly");
 
   const [form, setForm] = useState({
     empId: "",
@@ -49,7 +50,7 @@ const AddCTC = () => {
     const bonus = (basic / 100) * 20;
 
     // Performance Incentive = 20% of Basic (Monthly)
-    const incentiveMonthly = enableIncentive ? basic * 0.2 : 0;
+    const incentiveMonthly = basic * 0.2;
     const incentiveAnnual = incentiveMonthly * 12;
 
     // Employer PF fixed
@@ -236,14 +237,18 @@ const AddCTC = () => {
         </div>
 
         <div className="edit-actions">
-          <label className="incentive-toggle">
-            <input
-              type="checkbox"
-              checked={enableIncentive}
-              onChange={(e) => setEnableIncentive(e.target.checked)}
-            />
-            <span>Performance Incentive (20%)</span>
-          </label>
+          <div className="incentive-select">
+            <label>Performance Incentive (20%)</label>
+
+            <select
+              value={incentiveType}
+              onChange={(e) => setIncentiveType(e.target.value)}
+              disabled={!editMode}
+            >
+              <option value="Monthly">Monthly</option>
+              <option value="Quarterly">Quarterly</option>
+            </select>
+          </div>
 
           <button
             className={`edit-btn ${editMode ? "cancel" : ""}`}
@@ -317,10 +322,18 @@ const AddCTC = () => {
             editMode={editMode}
             onChange={(v) => handleChange("employerPF", v)}
           />
-
           <Row
-            label="Performance Incentive (20% of Basic)"
-            value={form.variableAnnual / 12}
+            label={
+              incentiveType === "Monthly"
+                ? "Performance Incentive (Monthly - 20% of Basic)"
+                : "Performance Incentive (Quarterly - 20% of Basic)"
+            }
+            value={
+              incentiveType === "Quarterly"
+                ? (form.variableAnnual / 12) * 3
+                : form.variableAnnual / 12
+            }
+            annualValue={form.variableAnnual}
             editable={false}
             editMode={false}
           />
@@ -365,7 +378,14 @@ const formatAmount = (value) =>
   });
 
 // Row component NEXT
-const Row = ({ label, value, editable = false, editMode, onChange }) => (
+const Row = ({
+  label,
+  value,
+  annualValue,
+  editable = false,
+  editMode,
+  onChange,
+}) => (
   <tr>
     <td className="label-cell">{label}</td>
 
@@ -381,7 +401,7 @@ const Row = ({ label, value, editable = false, editMode, onChange }) => (
       )}
     </td>
 
-    <td className="amount-cell">{formatAmount(value * 12)}</td>
+    <td className="amount-cell">{formatAmount(annualValue ?? value * 12)}</td>
   </tr>
 );
 

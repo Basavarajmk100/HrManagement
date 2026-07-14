@@ -32,6 +32,7 @@ import {
   FileBarChart,
   User,
   CalendarCheck,
+  Gift,
 } from "lucide-react";
 
 import {
@@ -373,6 +374,7 @@ const MENU_ITEMS = [
   { name: "General Info", icon: Info, path: "/employee-manager/general" },
   { name: "Attendance", icon: Clock, path: "/employee-manager/attendance" },
   { name: "Payroll", icon: Wallet, path: "/employee-manager/payroll" },
+  { name: "Incentives", icon: Gift, path: "/employee-manager/incentives" },
   { name: "Scheduling", icon: Calendar, path: "/employee-manager/scheduling" },
   { name: "Leave Details", icon: Umbrella, path: "/employee-manager/leaves" },
 

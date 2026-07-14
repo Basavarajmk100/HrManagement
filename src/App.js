@@ -100,6 +100,7 @@ import AddEmployeePage from "./components/EmployeeManager/AddEmployeePage";
 import GeneralInfo from "./components/EmployeeManager/GeneralInfo";
 import AttendanceManager from "./components/EmployeeManager/AttendanceManager";
 import PayrollManager from "./components/EmployeeManager/PayrollManager";
+import Incentives from "./components/EmployeeManager/Incentives";
 import SchedulingManager from "./components/EmployeeManager/SchedulingManager";
 import LeaveDetailsManager from "./components/EmployeeManager/LeaveDetailsManager";
 import AddHrStatsPage from "./components/EmployeeManager/AddHrStatsPage";
@@ -421,6 +422,8 @@ function App() {
           element={<AttendanceManager />}
         />
         <Route path="/employee-manager/payroll" element={<PayrollManager />} />
+
+        <Route path="/employee-manager/incentives" element={<Incentives />} />
         <Route
           path="/employee-manager/scheduling"
           element={<SchedulingManager />}
@@ -511,20 +514,24 @@ function App() {
         />
 
         <Route path="/provider/employees/total" element={<TotalEmployees />} />
+
         <Route path="/provider/employees/list" element={<EmployeeList />} />
 
         <Route
           path="/provider/subscriptions/active"
           element={<ActivePlans />}
         />
+
         <Route
           path="/provider/subscriptions/expired"
           element={<ExpiredPlans />}
         />
+
         <Route
           path="/provider/subscriptions/upgrade"
           element={<UpgradeRequests />}
         />
+
         <Route
           path="provider/subscriptions/companies"
           element={<SubscribedCompanies />}

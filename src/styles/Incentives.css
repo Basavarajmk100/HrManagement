@@ -1,0 +1,40 @@
+.incentive-container {
+  padding: 20px;
+  background: #fff;
+}
+
+.incentive-container h2 {
+  margin-bottom: 20px;
+  color: #1e3a8a;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.incentive-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1500px;
+}
+
+.incentive-table th,
+.incentive-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.incentive-table th {
+  background: #2563eb;
+  color: white;
+}
+
+.incentive-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.incentive-table tr:hover {
+  background: #eef4ff;
+}
