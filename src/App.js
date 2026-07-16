@@ -268,6 +268,8 @@ function App() {
           element={<AdminTrialBalancePage />}
         />
 
+        <Route path="/admin/PayslipReport" element={<PayslipReport />} />
+
         {/* Provider Dashboard route */}
         <Route path="/provider-dashboard" element={<ProviderDashboard />} />
 
@@ -283,6 +285,8 @@ function App() {
         <Route path="/manage-holidays" element={<HolidayManagement />} />
         <Route path="/payroll" element={<PayrollDashboard />} />
         <Route path="/hr/my-ctc" element={<HrManagerCTCSidebar />} />
+
+        <Route path="/hrmanager/PayslipReport" element={<PayslipReport />} />
 
         {/* Event Reports page */}
         <Route path="/event-reports" element={<EventReports />} />

@@ -198,3 +198,144 @@
     grid-template-columns: 1fr;
   }
 }
+/* ===== Modal Overlay ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.tds-modal {
+  width: 1150px;
+  max-width: 96%;
+  height: 90vh;
+  background: #f5f7fb;
+  border-radius: 15px;
+  display: flex;
+  gap: 25px;
+  padding: 25px;
+  position: relative;
+}
+
+.tds-left,
+.tds-right {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.tds-left h2,
+.tds-right h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #1f2937;
+}
+
+.tds-left h3 {
+  margin: 20px 0 15px;
+  font-size: 22px;
+  color: #1f2937;
+}
+
+.tds-form-group {
+  margin-bottom: 18px;
+}
+
+.tds-form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.tds-form-group span {
+  color: red;
+}
+
+.tds-form-group input,
+.tds-form-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.tds-form-group input:focus,
+.tds-form-group select:focus {
+  border-color: #6d28d9;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.15);
+}
+
+.calculate-btn {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #7c3aed, #9333ea);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tax-summary {
+  margin-top: 25px;
+}
+
+.tax-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.tax-row.monthly {
+  background: #ede9fe;
+  color: #5b21b6;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 25px 0;
+}
+
+@media (max-width: 900px) {
+  .tds-modal {
+    flex-direction: column;
+    height: 95vh;
+  }
+}

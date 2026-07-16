@@ -438,6 +438,7 @@ const MENU_ITEMS = [
   { name: "Organization Chart", icon: GitBranch, path: "/organization" },
   { name: "Holiday Management", icon: CalendarCheck, path: "/manage-holidays" },
   { name: "Profile", icon: Shield, path: "/profile" },
+  { name: "Payslip", icon: FileText, path: "/hrmanager/PayslipReport" },
 ];
 
 // ==========================================

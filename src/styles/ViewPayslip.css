@@ -1,8 +1,8 @@
 /* Full-screen payslip container */
 .payslip-container {
-  width: 100vw;           /* full viewport width */
-  min-height: 100vh;      /* full viewport height */
-  padding: 20px 40px;     /* some space from edges */
+  width: 100vw; /* full viewport width */
+  min-height: 100vh; /* full viewport height */
+  padding: 20px 40px; /* some space from edges */
   background: #fff;
   font-family: Arial, sans-serif;
   color: #000;
@@ -24,8 +24,7 @@
   font-weight: 600;
 }
 
-
-.payslip-header p{
+.payslip-header p {
   color: #000;
 }
 /* Title of the report */
@@ -55,7 +54,7 @@
 
 /* Payslip table styling */
 .payslip-table {
-  width: 100%;               /* full width */
+  width: 100%; /* full width */
   border-collapse: collapse;
   margin-bottom: 20px;
 }
@@ -63,7 +62,7 @@
 /* Table header blue with white text */
 .payslip-table th {
   background-color: #1e40af; /* Blue header */
-  color: white;              /* White text */
+  color: white; /* White text */
   padding: 10px;
   font-weight: 600;
   border: 1px solid #000;
@@ -78,7 +77,10 @@
 
 /* Total row bold */
 .total-row td {
+  background-color: #adb6c2 !important;
+  color: #fff;
   font-weight: bold;
+  border: 1px solid #000;
 }
 
 /* Net pay section */

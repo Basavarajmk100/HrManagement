@@ -319,6 +319,26 @@ body {
   padding: 0 10px;
 }
 
+.print-btn {
+  background-color: #0d6efd;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.print-btn:hover {
+  background-color: #0b5ed7;
+}
+
+.print-btn:active {
+  transform: scale(0.98);
+}
+
 /* =========================================================
    TABLE
 

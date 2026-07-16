@@ -32,6 +32,10 @@ const AddCTC = () => {
     setForm({ ...form, [key]: Number(value) || 0 });
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   /* ==============================
      AUTO CALCULATION FROM CTC
      ============================== */
@@ -328,11 +332,7 @@ const AddCTC = () => {
                 ? "Performance Incentive (Monthly - 20% of Basic)"
                 : "Performance Incentive (Quarterly - 20% of Basic)"
             }
-            value={
-              incentiveType === "Quarterly"
-                ? (form.variableAnnual / 12) * 3
-                : form.variableAnnual / 12
-            }
+            value={form.variableAnnual / 12}
             annualValue={form.variableAnnual}
             editable={false}
             editMode={false}
@@ -358,6 +358,10 @@ const AddCTC = () => {
           }}
         >
           Appraisal
+        </button>
+
+        <button className="print-btn" onClick={handlePrint}>
+          Print
         </button>
       </div>
 

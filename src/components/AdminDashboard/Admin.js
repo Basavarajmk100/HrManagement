@@ -364,6 +364,12 @@ const MENU_ITEMS = [
   },
 
   {
+    name: "Payslip",
+    path: "/admin/PayslipReport",
+    icon: FileText,
+  },
+
+  {
     name: "Finance",
     icon: Wallet,
     submenu: [

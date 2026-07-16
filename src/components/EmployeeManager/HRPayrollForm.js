@@ -12,6 +12,28 @@ const daysInMonth = (monthStr) => {
 
 export default function HrPayrollForm() {
   const [employees, setEmployees] = useState([]);
+  const [holidays, setHolidays] = useState([]);
+
+  const [showTdsModal, setShowTdsModal] = useState(false);
+
+  const [taxData, setTaxData] = useState({
+    annualCTC: "",
+    taxRegime: "Old",
+    hra: "",
+    lta: "",
+    section80C: "",
+    section80D: "",
+    homeLoanInterest: "",
+    nps: "",
+  });
+
+  const [taxResult, setTaxResult] = useState({
+    annualIncome: 0,
+    totalDeduction: 0,
+    taxableIncome: 0,
+    annualTax: 0,
+    monthlyTDS: 0,
+  });
 
   const [form, setForm] = useState({
     employeeId: "",
@@ -19,7 +41,7 @@ export default function HrPayrollForm() {
 
     // Attendance
     salaryCalendarDays: 0,
-    weeklyOff: 0,
+    paidLeaves: 0,
     generalHolidays: 0,
     presentDays: 0,
 
@@ -48,6 +70,13 @@ export default function HrPayrollForm() {
     fetch(`${API}/EmployeeManager/all`)
       .then((r) => r.json())
       .then(setEmployees);
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API}/HolidayCalendar`)
+      .then((res) => res.json())
+      .then((data) => setHolidays(data))
+      .catch((err) => console.error(err));
   }, []);
 
   const onChange = (e) =>
@@ -79,14 +108,14 @@ export default function HrPayrollForm() {
 
   // ---- Live derived numbers (attendance + totals) ----
   // ===================== ATTENDANCE =====================
-  // ===================== ATTENDANCE =====================
+
   const calendarDays = Number(form.salaryCalendarDays) || 0;
-  const weeklyOff = Number(form.weeklyOff) || 0;
+  const paidLeaves = Number(form.paidLeaves) || 0;
   const generalHolidays = Number(form.generalHolidays) || 0;
   const presentDays = Number(form.presentDays) || 0;
 
   // Working days
-  const workingDays = calendarDays - weeklyOff - generalHolidays;
+  const workingDays = calendarDays - paidLeaves - generalHolidays;
 
   // LOP Days
   const lopDays = Math.max(workingDays - presentDays, 0);
@@ -137,7 +166,7 @@ export default function HrPayrollForm() {
       employeeId: "",
       month: "",
       salaryCalendarDays: 0,
-      weeklyOff: 0,
+      paidLeaves: 0,
       generalHolidays: 0,
       presentDays: 0,
       basicSalary: 0,
@@ -188,7 +217,7 @@ export default function HrPayrollForm() {
       department: selectedEmployee.department,
 
       salaryCalendarDays: calendarDays,
-      weeklyOff,
+      paidLeaves,
       generalHolidays,
       payDays,
       presentDays,
@@ -231,6 +260,56 @@ export default function HrPayrollForm() {
       const err = await res.text();
       alert("Error adding payroll: " + err);
     }
+  };
+  const calculateTDS = () => {
+    const annualIncome = Number(taxData.annualCTC) || 0;
+
+    const totalDeduction =
+      (Number(taxData.section80C) || 0) +
+      (Number(taxData.section80D) || 0) +
+      (Number(taxData.homeLoanInterest) || 0) +
+      (Number(taxData.nps) || 0);
+
+    const taxableIncome = Math.max(annualIncome - totalDeduction, 0);
+
+    let annualTax = 0;
+
+    // Example tax calculation
+    if (taxData.taxRegime === "Old") {
+      if (taxableIncome <= 250000) {
+        annualTax = 0;
+      } else if (taxableIncome <= 500000) {
+        annualTax = (taxableIncome - 250000) * 0.05;
+      } else if (taxableIncome <= 1000000) {
+        annualTax = 12500 + (taxableIncome - 500000) * 0.2;
+      } else {
+        annualTax = 112500 + (taxableIncome - 1000000) * 0.3;
+      }
+    } else {
+      // Simple example for New Regime
+      if (taxableIncome <= 300000) {
+        annualTax = 0;
+      } else {
+        annualTax = taxableIncome * 0.1;
+      }
+    }
+
+    const monthlyTDS = Math.round(annualTax / 12);
+
+    // Update right panel
+    setTaxResult({
+      annualIncome,
+      totalDeduction,
+      taxableIncome,
+      annualTax: Math.round(annualTax),
+      monthlyTDS,
+    });
+
+    // Update payroll form
+    setForm((prev) => ({
+      ...prev,
+      tds: monthlyTDS,
+    }));
   };
 
   return (
@@ -339,11 +418,11 @@ export default function HrPayrollForm() {
             </div>
 
             <div className="hr-form-group">
-              <label>Weekly Off</label>
+              <label>paid Leaves</label>
               <input
-                name="weeklyOff"
+                name="paidLeaves"
                 type="number"
-                value={form.weeklyOff}
+                value={form.paidLeaves}
                 onChange={onChange}
               />
             </div>
@@ -489,9 +568,18 @@ export default function HrPayrollForm() {
           <label>PT</label>
           <input name="pt" type="number" value={form.pt} onChange={onChange} />
         </div>
-
         <div className="hr-form-group">
-          <label>TDS</label>
+          <div className="label-with-link">
+            <label>TDS</label>
+            <button
+              type="button"
+              className="tds-link"
+              onClick={() => setShowTdsModal(true)}
+            >
+              Calculate TDS
+            </button>
+          </div>
+
           <input
             name="tds"
             type="number"
@@ -545,6 +633,166 @@ export default function HrPayrollForm() {
           Add Payroll (for approval)
         </button>
       </form>
+
+      {showTdsModal && (
+        <div className="modal-overlay">
+          <div className="tds-modal">
+            {/* Left Panel */}
+            <div className="tds-left">
+              <h2>Income Details</h2>
+
+              <div className="tds-form-group">
+                <label>
+                  Annual CTC (₹) <span>*</span>
+                </label>
+                <input
+                  type="number"
+                  value={taxData.annualCTC}
+                  onChange={(e) =>
+                    setTaxData({ ...taxData, annualCTC: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="tds-form-group">
+                <label>Tax Regime</label>
+                <select
+                  value={taxData.taxRegime}
+                  onChange={(e) =>
+                    setTaxData({ ...taxData, taxRegime: e.target.value })
+                  }
+                >
+                  <option value="Old">Old Tax Regime</option>
+                  <option value="New">New Tax Regime</option>
+                </select>
+              </div>
+
+              <div className="tds-form-group">
+                <label>HRA (₹)</label>
+                <input
+                  type="number"
+                  placeholder="House Rent Allowance"
+                  value={taxData.hra}
+                  onChange={(e) =>
+                    setTaxData({ ...taxData, hra: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="tds-form-group">
+                <label>LTA (₹)</label>
+                <input
+                  type="number"
+                  placeholder="Leave Travel Allowance"
+                  value={taxData.lta}
+                  onChange={(e) =>
+                    setTaxData({ ...taxData, lta: e.target.value })
+                  }
+                />
+              </div>
+
+              <hr />
+
+              <h3>Deductions (Old Regime Only)</h3>
+
+              <div className="tds-form-group">
+                <label>Section 80C (₹) - Max ₹1,50,000</label>
+                <input
+                  type="number"
+                  placeholder="PPF, ELSS, Life Insurance"
+                  value={taxData.section80C}
+                  onChange={(e) =>
+                    setTaxData({ ...taxData, section80C: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="tds-form-group">
+                <label>Section 80D (₹) - Max ₹25,000</label>
+                <input
+                  type="number"
+                  placeholder="Health Insurance"
+                  value={taxData.section80D}
+                  onChange={(e) =>
+                    setTaxData({ ...taxData, section80D: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="tds-form-group">
+                <label>Home Loan Interest (₹)</label>
+                <input
+                  type="number"
+                  placeholder="Section 24"
+                  value={taxData.homeLoanInterest}
+                  onChange={(e) =>
+                    setTaxData({
+                      ...taxData,
+                      homeLoanInterest: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div className="tds-form-group">
+                <label>NPS (₹) - Max ₹50,000</label>
+                <input
+                  type="number"
+                  placeholder="Section 80CCD(1B)"
+                  value={taxData.nps}
+                  onChange={(e) =>
+                    setTaxData({ ...taxData, nps: e.target.value })
+                  }
+                />
+              </div>
+
+              <button className="calculate-btn" onClick={calculateTDS}>
+                Calculate TDS
+              </button>
+            </div>
+
+            {/* Right Panel */}
+
+            <div className="tds-right">
+              <h2>Tax Calculation</h2>
+
+              <div className="tax-summary">
+                <div className="tax-row">
+                  <span>Annual Income</span>
+                  <strong>₹ {taxResult.annualIncome}</strong>
+                </div>
+
+                <div className="tax-row">
+                  <span>Total Deductions</span>
+                  <strong>₹ {taxResult.totalDeduction}</strong>
+                </div>
+
+                <div className="tax-row">
+                  <span>Taxable Income</span>
+                  <strong>₹ {taxResult.taxableIncome}</strong>
+                </div>
+
+                <div className="tax-row">
+                  <span>Annual Tax</span>
+                  <strong>₹ {taxResult.annualTax}</strong>
+                </div>
+
+                <div className="tax-row monthly">
+                  <span>Monthly TDS</span>
+                  <strong>₹ {taxResult.monthlyTDS}</strong>
+                </div>
+              </div>
+            </div>
+
+            <button
+              className="close-modal"
+              onClick={() => setShowTdsModal(false)}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
