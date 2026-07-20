@@ -1,18 +1,18 @@
 .payslip-container {
-  width: 100vw !important;        /* full viewport width */
-  height: 100vh !important;       /* full viewport height */
-  max-width: none !important;     /* override previous max-width */
-  margin: 0 !important;           /* remove auto centering */
-  padding: 30px !important;       /* keep your padding */
+  width: 100vw !important; /* full viewport width */
+  height: 100vh !important; /* full viewport height */
+  max-width: none !important; /* override previous max-width */
+  margin: 0 !important; /* remove auto centering */
+  padding: 30px !important; /* keep your padding */
   background: #f8fafc !important;
   font-family: Arial, sans-serif !important;
   color: #1e40af !important;
-  border-radius: 0 !important;    /* remove rounded corners for full screen */
+  border-radius: 0 !important; /* remove rounded corners for full screen */
   box-sizing: border-box !important;
-  overflow: auto !important;      /* ensure scroll if content exceeds screen */
+  overflow: auto !important; /* ensure scroll if content exceeds screen */
 }
 
-.payslip-company-header p{
+.payslip-company-header p {
   color: black;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .download-all-btn {
-  background-color: #FA85B9 ; /* Blue button */
+  background-color: #fa85b9; /* Blue button */
   color: white;
   border: none;
   padding: 8px 15px;
@@ -51,7 +51,7 @@
 }
 
 .download-all-btn:hover {
-  background-color:#FA85B9 ;
+  background-color: #fa85b9;
 }
 
 .payslip-table {
@@ -61,7 +61,7 @@
 }
 
 .payslip-table th {
-  background-color:   #3B82F6 !important;
+  background-color: #3b82f6 !important;
   color: white;
   padding: 10px;
   text-align: left;
@@ -90,10 +90,28 @@
 }
 
 .download-btn {
-  background-color:#3b82f6 !important ;
+  background-color: #3b82f6 !important;
   color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .download-btn:hover {
-  background-color:#3b82f6 !important;
+  background-color: #3b82f6 !important;
+}
+
+.send-mail-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.send-mail-btn:hover {
+  background-color: #218838;
 }

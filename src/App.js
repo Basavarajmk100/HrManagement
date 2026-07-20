@@ -456,6 +456,7 @@ function App() {
         />
 
         <Route path="/employee-manager/CTCreport" element={<CTCReport />} />
+
         <Route
           path="/employee-manager/AttendanceReport"
           element={<AttendanceReport />}

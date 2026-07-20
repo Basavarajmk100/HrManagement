@@ -12,6 +12,7 @@ const PayslipReport = () => {
     {
       empId: "EMP001",
       name: "Basavaraj",
+      email: "basujuly31@gmail.com",
       month: "January",
       year: 2026,
       basic: 30000,
@@ -27,6 +28,7 @@ const PayslipReport = () => {
     {
       empId: "EMP002",
       name: "Deepak",
+      email: "sahanabhajantri779@gmail.com",
       month: "January",
       year: 2026,
       basic: 28000,
@@ -42,6 +44,7 @@ const PayslipReport = () => {
     {
       empId: "EMP003",
       name: "Sagar",
+      email: "sagar@kinsoft.com",
       month: "January",
       year: 2026,
       basic: 32000,
@@ -141,6 +144,55 @@ const PayslipReport = () => {
     navigate(`/employee-manager/ViewPayslip/${emp.empId}`, { state: { emp } });
   };
 
+  const sendMailToAll = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5133/api/payslip/send-mail-all",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(filteredPayslips),
+        },
+      );
+
+      if (response.ok) {
+        alert("Payslips sent successfully.");
+      } else {
+        alert("Failed to send emails.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    }
+  };
+
+  const sendMail = async (emp) => {
+    try {
+      const response = await fetch(
+        "http://localhost:5133/api/payslip/send-mail",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(emp),
+        },
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        alert(result.message);
+      } else {
+        alert("Failed to send email.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    }
+  };
+
   return (
     <div className="payslip-container">
       {/* Company Header */}
@@ -204,9 +256,15 @@ const PayslipReport = () => {
           </select>
         </div>
 
-        <button className="download-all-btn" onClick={downloadAllPayslips}>
-          Download All
-        </button>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <button className="download-all-btn" onClick={downloadAllPayslips}>
+            Download All
+          </button>
+
+          <button className="send-mail-btn" onClick={sendMailToAll}>
+            Send Mail to All
+          </button>
+        </div>
       </div>
 
       {/* Table */}
@@ -235,19 +293,35 @@ const PayslipReport = () => {
                   <td>{emp.grossSalary}</td>
                   <td>{emp.totalDeduction}</td>
                   <td>{emp.netSalary}</td>
-                  <td style={{ display: "flex", gap: "5px" }}>
-                    <button
-                      className="view-btn"
-                      onClick={() => ViewPayslip(emp)}
+                  <td>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "5px",
+                        flexWrap: "wrap",
+                      }}
                     >
-                      View
-                    </button>
-                    <button
-                      className="download-btn"
-                      onClick={() => downloadPayslip(emp)}
-                    >
-                      Download
-                    </button>
+                      <button
+                        className="view-btn"
+                        onClick={() => ViewPayslip(emp)}
+                      >
+                        View
+                      </button>
+
+                      <button
+                        className="download-btn"
+                        onClick={() => downloadPayslip(emp)}
+                      >
+                        Download
+                      </button>
+
+                      <button
+                        className="send-mail-btn"
+                        onClick={() => sendMail(emp)}
+                      >
+                        Send Mail
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
