@@ -315,7 +315,6 @@ export default function HrPayrollForm() {
   return (
     <div className="payroll-entry-page">
       <h2 className="payroll-title">HR Payroll Processing</h2>
-
       <form className="hr-payroll-form-container" onSubmit={submit}>
         {/* ===================== EMPLOYEE ===================== */}
         <div className="hr-form-group">
@@ -633,14 +632,17 @@ export default function HrPayrollForm() {
           Add Payroll (for approval)
         </button>
       </form>
-
+      \
       {showTdsModal && (
-        <div className="modal-overlay">
+        <div className="tds-modal-overlay">
           <div className="tds-modal">
+            {/* YOUR EXISTING CODE STARTS HERE */}
+
             {/* Left Panel */}
             <div className="tds-left">
               <h2>Income Details</h2>
 
+              {/* Annual CTC */}
               <div className="tds-form-group">
                 <label>
                   Annual CTC (₹) <span>*</span>
@@ -649,17 +651,24 @@ export default function HrPayrollForm() {
                   type="number"
                   value={taxData.annualCTC}
                   onChange={(e) =>
-                    setTaxData({ ...taxData, annualCTC: e.target.value })
+                    setTaxData({
+                      ...taxData,
+                      annualCTC: e.target.value,
+                    })
                   }
                 />
               </div>
 
+              {/* Tax Regime */}
               <div className="tds-form-group">
                 <label>Tax Regime</label>
                 <select
                   value={taxData.taxRegime}
                   onChange={(e) =>
-                    setTaxData({ ...taxData, taxRegime: e.target.value })
+                    setTaxData({
+                      ...taxData,
+                      taxRegime: e.target.value,
+                    })
                   }
                 >
                   <option value="Old">Old Tax Regime</option>
@@ -667,6 +676,7 @@ export default function HrPayrollForm() {
                 </select>
               </div>
 
+              {/* HRA - Show for Old and New */}
               <div className="tds-form-group">
                 <label>HRA (₹)</label>
                 <input
@@ -674,11 +684,15 @@ export default function HrPayrollForm() {
                   placeholder="House Rent Allowance"
                   value={taxData.hra}
                   onChange={(e) =>
-                    setTaxData({ ...taxData, hra: e.target.value })
+                    setTaxData({
+                      ...taxData,
+                      hra: e.target.value,
+                    })
                   }
                 />
               </div>
 
+              {/* LTA - Show for Old and New */}
               <div className="tds-form-group">
                 <label>LTA (₹)</label>
                 <input
@@ -686,65 +700,82 @@ export default function HrPayrollForm() {
                   placeholder="Leave Travel Allowance"
                   value={taxData.lta}
                   onChange={(e) =>
-                    setTaxData({ ...taxData, lta: e.target.value })
-                  }
-                />
-              </div>
-
-              <hr />
-
-              <h3>Deductions (Old Regime Only)</h3>
-
-              <div className="tds-form-group">
-                <label>Section 80C (₹) - Max ₹1,50,000</label>
-                <input
-                  type="number"
-                  placeholder="PPF, ELSS, Life Insurance"
-                  value={taxData.section80C}
-                  onChange={(e) =>
-                    setTaxData({ ...taxData, section80C: e.target.value })
-                  }
-                />
-              </div>
-
-              <div className="tds-form-group">
-                <label>Section 80D (₹) - Max ₹25,000</label>
-                <input
-                  type="number"
-                  placeholder="Health Insurance"
-                  value={taxData.section80D}
-                  onChange={(e) =>
-                    setTaxData({ ...taxData, section80D: e.target.value })
-                  }
-                />
-              </div>
-
-              <div className="tds-form-group">
-                <label>Home Loan Interest (₹)</label>
-                <input
-                  type="number"
-                  placeholder="Section 24"
-                  value={taxData.homeLoanInterest}
-                  onChange={(e) =>
                     setTaxData({
                       ...taxData,
-                      homeLoanInterest: e.target.value,
+                      lta: e.target.value,
                     })
                   }
                 />
               </div>
 
-              <div className="tds-form-group">
-                <label>NPS (₹) - Max ₹50,000</label>
-                <input
-                  type="number"
-                  placeholder="Section 80CCD(1B)"
-                  value={taxData.nps}
-                  onChange={(e) =>
-                    setTaxData({ ...taxData, nps: e.target.value })
-                  }
-                />
-              </div>
+              {/* DEDUCTIONS ONLY FOR OLD REGIME */}
+              {taxData.taxRegime === "Old" && (
+                <>
+                  <hr />
+
+                  <h3>Deductions (Old Regime Only)</h3>
+
+                  <div className="tds-form-group">
+                    <label>Section 80C (₹) - Max ₹1,50,000</label>
+                    <input
+                      type="number"
+                      placeholder="PPF, ELSS, Life Insurance"
+                      value={taxData.section80C}
+                      onChange={(e) =>
+                        setTaxData({
+                          ...taxData,
+                          section80C: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  <div className="tds-form-group">
+                    <label>Section 80D (₹) - Max ₹25,000</label>
+                    <input
+                      type="number"
+                      placeholder="Health Insurance"
+                      value={taxData.section80D}
+                      onChange={(e) =>
+                        setTaxData({
+                          ...taxData,
+                          section80D: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  <div className="tds-form-group">
+                    <label>Home Loan Interest (₹)</label>
+                    <input
+                      type="number"
+                      placeholder="Section 24"
+                      value={taxData.homeLoanInterest}
+                      onChange={(e) =>
+                        setTaxData({
+                          ...taxData,
+                          homeLoanInterest: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  <div className="tds-form-group">
+                    <label>NPS (₹) - Max ₹50,000</label>
+                    <input
+                      type="number"
+                      placeholder="Section 80CCD(1B)"
+                      value={taxData.nps}
+                      onChange={(e) =>
+                        setTaxData({
+                          ...taxData,
+                          nps: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                </>
+              )}
 
               <button className="calculate-btn" onClick={calculateTDS}>
                 Calculate TDS
@@ -752,7 +783,6 @@ export default function HrPayrollForm() {
             </div>
 
             {/* Right Panel */}
-
             <div className="tds-right">
               <h2>Tax Calculation</h2>
 
@@ -784,12 +814,15 @@ export default function HrPayrollForm() {
               </div>
             </div>
 
+            {/* Close Button */}
             <button
               className="close-modal"
               onClick={() => setShowTdsModal(false)}
             >
               ✕
             </button>
+
+            {/* YOUR EXISTING CODE ENDS HERE */}
           </div>
         </div>
       )}

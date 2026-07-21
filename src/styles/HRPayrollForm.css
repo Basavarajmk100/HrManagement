@@ -339,3 +339,82 @@ hr {
     height: 95vh;
   }
 }
+
+.label-with-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.label-with-link label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.tds-link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 10px;
+  color: #007bff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tds-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.tds-modal {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  gap: 30px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.tds-left {
+  flex: 1;
+}
+
+.tds-right {
+  flex: 1;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .tds-modal {
+    flex-direction: column;
+    width: 95%;
+  }
+}
