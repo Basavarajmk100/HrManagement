@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/Payslip.css";
 import { FaFileAlt } from "react-icons/fa";
 import { Download } from "lucide-react";
 
 const Payslip = () => {
+  const navigate = useNavigate();
   // Dummy payslip data
   const [payslips] = useState([
     { month: "January 2025", file: "payslip-jan-2025.pdf" },
@@ -13,57 +15,52 @@ const Payslip = () => {
     { month: "May 2025", file: "payslip-may-2025.pdf" },
   ]);
 
-  
   const theme = localStorage.getItem("theme") || "simple";
-      const isSimple = theme === "simple";
-    const isDark = theme === "dark";
-    const isColorful = theme === "colorful";
+  const isSimple = theme === "simple";
+  const isDark = theme === "dark";
+  const isColorful = theme === "colorful";
+
+  const ViewPayslip = (payslip) => {
+    navigate("/employee/payslip-view", {
+      state: { payslip },
+    });
+  };
 
   return (
-
-      <div className
-
-={`payslip-container theme-${theme}`}>
+    <div className={`payslip-container theme-${theme}`}>
       {/* Header */}
-      <div className
-
-="payslip-header">
+      <div className="payslip-header">
         <h2>
-          <span className
-
-="icon"><FaFileAlt /></span>
+          <span className="icon">
+            <FaFileAlt />
+          </span>
           Payslips
         </h2>
-        <div className
-
-="payslip-header-accent"></div>
-        <p className
-
-="payslip-subtitle">
+        <div className="payslip-header-accent"></div>
+        <p className="payslip-subtitle">
           Download your monthly salary slips securely
         </p>
       </div>
 
       {/* Payslip Cards */}
-      <div className
-
-="payslip-list">
+      <div className="payslip-list">
         {payslips.map((p, index) => (
-          <div className
-
-="payslip-card" key={index}>
-            <div className
-
-="payslip-info">
+          <div className="payslip-card" key={index}>
+            <div className="payslip-info">
               <h4>{p.month}</h4>
               <p>Payslip available for download</p>
             </div>
-           <a href={`/${p.file}`} download className
+            <div className="payslip-actions">
+              <button className="btn-view" onClick={() => ViewPayslip(p)}>
+                <FaFileAlt size={16} style={{ marginRight: "6px" }} />
+                View
+              </button>
 
-="btn-download">
-            <Download size={16} color="white" style={{marginRight:"6px"}} />
-              Download
-            </a>
+              <a href={`/${p.file}`} download className="btn-download">
+                <Download size={16} style={{ marginRight: "6px" }} />
+                Download
+              </a>
+            </div>
           </div>
         ))}
       </div>

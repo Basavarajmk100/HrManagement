@@ -1,0 +1,138 @@
+.salary-summary-container {
+  padding: 25px;
+  background: #f7f8fa;
+  min-height: 100vh;
+}
+
+.salary-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.salary-summary-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.salary-summary-header p {
+  margin-top: 5px;
+  color: #666;
+}
+
+/* Filters */
+
+.salary-summary-filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 15px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.filter-group input,
+.filter-group select {
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+  border-color: #007bff;
+}
+
+/* Buttons */
+
+.salary-summary-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.salary-summary-actions button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.excel-btn {
+  background: #198754;
+  color: white;
+}
+
+.pdf-btn {
+  background: #dc3545;
+  color: white;
+}
+
+/* Table */
+
+.salary-summary-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+}
+
+.salary-summary-table {
+  width: 100%;
+  min-width: 1500px;
+  border-collapse: collapse;
+}
+
+.salary-summary-table th {
+  background: #f1f3f5;
+  padding: 12px;
+  border: 1px solid #ddd;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.salary-summary-table td {
+  padding: 11px;
+  border: 1px solid #ddd;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.salary-summary-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.no-data {
+  text-align: center;
+  padding: 30px !important;
+  color: #777;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .salary-summary-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .salary-summary-actions {
+    justify-content: flex-start;
+  }
+}

@@ -78,6 +78,8 @@ import TrialBalancePage from "./components/HRDashboard/TrialBalancePage";
 // ⬇️ NEW — Performance Dashboard Component
 import PerformanceDashboard from "./components/HRDashboard/PerformanceDashboard";
 
+import SalarySummaryReport from "./components/HRDashboard/SalarySummaryReport";
+
 // Employee Dashboard Components
 import Profile from "./components/EmployeeDashboard/Profile";
 import Payslip from "./components/EmployeeDashboard/Payslip";
@@ -89,6 +91,8 @@ import EmployeeDashboardPageComponent from "./components/EmployeeDashboard/Emplo
 import EmployeeCTCSidebar from "./components/EmployeeDashboard/EmployeeCTCSidebar";
 import ViewInsurance from "./components/EmployeeDashboard/ViewInsurance";
 import RequestInsurance from "./components/EmployeeDashboard/RequestInsurance";
+
+import PayslipView from "./components/EmployeeDashboard/PayslipView";
 
 import ProviderDashboard from "./components/ProviderDashboard/ProviderDashboard";
 
@@ -285,6 +289,10 @@ function App() {
         <Route path="/manage-holidays" element={<HolidayManagement />} />
         <Route path="/payroll" element={<PayrollDashboard />} />
         <Route path="/hr/my-ctc" element={<HrManagerCTCSidebar />} />
+        <Route
+          path="/salary-summary-report"
+          element={<SalarySummaryReport />}
+        />
 
         <Route path="/hrmanager/PayslipReport" element={<PayslipReport />} />
 
@@ -369,6 +377,8 @@ function App() {
         <Route path="/payslip" element={<Payslip />} />
         <Route path="/holiday-calendar" element={<HolidayCalendar />} />
         <Route path="/my-team" element={<MyTeam />} />
+
+        <Route path="/employee/payslip-view" element={<PayslipView />} />
 
         <Route path="/income-declaration" element={<IncomeDeclaration />} />
 

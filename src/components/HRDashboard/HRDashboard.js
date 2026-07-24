@@ -358,6 +358,11 @@ const MENU_ITEMS = [
   { name: "Staff Details", icon: Users, path: "/staffdetails" },
   { name: "CTC Details", icon: DollarSign, path: "/my-ctc" },
   { name: "Event Reports", icon: FileText, path: "/event-reports" },
+  {
+    name: "Salary Summary Report",
+    icon: FileText,
+    path: "/salary-summary-report",
+  },
 
   // New Finance submenu
   {

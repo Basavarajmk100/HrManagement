@@ -44,32 +44,49 @@ const AddCTC = () => {
 
     const grossMonthly = form.totalCTC / 12;
 
-    // Basic = 50% of CTC
+    // Basic = 50% of Annual CTC / 12
     const basic = (form.totalCTC * 0.5) / 12;
 
     // HRA Rule
     const hra = basic < 50000 ? basic * 0.2 : basic * 0.3;
 
-    // Statutory Bonus = (Basic / 100) * 20
-    const bonus = (basic / 100) * 20;
+    // Statutory Bonus = 20% of Basic
+    const bonus = basic * 0.2;
 
-    // Performance Incentive = 20% of Basic (Monthly)
+    // Performance Incentive = 20% of Basic
     const incentiveMonthly = basic * 0.2;
     const incentiveAnnual = incentiveMonthly * 12;
 
     // Employer PF fixed
     const employerPF = 1800;
 
-    const usedAmount =
-      basic +
-      hra +
-      bonus +
-      employerPF +
-      form.medical +
-      form.transport +
-      incentiveMonthly;
+    // Calculate all components EXCEPT Performance Incentive
+    const amountBeforeIncentive =
+      basic + hra + bonus + employerPF + form.medical + form.transport;
 
-    const special = Math.max(grossMonthly - usedAmount, 0);
+    // Remaining amount available for:
+    // Special Allowance + Performance Incentive
+    const amountAvailable = Math.max(grossMonthly - amountBeforeIncentive, 0);
+
+    let special;
+    let variableAnnual;
+
+    if (enableIncentive) {
+      // CHECKED:
+      // Move 20% of Basic from Special Allowance
+      // to Performance Incentive
+
+      special = Math.max(amountAvailable - incentiveMonthly, 0);
+
+      variableAnnual = incentiveAnnual;
+    } else {
+      // UNCHECKED:
+      // Entire remaining amount stays as Special Allowance
+
+      special = amountAvailable;
+
+      variableAnnual = 0;
+    }
 
     setForm((prev) => ({
       ...prev,
@@ -78,8 +95,8 @@ const AddCTC = () => {
       hra,
       bonus,
       employerPF,
-      variableAnnual: incentiveAnnual, // AUTO SET
       special,
+      variableAnnual,
     }));
   }, [form.totalCTC, editMode, form.medical, form.transport, enableIncentive]);
 
@@ -242,12 +259,20 @@ const AddCTC = () => {
 
         <div className="edit-actions">
           <div className="incentive-select">
-            <label>Performance Incentive (20%)</label>
+            <label>
+              <input
+                type="checkbox"
+                checked={enableIncentive}
+                onChange={(e) => setEnableIncentive(e.target.checked)}
+                disabled={!editMode}
+              />
+              Performance Incentive (20%)
+            </label>
 
             <select
               value={incentiveType}
               onChange={(e) => setIncentiveType(e.target.value)}
-              disabled={!editMode}
+              disabled={!editMode || !enableIncentive}
             >
               <option value="Monthly">Monthly</option>
               <option value="Quarterly">Quarterly</option>
@@ -255,10 +280,25 @@ const AddCTC = () => {
           </div>
 
           <button
-            className={`edit-btn ${editMode ? "cancel" : ""}`}
-            onClick={() => setEditMode(!editMode)}
+            className="edit-btn"
+            onClick={() => {
+              if (!editMode) {
+                // Start editing
+                setEditMode(true);
+              } else {
+                // Ask confirmation before saving
+                const confirmSave = window.confirm(
+                  "Are you sure you want to save these changes?",
+                );
+
+                if (confirmSave) {
+                  setEditMode(false);
+                  alert("Changes saved successfully.");
+                }
+              }
+            }}
           >
-            {editMode ? "Cancel Edit" : "Edit"}
+            {editMode ? "Save" : "Edit"}
           </button>
         </div>
       </div>
@@ -326,17 +366,19 @@ const AddCTC = () => {
             editMode={editMode}
             onChange={(v) => handleChange("employerPF", v)}
           />
-          <Row
-            label={
-              incentiveType === "Monthly"
-                ? "Performance Incentive (Monthly - 20% of Basic)"
-                : "Performance Incentive (Quarterly - 20% of Basic)"
-            }
-            value={form.variableAnnual / 12}
-            annualValue={form.variableAnnual}
-            editable={false}
-            editMode={false}
-          />
+          {enableIncentive && (
+            <Row
+              label={
+                incentiveType === "Monthly"
+                  ? "Performance Incentive (Monthly - 20% of Basic)"
+                  : "Performance Incentive (Quarterly - 20% of Basic)"
+              }
+              value={form.variableAnnual / 12}
+              annualValue={form.variableAnnual}
+              editable={false}
+              editMode={false}
+            />
+          )}
 
           <tr className="total-row">
             <td>Total Cost to Company</td>
