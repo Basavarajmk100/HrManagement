@@ -80,6 +80,10 @@ import PerformanceDashboard from "./components/HRDashboard/PerformanceDashboard"
 
 import SalarySummaryReport from "./components/HRDashboard/SalarySummaryReport";
 
+import MonthlySalaryBreakupReport from "./components/HRDashboard/MonthlySalaryBreakupReport";
+
+import SalaryIncentiveAllowanceReport from "./components/HRDashboard/SalaryIncentiveAllowanceReport";
+
 // Employee Dashboard Components
 import Profile from "./components/EmployeeDashboard/Profile";
 import Payslip from "./components/EmployeeDashboard/Payslip";
@@ -292,6 +296,16 @@ function App() {
         <Route
           path="/salary-summary-report"
           element={<SalarySummaryReport />}
+        />
+
+        <Route
+          path="/monthly-salary-breakup-report"
+          element={<MonthlySalaryBreakupReport />}
+        />
+
+        <Route
+          path="/salary-incentive-allowance-report"
+          element={<SalaryIncentiveAllowanceReport />}
         />
 
         <Route path="/hrmanager/PayslipReport" element={<PayslipReport />} />

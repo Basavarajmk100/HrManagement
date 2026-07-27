@@ -364,6 +364,18 @@ const MENU_ITEMS = [
     path: "/salary-summary-report",
   },
 
+  {
+    name: "Monthly Salary Breakup",
+    icon: FileText,
+    path: "/monthly-salary-breakup-report",
+  },
+
+  {
+    name: "Incentive / Allowance Report",
+    icon: FileText,
+    path: "/salary-incentive-allowance-report",
+  },
+
   // New Finance submenu
   {
     name: "Finance",

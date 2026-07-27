@@ -1,0 +1,132 @@
+.salary-breakup-container {
+  padding: 25px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.salary-breakup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.salary-breakup-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.salary-breakup-header p {
+  margin-top: 5px;
+  color: #777;
+}
+
+.download-btn {
+  padding: 10px 18px;
+  background-color: #198754;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  background-color: #157347;
+}
+
+/* Filters */
+
+.salary-filters {
+  display: flex;
+  gap: 20px;
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.filter-group label {
+  font-weight: 600;
+  color: #444;
+}
+
+.filter-group select,
+.filter-group input {
+  padding: 10px 12px;
+  min-width: 220px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+  border-color: #0d6efd;
+}
+
+/* Table */
+
+.table-wrapper {
+  overflow-x: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.salary-breakup-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1200px;
+}
+
+.salary-breakup-table th {
+  background-color: #f1f3f5;
+  color: #333;
+  font-weight: 600;
+  padding: 14px;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+.salary-breakup-table td {
+  padding: 13px;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+.salary-breakup-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.no-data {
+  text-align: center;
+  padding: 30px !important;
+  color: #777;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .salary-breakup-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .salary-filters {
+    flex-direction: column;
+  }
+
+  .filter-group select,
+  .filter-group input {
+    width: 100%;
+  }
+}
