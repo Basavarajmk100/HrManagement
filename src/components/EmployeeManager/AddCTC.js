@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../styles/AddCTC.css";
 import AppraisalModal from "./AppraisalModal";
 import * as XLSX from "xlsx";
+import Swal from "sweetalert2";
 const AddCTC = () => {
   const [editMode, setEditMode] = useState(false);
 
@@ -184,6 +185,37 @@ const AddCTC = () => {
     XLSX.writeFile(workbook, "CTC_Search_Results.xlsx");
   };
 
+  const handleEditSave = async () => {
+    if (!editMode) {
+      setEditMode(true);
+      return;
+    }
+
+    const result = await Swal.fire({
+      title: "Save Changes?",
+      text: "Do you want to save these changes?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#2563eb",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, Save",
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+    });
+
+    if (result.isConfirmed) {
+      setEditMode(false);
+
+      Swal.fire({
+        title: "Saved!",
+        text: "Changes have been saved successfully.",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }
+  };
+
   return (
     <div className="ctc-card">
       {/* 🔍 Search CTC */}
@@ -279,25 +311,7 @@ const AddCTC = () => {
             </select>
           </div>
 
-          <button
-            className="edit-btn"
-            onClick={() => {
-              if (!editMode) {
-                // Start editing
-                setEditMode(true);
-              } else {
-                // Ask confirmation before saving
-                const confirmSave = window.confirm(
-                  "Are you sure you want to save these changes?",
-                );
-
-                if (confirmSave) {
-                  setEditMode(false);
-                  alert("Changes saved successfully.");
-                }
-              }
-            }}
-          >
+          <button className="edit-btn" onClick={handleEditSave}>
             {editMode ? "Save" : "Edit"}
           </button>
         </div>

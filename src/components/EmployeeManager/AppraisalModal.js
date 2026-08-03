@@ -6,9 +6,9 @@ const AppraisalModal = ({ isOpen, onClose, employee }) => {
   const [form, setForm] = useState({
     empId: "",
     empName: "",
-    currentCTC: 0,
-    appraisalPercent: 0,
-    revisedCTC: 0,
+    currentCTC: "",
+    appraisalPercent: "",
+    revisedCTC: "",
     effectiveFrom: "",
   });
 
@@ -18,22 +18,31 @@ const AppraisalModal = ({ isOpen, onClose, employee }) => {
         empId: employee.empId,
         empName: employee.empName,
         currentCTC: employee.totalCTC,
-        appraisalPercent: 0,
+        appraisalPercent: "",
         revisedCTC: employee.totalCTC,
         effectiveFrom: "",
       });
     }
   }, [employee]);
-
   const handlePercentageChange = (value) => {
-    const percent = Number(value);
+    if (value === "") {
+      setForm({
+        ...form,
+        appraisalPercent: "",
+        revisedCTC: form.currentCTC,
+      });
+      return;
+    }
 
-    const revisedCTC = form.currentCTC + (form.currentCTC * percent) / 100;
+    const percent = Number(value);
+    const currentCTC = Number(form.currentCTC) || 0;
+
+    const revisedCTC = currentCTC * (1 + percent / 100);
 
     setForm({
       ...form,
-      appraisalPercent: percent,
-      revisedCTC,
+      appraisalPercent: value,
+      revisedCTC: revisedCTC,
     });
   };
 
@@ -111,11 +120,11 @@ const AppraisalModal = ({ isOpen, onClose, employee }) => {
           <label>Current CTC</label>
           <input
             type="number"
-            value={form.currentCTC}
+            value={form.currentCTC === 0 ? "" : form.currentCTC}
             onChange={(e) =>
               setForm({
                 ...form,
-                currentCTC: Number(e.target.value),
+                currentCTC: e.target.value,
               })
             }
           />
@@ -125,6 +134,7 @@ const AppraisalModal = ({ isOpen, onClose, employee }) => {
           <label>Appraisal %</label>
           <input
             type="number"
+            placeholder="Enter Appraisal %"
             value={form.appraisalPercent}
             onChange={(e) => handlePercentageChange(e.target.value)}
           />
@@ -148,11 +158,11 @@ const AppraisalModal = ({ isOpen, onClose, employee }) => {
           <label>Revised CTC</label>
           <input
             type="number"
-            value={form.revisedCTC}
+            value={form.revisedCTC === 0 ? "" : form.revisedCTC}
             onChange={(e) =>
               setForm({
                 ...form,
-                revisedCTC: Number(e.target.value),
+                revisedCTC: e.target.value,
               })
             }
           />

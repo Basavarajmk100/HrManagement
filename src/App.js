@@ -406,7 +406,12 @@ function App() {
 
         {/* Employee Manager Routes */}
         <Route path="/hr-dashboard" element={<EmployeeManager />} />
-        <Route path="/hr-dashboard/add" element={<AddEmployeePage />} />
+        <Route path="/employee-manager/add" element={<AddEmployeePage />} />
+
+        <Route
+          path="/employee-manager/edit/:id"
+          element={<AddEmployeePage />}
+        />
         <Route
           path="/employee-manager/addPayroll"
           element={<HRPayrollForm />}

@@ -18,6 +18,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import API_URL from "../../config/api";
 
 const PayrollDashboard = () => {
   const [search, setSearch] = useState("");
@@ -42,14 +43,12 @@ const PayrollDashboard = () => {
       setError("");
 
       // 1️⃣ Employee master data
-      const empRes = await fetch("http://localhost:5133/api/EmployeeManager");
+      const empRes = await fetch(`${API_URL}/api/EmployeeManager`);
       if (!empRes.ok) throw new Error("Failed to fetch employee data");
       const employees = await empRes.json();
 
       // 2️⃣ Payroll Excel data
-      const payRes = await fetch(
-        "http://localhost:5133/api/hrdashboard-payroll",
-      );
+      const payRes = await fetch(`${API_URL}/api/hrdashboard-payroll`);
       if (!payRes.ok) throw new Error("Failed to fetch payroll data");
       const payrollsRaw = await payRes.json();
 
@@ -278,7 +277,7 @@ const PayrollDashboard = () => {
 
         // Send to backend
         const response = await fetch(
-          "http://localhost:5133/api/hrdashboard-payroll/upload",
+          `${API_URL}/api/hrdashboard-payroll/upload`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

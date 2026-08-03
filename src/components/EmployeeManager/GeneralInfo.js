@@ -3,6 +3,7 @@ import "../../styles/EmployeeManager.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import API_URL from "../../config/api";
 
 const GeneralInfo = () => {
   const [activeTab, setActiveTab] = useState("general");
@@ -20,11 +21,14 @@ const GeneralInfo = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [editId, setEditId] = useState(null);
+  const [editEmployee, setEditEmployee] = useState({});
+
   // ------------------ Backend Fetch ------------------
   const fetchEmployees = async () => {
     try {
       setLoadingEmployees(true);
-      const response = await fetch("http://localhost:5133/api/EmployeeManager");
+      const response = await fetch(`${API_URL}/api/EmployeeManager`);
       if (!response.ok) throw new Error("Failed to fetch employees");
       const data = await response.json();
       setEmployees(data);
@@ -68,44 +72,14 @@ const GeneralInfo = () => {
     if (!window.confirm("Are you sure you want to delete this employee?"))
       return;
     try {
-      const response = await fetch(
-        `http://localhost:5133/api/EmployeeManager/${id}`,
-        {
-          method: "DELETE",
-        },
-      );
+      const response = await fetch(`${API_URL}/api/EmployeeManager/${id}`, {
+        method: "DELETE",
+      });
       if (!response.ok) throw new Error("Failed to delete employee");
       setEmployees((prev) => prev.filter((emp) => emp.id !== id));
     } catch (error) {
       console.error(error);
       alert("Error deleting employee");
-    }
-  };
-
-  const handleEdit = async (id) => {
-    const newName = prompt("Enter new employee name:");
-    if (!newName) return;
-
-    try {
-      const employeeToUpdate = employees.find((emp) => emp.id === id);
-      const updatedEmployee = { ...employeeToUpdate, name: newName };
-
-      const response = await fetch(
-        `http://localhost:5133/api/EmployeeManager/${id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(updatedEmployee),
-        },
-      );
-      if (!response.ok) throw new Error("Failed to update employee");
-
-      setEmployees((prev) =>
-        prev.map((emp) => (emp.id === id ? updatedEmployee : emp)),
-      );
-    } catch (error) {
-      console.error(error);
-      alert("Error updating employee");
     }
   };
 
@@ -160,23 +134,28 @@ const GeneralInfo = () => {
     const worksheet = XLSX.utils.json_to_sheet(
       filteredEmployees.map((emp, index) => ({
         "Sl.No": index + 1,
-        "Emp ID": emp.id,
+        "Employee ID": emp.employeeId,
         "Employee Name": emp.name,
         "Father's Name": emp.father,
-        "Date of Joining": new Date(emp.doj).toLocaleDateString(),
+        "Mobile No": emp.mobileNo,
+        Email: emp.email,
+        Gender: emp.gender,
+        "Marital Status": emp.maritalStatus,
+        "Date of Joining": emp.doj
+          ? new Date(emp.doj).toLocaleDateString()
+          : "",
         "PF No": emp.pfNo,
-        "ESI No": emp.esiNo,
+        UAN: emp.uan,
         "PAN No": emp.pan,
-        "Bank Name": emp.bankName,
-        "Account No": emp.accountNo,
-        IFSC: emp.ifsc,
+        "Aadhaar No": emp.aadhaar,
         Designation: emp.designation,
         Occupation: emp.occupation,
         Department: emp.department,
-        Branch: emp.branch,
-        Grade: emp.grade,
-        UAN: emp.uan,
-        "Aadhaar No": emp.aadhaar,
+        "Bank Name": emp.bankName,
+        "Account No": emp.accountNo,
+        IFSC: emp.ifsc,
+        "PAN Card": emp.panCardPhoto ? "Uploaded" : "Not Uploaded",
+        "Aadhaar Card": emp.aadhaarCardPhoto ? "Uploaded" : "Not Uploaded",
       })),
     );
 
@@ -372,19 +351,28 @@ const GeneralInfo = () => {
                       <tr>
                         <th>Sl.No</th>
                         <th>Photo</th>
-                        <th>Emp ID</th>
+                        <th>Employee ID</th>
                         <th>Employee Name</th>
                         <th>Father</th>
+                        <th>Mobile No</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Marital Status</th>
                         <th>DOJ</th>
                         <th>PF</th>
-                        <th>ESI</th>
+                        <th>UAN</th>
                         <th>PAN</th>
-                        <th>Bank</th>
-                        <th>Account</th>
-                        <th>IFSC</th>
+                        <th>Aadhaar</th>
                         <th>Designation</th>
+                        <th>Occupation</th>
                         <th>Department</th>
-                        <th>Branch</th>
+                        <th>Bank</th>
+                        <th>Account No</th>
+                        <th>IFSC</th>
+                        <th>PAN Card</th>
+                        <th>Aadhaar Card</th>
+                        <th>Documents</th>
+
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -394,53 +382,98 @@ const GeneralInfo = () => {
                         <tr key={emp.id} className="table-row tr-card">
                           <td>{index + 1}</td>
 
-                          <td>
+                          <td className="photo-cell">
                             <img
                               src={emp.photo || "/default-profile.png"}
                               alt="profile"
                               className="profile-pic"
                             />
+
                             <input
                               type="file"
+                              accept="image/*"
                               onChange={(e) => handlePhotoUpload(e, emp.id)}
                             />
                           </td>
 
-                          <td>{emp.id}</td>
-
-                          <td>
-                            <div
-                              style={{
-                                display: "flex",
-                                flexDirection: "column",
-                              }}
-                            >
-                              <span className="cell-name">{emp.name}</span>
-                            </div>
-                          </td>
-
+                          <td>{emp.employeeId}</td>
+                          <td>{emp.name}</td>
                           <td>{emp.father}</td>
-
-                          <td>{new Date(emp.doj).toLocaleDateString()}</td>
-
+                          <td>{emp.mobileNo}</td>
+                          <td>{emp.email}</td>
+                          <td>{emp.gender}</td>
+                          <td>{emp.maritalStatus}</td>
+                          <td>
+                            {emp.doj
+                              ? new Date(emp.doj).toLocaleDateString()
+                              : ""}
+                          </td>
                           <td>{emp.pfNo}</td>
-                          <td>{emp.esiNo}</td>
+                          <td>{emp.uan}</td>
                           <td>{emp.pan}</td>
+                          <td>{emp.aadhaar}</td>
+                          <td>{emp.designation}</td>
+                          <td>{emp.occupation}</td>
+                          <td>{emp.department}</td>
                           <td>{emp.bankName}</td>
                           <td>{emp.accountNo}</td>
                           <td>{emp.ifsc}</td>
 
                           <td>
-                            <span className="cell-type">{emp.designation}</span>
+                            {emp.panCardPhoto ? (
+                              <img
+                                src={emp.panCardPhoto}
+                                alt="PAN"
+                                style={{
+                                  width: "70px",
+                                  height: "50px",
+                                  objectFit: "cover",
+                                  borderRadius: "4px",
+                                }}
+                              />
+                            ) : (
+                              "-"
+                            )}
+                          </td>
+                          <td>
+                            {emp.aadhaarCardPhoto ? (
+                              <img
+                                src={emp.aadhaarCardPhoto}
+                                alt="Aadhaar"
+                                style={{
+                                  width: "70px",
+                                  height: "50px",
+                                  objectFit: "cover",
+                                  borderRadius: "4px",
+                                }}
+                              />
+                            ) : (
+                              "-"
+                            )}
                           </td>
 
-                          <td>{emp.department}</td>
-                          <td>{emp.branch}</td>
+                          <td>
+                            {emp.documents && emp.documents.length > 0
+                              ? emp.documents.map((doc, index) => (
+                                  <div key={index}>
+                                    <a
+                                      href={doc.fileData}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      {doc.fileName}
+                                    </a>
+                                  </div>
+                                ))
+                              : "-"}
+                          </td>
 
-                          <td style={{ textAlign: "right" }}>
+                          <td>
                             <button
                               className="more-action-btn"
-                              onClick={() => handleEdit(emp.id)}
+                              onClick={() =>
+                                navigate(`/employee-manager/edit/${emp.id}`)
+                              }
                             >
                               Edit
                             </button>

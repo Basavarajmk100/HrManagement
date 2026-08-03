@@ -8,7 +8,7 @@
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   transition: all 0.3s ease-in-out;
 }
 
@@ -17,7 +17,7 @@
   margin-bottom: 25px;
   color: #333;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 12px;
 }
 
 /* Form styling */

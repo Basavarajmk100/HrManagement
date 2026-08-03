@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/HRPayrollForm.css";
 
-const API = "http://localhost:5133/api";
+const API = "/api";
 
 const daysInMonth = (monthStr) => {
   // monthStr is "YYYY-MM" from <input type="month">
@@ -600,6 +600,116 @@ export default function HrPayrollForm() {
         <div className="hr-form-group">
           <label>Remarks</label>
           <input name="remarks" value={form.remarks} onChange={onChange} />
+        </div>
+
+        {/* ===================== ADDITIONAL ADJUSTMENTS ===================== */}
+        <div className="hr-form-section full-width">
+          <div className="adjustments-container">
+            {/* Left Side */}
+            <div className="adjustments-left">
+              <h6>Other Deductions</h6>
+
+              <div className="adjustment-row">
+                <input
+                  type="text"
+                  name="deductionLabel1"
+                  placeholder="Enter Label"
+                  value={form.deductionLabel1 || ""}
+                  onChange={onChange}
+                  className="label-input"
+                />
+
+                <input
+                  type="number"
+                  name="deductionAmount1"
+                  placeholder="Amount"
+                  value={form.deductionAmount1 || ""}
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className="adjustment-row">
+                <input
+                  type="text"
+                  name="deductionLabel2"
+                  placeholder="Enter Label"
+                  value={form.deductionLabel2 || ""}
+                  onChange={onChange}
+                  className="label-input"
+                />
+
+                <input
+                  type="number"
+                  name="deductionAmount2"
+                  placeholder="Amount"
+                  value={form.deductionAmount2 || ""}
+                  onChange={onChange}
+                />
+              </div>
+            </div>
+
+            {/* Right Side */}
+            <div className="adjustments-right">
+              <h6>Other Allowance</h6>
+
+              <div className="adjustment-row">
+                <input
+                  type="text"
+                  name="buyOutLabel"
+                  placeholder="Buy Out"
+                  value={form.buyOutLabel || ""}
+                  onChange={onChange}
+                  className="label-input"
+                />
+
+                <input
+                  type="number"
+                  name="buyOut"
+                  placeholder="Amount"
+                  value={form.buyOut || ""}
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className="adjustment-row">
+                <input
+                  type="text"
+                  name="allowanceLabel1"
+                  placeholder="Enter Label"
+                  value={form.allowanceLabel1 || ""}
+                  onChange={onChange}
+                  className="label-input"
+                />
+
+                <input
+                  type="number"
+                  name="allowanceAmount1"
+                  placeholder="Amount"
+                  value={form.allowanceAmount1 || ""}
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className="adjustment-row">
+                <input
+                  type="text"
+                  name="allowanceLabel2"
+                  placeholder="Enter Label"
+                  value={form.allowanceLabel2 || ""}
+                  onChange={onChange}
+                  className="label-input"
+                />
+
+                <input
+                  type="number"
+                  name="allowanceAmount2"
+                  placeholder="Amount"
+                  value={form.allowanceAmount2 || ""}
+                  onChange={onChange}
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* ===================== LIVE SUMMARY ===================== */}
