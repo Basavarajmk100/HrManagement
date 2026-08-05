@@ -372,6 +372,7 @@ const GeneralInfo = () => {
                         <th>PAN Card</th>
                         <th>Aadhaar Card</th>
                         <th>Documents</th>
+                        <th>Remark</th>
 
                         <th>Actions</th>
                       </tr>
@@ -467,6 +468,8 @@ const GeneralInfo = () => {
                                 ))
                               : "-"}
                           </td>
+
+                          <td>{emp.rejectRemark || "-"}</td>
 
                           <td>
                             <button
