@@ -15,9 +15,17 @@ function UserApprovals() {
     { id: 3, name: "Arun", email: "arun@gmail.com", status: "Pending" },
   ]);
 
+  const [selectedUserId, setSelectedUserId] = useState(null);
+
+  // User Approvals
   const [showPending, setShowPending] = useState(true);
   const [showApproved, setShowApproved] = useState(true);
   const [showRejected, setShowRejected] = useState(true);
+
+  // Staff Details
+  const [staffPending, setStaffPending] = useState(true);
+  const [staffApproved, setStaffApproved] = useState(true);
+  const [staffRejected, setStaffRejected] = useState(true);
 
   /*for pop up modal*/
   const [showRejectModal, setShowRejectModal] = useState(false);
@@ -46,36 +54,62 @@ function UserApprovals() {
     setShowRejectModal(true);
   };
 
+  const openUserRejectModal = (id) => {
+    setSelectedUserId(id);
+    setSelectedEmployeeId(null);
+    setRejectRemark("");
+    setShowRejectModal(true);
+  };
+
   const submitReject = () => {
     if (!rejectRemark.trim()) {
       alert("Please enter a rejection remark.");
       return;
     }
 
-    setStaff((prev) =>
-      prev.map((emp) =>
-        emp.id === selectedEmployeeId
-          ? {
-              ...emp,
-              status: "Rejected",
-              rejectRemark: rejectRemark,
-            }
-          : emp,
-      ),
-    );
+    // Reject Staff
+    if (selectedEmployeeId !== null) {
+      setStaff((prev) =>
+        prev.map((emp) =>
+          emp.id === selectedEmployeeId
+            ? {
+                ...emp,
+                status: "Rejected",
+                rejectRemark,
+              }
+            : emp,
+        ),
+      );
+    }
+
+    // Reject User
+    if (selectedUserId !== null) {
+      setUsers((prev) =>
+        prev.map((user) =>
+          user.id === selectedUserId
+            ? {
+                ...user,
+                status: "Rejected",
+                rejectRemark,
+              }
+            : user,
+        ),
+      );
+    }
 
     setShowRejectModal(false);
     setRejectRemark("");
     setSelectedEmployeeId(null);
+    setSelectedUserId(null);
   };
 
   const filteredStaff = staff.filter((emp) => {
     const status = emp.status || "Pending";
 
     return (
-      (showPending && status === "Pending") ||
-      (showApproved && status === "Approved") ||
-      (showRejected && status === "Rejected")
+      (staffPending && status === "Pending") ||
+      (staffApproved && status === "Approved") ||
+      (staffRejected && status === "Rejected")
     );
   });
 
@@ -106,40 +140,6 @@ function UserApprovals() {
       <div className="page-content">
         {/* PAGE CONTENT WRAPPER */}
         <div className="content-wrapper">
-          <h5>User Approvals</h5>
-
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.status}</td>
-
-                  <td>
-                    {user.status === "Pending" && (
-                      <button
-                        onClick={() => approveUser(user.id)}
-                        className="approve-btn"
-                      >
-                        Approve
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
           <div
             style={{
               display: "flex",
@@ -171,6 +171,86 @@ function UserApprovals() {
                 type="checkbox"
                 checked={showRejected}
                 onChange={() => setShowRejected(!showRejected)}
+              />
+              Rejected
+            </label>
+          </div>
+          <h5>User Approvals</h5>
+
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.status}</td>
+
+                  <td>
+                    {user.status === "Pending" ? (
+                      <div className="action-buttons">
+                        <button
+                          className="approve-btn"
+                          onClick={() => approveUser(user.id)}
+                        >
+                          Approve
+                        </button>
+
+                        <button
+                          className="reject-btn"
+                          onClick={() => openUserRejectModal(user.id)}
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    ) : (
+                      <span>-</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div
+            style={{
+              display: "flex",
+              gap: "25px",
+              margin: "15px 0",
+              alignItems: "center",
+            }}
+          >
+            <label>
+              <input
+                type="checkbox"
+                checked={staffPending}
+                onChange={() => setStaffPending(!staffPending)}
+              />
+              Pending
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={staffApproved}
+                onChange={() => setStaffApproved(!staffApproved)}
+              />
+              Approved
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                checked={staffRejected}
+                onChange={() => setStaffRejected(!staffRejected)}
               />
               Rejected
             </label>

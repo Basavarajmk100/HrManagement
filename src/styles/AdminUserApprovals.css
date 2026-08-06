@@ -1,103 +1,159 @@
-/* Page Container */
+/* ===========================
+   Page Container
+=========================== */
 .dashboard-container {
-  padding: 25px;
+  padding: 15px;
   background: #f5f7fb;
   min-height: 100vh;
   font-family: "Segoe UI", sans-serif;
 }
 
-/* Title */
 .dashboard-container h2 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 24px;
   font-weight: 600;
   color: #1f2937;
-  font-size: 25px;
 }
 
-/* Table */
+.dashboard-container h5 {
+  margin: 15px 0 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* ===========================
+   Filter Checkboxes
+=========================== */
+.filter-section {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.filter-section label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ===========================
+   Table
+=========================== */
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  background: #ffffff;
-  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-size: 12px;
 }
 
-/* Table Header */
-/* Table Header */
 .data-table thead th {
-  background-color: #3b82f6;
-  color: white;
-  padding: 14px;
+  background: #3b82f6;
+  color: #fff;
+  padding: 7px 8px;
   text-align: left;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
-.data-table th {
-  padding: 14px;
-  text-align: left;
-  font-size: 14px;
-  font-weight: 600;
-  background-color: #3b82f6;
-}
-
-/* Table Body */
 .data-table td {
-  padding: 12px 14px;
-  border-bottom: 1px solid #eee;
-  font-size: 13px;
-  color: #374151;
+  padding: 6px 8px;
+  border-bottom: 1px solid #ececec;
+  font-size: 12px;
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
-/* Hover Effect */
 .data-table tbody tr:hover {
-  background: #f9fafb;
+  background: #f8fafc;
 }
 
-/* Status */
-.data-table td:nth-child(3) {
-  font-weight: 600;
-  color: #f59e0b; /* Pending color */
+/* ===========================
+   Profile Image
+=========================== */
+.data-table td img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-/* Approve Button */
+/* PAN / Aadhaar Images */
+.document-image {
+  width: 50px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.approve-btn,
+.reject-btn {
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.2s;
+}
+
 .approve-btn {
   background: #22c55e;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  color: white;
-  font-size: 12px;
-  cursor: pointer;
-  transition: 0.2s;
 }
 
 .approve-btn:hover {
   background: #16a34a;
-  transform: scale(1.05);
 }
 
 .reject-btn {
   background: #ef4444;
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
 .reject-btn:hover {
   background: #dc2626;
 }
 
+/* ===========================
+   Status Colors
+=========================== */
+.status-pending {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.status-approved {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.status-rejected {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* ===========================
+   Reject Modal
+=========================== */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0, 0, 0, 0.45);
   display: flex;
   justify-content: center;
@@ -108,23 +164,36 @@
 .reject-modal {
   width: 420px;
   background: #fff;
-  padding: 25px;
   border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  padding: 22px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
 .reject-modal h3 {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.reject-modal p {
+  margin-bottom: 12px;
+  color: #666;
+  font-size: 13px;
 }
 
 .reject-modal textarea {
   width: 100%;
+  min-height: 90px;
   resize: none;
   padding: 10px;
-  border-radius: 6px;
   border: 1px solid #ccc;
-  margin: 15px 0;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+.reject-modal textarea:focus {
+  border-color: #3b82f6;
 }
 
 .modal-buttons {
@@ -133,34 +202,28 @@
   gap: 10px;
 }
 
-.reject-btn {
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 .cancel-btn1,
 .submit-btn {
-  width: 90px; /* Same width */
-  height: 36px; /* Same height */
-  padding: 0;
+  width: 90px;
+  height: 36px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
+  cursor: pointer;
 }
 
-.cancel-btn {
+.cancel-btn1 {
   background: #6c757d;
   color: #fff;
 }
 
+.cancel-btn1:hover {
+  background: #5a6268;
+}
+
 .submit-btn {
-  background: #28a745 !important;
+  background: #28a745;
   color: #fff;
 }
 
@@ -168,6 +231,14 @@
   background: #218838;
 }
 
-.cancel-btn:hover {
-  background: #5a6268;
+/* ===========================
+   Responsive
+=========================== */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  min-width: 1800px;
 }
